@@ -10,6 +10,12 @@ import sys
 import datetime
 import os
 
+if hasattr(sys.stdout, 'reconfigure'):
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
+
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 REMOTE_URL = "https://github.com/nkyadawad-jpg/oil-gas-intelligence.git"
 
@@ -55,8 +61,8 @@ def sync_with_github(commit_message=None):
     print("--> Pushing directly to GitHub main branch...")
     push_res = run_git("push origin main", check=False)
     if push_res.returncode == 0:
-        print("✓ Antigravity & GitHub production link are 100% in sync!")
-        print(f"✓ Production Link: https://nkyadawad-jpg.github.io/oil-gas-intelligence/")
+        print("[OK] Antigravity & GitHub production link are 100% in sync!")
+        print(f"[OK] Production Link: https://nkyadawad-jpg.github.io/oil-gas-intelligence/")
         return True
     else:
         print(f"[!] Push notice: {push_res.stderr.strip() or push_res.stdout.strip()}")
