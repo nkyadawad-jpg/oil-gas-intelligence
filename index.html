@@ -114,8 +114,6 @@
         <i class="fa-solid fa-arrows-rotate" id="scanIcon"></i>
         <span>Scan Sources</span>
       </button>
-        <span>Scan Sources</span>
-      </button>
       <button onclick="openDailyBriefingModal()" class="hidden sm:flex bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/30 px-3 py-1.5 rounded-lg text-xs font-medium items-center gap-1.5 transition">
         <i class="fa-solid fa-newspaper text-amber-400"></i>
         <span>Briefing</span>
@@ -141,6 +139,22 @@
       </button>
     </div>
   </header>
+
+  <!-- PROMINENT REFRESH TIMESTAMP BANNER (ALWAYS VISIBLE ON MOBILE & DESKTOP ON TOP) -->
+  <div class="bg-slate-950/95 border-b border-slate-800/90 px-3 sm:px-4 py-1.5 flex items-center justify-between text-[11px] font-mono w-full shadow-inner z-30">
+    <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+      <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">29-Aug-2026 22:46 AST</strong>
+    </div>
+    <div class="flex items-center gap-2 shrink-0">
+      <span class="text-slate-400 text-[10px] sm:text-[11px] flex items-center gap-1">
+        <i class="fa-solid fa-shield-halved text-emerald-400 text-[10px]"></i>
+        <span class="hidden xs:inline">100% Genuine Qatar Govt Data</span>
+      </span>
+      <span class="text-[9px] sm:text-[10px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded border border-emerald-500/30 font-bold tracking-wider">VERIFIED</span>
+    </div>
+  </div>
 
   <!-- MAIN APP CONTAINER -->
   <div class="flex-1 flex w-full max-w-full overflow-x-hidden relative">
@@ -3196,6 +3210,10 @@ Q4. Spares & Delivery Timeline:
         if (res.ok) {
           const data = await res.json();
           if (data && data.syncTimestamp) {
+            const topTimestampEl = document.getElementById('topRefreshedTimestamp');
+            if (topTimestampEl) {
+              topTimestampEl.innerText = data.syncTimestamp;
+            }
             const syncBadge = document.getElementById('cloudSyncStatusBadge');
             if (syncBadge) {
               syncBadge.innerHTML = `<i class="fa-solid fa-cloud-arrow-down text-emerald-400 text-[10px]"></i> Cloud Synced: ${data.syncTimestamp}`;

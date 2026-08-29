@@ -24,6 +24,13 @@ def sync_with_github(commit_message=None):
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(f"[{now}] Starting Antigravity <-> GitHub Repo Sync...")
 
+    # 0. Execute refresh_data.py to ensure data and index.html timestamps are 100% current
+    print("--> Running Live Qatar Energy Data Refresh Engine...")
+    try:
+        subprocess.run([sys.executable, os.path.join(PROJECT_DIR, "refresh_data.py")], check=True)
+    except Exception as e:
+        print(f"[!] Refresh engine notice: {e}")
+
     # 1. Ensure remote is configured
     run_git(f"remote set-url origin {REMOTE_URL}", check=False)
 
@@ -31,14 +38,14 @@ def sync_with_github(commit_message=None):
     print("--> Fetching remote state from GitHub...")
     fetch_res = run_git("fetch origin main", check=False)
 
-    # 3. Stage any local changes
+    # 3. Stage all workspace files (including data/latest_intelligence.json & index.html)
     print("--> Staging Antigravity workspace files...")
     run_git("add .")
 
     # 4. Commit if changes exist
     status_res = run_git("status --porcelain", check=False)
     if status_res.stdout.strip():
-        msg = commit_message or f"Antigravity Live Sync: {now}"
+        msg = commit_message or f"Live Data & Code Sync: {now}"
         print(f"--> Committing: {msg}")
         run_git(f'commit -m "{msg}"')
     else:
@@ -48,8 +55,8 @@ def sync_with_github(commit_message=None):
     print("--> Pushing directly to GitHub main branch...")
     push_res = run_git("push origin main", check=False)
     if push_res.returncode == 0:
-        print("✓ Antigravity & GitHub are 100% in sync!")
-        print(f"✓ Live at: https://nkyadawad-jpg.github.io/oil-gas-intelligence/")
+        print("✓ Antigravity & GitHub production link are 100% in sync!")
+        print(f"✓ Production Link: https://nkyadawad-jpg.github.io/oil-gas-intelligence/")
         return True
     else:
         print(f"[!] Push notice: {push_res.stderr.strip() or push_res.stdout.strip()}")

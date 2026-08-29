@@ -1,19 +1,21 @@
 #!/usr/bin/env python3
 """
 Qatar O&G Opportunity Radar - Autonomous Fast Hourly Refresh Engine
-Runs automatically in GitHub Actions every hour to update live signals,
+Runs automatically in GitHub Actions & Antigravity Sync to update live signals,
 recalculate shutdown countdowns, verify portal connectivity, and generate
-fresh JSON intelligence for the live web landing page.
+fresh JSON intelligence and HTML timestamps for local & production sites.
 """
 
 import json
 import os
+import re
 import datetime
 import urllib.request
 import urllib.error
 import concurrent.futures
 
-DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(PROJECT_DIR, 'data')
 os.makedirs(DATA_DIR, exist_ok=True)
 
 OFFICIAL_SOURCES = [
@@ -54,6 +56,22 @@ def check_portal(source):
         "status": status
     }
 
+def update_index_html_timestamp(time_str):
+    index_path = os.path.join(PROJECT_DIR, 'index.html')
+    if os.path.exists(index_path):
+        with open(index_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        # Update topRefreshedTimestamp content
+        pattern = r'(<strong id="topRefreshedTimestamp"[^>]*>)[^<]*(<\/strong>)'
+        replacement = r'\g<1>' + time_str + r'\g<2>'
+        new_content = re.sub(pattern, replacement, content)
+
+        if new_content != content:
+            with open(index_path, 'w', encoding='utf-8') as f:
+                f.write(new_content)
+            print(f"[OK] Updated timestamp in index.html to: {time_str}")
+
 def generate_hourly_data():
     now_utc = datetime.datetime.now(datetime.timezone.utc)
     qatar_time = now_utc + datetime.timedelta(hours=3)
@@ -88,6 +106,7 @@ def generate_hourly_data():
         json.dump(payload, f, indent=2)
 
     print(f"[OK] Generated {out_file} successfully at {time_str}")
+    update_index_html_timestamp(time_str)
 
 if __name__ == '__main__':
     generate_hourly_data()
