@@ -1,6 +1,6 @@
 {
-  "syncTimestamp": "29-Aug-2026 22:53 AST",
-  "syncTimestampIso": "2026-08-29T19:53:14.838026+00:00",
+  "syncTimestamp": "29-Aug-2026 23:00 AST",
+  "syncTimestampIso": "2026-08-29T20:00:15.298890+00:00",
   "totalProjectsMonitored": 43,
   "verifiedHotLeads": 11,
   "openPipelineValuation": 4850000,
@@ -16,70 +16,70 @@
       "url": "https://portal.qatarenergy.qa",
       "tier": "Tier A (State)",
       "status": "Active (Verified)",
-      "checkedAt": "29-Aug-2026 22:53 AST"
+      "checkedAt": "29-Aug-2026 23:00 AST"
     },
     {
       "name": "QatarEnergy LNG Supplier & Tender Notices",
       "url": "https://www.qatarenergylng.qa",
       "tier": "Tier A (Operator)",
-      "status": "Active (200 OK)",
-      "checkedAt": "29-Aug-2026 22:53 AST"
+      "status": "Active (Verified)",
+      "checkedAt": "29-Aug-2026 23:00 AST"
     },
     {
       "name": "Pearl GTL / Shell Contractor Portal",
       "url": "https://www.shell.com.qa",
       "tier": "Tier A (Major JV)",
       "status": "Active (200 OK)",
-      "checkedAt": "29-Aug-2026 22:53 AST"
+      "checkedAt": "29-Aug-2026 23:00 AST"
     },
     {
       "name": "Tawteen In-Country Value (ICV) Program",
       "url": "https://www.icv.qa",
       "tier": "Tier A (Localization)",
       "status": "Active (Verified)",
-      "checkedAt": "29-Aug-2026 22:53 AST"
+      "checkedAt": "29-Aug-2026 23:00 AST"
     },
     {
       "name": "Ministry of Finance Monaqasat Public Tenders",
       "url": "https://monaqasat.mof.gov.qa",
       "tier": "Tier A (Government)",
       "status": "Active (Verified)",
-      "checkedAt": "29-Aug-2026 22:53 AST"
+      "checkedAt": "29-Aug-2026 23:00 AST"
     },
     {
       "name": "QAFCO Procurement (SAP Ariba Sourcing)",
       "url": "https://www.qafco.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "29-Aug-2026 22:53 AST"
+      "checkedAt": "29-Aug-2026 23:00 AST"
     },
     {
       "name": "Q-Chem / RLOC Supplier Registry",
       "url": "https://www.qchem.com.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "29-Aug-2026 22:53 AST"
+      "checkedAt": "29-Aug-2026 23:00 AST"
     },
     {
       "name": "DOPET Disclosures & Subcontracts",
       "url": "https://www.dopet.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "29-Aug-2026 22:53 AST"
+      "checkedAt": "29-Aug-2026 23:00 AST"
     },
     {
       "name": "QCON Turnaround Notices",
       "url": "https://www.qcon.com.qa",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "29-Aug-2026 22:53 AST"
+      "checkedAt": "29-Aug-2026 23:00 AST"
     },
     {
       "name": "Medgulf Construction Procurement",
       "url": "https://www.medgulfconstruction.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "29-Aug-2026 22:53 AST"
+      "checkedAt": "29-Aug-2026 23:00 AST"
     }
   ]
 }
