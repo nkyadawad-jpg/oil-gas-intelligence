@@ -60,8 +60,11 @@
         <div class="flex items-center space-x-2">
           <span class="font-bold text-lg tracking-wide text-white">QATAR O&G OPPORTUNITY RADAR</span>
           <span class="text-xs bg-qatar/30 text-amber-300 px-2 py-0.5 rounded border border-qatar/50 font-medium">PRE-RFQ INTELLIGENCE</span>
-          <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/30 flex items-center gap-1">
+          <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/30 flex items-center gap-1 font-semibold">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> Live Market Ingestion
+          </span>
+          <span id="cloudSyncStatusBadge" class="text-xs bg-slate-800 text-cyan-300 px-2 py-0.5 rounded border border-slate-700 font-mono hidden sm:inline-flex items-center gap-1">
+            <i class="fa-solid fa-cloud-arrow-down text-cyan-400 text-[10px]"></i> Hourly Auto-Sync Active
           </span>
         </div>
         <p class="text-[11px] text-slate-400">Detect Early • Approach First • Convert Faster | OEM Sales Command Center</p>
@@ -2903,12 +2906,34 @@ Q4. Spares & Delivery Timeline:
     }
 
     // ==========================================
+    // AUTOMATED CLOUD SYNC LISTENER
+    // ==========================================
+    async function checkLiveCloudSync() {
+      try {
+        const res = await fetch('data/latest_intelligence.json?t=' + Date.now());
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.syncTimestamp) {
+            const syncBadge = document.getElementById('cloudSyncStatusBadge');
+            if (syncBadge) {
+              syncBadge.innerHTML = `<i class="fa-solid fa-cloud-arrow-down text-emerald-400 text-[10px]"></i> Cloud Synced: ${data.syncTimestamp}`;
+            }
+          }
+        }
+      } catch(e) {
+        console.log("Using local baseline cache");
+      }
+    }
+
+    // ==========================================
     // INITIALIZATION
     // ==========================================
     document.addEventListener('DOMContentLoaded', () => {
       renderTopOpportunities();
       renderRecentSignals();
       renderQuickEpc();
+      checkLiveCloudSync();
+      setInterval(checkLiveCloudSync, 600000); // Check every 10 minutes
     });
   </script>
 </body>
