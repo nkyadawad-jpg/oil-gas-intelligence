@@ -85,29 +85,35 @@
     <div class="hidden xl:flex items-center space-x-6 text-xs bg-slate-950/60 px-4 py-1.5 rounded-lg border border-slate-800">
       <div>
         <span class="text-slate-400">Monthly Target:</span>
-        <span class="font-bold text-white ml-1">QAR 2.00M</span>
+        <span id="hdrTargetVal" class="font-bold text-white ml-1">QAR 2.00M</span>
       </div>
       <div class="h-4 w-px bg-slate-800"></div>
       <div>
         <span class="text-slate-400">Achieved:</span>
-        <span class="font-bold text-emerald-400 ml-1">QAR 1.25M (62.5%)</span>
+        <span id="hdrAchievedVal" class="font-bold text-emerald-400 ml-1">QAR 1.25M (62.5%)</span>
       </div>
       <div class="h-4 w-px bg-slate-800"></div>
       <div>
         <span class="text-slate-400">Weighted Pipeline:</span>
-        <span class="font-bold text-amber-300 ml-1">QAR 2.74M</span>
+        <span id="hdrWeightedVal" class="font-bold text-amber-300 ml-1">QAR 2.74M</span>
       </div>
       <div class="h-4 w-px bg-slate-800"></div>
       <div>
         <span class="text-slate-400">Pipeline Coverage:</span>
-        <span class="font-bold text-cyan-400 ml-1">2.4X</span>
+        <span id="hdrCoverageVal" class="font-bold text-cyan-400 ml-1">2.4X</span>
       </div>
     </div>
 
     <!-- Header Actions -->
     <div class="flex items-center space-x-2 sm:space-x-3">
+      <button onclick="openTargetConfigModal()" class="bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/40 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow transition">
+        <i class="fa-solid fa-sliders text-amber-400"></i>
+        <span class="hidden sm:inline">Set Target</span>
+      </button>
       <button onclick="triggerScan()" class="hidden sm:flex bg-gradient-to-r from-qatar to-qatar-light hover:from-qatar-light hover:to-qatar text-white px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold items-center gap-1.5 shadow-md shadow-qatar/20 transition-all active:scale-95">
         <i class="fa-solid fa-arrows-rotate" id="scanIcon"></i>
+        <span>Scan Sources</span>
+      </button>
         <span>Scan Sources</span>
       </button>
       <button onclick="openDailyBriefingModal()" class="hidden sm:flex bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/30 px-3 py-1.5 rounded-lg text-xs font-medium items-center gap-1.5 transition">
@@ -254,63 +260,66 @@
       <section id="tab-command_center" class="tab-content space-y-6">
         <!-- Sales Target Progress & KPI Banner -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <!-- KPI 1 -->
-          <div class="glass-panel p-4 rounded-xl relative overflow-hidden border-slate-700">
-            <div class="absolute -right-2 -bottom-2 opacity-10 text-6xl text-amber-400"><i class="fa-solid fa-bullseye"></i></div>
+          <!-- KPI 1: TARGET & ACHIEVED -->
+          <div class="glass-panel p-4 rounded-xl relative overflow-hidden border-slate-700 cursor-pointer hover:border-amber-500/50 transition group" onclick="openTargetConfigModal()" title="Click to customize monthly sales target">
+            <div class="absolute -right-2 -bottom-2 opacity-10 text-6xl text-amber-400 group-hover:scale-110 transition-transform"><i class="fa-solid fa-bullseye"></i></div>
             <div class="flex justify-between items-start">
               <div>
-                <p class="text-xs text-slate-400 font-medium">Monthly Sales Target</p>
-                <h3 class="text-2xl font-black text-white mt-1">QAR 2.00M</h3>
+                <p class="text-xs text-slate-400 font-medium flex items-center gap-1.5">
+                  <span>Monthly Sales Target</span>
+                  <i class="fa-solid fa-pen-to-square text-[10px] text-amber-400 opacity-60 group-hover:opacity-100"></i>
+                </p>
+                <h3 id="kpiTargetVal" class="text-2xl font-black text-white mt-1">QAR 2.00M</h3>
               </div>
-              <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs px-2 py-0.5 rounded font-bold">62.5%</span>
+              <span id="kpiTargetPercent" class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs px-2 py-0.5 rounded font-bold">62.5%</span>
             </div>
             <div class="w-full bg-slate-800 h-2 rounded-full mt-3 overflow-hidden">
-              <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full" style="width: 62.5%"></div>
+              <div id="kpiTargetBar" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full transition-all duration-500" style="width: 62.5%"></div>
             </div>
             <div class="flex justify-between text-[11px] text-slate-400 mt-2">
-              <span>Achieved: <strong class="text-emerald-300">QAR 1.25M</strong></span>
-              <span>Gap: <strong class="text-amber-300">QAR 750K</strong></span>
+              <span>Achieved: <strong id="kpiAchievedVal" class="text-emerald-300">QAR 1.25M</strong></span>
+              <span>Gap: <strong id="kpiGapVal" class="text-amber-300">QAR 750K</strong></span>
             </div>
           </div>
 
-          <!-- KPI 2 -->
+          <!-- KPI 2: DYNAMIC OPEN PIPELINE -->
           <div class="glass-panel p-4 rounded-xl relative overflow-hidden border-slate-700">
             <div class="absolute -right-2 -bottom-2 opacity-10 text-6xl text-cyan-400"><i class="fa-solid fa-chart-line"></i></div>
             <div class="flex justify-between items-start">
               <div>
-                <p class="text-xs text-slate-400 font-medium">Open Pipeline (Weighted)</p>
-                <h3 class="text-2xl font-black text-cyan-300 mt-1">QAR 4.85M</h3>
+                <p class="text-xs text-slate-400 font-medium">Open Pipeline (Sum of Leads)</p>
+                <h3 id="kpiTotalPipelineVal" class="text-2xl font-black text-cyan-300 mt-1">QAR 4.85M</h3>
               </div>
-              <span class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs px-2 py-0.5 rounded font-bold">2.4X Cov</span>
+              <span id="kpiCoverageBadge" class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs px-2 py-0.5 rounded font-bold">2.4X Cov</span>
             </div>
-            <p class="text-[11px] text-slate-400 mt-2">Weighted Expected Value: <strong class="text-white">QAR 2.74M</strong></p>
+            <p class="text-[11px] text-slate-400 mt-2">Weighted Expected Value: <strong id="kpiWeightedVal" class="text-white">QAR 2.74M</strong></p>
             <div class="text-[11px] text-slate-400 mt-1 flex justify-between">
-              <span>Pre-RFQ Stage: <strong class="text-amber-300">QAR 3.1M</strong></span>
-              <span>Live ITT: <strong class="text-emerald-300">QAR 1.75M</strong></span>
+              <span>Pre-RFQ Stage: <strong id="kpiPreRfqVal" class="text-amber-300">QAR 3.10M</strong></span>
+              <span>Live ITT: <strong id="kpiLiveIttVal" class="text-emerald-300">QAR 1.75M</strong></span>
             </div>
           </div>
 
-          <!-- KPI 3 -->
+          <!-- KPI 3: HOT LEADS COUNT -->
           <div class="glass-panel p-4 rounded-xl relative overflow-hidden border-slate-700">
             <div class="absolute -right-2 -bottom-2 opacity-10 text-6xl text-red-400"><i class="fa-solid fa-fire"></i></div>
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-xs text-slate-400 font-medium">Hot Pre-RFQ Opportunities</p>
-                <h3 class="text-2xl font-black text-red-400 mt-1">11 Leads</h3>
+                <h3 id="kpiHotLeadsCount" class="text-2xl font-black text-red-400 mt-1">11 Leads</h3>
               </div>
               <span class="bg-red-500/20 text-red-400 border border-red-500/30 text-xs px-2 py-0.5 rounded font-bold animate-pulse">🔥 High Conv</span>
             </div>
             <div class="flex items-center gap-2 mt-3 text-[11px] text-slate-300">
               <span class="text-slate-400">Total Monitored Leads:</span>
-              <span class="font-bold text-white">43 active leads</span>
+              <span id="kpiTotalLeadsCount" class="font-bold text-white">12 active scopes</span>
             </div>
             <div class="flex justify-between text-[11px] text-slate-400 mt-1">
-              <span>High Potential: <strong class="text-amber-400">23</strong></span>
-              <span>Watchlist: <strong class="text-slate-300">9</strong></span>
+              <span>High Potential (&gt;80): <strong id="kpiHighPotCount" class="text-amber-400">11</strong></span>
+              <span>Watchlist: <strong id="kpiWatchlistCount" class="text-slate-300">1</strong></span>
             </div>
           </div>
 
-          <!-- KPI 4 -->
+          <!-- KPI 4: IMMINENT SHUTDOWNS -->
           <div class="glass-panel p-4 rounded-xl relative overflow-hidden border-slate-700">
             <div class="absolute -right-2 -bottom-2 opacity-10 text-6xl text-orange-400"><i class="fa-solid fa-wrench"></i></div>
             <div class="flex justify-between items-start">
@@ -331,65 +340,65 @@
             <div>
               <h4 class="font-bold text-sm text-white flex items-center gap-2">
                 <i class="fa-solid fa-chart-pie text-qatar-gold"></i>
-                Product-Wise Pipeline vs. Your OEM Lines
+                Dynamic Product-Wise Pipeline vs. Your OEM Lines
               </h4>
-              <p class="text-xs text-slate-400">Targeted allocation across Valves, ASCO Solenoids, Protectoseal, Westlock, Trillium, Gauges & ADAMS</p>
+              <p class="text-xs text-slate-400">Real-time allocation calculated dynamically from your CRM opportunities</p>
             </div>
-            <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Total Opportunity Pool: QAR 4.85M</span>
+            <span id="pbTotalPoolVal" class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700 font-mono">Total Opportunity Pool: QAR 4.85M</span>
           </div>
 
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800 hover:border-slate-700 transition">
               <div class="flex items-center justify-between text-xs text-slate-400">
                 <span>Process Valves</span>
-                <span class="text-emerald-400 font-semibold">43%</span>
+                <span id="pbValvesPct" class="text-emerald-400 font-semibold">43%</span>
               </div>
-              <div class="text-base font-bold text-white mt-1">QAR 2.10M</div>
+              <div id="pbValvesVal" class="text-base font-bold text-white mt-1">QAR 2.10M</div>
               <p class="text-[10px] text-slate-500 truncate">Ball/Butterfly/Gate/ADAMS</p>
             </div>
 
             <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800 hover:border-slate-700 transition">
               <div class="flex items-center justify-between text-xs text-slate-400">
                 <span>Instrumentation</span>
-                <span class="text-cyan-400 font-semibold">18%</span>
+                <span id="pbInstPct" class="text-cyan-400 font-semibold">18%</span>
               </div>
-              <div class="text-base font-bold text-white mt-1">QAR 850K</div>
+              <div id="pbInstVal" class="text-base font-bold text-white mt-1">QAR 850K</div>
               <p class="text-[10px] text-slate-500 truncate">Ashcroft/Baumer/Bourdon</p>
             </div>
 
             <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800 hover:border-slate-700 transition">
               <div class="flex items-center justify-between text-xs text-slate-400">
                 <span>Solenoids (ASCO)</span>
-                <span class="text-amber-400 font-semibold">13%</span>
+                <span id="pbSolenoidsPct" class="text-amber-400 font-semibold">13%</span>
               </div>
-              <div class="text-base font-bold text-white mt-1">QAR 620K</div>
+              <div id="pbSolenoidsVal" class="text-base font-bold text-white mt-1">QAR 620K</div>
               <p class="text-[10px] text-slate-500 truncate">Emerson ASCO Actuation</p>
             </div>
 
             <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800 hover:border-slate-700 transition">
               <div class="flex items-center justify-between text-xs text-slate-400">
                 <span>Flame Arrestors</span>
-                <span class="text-red-400 font-semibold">9%</span>
+                <span id="pbFlamePct" class="text-red-400 font-semibold">9%</span>
               </div>
-              <div class="text-base font-bold text-white mt-1">QAR 430K</div>
+              <div id="pbFlameVal" class="text-base font-bold text-white mt-1">QAR 430K</div>
               <p class="text-[10px] text-slate-500 truncate">Protectoseal Vapor Relief</p>
             </div>
 
             <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800 hover:border-slate-700 transition">
               <div class="flex items-center justify-between text-xs text-slate-400">
                 <span>Pump Spares</span>
-                <span class="text-indigo-400 font-semibold">6%</span>
+                <span id="pbPumpsPct" class="text-indigo-400 font-semibold">6%</span>
               </div>
-              <div class="text-base font-bold text-white mt-1">QAR 270K</div>
+              <div id="pbPumpsVal" class="text-base font-bold text-white mt-1">QAR 270K</div>
               <p class="text-[10px] text-slate-500 truncate">Trillium Rotating Spares</p>
             </div>
 
             <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800 hover:border-slate-700 transition">
               <div class="flex items-center justify-between text-xs text-slate-400">
                 <span>Valve Monitoring</span>
-                <span class="text-teal-400 font-semibold">11%</span>
+                <span id="pbMonitoringPct" class="text-teal-400 font-semibold">11%</span>
               </div>
-              <div class="text-base font-bold text-white mt-1">QAR 580K</div>
+              <div id="pbMonitoringVal" class="text-base font-bold text-white mt-1">QAR 580K</div>
               <p class="text-[10px] text-slate-500 truncate">Westlock Positioners</p>
             </div>
           </div>
@@ -1103,6 +1112,57 @@
   </div>
 
 
+  <!-- MODAL: CONFIGURE SALES TARGETS & QUOTA -->
+  <div id="targetConfigModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 flex items-center justify-center border border-amber-500/40">
+            <i class="fa-solid fa-sliders"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-white">Sales Quota & KPI Settings</h3>
+            <p class="text-[11px] text-slate-400">Customize your monthly sales target & achieved quota</p>
+          </div>
+        </div>
+        <button onclick="closeTargetConfigModal()" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <form id="targetConfigForm" onsubmit="saveTargetConfig(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Monthly Sales Target (QAR)</label>
+          <input type="number" id="inputMonthlyTarget" required step="50000" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white font-mono font-bold text-sm focus:outline-none focus:border-amber-400" />
+          <div class="flex items-center gap-1.5 mt-2 flex-wrap text-[10px]">
+            <span class="text-slate-400">Presets:</span>
+            <button type="button" onclick="setTargetPreset(1000000)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded">1.0M</button>
+            <button type="button" onclick="setTargetPreset(1500000)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded">1.5M</button>
+            <button type="button" onclick="setTargetPreset(2000000)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-amber-300 font-bold rounded">2.0M</button>
+            <button type="button" onclick="setTargetPreset(2500000)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded">2.5M</button>
+            <button type="button" onclick="setTargetPreset(3000000)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded">3.0M</button>
+            <button type="button" onclick="setTargetPreset(5000000)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded">5.0M</button>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Achieved Sales Month-to-Date (QAR)</label>
+          <input type="number" id="inputAchievedSales" required step="25000" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white font-mono font-bold text-sm focus:outline-none focus:border-emerald-400" />
+        </div>
+
+        <div class="p-3 bg-slate-950 rounded-lg border border-slate-800 text-[11px] text-slate-300 space-y-1">
+          <div class="flex justify-between"><span>Active Opportunities in CRM:</span> <strong id="modalCrmCount" class="text-white">12 Leads</strong></div>
+          <div class="flex justify-between"><span>Sum of CRM Pipeline:</span> <strong id="modalCrmSum" class="text-cyan-300">QAR 4,850,000</strong></div>
+          <div class="text-[10px] text-slate-500 pt-1">Total Pipeline is always dynamically calculated from your live CRM Grid rows.</div>
+        </div>
+
+        <div class="flex justify-end gap-2 pt-2 border-t border-slate-800">
+          <button type="button" onclick="closeTargetConfigModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-lg text-xs">Cancel</button>
+          <button type="submit" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black px-5 py-2 rounded-lg text-xs shadow">Apply Targets</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
   <!-- JAVASCRIPT APPLICATION CORE -->
   <script>
     // ==========================================
@@ -1700,14 +1760,179 @@
     ];
 
     // ==========================================
-    // STATE MANAGEMENT
+    // STATE & CUSTOM SETTINGS MANAGEMENT
     // ==========================================
     let opportunities = JSON.parse(localStorage.getItem('qatar_radar_leads')) || DEFAULT_OPPORTUNITIES;
+    let userSettings = JSON.parse(localStorage.getItem('qatar_user_settings')) || {
+      monthlyTarget: 2000000,
+      achievedSales: 1250000
+    };
     let selectedLeadForOutreach = opportunities[0];
     let currentSort = { column: 'score', asc: false };
 
     function saveState() {
       localStorage.setItem('qatar_radar_leads', JSON.stringify(opportunities));
+      recalculateKpiMetrics();
+    }
+
+    function saveSettings() {
+      localStorage.setItem('qatar_user_settings', JSON.stringify(userSettings));
+      recalculateKpiMetrics();
+    }
+
+    // ==========================================
+    // DYNAMIC KPI & REVENUE ENGINE (REAL-TIME MATH)
+    // ==========================================
+    function formatQarShort(val) {
+      if (val >= 1000000) {
+        return `QAR ${(val / 1000000).toFixed(2)}M`;
+      } else if (val >= 1000) {
+        return `QAR ${(val / 1000).toFixed(0)}K`;
+      }
+      return `QAR ${val.toLocaleString()}`;
+    }
+
+    function recalculateKpiMetrics() {
+      const totalPipeline = opportunities.reduce((acc, o) => acc + (Number(o.value) || 0), 0);
+      const weightedPipeline = opportunities.reduce((acc, o) => acc + ((Number(o.value) || 0) * ((Number(o.score) || 80) / 100)), 0);
+      const preRfqPipeline = opportunities.filter(o => !o.stage.includes('Level 4') && !o.stage.includes('Level 5') && !o.status.includes('RFQ Received') && !o.status.includes('Quotation') && !o.status.includes('Won')).reduce((acc, o) => acc + (Number(o.value) || 0), 0);
+      const liveIttPipeline = totalPipeline - preRfqPipeline;
+
+      const hotLeads = opportunities.filter(o => (Number(o.score) || 0) >= 80);
+      const hotCount = hotLeads.length;
+      const totalLeads = opportunities.length;
+
+      const target = Number(userSettings.monthlyTarget) || 2000000;
+      const achieved = Number(userSettings.achievedSales) || 1250000;
+      const gap = Math.max(0, target - achieved);
+      const percentage = target > 0 ? Math.min(100, ((achieved / target) * 100)).toFixed(1) : 0;
+      const coverage = target > 0 ? (totalPipeline / target).toFixed(1) : '0.0';
+
+      // 1. Header Quick Stats
+      const hdrTarget = document.getElementById('hdrTargetVal');
+      const hdrAchieved = document.getElementById('hdrAchievedVal');
+      const hdrWeighted = document.getElementById('hdrWeightedVal');
+      const hdrCoverage = document.getElementById('hdrCoverageVal');
+
+      if (hdrTarget) hdrTarget.innerText = formatQarShort(target);
+      if (hdrAchieved) hdrAchieved.innerText = `${formatQarShort(achieved)} (${percentage}%)`;
+      if (hdrWeighted) hdrWeighted.innerText = formatQarShort(weightedPipeline);
+      if (hdrCoverage) hdrCoverage.innerText = `${coverage}X`;
+
+      // 2. Command Center KPI Card 1 (Target & Achieved)
+      const kpiTarget = document.getElementById('kpiTargetVal');
+      const kpiPct = document.getElementById('kpiTargetPercent');
+      const kpiBar = document.getElementById('kpiTargetBar');
+      const kpiAch = document.getElementById('kpiAchievedVal');
+      const kpiGap = document.getElementById('kpiGapVal');
+
+      if (kpiTarget) kpiTarget.innerText = formatQarShort(target);
+      if (kpiPct) kpiPct.innerText = `${percentage}%`;
+      if (kpiBar) kpiBar.style.width = `${percentage}%`;
+      if (kpiAch) kpiAch.innerText = formatQarShort(achieved);
+      if (kpiGap) kpiGap.innerText = formatQarShort(gap);
+
+      // 3. Command Center KPI Card 2 (Open Pipeline)
+      const kpiTotPip = document.getElementById('kpiTotalPipelineVal');
+      const kpiCovBadge = document.getElementById('kpiCoverageBadge');
+      const kpiWt = document.getElementById('kpiWeightedVal');
+      const kpiPre = document.getElementById('kpiPreRfqVal');
+      const kpiItt = document.getElementById('kpiLiveIttVal');
+
+      if (kpiTotPip) kpiTotPip.innerText = formatQarShort(totalPipeline);
+      if (kpiCovBadge) kpiCovBadge.innerText = `${coverage}X Cov`;
+      if (kpiWt) kpiWt.innerText = formatQarShort(weightedPipeline);
+      if (kpiPre) kpiPre.innerText = formatQarShort(preRfqPipeline);
+      if (kpiItt) kpiItt.innerText = formatQarShort(liveIttPipeline);
+
+      // 4. Command Center KPI Card 3 (Leads Count)
+      const kpiHot = document.getElementById('kpiHotLeadsCount');
+      const kpiTotCount = document.getElementById('kpiTotalLeadsCount');
+      const kpiHighPot = document.getElementById('kpiHighPotCount');
+      const kpiWatch = document.getElementById('kpiWatchlistCount');
+
+      if (kpiHot) kpiHot.innerText = `${hotCount} Leads`;
+      if (kpiTotCount) kpiTotCount.innerText = `${totalLeads} active scopes`;
+      if (kpiHighPot) kpiHighPot.innerText = hotCount;
+      if (kpiWatch) kpiWatch.innerText = Math.max(0, totalLeads - hotCount);
+
+      // 5. Product Revenue Breakdown Calculations
+      let sumValves = 0, sumInst = 0, sumSolenoids = 0, sumFlame = 0, sumPumps = 0, sumMonitoring = 0;
+      opportunities.forEach(o => {
+        const val = Number(o.value) || 0;
+        const prod = (o.product || '').toLowerCase();
+        const brand = (o.brand || '').toLowerCase();
+
+        if (prod.includes('flame') || brand.includes('protectoseal')) sumFlame += val;
+        else if (prod.includes('solenoid') || (brand.includes('asco') && !prod.includes('valve'))) sumSolenoids += val;
+        else if (prod.includes('pump') || brand.includes('trillium')) sumPumps += val;
+        else if (prod.includes('monitoring') || prod.includes('positioner') || brand.includes('westlock')) sumMonitoring += val;
+        else if (prod.includes('gauge') || prod.includes('temp') || prod.includes('press') || brand.includes('ashcroft') || brand.includes('bourdon') || brand.includes('baumer')) sumInst += val;
+        else sumValves += val;
+      });
+
+      const pbPool = document.getElementById('pbTotalPoolVal');
+      if (pbPool) pbPool.innerText = `Total Opportunity Pool: ${formatQarShort(totalPipeline)}`;
+
+      const updatePb = (valElId, pctElId, sumVal) => {
+        const vEl = document.getElementById(valElId);
+        const pEl = document.getElementById(pctElId);
+        const pct = totalPipeline > 0 ? ((sumVal / totalPipeline) * 100).toFixed(0) : 0;
+        if (vEl) vEl.innerText = formatQarShort(sumVal);
+        if (pEl) pEl.innerText = `${pct}%`;
+      };
+
+      updatePb('pbValvesVal', 'pbValvesPct', sumValves);
+      updatePb('pbInstVal', 'pbInstPct', sumInst);
+      updatePb('pbSolenoidsVal', 'pbSolenoidsPct', sumSolenoids);
+      updatePb('pbFlameVal', 'pbFlamePct', sumFlame);
+      updatePb('pbPumpsVal', 'pbPumpsPct', sumPumps);
+      updatePb('pbMonitoringVal', 'pbMonitoringPct', sumMonitoring);
+    }
+
+    // ==========================================
+    // TARGET CONFIGURATION CONTROLLER
+    // ==========================================
+    function openTargetConfigModal() {
+      const modal = document.getElementById('targetConfigModal');
+      const inTarget = document.getElementById('inputMonthlyTarget');
+      const inAch = document.getElementById('inputAchievedSales');
+      const modalCount = document.getElementById('modalCrmCount');
+      const modalSum = document.getElementById('modalCrmSum');
+
+      if (inTarget) inTarget.value = userSettings.monthlyTarget;
+      if (inAch) inAch.value = userSettings.achievedSales;
+
+      const totalPipeline = opportunities.reduce((acc, o) => acc + (Number(o.value) || 0), 0);
+      if (modalCount) modalCount.innerText = `${opportunities.length} Leads`;
+      if (modalSum) modalSum.innerText = `QAR ${totalPipeline.toLocaleString()}`;
+
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeTargetConfigModal() {
+      const modal = document.getElementById('targetConfigModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function setTargetPreset(targetVal, achievedVal = null) {
+      const inTarget = document.getElementById('inputMonthlyTarget');
+      const inAch = document.getElementById('inputAchievedSales');
+      if (inTarget) inTarget.value = targetVal;
+      if (inAch && achievedVal !== null) inAch.value = achievedVal;
+    }
+
+    function saveTargetConfig(e) {
+      e.preventDefault();
+      const inTarget = document.getElementById('inputMonthlyTarget');
+      const inAch = document.getElementById('inputAchievedSales');
+
+      userSettings.monthlyTarget = Number(inTarget.value) || 2000000;
+      userSettings.achievedSales = Number(inAch.value) || 0;
+
+      saveSettings();
+      closeTargetConfigModal();
+      alert(`Targets updated successfully!\nMonthly Target: QAR ${userSettings.monthlyTarget.toLocaleString()}\nAchieved: QAR ${userSettings.achievedSales.toLocaleString()}`);
     }
 
     // ==========================================
@@ -2986,6 +3211,7 @@ Q4. Spares & Delivery Timeline:
     // INITIALIZATION
     // ==========================================
     document.addEventListener('DOMContentLoaded', () => {
+      recalculateKpiMetrics();
       renderTopOpportunities();
       renderRecentSignals();
       renderQuickEpc();
