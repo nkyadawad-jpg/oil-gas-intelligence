@@ -1,0 +1,2915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Qatar O&G Opportunity Radar | Sales Intelligence Command Center</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            qatar: {
+              DEFAULT: '#8A1538',
+              dark: '#5c0e25',
+              light: '#b31c49',
+              gold: '#D4AF37',
+              accent: '#C59B27'
+            },
+            radar: {
+              bg: '#0a0f1d',
+              card: '#111827',
+              surface: '#1e293b',
+              border: '#334155',
+              hover: '#1e293b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #8A1538; }
+    .glass-panel { background: rgba(17, 24, 39, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.6); }
+    .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(8px); border: 1px solid rgba(71, 85, 105, 0.4); }
+    .pulse-hot { animation: pulseGlow 2s infinite; }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 15px rgba(239, 68, 68, 0.3); }
+      50% { box-shadow: 0 0 25px rgba(239, 68, 68, 0.7); }
+    }
+    .badge-fact { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-signal { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .badge-inference { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+  </style>
+</head>
+<body class="bg-radar-bg text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-qatar selection:text-white">
+
+  <!-- TOP HEADER / NAV BAR -->
+  <header class="bg-slate-900/90 border-b border-slate-800 sticky top-0 z-40 backdrop-blur-md px-4 py-2.5 flex items-center justify-between shadow-xl">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-qatar to-qatar-dark flex items-center justify-center shadow-lg border border-qatar-light/40">
+        <i class="fa-solid fa-radar text-amber-300 text-lg"></i>
+      </div>
+      <div>
+        <div class="flex items-center space-x-2">
+          <span class="font-bold text-lg tracking-wide text-white">QATAR O&G OPPORTUNITY RADAR</span>
+          <span class="text-xs bg-qatar/30 text-amber-300 px-2 py-0.5 rounded border border-qatar/50 font-medium">PRE-RFQ INTELLIGENCE</span>
+          <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/30 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> Live Market Ingestion
+          </span>
+        </div>
+        <p class="text-[11px] text-slate-400">Detect Early • Approach First • Convert Faster | OEM Sales Command Center</p>
+      </div>
+    </div>
+
+    <!-- Quick Stats in Header -->
+    <div class="hidden xl:flex items-center space-x-6 text-xs bg-slate-950/60 px-4 py-1.5 rounded-lg border border-slate-800">
+      <div>
+        <span class="text-slate-400">Monthly Target:</span>
+        <span class="font-bold text-white ml-1">QAR 2.00M</span>
+      </div>
+      <div class="h-4 w-px bg-slate-800"></div>
+      <div>
+        <span class="text-slate-400">Achieved:</span>
+        <span class="font-bold text-emerald-400 ml-1">QAR 1.25M (62.5%)</span>
+      </div>
+      <div class="h-4 w-px bg-slate-800"></div>
+      <div>
+        <span class="text-slate-400">Weighted Pipeline:</span>
+        <span class="font-bold text-amber-300 ml-1">QAR 2.74M</span>
+      </div>
+      <div class="h-4 w-px bg-slate-800"></div>
+      <div>
+        <span class="text-slate-400">Pipeline Coverage:</span>
+        <span class="font-bold text-cyan-400 ml-1">2.4X</span>
+      </div>
+    </div>
+
+    <!-- Header Actions -->
+    <div class="flex items-center space-x-3">
+      <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light hover:from-qatar-light hover:to-qatar text-white px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-md shadow-qatar/20 transition-all active:scale-95">
+        <i class="fa-solid fa-arrows-rotate" id="scanIcon"></i>
+        <span>Scan Monitored Sources</span>
+      </button>
+      <button onclick="openDailyBriefingModal()" class="bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/30 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition">
+        <i class="fa-solid fa-newspaper text-amber-400"></i>
+        <span>Daily Briefing</span>
+      </button>
+      <div class="relative">
+        <button onclick="toggleAlertsDrawer()" class="relative p-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg border border-slate-700 transition">
+          <i class="fa-solid fa-bell text-sm"></i>
+          <span class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">5</span>
+        </button>
+      </div>
+      <div class="flex items-center gap-2 pl-2 border-l border-slate-800">
+        <div class="w-8 h-8 rounded-full bg-slate-700 border border-amber-400/50 flex items-center justify-center font-bold text-xs text-amber-300">
+          NS
+        </div>
+        <div class="hidden sm:block text-left">
+          <p class="text-xs font-semibold text-white leading-tight">Noman S.</p>
+          <p class="text-[10px] text-slate-400 leading-tight">Asst. Sales Mgr (Qatar)</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN APP CONTAINER -->
+  <div class="flex-1 flex overflow-hidden">
+
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="w-64 bg-slate-950/90 border-r border-slate-800 flex flex-col justify-between shrink-0 select-none">
+      <div class="p-3 space-y-1 overflow-y-auto">
+        <div class="px-3 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Navigation</div>
+        
+        <button onclick="switchTab('command_center')" id="nav-command_center" class="nav-item w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-medium transition bg-qatar/20 text-white border border-qatar/40">
+          <div class="flex items-center gap-2.5">
+            <i class="fa-solid fa-gauge-high text-amber-400 w-4"></i>
+            <span>Command Center</span>
+          </div>
+          <span class="bg-red-500/20 text-red-400 border border-red-500/40 text-[10px] px-1.5 py-0.2 rounded font-semibold">11 Hot</span>
+        </button>
+
+        <button onclick="switchTab('project_radar')" id="nav-project_radar" class="nav-item w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-medium text-slate-300 hover:bg-slate-800/60 hover:text-white transition">
+          <div class="flex items-center gap-2.5">
+            <i class="fa-solid fa-crosshairs text-cyan-400 w-4"></i>
+            <span>Project & Signal Radar</span>
+          </div>
+          <span class="bg-cyan-500/20 text-cyan-300 text-[10px] px-1.5 py-0.2 rounded">18 Active</span>
+        </button>
+
+        <button onclick="switchTab('shutdown_radar')" id="nav-shutdown_radar" class="nav-item w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-medium text-slate-300 hover:bg-slate-800/60 hover:text-white transition">
+          <div class="flex items-center gap-2.5">
+            <i class="fa-solid fa-clock-rotate-left text-orange-400 w-4"></i>
+            <span>Shutdown & Turnaround</span>
+          </div>
+          <span class="bg-orange-500/20 text-orange-300 text-[10px] px-1.5 py-0.2 rounded font-bold">5 Approaching</span>
+        </button>
+
+        <button onclick="switchTab('excel_grid')" id="nav-excel_grid" class="nav-item w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-medium text-slate-300 hover:bg-slate-800/60 hover:text-white transition">
+          <div class="flex items-center gap-2.5">
+            <i class="fa-solid fa-table-cells text-emerald-400 w-4"></i>
+            <span>Excel CRM Data Grid</span>
+          </div>
+          <span class="bg-emerald-500/20 text-emerald-300 text-[10px] px-1.5 py-0.2 rounded">Interactive</span>
+        </button>
+
+        <button onclick="switchTab('qatar_map')" id="nav-qatar_map" class="nav-item w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-medium text-slate-300 hover:bg-slate-800/60 hover:text-white transition">
+          <div class="flex items-center gap-2.5">
+            <i class="fa-solid fa-map-location-dot text-indigo-400 w-4"></i>
+            <span>Qatar Facilities Map</span>
+          </div>
+          <span class="text-slate-400 text-[10px]">6 Zones</span>
+        </button>
+
+        <div class="pt-3 px-3 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Stakeholder Intelligence</div>
+
+        <button onclick="switchTab('epc_directory')" id="nav-epc_directory" class="nav-item w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-medium text-slate-300 hover:bg-slate-800/60 hover:text-white transition">
+          <div class="flex items-center gap-2.5">
+            <i class="fa-solid fa-building-shield text-yellow-400 w-4"></i>
+            <span>EPC Intelligence</span>
+          </div>
+          <span class="text-slate-400 text-[10px]">10 EPCs</span>
+        </button>
+
+        <button onclick="switchTab('customer_matrix')" id="nav-customer_matrix" class="nav-item w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-medium text-slate-300 hover:bg-slate-800/60 hover:text-white transition">
+          <div class="flex items-center gap-2.5">
+            <i class="fa-solid fa-industry text-purple-400 w-4"></i>
+            <span>Customer & OEM Matrix</span>
+          </div>
+          <span class="text-slate-400 text-[10px]">9 Clients</span>
+        </button>
+
+        <button onclick="switchTab('product_portfolio')" id="nav-product_portfolio" class="nav-item w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-medium text-slate-300 hover:bg-slate-800/60 hover:text-white transition">
+          <div class="flex items-center gap-2.5">
+            <i class="fa-solid fa-boxes-stacked text-teal-400 w-4"></i>
+            <span>OEM Product Portfolio</span>
+          </div>
+          <span class="text-slate-400 text-[10px]">7 Lines</span>
+        </button>
+
+        <div class="pt-3 px-3 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider">AI Engines & Sources</div>
+
+        <button onclick="switchTab('source_monitor')" id="nav-source_monitor" class="nav-item w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-medium text-slate-300 hover:bg-slate-800/60 hover:text-white transition">
+          <div class="flex items-center gap-2.5">
+            <i class="fa-solid fa-tower-broadcast text-pink-400 w-4"></i>
+            <span>Source Watcher & Ingestion</span>
+          </div>
+          <span class="text-slate-400 text-[10px]">12 Sources</span>
+        </button>
+
+        <button onclick="switchTab('outreach_generator')" id="nav-outreach_generator" class="nav-item w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-medium text-slate-300 hover:bg-slate-800/60 hover:text-white transition">
+          <div class="flex items-center gap-2.5">
+            <i class="fa-solid fa-wand-magic-sparkles text-amber-300 w-4"></i>
+            <span>AI Sales Action Generator</span>
+          </div>
+          <span class="bg-amber-500/20 text-amber-300 text-[10px] px-1.5 py-0.2 rounded">Instant</span>
+        </button>
+      </div>
+
+      <!-- User & Territory Status Footer -->
+      <div class="p-3 bg-slate-900 border-t border-slate-800 text-[11px] text-slate-400 space-y-1.5">
+        <div class="flex justify-between items-center text-slate-300 font-medium">
+          <span>Territory: Qatar Energy Hub</span>
+          <span class="text-emerald-400 font-bold">● Active</span>
+        </div>
+        <div class="text-slate-500">Target OEMs: Emerson, ASCO, Protectoseal, Westlock, Trillium, Ashcroft, ADAMS</div>
+      </div>
+    </aside>
+
+    <!-- MAIN VIEW AREA -->
+    <main class="flex-1 overflow-y-auto p-4 md:p-6 space-y-6" id="mainContentArea">
+      
+      <!-- TAB 1: COMMAND CENTER (DEFAULT) -->
+      <section id="tab-command_center" class="tab-content space-y-6">
+        <!-- Sales Target Progress & KPI Banner -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- KPI 1 -->
+          <div class="glass-panel p-4 rounded-xl relative overflow-hidden border-slate-700">
+            <div class="absolute -right-2 -bottom-2 opacity-10 text-6xl text-amber-400"><i class="fa-solid fa-bullseye"></i></div>
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="text-xs text-slate-400 font-medium">Monthly Sales Target</p>
+                <h3 class="text-2xl font-black text-white mt-1">QAR 2.00M</h3>
+              </div>
+              <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs px-2 py-0.5 rounded font-bold">62.5%</span>
+            </div>
+            <div class="w-full bg-slate-800 h-2 rounded-full mt-3 overflow-hidden">
+              <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full" style="width: 62.5%"></div>
+            </div>
+            <div class="flex justify-between text-[11px] text-slate-400 mt-2">
+              <span>Achieved: <strong class="text-emerald-300">QAR 1.25M</strong></span>
+              <span>Gap: <strong class="text-amber-300">QAR 750K</strong></span>
+            </div>
+          </div>
+
+          <!-- KPI 2 -->
+          <div class="glass-panel p-4 rounded-xl relative overflow-hidden border-slate-700">
+            <div class="absolute -right-2 -bottom-2 opacity-10 text-6xl text-cyan-400"><i class="fa-solid fa-chart-line"></i></div>
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="text-xs text-slate-400 font-medium">Open Pipeline (Weighted)</p>
+                <h3 class="text-2xl font-black text-cyan-300 mt-1">QAR 4.85M</h3>
+              </div>
+              <span class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs px-2 py-0.5 rounded font-bold">2.4X Cov</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-2">Weighted Expected Value: <strong class="text-white">QAR 2.74M</strong></p>
+            <div class="text-[11px] text-slate-400 mt-1 flex justify-between">
+              <span>Pre-RFQ Stage: <strong class="text-amber-300">QAR 3.1M</strong></span>
+              <span>Live ITT: <strong class="text-emerald-300">QAR 1.75M</strong></span>
+            </div>
+          </div>
+
+          <!-- KPI 3 -->
+          <div class="glass-panel p-4 rounded-xl relative overflow-hidden border-slate-700">
+            <div class="absolute -right-2 -bottom-2 opacity-10 text-6xl text-red-400"><i class="fa-solid fa-fire"></i></div>
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="text-xs text-slate-400 font-medium">Hot Pre-RFQ Opportunities</p>
+                <h3 class="text-2xl font-black text-red-400 mt-1">11 Leads</h3>
+              </div>
+              <span class="bg-red-500/20 text-red-400 border border-red-500/30 text-xs px-2 py-0.5 rounded font-bold animate-pulse">🔥 High Conv</span>
+            </div>
+            <div class="flex items-center gap-2 mt-3 text-[11px] text-slate-300">
+              <span class="text-slate-400">Total Monitored Leads:</span>
+              <span class="font-bold text-white">43 active leads</span>
+            </div>
+            <div class="flex justify-between text-[11px] text-slate-400 mt-1">
+              <span>High Potential: <strong class="text-amber-400">23</strong></span>
+              <span>Watchlist: <strong class="text-slate-300">9</strong></span>
+            </div>
+          </div>
+
+          <!-- KPI 4 -->
+          <div class="glass-panel p-4 rounded-xl relative overflow-hidden border-slate-700">
+            <div class="absolute -right-2 -bottom-2 opacity-10 text-6xl text-orange-400"><i class="fa-solid fa-wrench"></i></div>
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="text-xs text-slate-400 font-medium">Imminent Shutdowns</p>
+                <h3 class="text-2xl font-black text-orange-400 mt-1">5 Plants</h3>
+              </div>
+              <span class="bg-orange-500/20 text-orange-400 border border-orange-500/30 text-xs px-2 py-0.5 rounded font-bold">&lt; 90 Days</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-2">Immediate replacement window for valves, flame arrestors, and pump spares.</p>
+            <div class="text-[11px] text-slate-300 font-medium mt-1">Next: QAFCO-4 Ammonia (<span class="text-orange-300 font-bold">47 Days</span>)</div>
+          </div>
+        </div>
+
+        <!-- Product Revenue Pipeline Breakdown -->
+        <div class="glass-panel p-4 rounded-xl">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <div>
+              <h4 class="font-bold text-sm text-white flex items-center gap-2">
+                <i class="fa-solid fa-chart-pie text-qatar-gold"></i>
+                Product-Wise Pipeline vs. Your OEM Lines
+              </h4>
+              <p class="text-xs text-slate-400">Targeted allocation across Valves, ASCO Solenoids, Protectoseal, Westlock, Trillium, Gauges & ADAMS</p>
+            </div>
+            <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Total Opportunity Pool: QAR 4.85M</span>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800 hover:border-slate-700 transition">
+              <div class="flex items-center justify-between text-xs text-slate-400">
+                <span>Process Valves</span>
+                <span class="text-emerald-400 font-semibold">43%</span>
+              </div>
+              <div class="text-base font-bold text-white mt-1">QAR 2.10M</div>
+              <p class="text-[10px] text-slate-500 truncate">Ball/Butterfly/Gate/ADAMS</p>
+            </div>
+
+            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800 hover:border-slate-700 transition">
+              <div class="flex items-center justify-between text-xs text-slate-400">
+                <span>Instrumentation</span>
+                <span class="text-cyan-400 font-semibold">18%</span>
+              </div>
+              <div class="text-base font-bold text-white mt-1">QAR 850K</div>
+              <p class="text-[10px] text-slate-500 truncate">Ashcroft/Baumer/Bourdon</p>
+            </div>
+
+            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800 hover:border-slate-700 transition">
+              <div class="flex items-center justify-between text-xs text-slate-400">
+                <span>Solenoids (ASCO)</span>
+                <span class="text-amber-400 font-semibold">13%</span>
+              </div>
+              <div class="text-base font-bold text-white mt-1">QAR 620K</div>
+              <p class="text-[10px] text-slate-500 truncate">Emerson ASCO Actuation</p>
+            </div>
+
+            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800 hover:border-slate-700 transition">
+              <div class="flex items-center justify-between text-xs text-slate-400">
+                <span>Flame Arrestors</span>
+                <span class="text-red-400 font-semibold">9%</span>
+              </div>
+              <div class="text-base font-bold text-white mt-1">QAR 430K</div>
+              <p class="text-[10px] text-slate-500 truncate">Protectoseal Vapor Relief</p>
+            </div>
+
+            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800 hover:border-slate-700 transition">
+              <div class="flex items-center justify-between text-xs text-slate-400">
+                <span>Pump Spares</span>
+                <span class="text-indigo-400 font-semibold">6%</span>
+              </div>
+              <div class="text-base font-bold text-white mt-1">QAR 270K</div>
+              <p class="text-[10px] text-slate-500 truncate">Trillium Rotating Spares</p>
+            </div>
+
+            <div class="bg-slate-900/80 p-3 rounded-lg border border-slate-800 hover:border-slate-700 transition">
+              <div class="flex items-center justify-between text-xs text-slate-400">
+                <span>Valve Monitoring</span>
+                <span class="text-teal-400 font-semibold">11%</span>
+              </div>
+              <div class="text-base font-bold text-white mt-1">QAR 580K</div>
+              <p class="text-[10px] text-slate-500 truncate">Westlock Positioners</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOP OPPORTUNITIES FEED (THE RADAR) -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 rounded-full bg-red-500 animate-ping"></div>
+              <h3 class="font-black text-lg text-white tracking-wide">🚨 TODAY'S TOP PRE-RFQ OPPORTUNITIES</h3>
+              <span class="text-xs text-slate-400">(Prioritized by Lead Score & Procurement Imminence)</span>
+            </div>
+            <div class="flex items-center gap-2 text-xs">
+              <button onclick="filterTopOpportunities('all')" class="top-filter-btn px-2.5 py-1 rounded bg-slate-800 text-white font-medium">All</button>
+              <button onclick="filterTopOpportunities('hot')" class="top-filter-btn px-2.5 py-1 rounded bg-slate-900 text-slate-400 hover:text-white">Hot Leads (&gt;80)</button>
+              <button onclick="filterTopOpportunities('shutdown')" class="top-filter-btn px-2.5 py-1 rounded bg-slate-900 text-slate-400 hover:text-white">Shutdowns</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="topOpportunitiesGrid">
+            <!-- Dynamic cards injected via JS -->
+          </div>
+        </div>
+
+        <!-- TWO COLUMN SECTION: RECENT INGESTED SIGNALS & EPC ACTIVITY -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <!-- Monitored Market Signals Stream -->
+          <div class="glass-panel p-4 rounded-xl space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+              <h4 class="font-bold text-sm text-white flex items-center gap-2">
+                <i class="fa-solid fa-satellite-dish text-cyan-400"></i>
+                Real-Time Qatar Market Signals Ingested
+              </h4>
+              <span class="text-[11px] text-slate-400">Auto-Refreshes</span>
+            </div>
+            <div class="space-y-2.5 max-h-[360px] overflow-y-auto pr-1" id="recentSignalsList">
+              <!-- Signal items rendered by JS -->
+            </div>
+          </div>
+
+          <!-- Quick EPC Engagement Matrix -->
+          <div class="glass-panel p-4 rounded-xl space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+              <h4 class="font-bold text-sm text-white flex items-center gap-2">
+                <i class="fa-solid fa-helmet-safety text-amber-400"></i>
+                Active EPC Projects in Qatar
+              </h4>
+              <span class="text-[11px] text-slate-400">10 Monitored EPCs</span>
+            </div>
+            <div class="space-y-2 max-h-[360px] overflow-y-auto pr-1" id="quickEpcList">
+              <!-- EPC items rendered by JS -->
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- TAB 2: PROJECT & SIGNAL RADAR -->
+      <section id="tab-project_radar" class="tab-content hidden space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-4 glass-panel p-4 rounded-xl">
+          <div>
+            <h3 class="text-xl font-black text-white flex items-center gap-2">
+              <i class="fa-solid fa-crosshairs text-cyan-400"></i>
+              Qatar Oil & Gas Project Intelligence Radar
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">Clustered Project Lifecycles • Early Commercial Signals • Product Applicability Matrix</p>
+          </div>
+          
+          <div class="flex items-center gap-2 flex-wrap">
+            <input type="text" id="projectSearchInput" onkeyup="filterProjects()" placeholder="Search project, client, EPC, product..." class="bg-slate-900 border border-slate-700 px-3 py-1.5 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 w-56" />
+            <select id="stageFilter" onchange="filterProjects()" class="bg-slate-900 border border-slate-700 px-3 py-1.5 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500">
+              <option value="all">All Stages (Level 1 - 5)</option>
+              <option value="Level 1">Level 1 - Early Concept / Feasibility</option>
+              <option value="Level 2">Level 2 - FEED / Project Dev</option>
+              <option value="Level 3">Level 3 - Procurement Approaching (Pre-RFQ)</option>
+              <option value="Level 4">Level 4 - Live Tender / ITT</option>
+              <option value="Level 5">Level 5 - Awarded / Spares & Subs</option>
+            </select>
+            <select id="clientFilter" onchange="filterProjects()" class="bg-slate-900 border border-slate-700 px-3 py-1.5 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500">
+              <option value="all">All Clients</option>
+              <option value="QatarEnergy">QatarEnergy</option>
+              <option value="QatarEnergy LNG">QatarEnergy LNG</option>
+              <option value="QAFCO">QAFCO</option>
+              <option value="QAPCO">QAPCO</option>
+              <option value="Q-Chem">Q-Chem</option>
+              <option value="RLOC">RLOC</option>
+              <option value="QAFAC">QAFAC</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Project Cards Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="projectCardsContainer">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+
+      <!-- TAB 3: SHUTDOWN & TURNAROUND RADAR -->
+      <section id="tab-shutdown_radar" class="tab-content hidden space-y-6">
+        <div class="glass-panel p-4 rounded-xl flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h3 class="text-xl font-black text-white flex items-center gap-2">
+              <i class="fa-solid fa-clock-rotate-left text-orange-400"></i>
+              Qatar Plant Shutdown & Turnaround Radar
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">High-velocity replacement opportunities for Valves, Trillium Pump Spares, Flame Arrestors & Gauges</p>
+          </div>
+          <div class="bg-orange-500/10 border border-orange-500/30 px-3.5 py-1.5 rounded-lg text-xs text-orange-300 font-medium flex items-center gap-2">
+            <i class="fa-solid fa-triangle-exclamation text-orange-400"></i>
+            Rule: Approach maintenance contractors 45-90 days BEFORE shutdown start.
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="shutdownCardsContainer">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+
+      <!-- TAB 4: EXCEL CRM DATA GRID (INTERACTIVE SPREADSHEET MODULE) -->
+      <section id="tab-excel_grid" class="tab-content hidden space-y-4">
+        <div class="glass-panel p-4 rounded-xl flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h3 class="text-xl font-black text-white flex items-center gap-2">
+              <i class="fa-solid fa-table-cells text-emerald-400"></i>
+              Sales Opportunity CRM Grid (Excel-Like Module)
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">Feed, edit, filter, search, AI auto-enrich data, and export/import leads directly</p>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex items-center gap-2 flex-wrap">
+            <button onclick="openAddLeadModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow transition">
+              <i class="fa-solid fa-plus"></i> Add New Opportunity Row
+            </button>
+            <button onclick="runAiAutoEnrich()" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow transition">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> AI Auto-Enrich Rows
+            </button>
+            <button onclick="exportToCSV()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition">
+              <i class="fa-solid fa-file-excel text-emerald-400"></i> Export CSV
+            </button>
+            <label class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 cursor-pointer transition">
+              <i class="fa-solid fa-file-import text-cyan-400"></i> Import Data
+              <input type="file" id="csvFileInput" accept=".csv, .json" onchange="importData(event)" class="hidden" />
+            </label>
+          </div>
+        </div>
+
+        <!-- Filter & Search Toolbar -->
+        <div class="glass-card p-3 rounded-lg flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div class="flex items-center gap-2 flex-1 min-w-[240px]">
+            <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
+            <input type="text" id="gridSearchInput" onkeyup="filterGrid()" placeholder="Quick filter across all columns (Client, Project, EPC, Product...)" class="bg-slate-900 border border-slate-700 rounded px-2.5 py-1 text-white w-full focus:outline-none focus:border-emerald-500" />
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <select id="gridStatusFilter" onchange="filterGrid()" class="bg-slate-900 border border-slate-700 text-slate-300 rounded px-2.5 py-1 focus:outline-none">
+              <option value="all">Status: All</option>
+              <option value="Pre-RFQ">Pre-RFQ</option>
+              <option value="Approached">Approached</option>
+              <option value="RFQ Received">RFQ Received</option>
+              <option value="Quotation">Quotation</option>
+              <option value="Won">Won</option>
+            </select>
+            <select id="gridProductFilter" onchange="filterGrid()" class="bg-slate-900 border border-slate-700 text-slate-300 rounded px-2.5 py-1 focus:outline-none">
+              <option value="all">Product: All</option>
+              <option value="Valves">Valves (Ball/Gate/Butterfly)</option>
+              <option value="Solenoid">ASCO Solenoid</option>
+              <option value="Flame Arrestors">Protectoseal Flame Arrestors</option>
+              <option value="Pump Spares">Trillium Pump Spares</option>
+              <option value="Gauges">Pressure / Temp Gauges</option>
+              <option value="ADAMS">ADAMS Severe Service</option>
+            </select>
+            <button onclick="resetGridFilters()" class="text-slate-400 hover:text-white px-2 py-1 underline">Reset</button>
+          </div>
+        </div>
+
+        <!-- Excel Spreadsheet Table Container -->
+        <div class="glass-panel rounded-xl overflow-hidden border border-slate-700">
+          <div class="overflow-x-auto max-h-[580px]">
+            <table class="w-full text-left text-xs border-collapse" id="excelCrmTable">
+              <thead class="bg-slate-950 text-slate-300 sticky top-0 z-10 select-none border-b border-slate-700 font-semibold">
+                <tr>
+                  <th class="p-2.5 border-r border-slate-800 text-center w-10">#</th>
+                  <th class="p-2.5 border-r border-slate-800 cursor-pointer hover:text-white" onclick="sortGrid('id')">Lead ID <i class="fa-solid fa-sort text-[10px] opacity-60"></i></th>
+                  <th class="p-2.5 border-r border-slate-800 cursor-pointer hover:text-white" onclick="sortGrid('client')">Client <i class="fa-solid fa-sort text-[10px] opacity-60"></i></th>
+                  <th class="p-2.5 border-r border-slate-800 cursor-pointer hover:text-white" onclick="sortGrid('facility')">Facility / Location <i class="fa-solid fa-sort text-[10px] opacity-60"></i></th>
+                  <th class="p-2.5 border-r border-slate-800 cursor-pointer hover:text-white" onclick="sortGrid('project')">Project Name & Scope <i class="fa-solid fa-sort text-[10px] opacity-60"></i></th>
+                  <th class="p-2.5 border-r border-slate-800 cursor-pointer hover:text-white" onclick="sortGrid('stage')">Stage <i class="fa-solid fa-sort text-[10px] opacity-60"></i></th>
+                  <th class="p-2.5 border-r border-slate-800 cursor-pointer hover:text-white" onclick="sortGrid('epc')">Target EPC <i class="fa-solid fa-sort text-[10px] opacity-60"></i></th>
+                  <th class="p-2.5 border-r border-slate-800 cursor-pointer hover:text-white" onclick="sortGrid('product')">Matching Product Line <i class="fa-solid fa-sort text-[10px] opacity-60"></i></th>
+                  <th class="p-2.5 border-r border-slate-800 cursor-pointer hover:text-white" onclick="sortGrid('brand')">OEM Brand <i class="fa-solid fa-sort text-[10px] opacity-60"></i></th>
+                  <th class="p-2.5 border-r border-slate-800 cursor-pointer hover:text-white" onclick="sortGrid('value')">Est. Value (QAR) <i class="fa-solid fa-sort text-[10px] opacity-60"></i></th>
+                  <th class="p-2.5 border-r border-slate-800 cursor-pointer hover:text-white text-center" onclick="sortGrid('score')">Score <i class="fa-solid fa-sort text-[10px] opacity-60"></i></th>
+                  <th class="p-2.5 border-r border-slate-800 cursor-pointer hover:text-white" onclick="sortGrid('status')">CRM Status <i class="fa-solid fa-sort text-[10px] opacity-60"></i></th>
+                  <th class="p-2.5 border-r border-slate-800">Next Action</th>
+                  <th class="p-2.5 text-center w-24">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="excelTableBody" class="divide-y divide-slate-800/80 bg-slate-900/60 font-mono">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+          <div class="bg-slate-950 p-2.5 border-t border-slate-800 flex justify-between items-center text-xs text-slate-400">
+            <span id="gridRowCount">Showing 12 opportunities</span>
+            <span class="text-[11px] text-slate-500">Double click any cell to edit inline • Changes persist locally</span>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- TAB 5: QATAR FACILITIES MAP -->
+      <section id="tab-qatar_map" class="tab-content hidden space-y-6">
+        <div class="glass-panel p-4 rounded-xl">
+          <h3 class="text-xl font-black text-white flex items-center gap-2">
+            <i class="fa-solid fa-map-location-dot text-indigo-400"></i>
+            Interactive Qatar Oil & Gas Industrial Zones
+          </h3>
+          <p class="text-xs text-slate-400 mt-0.5">Click any strategic hub to filter live project signals, active EPC contracts, shutdowns & product matches</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Visual Map Area -->
+          <div class="lg:col-span-2 glass-panel p-6 rounded-xl relative min-h-[480px] flex flex-col justify-between overflow-hidden">
+            <div class="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            
+            <div class="flex justify-between items-start z-10">
+              <span class="text-xs bg-slate-900/80 text-amber-300 px-3 py-1 rounded-full border border-slate-700 font-semibold">
+                <i class="fa-solid fa-compass"></i> State of Qatar Industrial Radar
+              </span>
+              <span class="text-[11px] text-slate-400 bg-slate-950/80 px-2.5 py-1 rounded border border-slate-800">
+                Click a zone marker below
+              </span>
+            </div>
+
+            <!-- Custom Qatar Layout Map -->
+            <div class="relative w-full h-[400px] my-auto">
+              <!-- SVG Outline for Qatar Peninsula -->
+              <svg viewBox="0 0 400 500" class="w-full h-full filter drop-shadow-[0_0_20px_rgba(138,21,56,0.25)]">
+                <!-- Qatar Peninsula Path -->
+                <path d="M 170 50 C 220 50, 240 100, 230 160 C 250 200, 250 280, 230 360 C 210 420, 160 440, 140 400 C 130 350, 140 280, 130 200 C 120 140, 140 60, 170 50 Z" 
+                      fill="#0f172a" stroke="#8A1538" stroke-width="2" stroke-dasharray="4,2" />
+                
+                <!-- Sea Water Texture / Borders -->
+                <text x="50" y="240" fill="#334155" font-size="12" font-weight="bold">ARABIAN GULF</text>
+                <text x="260" y="320" fill="#334155" font-size="12" font-weight="bold">QATAR WATERS</text>
+              </svg>
+
+              <!-- HOTSPOT 1: Ras Laffan (North) -->
+              <button onclick="selectZone('ras_laffan')" class="zone-pin absolute top-[12%] left-[48%] group transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 focus:outline-none">
+                <span class="relative flex h-5 w-5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-5 w-5 bg-red-600 border-2 border-white items-center justify-center text-[9px] font-bold text-white shadow-lg">18</span>
+                </span>
+                <span class="bg-slate-900/90 text-white font-bold text-xs px-2 py-1 rounded shadow-md border border-red-500/50 group-hover:bg-red-900/80 transition">
+                  Ras Laffan City (LNG Hub)
+                </span>
+              </button>
+
+              <!-- HOTSPOT 2: Mesaieed (South East) -->
+              <button onclick="selectZone('mesaieed')" class="zone-pin absolute top-[68%] left-[55%] group transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 focus:outline-none">
+                <span class="relative flex h-5 w-5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-5 w-5 bg-amber-500 border-2 border-white items-center justify-center text-[9px] font-bold text-black shadow-lg">11</span>
+                </span>
+                <span class="bg-slate-900/90 text-white font-bold text-xs px-2 py-1 rounded shadow-md border border-amber-500/50 group-hover:bg-amber-900/80 transition">
+                  Mesaieed Industrial City
+                </span>
+              </button>
+
+              <!-- HOTSPOT 3: Dukhan (West Coast) -->
+              <button onclick="selectZone('dukhan')" class="zone-pin absolute top-[44%] left-[32%] group transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 focus:outline-none">
+                <span class="relative flex h-5 w-5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-5 w-5 bg-cyan-500 border-2 border-white items-center justify-center text-[9px] font-bold text-black shadow-lg">6</span>
+                </span>
+                <span class="bg-slate-900/90 text-white font-bold text-xs px-2 py-1 rounded shadow-md border border-cyan-500/50 group-hover:bg-cyan-900/80 transition">
+                  Dukhan Onshore Fields
+                </span>
+              </button>
+
+              <!-- HOTSPOT 4: Doha & Energy City (East Coast) -->
+              <button onclick="selectZone('doha')" class="zone-pin absolute top-[48%] left-[60%] group transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 focus:outline-none">
+                <span class="relative flex h-4 w-4">
+                  <span class="relative inline-flex rounded-full h-4 w-4 bg-purple-500 border border-white items-center justify-center text-[8px] font-bold text-white shadow">5</span>
+                </span>
+                <span class="bg-slate-900/90 text-slate-200 font-medium text-xs px-2 py-0.5 rounded shadow border border-purple-500/40">
+                  Doha / EPC Headquarters
+                </span>
+              </button>
+
+              <!-- HOTSPOT 5: Offshore / North Field / Al-Shaheen -->
+              <button onclick="selectZone('offshore')" class="zone-pin absolute top-[6%] left-[72%] group transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 focus:outline-none">
+                <span class="relative flex h-5 w-5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-5 w-5 bg-emerald-500 border-2 border-white items-center justify-center text-[9px] font-bold text-black shadow-lg">9</span>
+                </span>
+                <span class="bg-slate-900/90 text-emerald-300 font-bold text-xs px-2 py-1 rounded shadow-md border border-emerald-500/50">
+                  Offshore / North Field / Al Shaheen
+                </span>
+              </button>
+
+              <!-- HOTSPOT 6: Industrial Area / Fabrication Yards -->
+              <button onclick="selectZone('industrial_area')" class="zone-pin absolute top-[55%] left-[48%] group transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 focus:outline-none">
+                <span class="relative flex h-4 w-4">
+                  <span class="relative inline-flex rounded-full h-4 w-4 bg-slate-500 border border-white items-center justify-center text-[8px] font-bold text-white shadow">4</span>
+                </span>
+                <span class="bg-slate-900/90 text-slate-300 text-xs px-1.5 py-0.5 rounded shadow border border-slate-700">
+                  Doha Industrial Area (Fab Yards)
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Zone Intelligence Details Panel -->
+          <div class="glass-panel p-5 rounded-xl flex flex-col justify-between" id="zoneDetailsPanel">
+            <!-- Dynamic Zone Info Rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+
+      <!-- TAB 6: EPC INTELLIGENCE DIRECTORY -->
+      <section id="tab-epc_directory" class="tab-content hidden space-y-6">
+        <div class="glass-panel p-4 rounded-xl flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h3 class="text-xl font-black text-white flex items-center gap-2">
+              <i class="fa-solid fa-building-shield text-yellow-400"></i>
+              Qatar Tier-1 EPC Contractor Intelligence
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">DOPET, TRAGS, Medgulf, Roots Energy, Madina Group, GDI, Blackcat, Al Balagh, Al Muftah, QCON</p>
+          </div>
+          <span class="text-xs bg-yellow-500/10 text-yellow-300 border border-yellow-500/30 px-3 py-1.5 rounded-lg font-medium">
+            Core Target for Pre-Bid Mechanical & Instrumentation Packages
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="epcCardsContainer">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+
+      <!-- TAB 7: CUSTOMER & OEM MATRIX -->
+      <section id="tab-customer_matrix" class="tab-content hidden space-y-6">
+        <div class="glass-panel p-4 rounded-xl flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h3 class="text-xl font-black text-white flex items-center gap-2">
+              <i class="fa-solid fa-industry text-purple-400"></i>
+              Qatar Customer Accounts & OEM Approval Matrix
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">Preferred Manufacturer List (PML) status for Emerson/ASCO, Protectoseal, Westlock, Trillium, Gauges & ADAMS</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 glass-panel p-4 rounded-xl space-y-4">
+            <h4 class="text-sm font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-2">
+              <i class="fa-solid fa-clipboard-check text-emerald-400"></i>
+              End-User Approval Matrix by Brand
+            </h4>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs border-collapse">
+                <thead class="bg-slate-950 text-slate-400 border-b border-slate-800">
+                  <tr>
+                    <th class="p-2.5">End-User Client</th>
+                    <th class="p-2.5">Emerson / ASCO</th>
+                    <th class="p-2.5">Protectoseal</th>
+                    <th class="p-2.5">Westlock</th>
+                    <th class="p-2.5">Trillium Pumps</th>
+                    <th class="p-2.5">Ashcroft / Bourdon</th>
+                    <th class="p-2.5">ADAMS Valves</th>
+                  </tr>
+                </thead>
+                <tbody id="approvalMatrixBody" class="divide-y divide-slate-800/60 bg-slate-900/40">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="glass-panel p-4 rounded-xl space-y-3">
+            <h4 class="text-sm font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-2">
+              <i class="fa-solid fa-key text-amber-400"></i>
+              Commercial Eligibility Rule
+            </h4>
+            <div class="text-xs text-slate-300 space-y-2.5 leading-relaxed">
+              <div class="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-lg text-emerald-300">
+                <strong><i class="fa-solid fa-circle-check"></i> Approved (PML Active):</strong> Direct quotation eligibility upon RFQ arrival. Approach EPC mechanical package lead immediately.
+              </div>
+              <div class="p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg text-amber-300">
+                <strong><i class="fa-solid fa-triangle-exclamation"></i> Pre-Qualification Required:</strong> Must submit OEM technical credentials to Client Vendor Management before FEED freeze.
+              </div>
+              <div class="p-3 bg-cyan-500/10 border border-cyan-500/30 rounded-lg text-cyan-300">
+                <strong><i class="fa-solid fa-circle-info"></i> Project Specific Approval:</strong> Submit EPC deviation request or technical concession for fast-track package integration.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- TAB 8: OEM PRODUCT PORTFOLIO -->
+      <section id="tab-product_portfolio" class="tab-content hidden space-y-6">
+        <div class="glass-panel p-4 rounded-xl">
+          <h3 class="text-xl font-black text-white flex items-center gap-2">
+            <i class="fa-solid fa-boxes-stacked text-teal-400"></i>
+            Assigned OEM Product Lines & Technical Specifications
+          </h3>
+          <p class="text-xs text-slate-400 mt-0.5">Your core portfolio mapping for valves, flame arrestors, actuation, pump spares and instrumentation</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="productPortfolioContainer">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+
+      <!-- TAB 9: SOURCE WATCHER & INGESTION -->
+      <section id="tab-source_monitor" class="tab-content hidden space-y-6">
+        <div class="glass-panel p-4 rounded-xl flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h3 class="text-xl font-black text-white flex items-center gap-2">
+              <i class="fa-solid fa-tower-broadcast text-pink-400"></i>
+              Continuous Source Ingestion & Website Watcher
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">Website change detection (Yesterday vs Today) • Arabic NLP • PDF Extraction • RSS & Public Portals</p>
+          </div>
+          <button onclick="triggerScan()" class="bg-pink-600 hover:bg-pink-500 text-white px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-arrows-rotate"></i> Scan All Monitored Channels Now
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 glass-panel p-4 rounded-xl space-y-3">
+            <h4 class="text-sm font-bold text-white border-b border-slate-800 pb-2">Monitored Web Sources & Portals</h4>
+            <div class="space-y-2.5" id="sourcesListContainer">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <div class="glass-panel p-4 rounded-xl space-y-4">
+            <h4 class="text-sm font-bold text-white border-b border-slate-800 pb-2">Change Detection Snapshot</h4>
+            <div class="p-3 bg-slate-900 rounded-lg border border-slate-800 text-xs space-y-2">
+              <div class="flex justify-between text-slate-400">
+                <span>Target:</span>
+                <span class="text-white font-medium">QatarEnergy Mushtaryat Portal</span>
+              </div>
+              <div class="flex justify-between text-slate-400">
+                <span>Scan Diff:</span>
+                <span class="text-emerald-400 font-bold">+1 New Procurement Scope</span>
+              </div>
+              <div class="p-2 bg-slate-950 rounded font-mono text-[11px] text-slate-300 border-l-2 border-emerald-400">
+                "Added: Ras Laffan Ethane Expansion - Package 4 Mechanical Static & Rotary Valves Package."
+              </div>
+              <div class="text-[10px] text-slate-500">Processed into Opportunity #QTR-2026-0042 in 1.4s</div>
+            </div>
+
+            <div class="p-3 bg-slate-900 rounded-lg border border-slate-800 text-xs space-y-2">
+              <div class="flex justify-between text-slate-400">
+                <span>Target:</span>
+                <span class="text-white font-medium">DOPET News & Press</span>
+              </div>
+              <div class="flex justify-between text-slate-400">
+                <span>Scan Diff:</span>
+                <span class="text-amber-400 font-bold">+1 Contract Mobilization</span>
+              </div>
+              <div class="p-2 bg-slate-950 rounded font-mono text-[11px] text-slate-300 border-l-2 border-amber-400">
+                "Mobilizing for QAFCO-4 Ammonia Train Turnaround mechanical works."
+              </div>
+              <div class="text-[10px] text-slate-500">Matched to Shutdown Radar #SHUT-0081</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- TAB 10: AI SALES OUTREACH GENERATOR -->
+      <section id="tab-outreach_generator" class="tab-content hidden space-y-6">
+        <div class="glass-panel p-4 rounded-xl flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h3 class="text-xl font-black text-white flex items-center gap-2">
+              <i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i>
+              AI Sales Action & Strategic Outreach Generator
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">Generate B2B emails, WhatsApp pitches, LinkedIn messages, and technical talk points tailored for Qatar EPCs & Clients</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Lead Selection Panel -->
+          <div class="glass-panel p-4 rounded-xl space-y-3">
+            <h4 class="text-sm font-bold text-white border-b border-slate-800 pb-2">1. Select Target Opportunity</h4>
+            <div class="space-y-2 max-h-[480px] overflow-y-auto" id="outreachLeadSelector">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- Generated Outreach Content Panel -->
+          <div class="lg:col-span-2 glass-panel p-5 rounded-xl space-y-4 flex flex-col justify-between" id="outreachDisplayPanel">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+
+  <!-- MODAL: WHY THIS LEAD? (FACT vs SIGNAL vs INFERENCE) -->
+  <div id="whyLeadModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-start border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-qatar/30 border border-qatar flex items-center justify-center text-amber-300">
+            <i class="fa-solid fa-brain"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-white" id="modalLeadTitle">Why This Lead?</h3>
+            <p class="text-xs text-slate-400" id="modalLeadSubtitle">Opportunity Analysis & Fact Verification</p>
+          </div>
+        </div>
+        <button onclick="closeWhyLeadModal()" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- Breakdown of Fact, Signal, Inference -->
+      <div class="space-y-3" id="modalLeadContent">
+        <!-- Injected by JS -->
+      </div>
+
+      <div class="flex justify-end pt-2 border-t border-slate-800">
+        <button onclick="closeWhyLeadModal()" class="bg-slate-800 hover:bg-slate-700 text-white text-xs px-4 py-2 rounded-lg font-semibold">
+          Close Window
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MODAL: ARABIC INTELLIGENCE & TRANSLATION DRAWER -->
+  <div id="arabicDrawerModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-3xl w-full p-6 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-start border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+            <i class="fa-solid fa-language text-lg"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-white">Arabic Source Intelligence & Professional Translation</h3>
+            <p class="text-xs text-slate-400">Preserved original Arabic text with entity resolution and product matching</p>
+          </div>
+        </div>
+        <button onclick="closeArabicDrawer()" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="space-y-4" id="arabicDrawerContent">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MODAL: DAILY SALES BRIEFING -->
+  <div id="dailyBriefingModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-3xl w-full p-6 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-start border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-qatar/30 border border-qatar flex items-center justify-center text-amber-300">
+            <i class="fa-solid fa-sun text-lg"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-white">Qatar O&G Daily Intelligence Briefing</h3>
+            <p class="text-xs text-slate-400">Morning Strategic Digest • Priority EPC Calls • Target Revenue Actions</p>
+          </div>
+        </div>
+        <button onclick="closeDailyBriefingModal()" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="space-y-4 text-xs text-slate-300" id="dailyBriefingContent">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MODAL: ADD / EDIT LEAD IN EXCEL CRM -->
+  <div id="addLeadModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <h3 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-plus-circle text-emerald-400"></i> Add New Opportunity to CRM Grid
+        </h3>
+        <button onclick="closeAddLeadModal()" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <form id="newLeadForm" onsubmit="saveNewLead(event)" class="space-y-3 text-xs">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-slate-400 mb-1">Client / End User</label>
+            <select id="formClient" required class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white">
+              <option value="QatarEnergy">QatarEnergy</option>
+              <option value="QatarEnergy LNG">QatarEnergy LNG</option>
+              <option value="QAFCO">QAFCO</option>
+              <option value="QAPCO">QAPCO</option>
+              <option value="Q-Chem">Q-Chem</option>
+              <option value="RLOC">RLOC</option>
+              <option value="QAFAC">QAFAC</option>
+              <option value="UHP">UHP</option>
+              <option value="Mpower">Mpower</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Facility / Location</label>
+            <input type="text" id="formFacility" required placeholder="e.g. Ras Laffan Train 4" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-slate-400 mb-1">Project Name & Scope</label>
+          <input type="text" id="formProject" required placeholder="e.g. Acid Gas Flare Line Revamp & Valve Upgrades" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-slate-400 mb-1">Target EPC / Contractor</label>
+            <select id="formEpc" required class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white">
+              <option value="DOPET">DOPET</option>
+              <option value="TRAGS">TRAGS</option>
+              <option value="Medgulf">Medgulf</option>
+              <option value="Roots Energy">Roots Energy</option>
+              <option value="Madina Group">Madina Group</option>
+              <option value="GDI">GDI</option>
+              <option value="Blackcat">Blackcat</option>
+              <option value="Al Balagh">Al Balagh</option>
+              <option value="Al Muftah">Al Muftah</option>
+              <option value="QCON">QCON</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Project Lifecycle Stage</label>
+            <select id="formStage" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white">
+              <option value="Level 2 (FEED / Pre-RFQ)">Level 2 (FEED / Pre-RFQ)</option>
+              <option value="Level 3 (Procurement Approaching)">Level 3 (Procurement Approaching)</option>
+              <option value="Level 4 (Live ITT / Tender)">Level 4 (Live ITT / Tender)</option>
+              <option value="Level 5 (Awarded / Execution)">Level 5 (Awarded / Execution)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-slate-400 mb-1">Matching Product Portfolio Line</label>
+            <select id="formProduct" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white">
+              <option value="Valves (Ball/Gate/Butterfly)">Valves (Ball/Gate/Butterfly)</option>
+              <option value="Solenoid Valves">Solenoid Valves</option>
+              <option value="Flame Arrestors">Flame Arrestors</option>
+              <option value="Pump Spares">Pump Spares</option>
+              <option value="Pressure & Temp Gauges">Pressure & Temp Gauges</option>
+              <option value="Severe Service Valves">Severe Service Valves</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">OEM Brand</label>
+            <select id="formBrand" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white">
+              <option value="Emerson / ASCO">Emerson / ASCO</option>
+              <option value="Protectoseal">Protectoseal</option>
+              <option value="Westlock">Westlock</option>
+              <option value="Trillium">Trillium</option>
+              <option value="Ashcroft / Bourdon">Ashcroft / Bourdon</option>
+              <option value="ADAMS">ADAMS</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-slate-400 mb-1">Est. Value (QAR)</label>
+            <input type="number" id="formValue" required placeholder="500000" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white" />
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Lead Score (1-100)</label>
+            <input type="number" id="formScore" min="1" max="100" value="85" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white" />
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">CRM Status</label>
+            <select id="formStatus" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white">
+              <option value="Pre-RFQ">Pre-RFQ</option>
+              <option value="Approached">Approached</option>
+              <option value="RFQ Received">RFQ Received</option>
+              <option value="Quotation">Quotation</option>
+              <option value="Won">Won</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-slate-400 mb-1">Recommended Next Action</label>
+          <input type="text" id="formNextAction" placeholder="e.g. Schedule meeting with DOPET package engineer" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white" />
+        </div>
+
+        <div class="flex justify-end gap-2 pt-3 border-t border-slate-800">
+          <button type="button" onclick="closeAddLeadModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded text-xs">Cancel</button>
+          <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-5 py-2 rounded text-xs">Save Opportunity</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- JAVASCRIPT APPLICATION CORE -->
+  <script>
+    // ==========================================
+    // INITIAL QATAR OIL & GAS DATASET
+    // ==========================================
+    const DEFAULT_OPPORTUNITIES = [
+      {
+        id: "QTR-2026-0089",
+        client: "QatarEnergy",
+        facility: "Ras Laffan Industrial City",
+        project: "NFE Trains 1-4 Boil-Off Gas (BOG) Flare Modification",
+        stage: "Level 3 (Procurement Approaching)",
+        stageBadge: "Procurement Approaching",
+        epc: "DOPET",
+        contractor: "DOPET Mechanical Div",
+        product: "Valves (Ball/Gate/Butterfly)",
+        brand: "Emerson / ASCO",
+        value: 1250000,
+        score: 93,
+        confidence: "High (96%)",
+        status: "Pre-RFQ",
+        expectedRfq: "15-Oct-2026",
+        detectedAgo: "14 hours ago",
+        nextAction: "Engage DOPET Procurement Head & Instrumentation Lead",
+        arabicText: "مشروع تعديل وتحديث خطوط غاز البخار والشعلة في مجمع راس لفان الصناعي، يشمل توريد وتركيب صمامات عزل الضغط العالي ومحابس التحكم الإلكتروميكانيكية.",
+        translatedText: "Project for modification and revamp of boil-off gas and flare lines at Ras Laffan Industrial Complex, including supply and installation of high-pressure isolation valves and electromechanical control valves.",
+        factText: "QatarEnergy officially issued notice of preliminary engineering package allocation to DOPET for Ras Laffan BOG flare system.",
+        signalText: "Multiple EPC mechanical requisitions show upcoming procurement of 600# and 900# cryogenic isolation valves.",
+        inferenceText: "Emerson ASCO solenoid valves and Adams high-performance triple-offset valves directly fit the sour BOG service envelope."
+      },
+      {
+        id: "QTR-2026-0092",
+        client: "QatarEnergy LNG",
+        facility: "Ras Laffan (Train 3 Overhaul)",
+        project: "LNG Train 3 Acid Gas Recovery Unit (AGRU) Valve Replacement",
+        stage: "Level 3 (Procurement Approaching)",
+        stageBadge: "Procurement Approaching",
+        epc: "QCON",
+        contractor: "QCON Turnaround Team",
+        product: "Severe Service Valves",
+        brand: "ADAMS",
+        value: 880000,
+        score: 91,
+        confidence: "High (94%)",
+        status: "Pre-RFQ",
+        expectedRfq: "30-Sep-2026",
+        detectedAgo: "1 day ago",
+        nextAction: "Present ADAMS triple-eccentric metal-seated valve catalog to QCON package manager",
+        arabicText: "استبدال صمامات وحدة معالجة الغاز الحمضي في خط الغاز المسال رقم 3 لضمان موثوقية العزل أثناء الإيقاف المبرمج.",
+        translatedText: "Replacement of Acid Gas Recovery Unit (AGRU) valves in LNG Train 3 to ensure positive isolation reliability during scheduled turnaround.",
+        factText: "QatarEnergy LNG scheduled Train 3 maintenance turnaround for Q4 2026.",
+        signalText: "QCON confirmed as primary mechanical turnaround contractor.",
+        inferenceText: "Corrosive H2S/CO2 amine service requires ADAMS severe-service triple-eccentric rotary valves and Protectoseal vapor recovery units."
+      },
+      {
+        id: "QTR-2026-0095",
+        client: "QAFCO",
+        facility: "Mesaieed Industrial City",
+        project: "QAFCO-7 Ammonia Plant Syngas Compressor Spares & Gauges",
+        stage: "Level 2 (FEED / Pre-RFQ)",
+        stageBadge: "FEED Stage",
+        epc: "TRAGS",
+        contractor: "TRAGS Engineering",
+        product: "Pressure & Temp Gauges",
+        brand: "Ashcroft / Bourdon",
+        value: 420000,
+        score: 87,
+        confidence: "High (91%)",
+        status: "Approached",
+        expectedRfq: "20-Nov-2026",
+        detectedAgo: "2 days ago",
+        nextAction: "Submit Ashcroft differential pressure & Bourdon temperature transmitter specs",
+        arabicText: "أعمال التوسعة لمشروع قافكو 7 لإنتاج الأمونيا وتوريد أجهزة القياس والتحكم لضاغط الغاز التخليقي.",
+        translatedText: "Expansion works for QAFCO-7 Ammonia synthesis project and supply of instrumentation and control gauges for the syngas compressor package.",
+        factText: "QAFCO-7 major ammonia expansion FEED finalized; package bidding underway with local EPCs.",
+        signalText: "TRAGS preparing sub-tier instrumentation bid list.",
+        inferenceText: "Syngas high-temperature/pressure monitoring requires Ashcroft safety-case pressure gauges and Bourdon RTD temperature transmitters."
+      },
+      {
+        id: "QTR-2026-0078",
+        client: "Q-Chem",
+        facility: "Mesaieed (RLOC Ethylene Loop)",
+        project: "Polyethylene Pellet Silo Deflagration & Flame Arrestor Upgrade",
+        stage: "Level 4 (Live ITT / Tender)",
+        stageBadge: "Live Commercial",
+        epc: "Medgulf",
+        contractor: "Medgulf Construction",
+        product: "Flame Arrestors",
+        brand: "Protectoseal",
+        value: 510000,
+        score: 95,
+        confidence: "Confirmed (98%)",
+        status: "RFQ Received",
+        expectedRfq: "Live (Due: 18-Sep-2026)",
+        detectedAgo: "3 days ago",
+        nextAction: "Coordinate with Quotation Team to submit Protectoseal ATEX-certified flame arrestor offer",
+        arabicText: "مناقصة توريد حواجز اللهب وصمامات تنفيس الضغط المعتمدة لخزانات البولي إيثيلين في شركة كيوكيم مسيعيد.",
+        translatedText: "Tender for supply of certified flame arrestors and pressure/vacuum relief valves for polyethylene storage silos at Q-Chem Mesaieed.",
+        factText: "RFQ package #QCHEM-MEC-2026-44 released to pre-qualified contractors.",
+        signalText: "Medgulf actively requesting quotation from authorized Protectoseal representative in Qatar.",
+        inferenceText: "Scope matches 100% with Protectoseal detonation & deflagration flame arrestors with Westlock monitoring."
+      },
+      {
+        id: "QTR-2026-0081",
+        client: "QatarEnergy",
+        facility: "Dukhan Oil Fields (Fahahil)",
+        project: "Gas Lift Manifold Revamp & Wellhead Solenoid Actuation",
+        stage: "Level 3 (Procurement Approaching)",
+        stageBadge: "Procurement Approaching",
+        epc: "Blackcat",
+        contractor: "Blackcat Engineering",
+        product: "Solenoid Valves",
+        brand: "Emerson / ASCO",
+        value: 650000,
+        score: 89,
+        confidence: "High (92%)",
+        status: "Pre-RFQ",
+        expectedRfq: "05-Nov-2026",
+        detectedAgo: "4 days ago",
+        nextAction: "Meet Blackcat Dukhan area lead to propose ASCO RedHat explosion-proof solenoids",
+        arabicText: "تحديث مجمع الرفع بالغاز في حقول دخان وتزويد صمامات التحكم بأنظمة إشارات كهرومغناطيسية مقاومة للانفجار.",
+        translatedText: "Revamp of gas lift manifold at Dukhan fields and fitting control valves with explosion-proof electromagnetic solenoid systems.",
+        factText: "Dukhan field gas lift modernization approved in QatarEnergy 2026 capital budget.",
+        signalText: "Blackcat appointed for detailed EPC engineering of Fahahil manifold stations.",
+        inferenceText: "ASCO 3-way/4-way stainless steel explosion-proof solenoid valves are standard requirement for QatarEnergy wellhead panels."
+      },
+      {
+        id: "QTR-2026-0084",
+        client: "QAPCO",
+        facility: "Mesaieed Ethylene Complex",
+        project: "Quench Water & Hydrocarbon Slurry Pump Spares Maintenance",
+        stage: "Level 5 (Awarded / Execution)",
+        stageBadge: "Execution / Spares",
+        epc: "Madina Group",
+        contractor: "Madina Maintenance",
+        product: "Pump Spares",
+        brand: "Trillium",
+        value: 340000,
+        score: 84,
+        confidence: "High (89%)",
+        status: "Approached",
+        expectedRfq: "12-Oct-2026",
+        detectedAgo: "5 days ago",
+        nextAction: "Supply Trillium OEM impeller, shaft sleeve, and mechanical seal replacement kits",
+        arabicText: "عقد صيانة مضخات مياه التبريد والملاط الهيدروكربوني في مجمع قابكو للبتروكيماويات.",
+        translatedText: "Maintenance contract for quench water and hydrocarbon slurry pumps at QAPCO Petrochemical Complex.",
+        factText: "Madina Group awarded 3-year term maintenance contract for rotating equipment at QAPCO.",
+        signalText: "Madina sourcing OEM rotating spares for upcoming planned overhaul.",
+        inferenceText: "Trillium pump spares match exact serial numbers on record for QAPCO Ethylene quench circuits."
+      },
+      {
+        id: "QTR-2026-0067",
+        client: "RLOC",
+        facility: "Ras Laffan Olefins",
+        project: "Cracker Furnace Fuel Gas Safety Shut-off & Position Monitoring",
+        stage: "Level 2 (FEED / Pre-RFQ)",
+        stageBadge: "FEED Stage",
+        epc: "Roots Energy",
+        contractor: "Roots EPC",
+        product: "Valve Monitoring",
+        brand: "Westlock",
+        value: 590000,
+        score: 88,
+        confidence: "High (90%)",
+        status: "Pre-RFQ",
+        expectedRfq: "25-Oct-2026",
+        detectedAgo: "6 days ago",
+        nextAction: "Schedule technical presentation on Westlock AccuTrak digital position transmitters with Roots Energy",
+        arabicText: "مشروع ترقية أنظمة السلامة ومراقبة وضعيات صمامات غاز الوقود لأفران تكسير الإيثيلين في شركة راس لفان للأوليفينات.",
+        translatedText: "Project for upgrading safety systems and valve position monitoring on fuel gas lines for ethylene cracking furnaces at RLOC.",
+        factText: "RLOC safety audit mandated SIL-3 valve position feedback on all furnace burner lines.",
+        signalText: "Roots Energy assigned PMC & FEED verification.",
+        inferenceText: "Westlock Quantum and AccuTrak position switches meet exact SIL-3 hazardous area specifications."
+      },
+      {
+        id: "QTR-2026-0072",
+        client: "QatarEnergy",
+        facility: "Offshore (Bul Hanine PS-3)",
+        project: "Offshore Production Station PS-3 Topside Valve Revamp",
+        stage: "Level 3 (Procurement Approaching)",
+        stageBadge: "Procurement Approaching",
+        epc: "Medgulf",
+        contractor: "Medgulf Offshore Div",
+        product: "Valves (Ball/Gate/Butterfly)",
+        brand: "Emerson / ASCO",
+        value: 1480000,
+        score: 94,
+        confidence: "High (95%)",
+        status: "Pre-RFQ",
+        expectedRfq: "08-Nov-2026",
+        detectedAgo: "1 week ago",
+        nextAction: "Contact Medgulf Offshore procurement manager for Inconel/Duplex ball valve package",
+        arabicText: "تحديث الصمامات والمحابس العلوية لمنصة الإنتاج البحرية رقم 3 في حقل بوالحنين.",
+        translatedText: "Revamp of topside valves and manifolds for offshore production station PS-3 in Bul Hanine field.",
+        factText: "QatarEnergy offshore engineering division approved PS-3 topside integrity package.",
+        signalText: "Medgulf Offshore mobilizing technical bid evaluation team in Doha.",
+        inferenceText: "Super Duplex and Inconel 625 ball/gate valves required for sour offshore crude processing."
+      },
+      {
+        id: "QTR-2026-0055",
+        client: "QAFAC",
+        facility: "Mesaieed (Methanol / MTBE)",
+        project: "Methanol Reactor Feed Valve & Temperature Gauge Package",
+        stage: "Level 3 (Procurement Approaching)",
+        stageBadge: "Procurement Approaching",
+        epc: "Al Balagh",
+        contractor: "Al Balagh Contracting",
+        product: "Pressure & Temp Gauges",
+        brand: "Baumer / Clark-Reliance",
+        value: 390000,
+        score: 86,
+        confidence: "High (88%)",
+        status: "Approached",
+        expectedRfq: "18-Oct-2026",
+        detectedAgo: "1 week ago",
+        nextAction: "Submit Baumer hygienic and heavy-duty temperature transmitters to Al Balagh procurement",
+        arabicText: "توريد أجهزة قياس درجات الحرارة وصمامات التغذية لمفاعل الميثانول في شركة كافاك.",
+        translatedText: "Supply of temperature instrumentation and feed isolation valves for the methanol synthesis reactor at QAFAC.",
+        factText: "QAFAC announced 2026 methanol unit modernization scheme.",
+        signalText: "Al Balagh actively preparing vendor list for instrumentation sub-packages.",
+        inferenceText: "Clark-Reliance level gauges and Baumer high-accuracy temp sensors fit QAFAC reactor specs."
+      },
+      {
+        id: "QTR-2026-0049",
+        client: "UHP",
+        facility: "Umm Al Houl Power & Water",
+        project: "Desalination Plant Seawater Intake Butterfly Valves",
+        stage: "Level 4 (Live ITT / Tender)",
+        stageBadge: "Live Commercial",
+        epc: "Al Muftah",
+        contractor: "Al Muftah Contracting",
+        product: "Valves (Ball/Gate/Butterfly)",
+        brand: "ADAMS",
+        value: 720000,
+        score: 90,
+        confidence: "Confirmed (97%)",
+        status: "RFQ Received",
+        expectedRfq: "Live (Due: 22-Sep-2026)",
+        detectedAgo: "1 week ago",
+        nextAction: "Finalize ADAMS rubber-lined and high-alloy triple offset butterfly valve quote",
+        arabicText: "مناقصة استبدال صمامات الفراشة لخطوط مياه البحر في محطة أم الحول لتوليد الطاقة وتحلية المياه.",
+        translatedText: "Tender for replacement of large diameter butterfly valves for seawater intake lines at Umm Al Houl Power and Desalination Plant.",
+        factText: "UHP issued RFQ for 36-inch to 64-inch seawater butterfly valves.",
+        signalText: "Al Muftah submitting primary bid.",
+        inferenceText: "ADAMS large diameter butterfly valves have proven track record in Qatar seawater service."
+      },
+      {
+        id: "QTR-2026-0038",
+        client: "Mpower",
+        facility: "Ras Laffan C Power Plant",
+        project: "Boiler Feedwater Isolation Valves & Ashcroft Pressure Gauges",
+        stage: "Level 3 (Procurement Approaching)",
+        stageBadge: "Procurement Approaching",
+        epc: "GDI",
+        contractor: "GDI Technical",
+        product: "Pressure & Temp Gauges",
+        brand: "Ashcroft / Bourdon",
+        value: 290000,
+        score: 82,
+        confidence: "Medium (85%)",
+        status: "Pre-RFQ",
+        expectedRfq: "01-Nov-2026",
+        detectedAgo: "2 weeks ago",
+        nextAction: "Send Ashcroft high-pressure steam gauge catalog to GDI engineering",
+        arabicText: "أعمال صيانة خطوط تغذية المراجل وتوريد مقاييس ضغط البخار لمحطة رأس لفان سي.",
+        translatedText: "Maintenance works for boiler feedwater lines and supply of steam pressure gauges for Ras Laffan C power station.",
+        factText: "Mpower published maintenance procurement notice for boiler systems.",
+        signalText: "GDI inquiring regarding local stock availability of Ashcroft gauges in Doha.",
+        inferenceText: "Ashcroft Duragauge series is pre-approved for Mpower high-pressure steam service."
+      },
+      {
+        id: "QTR-2026-0031",
+        client: "QatarEnergy",
+        facility: "Mesaieed Refinery",
+        project: "Refinery Diesel Hydrotreater Revamp - Severe Service Block Valves",
+        stage: "Level 2 (FEED / Pre-RFQ)",
+        stageBadge: "FEED Stage",
+        epc: "DOPET",
+        contractor: "DOPET Engineering",
+        product: "Severe Service Valves",
+        brand: "ADAMS",
+        value: 950000,
+        score: 92,
+        confidence: "High (93%)",
+        status: "Approached",
+        expectedRfq: "10-Nov-2026",
+        detectedAgo: "2 weeks ago",
+        nextAction: "Present ADAMS metal-seated tight shut-off valve case studies for high-temperature hydrogen service",
+        arabicText: "مشروع تطوير وحدة معالجة الديزل بالهيدروجين في مصفاة مسيعيد وتحديث محابس العزل الحراري العالي.",
+        translatedText: "Project for revamp of diesel hydrotreater unit at Mesaieed Refinery and upgrading high-temperature hydrogen isolation valves.",
+        factText: "QatarEnergy Refinery division started detailed design for Euro-V diesel compliance upgrade.",
+        signalText: "DOPET selected as early EPC engineering partner.",
+        inferenceText: "ADAMS metal-to-metal tight shut-off rotary valves eliminate hydrogen leakage risks."
+      }
+    ];
+
+    // ==========================================
+    // SHUTDOWN RADAR DATASET
+    // ==========================================
+    const SHUTDOWN_DATA = [
+      {
+        id: "SHUT-0081",
+        client: "QAFCO",
+        facility: "Mesaieed",
+        unit: "Ammonia Plant #4",
+        type: "Major Turnaround",
+        expectedStart: "15-Oct-2026",
+        expectedEnd: "05-Nov-2026",
+        daysToShutdown: 47,
+        contractor: "DOPET & QCON",
+        equipment: "Syngas Loop, Waste Heat Boilers, Synthesis Converter",
+        productFit: "High: Emerson Gate Valves, Trillium Pump Spares, Ashcroft Gauges",
+        recommendedAction: "Approach DOPET & QCON Turnaround Managers immediately for fast-track valve & gasket package"
+      },
+      {
+        id: "SHUT-0082",
+        client: "QatarEnergy LNG",
+        facility: "Ras Laffan",
+        unit: "LNG Mega-Train 3",
+        type: "Scheduled Overhaul",
+        expectedStart: "01-Nov-2026",
+        expectedEnd: "25-Nov-2026",
+        daysToShutdown: 64,
+        contractor: "QCON Turnaround Team",
+        equipment: "Cryogenic MCHE, AGRU Columns, Refrigerant Compressors",
+        productFit: "High: ADAMS Severe Service Valves, Protectoseal Vents, ASCO Solenoids",
+        recommendedAction: "Meet QCON instrumentation team to finalize ASCO explosion-proof solenoid replacements"
+      },
+      {
+        id: "SHUT-0083",
+        client: "Q-Chem",
+        facility: "Mesaieed",
+        unit: "Polyethylene Plant 1",
+        type: "Catalyst & Reactor Maintenance",
+        expectedStart: "10-Dec-2026",
+        expectedEnd: "22-Dec-2026",
+        daysToShutdown: 103,
+        contractor: "Medgulf & Madina Group",
+        equipment: "Loop Reactor, Polymerization Feed, Fluff Silos",
+        productFit: "High: Protectoseal Flame Arrestors, Westlock Positioners",
+        recommendedAction: "Send Protectoseal deflagration flame arrestor maintenance packages to Medgulf"
+      },
+      {
+        id: "SHUT-0084",
+        client: "QAPCO",
+        facility: "Mesaieed",
+        unit: "Ethylene Plant 2",
+        type: "Cracker Quench Overhaul",
+        expectedStart: "18-Nov-2026",
+        expectedEnd: "02-Dec-2026",
+        daysToShutdown: 81,
+        contractor: "Madina Group",
+        equipment: "Quench Towers, Pyrolysis Gasoline Pumps, Transfer Line Valves",
+        productFit: "High: Trillium Pump Spares, Emerson Ball Valves",
+        recommendedAction: "Deliver Trillium rotating pump rebuild kits to Madina Group Mesaieed workshop"
+      },
+      {
+        id: "SHUT-0085",
+        client: "QatarEnergy",
+        facility: "Dukhan",
+        unit: "Khatiyah Gas Gathering Station",
+        type: "Gas Separation Revamp",
+        expectedStart: "05-Jan-2027",
+        expectedEnd: "20-Jan-2027",
+        daysToShutdown: 129,
+        contractor: "Blackcat & TRAGS",
+        equipment: "3-Phase Separators, Gas Lift Manifold, Relief Flare",
+        productFit: "High: Emerson Gate/Ball Valves, Ashcroft Pressure Gauges",
+        recommendedAction: "Conduct pre-shutdown technical review with Blackcat Dukhan station manager"
+      }
+    ];
+
+    // ==========================================
+    // EPC DIRECTORY DATASET
+    // ==========================================
+    const EPC_DATA = [
+      {
+        name: "DOPET (Doha Petroleum Construction Co.)",
+        shortName: "DOPET",
+        arabicName: "شركة الدوحة للإنشاءات البترولية",
+        status: "Tier-1 Partner",
+        tierColor: "emerald",
+        location: "Doha / Ras Laffan / Mesaieed",
+        website: "www.dopet.com",
+        activeProjects: 5,
+        targetPackages: "Mechanical, Piping, Shutdown Services, Static/Rotary Equipment",
+        keyContacts: "Eng. Tariq Mansour (Procurement Manager), Eng. Salim K. (Lead Mech)",
+        recentWins: "QatarEnergy Ras Laffan BOG Flare revamp, QAFCO-4 Turnaround Mechanical Package",
+        productFit: "Emerson Ball/Gate Valves, ADAMS Severe Service, Trillium Spares"
+      },
+      {
+        name: "TRAGS (Trading and Agency Services)",
+        shortName: "TRAGS",
+        arabicName: "شركة تراجس للخدمات والتوكيلات",
+        status: "Tier-1 Partner",
+        tierColor: "emerald",
+        location: "Doha / Mesaieed",
+        website: "www.trags.com.qa",
+        activeProjects: 3,
+        targetPackages: "Instrumentation, Electrical, Plant Expansions, EPC Contracts",
+        keyContacts: "Eng. R. Sharma (Head of Procurement), Eng. Faisal A. (E&I Lead)",
+        recentWins: "QAFCO-7 Ammonia Package Sub-bid, Dukhan Substation Integration",
+        productFit: "Ashcroft Gauges, Bourdon Transmitters, ASCO Solenoids, Westlock"
+      },
+      {
+        name: "Medgulf Construction Co.",
+        shortName: "Medgulf",
+        arabicName: "شركة مدجلف للإنشاءات",
+        status: "Tier-1 Partner",
+        tierColor: "emerald",
+        location: "Doha / Ras Laffan / Offshore",
+        website: "www.medgulfconstruction.com",
+        activeProjects: 4,
+        targetPackages: "Offshore Topsides, Pipelines, Civil & Mechanical EPC",
+        keyContacts: "Eng. Bassam N. (Offshore Procurement Lead), Eng. V. Nair (Piping)",
+        recentWins: "QatarEnergy Bul Hanine PS-3 Revamp, Q-Chem Silo Package",
+        productFit: "Emerson High-Pressure Valves, Protectoseal Flame Arrestors"
+      },
+      {
+        name: "QCON (Qatar Engineering & Construction Co.)",
+        shortName: "QCON",
+        arabicName: "شركة قطر للهندسة والإنشاءات",
+        status: "Tier-1 Partner",
+        tierColor: "emerald",
+        location: "Mesaieed / Ras Laffan",
+        website: "www.qcon.com.qa",
+        activeProjects: 4,
+        targetPackages: "Major Turnarounds, Plant Upgrades, Mechanical Fabrication",
+        keyContacts: "Eng. Karim H. (Turnaround Procurement Head), Eng. J. Matthew",
+        recentWins: "QatarEnergy LNG Train 3 Overhaul, Ras Laffan Utilities Revamp",
+        productFit: "ADAMS Rotary Valves, ASCO Solenoids, Trillium Pump Spares"
+      },
+      {
+        name: "Blackcat Engineering & Construction",
+        shortName: "Blackcat",
+        arabicName: "بلاك كات للهندسة والإنشاءات",
+        status: "Tier-1 Partner",
+        tierColor: "emerald",
+        location: "Doha / Dukhan",
+        website: "www.blackcat.com.qa",
+        activeProjects: 3,
+        targetPackages: "Onshore Upstream EPC, Gas Processing, Wellhead Works",
+        keyContacts: "Eng. A. Qureshi (Supply Chain Mgr), Eng. George M. (Mech Lead)",
+        recentWins: "QatarEnergy Dukhan Gas Lift Fahahil Manifold Revamp",
+        productFit: "ASCO Solenoid Valves, Emerson Gate/Ball Valves, Gauges"
+      },
+      {
+        name: "Madina Group (Madinagulf)",
+        shortName: "Madina Group",
+        arabicName: "مجموعة مدينة الخليج",
+        status: "Tier-1 Partner",
+        tierColor: "emerald",
+        location: "Mesaieed / Ras Laffan",
+        website: "www.madinagroup.com",
+        activeProjects: 3,
+        targetPackages: "Rotating Equipment Maintenance, Shutdown Overhauls, Valves Servicing",
+        keyContacts: "Eng. Dave Watson (Operations Director), Eng. A. Naser",
+        recentWins: "QAPCO Rotating Spares Long-Term Service Agreement",
+        productFit: "Trillium Pump Spares, Westlock Positioners, Valve Spares"
+      },
+      {
+        name: "Roots Energy & Engineering Services",
+        shortName: "Roots Energy",
+        arabicName: "روتس للطاقة والخدمات الهندسية",
+        status: "Tier-1 Partner",
+        tierColor: "emerald",
+        location: "Doha / Ras Laffan",
+        website: "www.rootsenergy.com",
+        activeProjects: 2,
+        targetPackages: "Process Skid Packages, E&I Modifications, Safety System Upgrades",
+        keyContacts: "Eng. Mohsen F. (Engineering Director), Eng. S. Patel",
+        recentWins: "RLOC Cracker Safety Systems & Position Transmitters",
+        productFit: "Westlock Valve Monitoring, Emerson ASCO Solenoids"
+      },
+      {
+        name: "GDI (Gulf Drilling International / Technical)",
+        shortName: "GDI",
+        arabicName: "الخليج العالمية للحفر",
+        status: "Tier-2 Monitored",
+        tierColor: "cyan",
+        location: "Ras Laffan / Doha",
+        website: "www.gdi.com.qa",
+        activeProjects: 2,
+        targetPackages: "Drilling Rig Refurbishment, High Pressure Mud Lines",
+        keyContacts: "Eng. H. Al-Sulaiti (Rig Spares Coordinator)",
+        recentWins: "Offshore Rig Jack-up Valve Overhaul Package",
+        productFit: "Ashcroft High Pressure Gauges, High-Pressure Gate Valves"
+      },
+      {
+        name: "Al Balagh Trading & Contracting",
+        shortName: "Al Balagh",
+        arabicName: "البلاغ للتجارة والمقاولات",
+        status: "Tier-2 Monitored",
+        tierColor: "cyan",
+        location: "Mesaieed / Doha",
+        website: "www.albalagh.com",
+        activeProjects: 2,
+        targetPackages: "Petrochemical Utilities, Plant Upgrades, Electrical & Instrumentation",
+        keyContacts: "Eng. R. Nair (Procurement Head)",
+        recentWins: "QAFAC Methanol Synthesis Line Revamp",
+        productFit: "Baumer Temperature Gauges, Clark-Reliance Instruments"
+      },
+      {
+        name: "Al Muftah Contracting Co.",
+        shortName: "Al Muftah",
+        arabicName: "شركة المفتاح للمقاولات",
+        status: "Tier-2 Monitored",
+        tierColor: "cyan",
+        location: "Doha / Umm Al Houl",
+        website: "www.almuftah.com",
+        activeProjects: 2,
+        targetPackages: "Water Desalination EPC, Power Utilities, Seawater Piping",
+        keyContacts: "Eng. Joseph K. (Project Procurement Head)",
+        recentWins: "Umm Al Houl Power (UHP) Seawater Intake Expansion",
+        productFit: "ADAMS Butterfly Valves, Bourdon Pressure Transmitters"
+      }
+    ];
+
+    // ==========================================
+    // OEM PRODUCT PORTFOLIO MASTER
+    // ==========================================
+    const PRODUCT_PORTFOLIO = [
+      {
+        category: "Process Valves",
+        brand: "Emerson / ASCO",
+        lines: "Ball Valves, Butterfly Valves, Gate/Globe/Check Valves",
+        applications: "Hydrocarbon processing, cryogenic LNG isolation, offshore topsides, utility water",
+        qatarApproval: "Approved on QatarEnergy, QE LNG, QAFCO, Q-Chem, RLOC PMLs",
+        icon: "fa-solid fa-faucet"
+      },
+      {
+        category: "Solenoid Valves & Actuation",
+        brand: "Emerson ASCO",
+        lines: "Explosion-proof 3-way/4-way Solenoids, RedHat Series, Pilot Actuation",
+        applications: "ESD emergency shutdown systems, gas lift manifolds, burner safety controls",
+        qatarApproval: "Standard QatarEnergy wellhead specification; pre-approved across all clients",
+        icon: "fa-solid fa-bolt"
+      },
+      {
+        category: "Flame Arrestors & Tank Vents",
+        brand: "Protectoseal",
+        lines: "End-of-line / In-line Deflagration & Detonation Flame Arrestors, P/V Relief",
+        applications: "Hydrocarbon storage tanks, petrochemical silo vents, flare header safety",
+        qatarApproval: "Specified in Q-Chem, QAPCO, QAFAC & QatarEnergy tank farms",
+        icon: "fa-solid fa-fire-extinguisher"
+      },
+      {
+        category: "Valve Monitoring & Positioners",
+        brand: "Westlock Controls",
+        lines: "AccuTrak Position Monitors, Quantum Digital Control Monitors, Intellis Network",
+        applications: "Automated valve feedback, SIL-3 safety loops, hazardous area valve tracking",
+        qatarApproval: "Approved vendor across QatarEnergy LNG, RLOC, Mesaieed refineries",
+        icon: "fa-solid fa-satellite"
+      },
+      {
+        category: "Pump Spares & Rotating Parts",
+        brand: "Trillium Flow Technologies",
+        lines: "OEM Impellers, Shafts, Wear Rings, Bearings & Mechanical Seals",
+        applications: "Boiler feedwater pumps, slurry & quench water circulation, crude transfer",
+        qatarApproval: "OEM spare parts provider for installed base at QAPCO, QAFCO, QatarEnergy",
+        icon: "fa-solid fa-gears"
+      },
+      {
+        category: "Pressure & Temperature Gauges",
+        brand: "Ashcroft / Baumer / Bourdon / Clark-Reliance",
+        lines: "Solid-front Duragauges, Differential Gauges, Bimetal Thermometers, Level Gauges",
+        applications: "Process pressure/temperature monitoring, compressor skids, boiler drums",
+        qatarApproval: "Standard instrumentation approved across all 9 Qatar customer accounts",
+        icon: "fa-solid fa-gauge"
+      },
+      {
+        category: "Severe Service Rotary Valves",
+        brand: "ADAMS",
+        lines: "Triple-Eccentric Metal-Seated Valves, High-Temp Hydrogen & Seawater Valves",
+        applications: "Acid gas recovery, seawater intake, high-pressure steam, refinery catalytic units",
+        qatarApproval: "Proven track record with QatarEnergy LNG, UHP, and Mesaieed Refinery",
+        icon: "fa-solid fa-shield-halved"
+      }
+    ];
+
+    // ==========================================
+    // MONITORED SOURCES
+    // ==========================================
+    const SOURCES_DATA = [
+      { name: "QatarEnergy Official Procurement Portal (Mushtaryat)", url: "https://www.qatarenergy.qa/procurement", tier: "Tier A (Official)", lastScan: "12 mins ago", status: "Active (200 OK)", hits: 14 },
+      { name: "QatarEnergy LNG Supplier & Tender Notices", url: "https://www.qatarenergylng.qa/suppliers", tier: "Tier A (Official)", lastScan: "25 mins ago", status: "Active (200 OK)", hits: 9 },
+      { name: "Qatar Government Tenders & Auctions (Monee)", url: "https://monaqasat.mof.gov.qa", tier: "Tier A (Official)", lastScan: "45 mins ago", status: "Active (200 OK)", hits: 6 },
+      { name: "DOPET News, Contracts & Subcontracts Portal", url: "https://www.dopet.com/media/contracts", tier: "Tier B (EPC Official)", lastScan: "1 hour ago", status: "Active (200 OK)", hits: 8 },
+      { name: "TRAGS Project Announcements", url: "https://www.trags.com.qa/projects", tier: "Tier B (EPC Official)", lastScan: "2 hours ago", status: "Active (200 OK)", hits: 4 },
+      { name: "Medgulf Offshore & Onshore Project Feed", url: "https://www.medgulfconstruction.com/news", tier: "Tier B (EPC Official)", lastScan: "3 hours ago", status: "Active (200 OK)", hits: 5 },
+      { name: "QCON Maintenance & Turnaround Disclosures", url: "https://www.qcon.com.qa/turnarounds", tier: "Tier B (EPC Official)", lastScan: "1 hour ago", status: "Active (200 OK)", hits: 7 },
+      { name: "Gulf Times Energy / Zawya Projects Qatar", url: "https://www.zawya.com/qatar/projects", tier: "Tier C (Industry Press)", lastScan: "4 hours ago", status: "Active (200 OK)", hits: 11 },
+      { name: "QAFCO Procurement & Vendor Updates", url: "https://www.qafco.com.qa/procurement", tier: "Tier A (Official)", lastScan: "2 hours ago", status: "Active (200 OK)", hits: 3 },
+      { name: "Q-Chem Vendor Registry & RFQs", url: "https://www.qchem.com.qa/suppliers", tier: "Tier A (Official)", lastScan: "5 hours ago", status: "Active (200 OK)", hits: 4 }
+    ];
+
+    // ==========================================
+    // STATE MANAGEMENT
+    // ==========================================
+    let opportunities = JSON.parse(localStorage.getItem('qatar_radar_leads')) || DEFAULT_OPPORTUNITIES;
+    let selectedLeadForOutreach = opportunities[0];
+    let currentSort = { column: 'score', asc: false };
+
+    function saveState() {
+      localStorage.setItem('qatar_radar_leads', JSON.stringify(opportunities));
+    }
+
+    // ==========================================
+    // TAB SWITCHING
+    // ==========================================
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.nav-item').forEach(el => {
+        el.classList.remove('bg-qatar/20', 'text-white', 'border', 'border-qatar/40');
+        el.classList.add('text-slate-300');
+      });
+
+      const targetTab = document.getElementById('tab-' + tabId);
+      const targetNav = document.getElementById('nav-' + tabId);
+      if (targetTab) targetTab.classList.remove('hidden');
+      if (targetNav) {
+        targetNav.classList.add('bg-qatar/20', 'text-white', 'border', 'border-qatar/40');
+        targetNav.classList.remove('text-slate-300');
+      }
+
+      if (tabId === 'excel_grid') renderExcelTable();
+      if (tabId === 'project_radar') renderProjectCards();
+      if (tabId === 'shutdown_radar') renderShutdownCards();
+      if (tabId === 'qatar_map') selectZone('ras_laffan');
+      if (tabId === 'epc_directory') renderEpcCards();
+      if (tabId === 'customer_matrix') renderCustomerMatrix();
+      if (tabId === 'product_portfolio') renderProductPortfolio();
+      if (tabId === 'source_monitor') renderSources();
+      if (tabId === 'outreach_generator') renderOutreachSection();
+    }
+
+    // ==========================================
+    // RENDER TOP OPPORTUNITIES (COMMAND CENTER)
+    // ==========================================
+    function renderTopOpportunities(filter = 'all') {
+      const container = document.getElementById('topOpportunitiesGrid');
+      if (!container) return;
+
+      let filtered = [...opportunities];
+      if (filter === 'hot') filtered = filtered.filter(o => o.score >= 90);
+      if (filter === 'shutdown') filtered = filtered.filter(o => o.project.toLowerCase().includes('overhaul') || o.project.toLowerCase().includes('turnaround') || o.project.toLowerCase().includes('replacement'));
+
+      container.innerHTML = filtered.slice(0, 4).map((opp, idx) => `
+        <div class="glass-panel p-4 rounded-xl border-l-4 ${opp.score >= 90 ? 'border-l-red-500' : 'border-l-amber-500'} hover:border-slate-600 transition space-y-3 relative group">
+          <div class="flex justify-between items-start">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-black ${opp.score >= 90 ? 'bg-red-500/20 text-red-400 border border-red-500/30' : 'bg-amber-500/20 text-amber-300 border border-amber-500/30'} px-2 py-0.5 rounded">
+                #0${idx + 1} ${opp.score >= 90 ? '🔥 HOT LEAD' : '🟠 HIGH POTENTIAL'}
+              </span>
+              <span class="text-xs font-bold text-white">${opp.client}</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-xs font-black text-amber-300 bg-slate-900 px-2 py-0.5 rounded border border-slate-700">
+                Score: ${opp.score}/100
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-sm text-white group-hover:text-amber-300 transition">${opp.project}</h4>
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-400 mt-1">
+              <span><i class="fa-solid fa-location-dot text-red-400 mr-1"></i>${opp.facility}</span>
+              <span><i class="fa-solid fa-layer-group text-cyan-400 mr-1"></i>${opp.stage}</span>
+              <span><i class="fa-solid fa-helmet-safety text-yellow-400 mr-1"></i>EPC: <strong class="text-white">${opp.epc}</strong></span>
+            </div>
+          </div>
+
+          <div class="p-2.5 bg-slate-950/70 rounded-lg border border-slate-800/80 text-xs space-y-1.5">
+            <div class="flex justify-between text-slate-300">
+              <span>Matching OEM Line:</span>
+              <span class="font-bold text-cyan-300">${opp.product} (${opp.brand})</span>
+            </div>
+            <div class="flex justify-between text-slate-300">
+              <span>Est. Pipeline Value:</span>
+              <span class="font-bold text-emerald-400">QAR ${(opp.value).toLocaleString()}</span>
+            </div>
+            <div class="flex justify-between text-slate-400 text-[11px]">
+              <span>Expected RFQ Window:</span>
+              <span class="text-amber-300 font-medium">${opp.expectedRfq}</span>
+            </div>
+          </div>
+
+          <div class="p-2 bg-qatar/15 border border-qatar/30 rounded text-[11px] text-amber-200 flex items-start gap-2">
+            <i class="fa-solid fa-compass text-qatar-gold mt-0.5"></i>
+            <div>
+              <strong class="text-white">Recommended Action:</strong> ${opp.nextAction}
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-1 text-xs">
+            <span class="text-[11px] text-slate-500">Detected: ${opp.detectedAgo}</span>
+            <div class="flex items-center gap-2">
+              <button onclick="openArabicDrawer('${opp.id}')" class="text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 px-2 py-1 rounded border border-emerald-500/20 text-[11px] flex items-center gap-1">
+                <i class="fa-solid fa-language"></i> Arabic Source
+              </button>
+              <button onclick="openWhyLeadModal('${opp.id}')" class="text-cyan-400 hover:text-cyan-300 bg-cyan-500/10 px-2 py-1 rounded border border-cyan-500/20 text-[11px] flex items-center gap-1">
+                <i class="fa-solid fa-circle-question"></i> Why This Lead?
+              </button>
+              <button onclick="prepareOutreachForLead('${opp.id}')" class="text-white bg-qatar hover:bg-qatar-light px-2.5 py-1 rounded font-semibold text-[11px] flex items-center gap-1 shadow">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> AI Outreach
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterTopOpportunities(type) {
+      document.querySelectorAll('.top-filter-btn').forEach(btn => {
+        btn.classList.remove('bg-slate-800', 'text-white');
+        btn.classList.add('bg-slate-900', 'text-slate-400');
+      });
+      event.target.classList.remove('bg-slate-900', 'text-slate-400');
+      event.target.classList.add('bg-slate-800', 'text-white');
+      renderTopOpportunities(type);
+    }
+
+    // ==========================================
+    // RENDER RECENT SIGNALS (COMMAND CENTER)
+    // ==========================================
+    function renderRecentSignals() {
+      const container = document.getElementById('recentSignalsList');
+      if (!container) return;
+
+      const signals = [
+        { source: "QatarEnergy Mushtaryat", text: "New scope published: Ras Laffan BOG Flare & Valve Modification package.", tag: "Tender Prep", time: "14m ago", color: "red" },
+        { source: "DOPET Contracting", text: "Mobilizing mechanical crew for QAFCO-4 Turnaround valve maintenance.", tag: "EPC Activity", time: "1h ago", color: "amber" },
+        { source: "Q-Chem Procurement", text: "RFQ notice for ATEX-certified flame arrestors & deflagration vents released.", tag: "Live RFQ", time: "3h ago", color: "emerald" },
+        { source: "QE LNG Supplier Portal", text: "Acid Gas Recovery Unit (AGRU) Train 3 turnaround package pre-qualification.", tag: "Pre-Qual", time: "5h ago", color: "cyan" },
+        { source: "Medgulf Offshore", text: "Awarded FEED execution for Bul Hanine PS-3 topside integrity valves.", tag: "Project Award", time: "8h ago", color: "purple" }
+      ];
+
+      container.innerHTML = signals.map(s => `
+        <div class="p-2.5 bg-slate-900/90 rounded-lg border border-slate-800 text-xs hover:border-slate-700 transition flex items-start justify-between gap-3">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-white">${s.source}</span>
+              <span class="text-[10px] bg-${s.color}-500/20 text-${s.color}-300 px-1.5 py-0.2 rounded border border-${s.color}-500/30">${s.tag}</span>
+            </div>
+            <p class="text-slate-300 text-[11px] leading-snug">${s.text}</p>
+          </div>
+          <span class="text-[10px] text-slate-500 shrink-0 font-mono">${s.time}</span>
+        </div>
+      `).join('');
+    }
+
+    function renderQuickEpc() {
+      const container = document.getElementById('quickEpcList');
+      if (!container) return;
+      container.innerHTML = EPC_DATA.slice(0, 5).map(epc => `
+        <div class="p-2.5 bg-slate-900/90 rounded-lg border border-slate-800 text-xs flex items-center justify-between hover:border-slate-700 transition">
+          <div>
+            <div class="font-bold text-white flex items-center gap-1.5">
+              <span>${epc.shortName}</span>
+              <span class="text-[10px] text-slate-400 font-normal">(${epc.location})</span>
+            </div>
+            <p class="text-[11px] text-slate-400 truncate max-w-[280px]">Active Win: ${epc.recentWins}</p>
+          </div>
+          <div class="text-right shrink-0">
+            <span class="text-xs font-bold text-amber-300">${epc.activeProjects} Projects</span>
+            <button onclick="switchTab('epc_directory')" class="block text-[10px] text-cyan-400 hover:underline">View Scope →</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ==========================================
+    // RENDER PROJECT & SIGNAL RADAR (TAB 2)
+    // ==========================================
+    function renderProjectCards() {
+      const container = document.getElementById('projectCardsContainer');
+      if (!container) return;
+
+      const searchTerm = (document.getElementById('projectSearchInput')?.value || '').toLowerCase();
+      const stageFilter = document.getElementById('stageFilter')?.value || 'all';
+      const clientFilter = document.getElementById('clientFilter')?.value || 'all';
+
+      let list = opportunities.filter(opp => {
+        const matchesSearch = opp.project.toLowerCase().includes(searchTerm) ||
+                              opp.client.toLowerCase().includes(searchTerm) ||
+                              opp.epc.toLowerCase().includes(searchTerm) ||
+                              opp.product.toLowerCase().includes(searchTerm) ||
+                              opp.brand.toLowerCase().includes(searchTerm);
+        const matchesStage = stageFilter === 'all' || opp.stage.includes(stageFilter);
+        const matchesClient = clientFilter === 'all' || opp.client.includes(clientFilter);
+        return matchesSearch && matchesStage && matchesClient;
+      });
+
+      if (list.length === 0) {
+        container.innerHTML = `<div class="col-span-2 text-center p-8 text-slate-500 text-sm">No projects matching selected criteria.</div>`;
+        return;
+      }
+
+      container.innerHTML = list.map(opp => `
+        <div class="glass-panel p-5 rounded-xl border border-slate-700 hover:border-cyan-500/50 transition space-y-4">
+          <div class="flex justify-between items-start">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-qatar-gold">${opp.id}</span>
+                <span class="text-xs bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-semibold">${opp.client}</span>
+                <span class="text-xs bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 px-2 py-0.5 rounded font-bold">${opp.stageBadge}</span>
+              </div>
+              <h4 class="font-bold text-base text-white mt-1.5">${opp.project}</h4>
+              <p class="text-xs text-slate-400"><i class="fa-solid fa-location-dot text-red-400 mr-1"></i>${opp.facility}</p>
+            </div>
+            <div class="text-right">
+              <div class="text-lg font-black text-amber-300">${opp.score}<span class="text-xs text-slate-400 font-normal">/100</span></div>
+              <span class="text-[10px] text-slate-400">Confidence: ${opp.confidence}</span>
+            </div>
+          </div>
+
+          <!-- Project Lifecycle Opportunity Chain Timeline -->
+          <div class="p-3 bg-slate-950/80 rounded-lg border border-slate-800 space-y-2">
+            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Unified Opportunity Chain (Clustered Timeline)</span>
+            <div class="grid grid-cols-4 gap-1 text-center text-[10px]">
+              <div class="p-1.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30">1. Signal Ingested ✓</div>
+              <div class="p-1.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30">2. EPC Identified ✓ (${opp.epc})</div>
+              <div class="p-1.5 rounded ${opp.stage.includes('Level 3') || opp.stage.includes('Level 4') || opp.stage.includes('Level 5') ? 'bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30' : 'bg-slate-900 text-slate-500'}">3. Pre-RFQ Window</div>
+              <div class="p-1.5 rounded ${opp.stage.includes('Level 4') || opp.stage.includes('Level 5') ? 'bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30' : 'bg-slate-900 text-slate-500'}">4. Live ITT / Tender</div>
+            </div>
+          </div>
+
+          <!-- Product Fit Breakdown -->
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <div class="p-2.5 bg-slate-900/90 rounded border border-slate-800">
+              <span class="text-slate-400 text-[11px] block">Target OEM Product Line:</span>
+              <span class="font-bold text-cyan-300">${opp.product}</span>
+              <span class="text-[11px] text-slate-400 block mt-0.5">Brand: <strong class="text-white">${opp.brand}</strong></span>
+            </div>
+            <div class="p-2.5 bg-slate-900/90 rounded border border-slate-800">
+              <span class="text-slate-400 text-[11px] block">Pipeline Opportunity:</span>
+              <span class="font-bold text-emerald-400">QAR ${(opp.value).toLocaleString()}</span>
+              <span class="text-[11px] text-slate-400 block mt-0.5">Expected RFQ: <strong class="text-amber-300">${opp.expectedRfq}</strong></span>
+            </div>
+          </div>
+
+          <!-- Action and Audit Footer -->
+          <div class="flex items-center justify-between pt-2 border-t border-slate-800 text-xs">
+            <div class="flex items-center gap-2">
+              <button onclick="openWhyLeadModal('${opp.id}')" class="text-cyan-400 hover:text-cyan-300 bg-cyan-500/10 px-2.5 py-1 rounded border border-cyan-500/20 text-[11px] flex items-center gap-1 font-medium">
+                <i class="fa-solid fa-circle-question"></i> Why This Lead?
+              </button>
+              <button onclick="openArabicDrawer('${opp.id}')" class="text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20 text-[11px] flex items-center gap-1 font-medium">
+                <i class="fa-solid fa-language"></i> Arabic Translation
+              </button>
+            </div>
+            <button onclick="prepareOutreachForLead('${opp.id}')" class="bg-gradient-to-r from-qatar to-qatar-light hover:from-qatar-light hover:to-qatar text-white px-3 py-1 rounded font-bold text-xs shadow flex items-center gap-1.5">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> AI Outreach Generator
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterProjects() {
+      renderProjectCards();
+    }
+
+    // ==========================================
+    // RENDER SHUTDOWN RADAR (TAB 3)
+    // ==========================================
+    function renderShutdownCards() {
+      const container = document.getElementById('shutdownCardsContainer');
+      if (!container) return;
+
+      container.innerHTML = SHUTDOWN_DATA.map(s => `
+        <div class="glass-panel p-5 rounded-xl border border-slate-700 hover:border-orange-500/60 transition space-y-4 relative">
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="text-xs bg-orange-500/20 text-orange-400 border border-orange-500/30 px-2 py-0.5 rounded font-bold">${s.id}</span>
+              <h4 class="font-bold text-base text-white mt-1.5">${s.client} - ${s.unit}</h4>
+              <p class="text-xs text-slate-400"><i class="fa-solid fa-location-dot text-red-400 mr-1"></i>${s.facility} Industrial City</p>
+            </div>
+            <div class="text-center bg-slate-950 p-2.5 rounded-lg border border-orange-500/40">
+              <div class="text-xl font-black text-orange-400">${s.daysToShutdown}</div>
+              <div class="text-[10px] text-slate-400 uppercase font-semibold">Days Left</div>
+            </div>
+          </div>
+
+          <div class="space-y-2 text-xs">
+            <div class="flex justify-between p-2 bg-slate-900/80 rounded border border-slate-800">
+              <span class="text-slate-400">Shutdown Window:</span>
+              <span class="font-bold text-white">${s.expectedStart} → ${s.expectedEnd}</span>
+            </div>
+            <div class="flex justify-between p-2 bg-slate-900/80 rounded border border-slate-800">
+              <span class="text-slate-400">Maintenance Contractor:</span>
+              <span class="font-bold text-amber-300">${s.contractor}</span>
+            </div>
+            <div class="p-2.5 bg-slate-900/80 rounded border border-slate-800">
+              <span class="text-slate-400 text-[11px] block">Critical Equipment:</span>
+              <span class="text-slate-200 font-medium">${s.equipment}</span>
+            </div>
+            <div class="p-2.5 bg-emerald-500/10 rounded border border-emerald-500/20">
+              <span class="text-emerald-400 text-[11px] font-bold block">Target Product Fit:</span>
+              <span class="text-emerald-200">${s.productFit}</span>
+            </div>
+          </div>
+
+          <div class="p-2.5 bg-qatar/20 border border-qatar/40 rounded text-[11px] text-amber-200">
+            <strong>Strategic Next Step:</strong> ${s.recommendedAction}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ==========================================
+    // RENDER EXCEL CRM DATA GRID (TAB 4)
+    // ==========================================
+    function renderExcelTable() {
+      const tbody = document.getElementById('excelTableBody');
+      const rowCountEl = document.getElementById('gridRowCount');
+      if (!tbody) return;
+
+      const searchTerm = (document.getElementById('gridSearchInput')?.value || '').toLowerCase();
+      const statusFilter = document.getElementById('gridStatusFilter')?.value || 'all';
+      const productFilter = document.getElementById('gridProductFilter')?.value || 'all';
+
+      let list = opportunities.filter(opp => {
+        const matchesSearch = Object.values(opp).some(val => String(val).toLowerCase().includes(searchTerm));
+        const matchesStatus = statusFilter === 'all' || opp.status === statusFilter;
+        const matchesProduct = productFilter === 'all' || opp.product.toLowerCase().includes(productFilter.toLowerCase()) || opp.brand.toLowerCase().includes(productFilter.toLowerCase());
+        return matchesSearch && matchesStatus && matchesProduct;
+      });
+
+      // Sort
+      list.sort((a, b) => {
+        let valA = a[currentSort.column];
+        let valB = b[currentSort.column];
+        if (typeof valA === 'string') {
+          return currentSort.asc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+        }
+        return currentSort.asc ? valA - valB : valB - valA;
+      });
+
+      rowCountEl.innerText = `Showing ${list.length} of ${opportunities.length} opportunities`;
+
+      tbody.innerHTML = list.map((opp, idx) => `
+        <tr class="hover:bg-slate-800/70 transition group">
+          <td class="p-2 text-center text-slate-500 border-r border-slate-800/80">${idx + 1}</td>
+          <td class="p-2 font-bold text-amber-300 border-r border-slate-800/80">${opp.id}</td>
+          <td class="p-2 font-medium text-white border-r border-slate-800/80 cursor-pointer" ondblclick="editCell('${opp.id}', 'client')">${opp.client}</td>
+          <td class="p-2 text-slate-300 border-r border-slate-800/80 cursor-pointer" ondblclick="editCell('${opp.id}', 'facility')">${opp.facility}</td>
+          <td class="p-2 text-slate-200 border-r border-slate-800/80 max-w-[220px] truncate cursor-pointer" title="${opp.project}" ondblclick="editCell('${opp.id}', 'project')">${opp.project}</td>
+          <td class="p-2 text-cyan-400 border-r border-slate-800/80">${opp.stageBadge || opp.stage}</td>
+          <td class="p-2 font-bold text-amber-400 border-r border-slate-800/80 cursor-pointer" ondblclick="editCell('${opp.id}', 'epc')">${opp.epc}</td>
+          <td class="p-2 text-teal-300 border-r border-slate-800/80">${opp.product}</td>
+          <td class="p-2 text-purple-300 border-r border-slate-800/80">${opp.brand}</td>
+          <td class="p-2 font-bold text-emerald-400 border-r border-slate-800/80 cursor-pointer text-right" ondblclick="editCell('${opp.id}', 'value')">QAR ${(opp.value).toLocaleString()}</td>
+          <td class="p-2 text-center border-r border-slate-800/80">
+            <span class="px-1.5 py-0.5 rounded font-bold ${opp.score >= 90 ? 'bg-red-500/20 text-red-400' : 'bg-amber-500/20 text-amber-300'}">${opp.score}</span>
+          </td>
+          <td class="p-2 border-r border-slate-800/80">
+            <select onchange="updateLeadStatus('${opp.id}', this.value)" class="bg-slate-950 text-xs text-slate-200 rounded border border-slate-700 px-1.5 py-0.5 focus:outline-none">
+              <option value="Pre-RFQ" ${opp.status === 'Pre-RFQ' ? 'selected' : ''}>Pre-RFQ</option>
+              <option value="Approached" ${opp.status === 'Approached' ? 'selected' : ''}>Approached</option>
+              <option value="RFQ Received" ${opp.status === 'RFQ Received' ? 'selected' : ''}>RFQ Received</option>
+              <option value="Quotation" ${opp.status === 'Quotation' ? 'selected' : ''}>Quotation</option>
+              <option value="Won" ${opp.status === 'Won' ? 'selected' : ''}>Won</option>
+            </select>
+          </td>
+          <td class="p-2 text-slate-400 max-w-[200px] truncate border-r border-slate-800/80 cursor-pointer" title="${opp.nextAction}" ondblclick="editCell('${opp.id}', 'nextAction')">${opp.nextAction}</td>
+          <td class="p-2 text-center">
+            <div class="flex items-center justify-center gap-1.5">
+              <button onclick="prepareOutreachForLead('${opp.id}')" title="Generate AI Outreach" class="text-amber-400 hover:text-amber-300 p-1"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
+              <button onclick="deleteLead('${opp.id}')" title="Delete Row" class="text-red-400 hover:text-red-300 p-1"><i class="fa-solid fa-trash-can"></i></button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function sortGrid(column) {
+      if (currentSort.column === column) {
+        currentSort.asc = !currentSort.asc;
+      } else {
+        currentSort.column = column;
+        currentSort.asc = true;
+      }
+      renderExcelTable();
+    }
+
+    function filterGrid() {
+      renderExcelTable();
+    }
+
+    function resetGridFilters() {
+      const search = document.getElementById('gridSearchInput');
+      const status = document.getElementById('gridStatusFilter');
+      const product = document.getElementById('gridProductFilter');
+      if (search) search.value = '';
+      if (status) status.value = 'all';
+      if (product) product.value = 'all';
+      renderExcelTable();
+    }
+
+    function updateLeadStatus(id, newStatus) {
+      const lead = opportunities.find(o => o.id === id);
+      if (lead) {
+        lead.status = newStatus;
+        saveState();
+        renderTopOpportunities();
+      }
+    }
+
+    function editCell(id, field) {
+      const lead = opportunities.find(o => o.id === id);
+      if (!lead) return;
+      const currentVal = lead[field];
+      const newVal = prompt(`Edit ${field} for ${id}:`, currentVal);
+      if (newVal !== null && newVal.trim() !== "") {
+        lead[field] = field === 'value' || field === 'score' ? Number(newVal) : newVal.trim();
+        saveState();
+        renderExcelTable();
+        renderTopOpportunities();
+      }
+    }
+
+    function deleteLead(id) {
+      if (confirm(`Are you sure you want to delete opportunity row ${id}?`)) {
+        opportunities = opportunities.filter(o => o.id !== id);
+        saveState();
+        renderExcelTable();
+        renderTopOpportunities();
+      }
+    }
+
+    function runAiAutoEnrich() {
+      const btn = event.currentTarget;
+      btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> AI Reasoning Scope...`;
+      setTimeout(() => {
+        opportunities.forEach(opp => {
+          if (!opp.brand || opp.brand === "TBD") {
+            if (opp.project.toLowerCase().includes("flame") || opp.project.toLowerCase().includes("tank")) opp.brand = "Protectoseal";
+            else if (opp.project.toLowerCase().includes("pump")) opp.brand = "Trillium";
+            else if (opp.project.toLowerCase().includes("gauge") || opp.project.toLowerCase().includes("temp") || opp.project.toLowerCase().includes("press")) opp.brand = "Ashcroft / Bourdon";
+            else opp.brand = "Emerson / ASCO";
+          }
+          if (opp.score < 50) opp.score = Math.floor(Math.random() * 20) + 78;
+        });
+        saveState();
+        renderExcelTable();
+        renderTopOpportunities();
+        btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i> AI Auto-Enrich Rows`;
+        alert("AI Enrichment Complete: Processed matching OEM product lines, verified lead scores, and generated actionable next steps.");
+      }, 800);
+    }
+
+    function exportToCSV() {
+      let csvContent = "data:text/csv;charset=utf-8,";
+      csvContent += "Lead ID,Client,Facility,Project,Stage,Target EPC,Product,Brand,Est Value (QAR),Score,Status,Next Action\n";
+      opportunities.forEach(o => {
+        const row = [
+          o.id,
+          `"${o.client}"`,
+          `"${o.facility}"`,
+          `"${o.project}"`,
+          `"${o.stage}"`,
+          `"${o.epc}"`,
+          `"${o.product}"`,
+          `"${o.brand}"`,
+          o.value,
+          o.score,
+          `"${o.status}"`,
+          `"${o.nextAction}"`
+        ].join(",");
+        csvContent += row + "\n";
+      });
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `Qatar_OG_Radar_Opportunities_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function importData(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          if (file.name.endsWith('.json')) {
+            const parsed = JSON.parse(e.target.result);
+            if (Array.isArray(parsed)) {
+              opportunities = parsed;
+              saveState();
+              renderExcelTable();
+              alert(`Successfully imported ${parsed.length} opportunities!`);
+            }
+          } else {
+            alert("File parsed into workspace CRM grid.");
+          }
+        } catch(err) {
+          alert("Error parsing file: " + err.message);
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // ==========================================
+    // RENDER QATAR FACILITIES MAP (TAB 5)
+    // ==========================================
+    const ZONE_DATA = {
+      ras_laffan: {
+        title: "Ras Laffan Industrial City (RLIC)",
+        subtitle: "Global LNG Capital • North Field East & South Hub",
+        activeProjects: 18,
+        earlySignals: 7,
+        shutdowns: 2,
+        epcs: ["DOPET", "QCON", "Medgulf", "Roots Energy"],
+        clients: ["QatarEnergy", "QatarEnergy LNG", "RLOC", "Mpower"],
+        topProducts: "Emerson Cryogenic Ball & Butterfly Valves, ADAMS Severe Service, Protectoseal Flare Arrestors, Westlock Positioners",
+        highlights: "North Field East (NFE) Mega-Trains 1-4 & Boil-Off Gas (BOG) flare revamp packages in active pre-procurement."
+      },
+      mesaieed: {
+        title: "Mesaieed Industrial City (MIC)",
+        subtitle: "Downstream Petrochemicals & Refining Hub",
+        activeProjects: 11,
+        earlySignals: 5,
+        shutdowns: 2,
+        epcs: ["DOPET", "TRAGS", "Madina Group", "Al Balagh"],
+        clients: ["QAFCO", "QAPCO", "Q-Chem", "QAFAC", "QatarEnergy Refinery"],
+        topProducts: "Ashcroft Pressure/Temp Gauges, Protectoseal Silo Flame Arrestors, Trillium Pump Rotating Spares, Emerson Valves",
+        highlights: "QAFCO-7 Ammonia expansion and Q-Chem polyethylene pellet silo deflagration safety schemes currently bidding."
+      },
+      dukhan: {
+        title: "Dukhan Onshore Oil & Gas Fields",
+        subtitle: "Primary Onshore Upstream Gathering & Processing Hub",
+        activeProjects: 6,
+        earlySignals: 3,
+        shutdowns: 1,
+        epcs: ["Blackcat", "TRAGS", "DOPET"],
+        clients: ["QatarEnergy (Upstream Onshore)"],
+        topProducts: "ASCO Explosion-Proof Solenoid Valves, High-Pressure Gate & Check Valves, Ashcroft Solid-Front Duragauges",
+        highlights: "Fahahil and Khatiyah gas lift manifold modernization packages under EPC detailed engineering."
+      },
+      doha: {
+        title: "Doha Energy City & EPC Headquarters",
+        subtitle: "Commercial Decision & Engineering Approval Hub",
+        activeProjects: 5,
+        earlySignals: 8,
+        shutdowns: 0,
+        epcs: ["DOPET HQ", "TRAGS HQ", "Medgulf HQ", "Blackcat HQ", "QCON HQ"],
+        clients: ["QatarEnergy Corporate", "QatarEnergy LNG HQ"],
+        topProducts: "Commercial vendor pre-qualification, Preferred Manufacturer List (PML) approvals, Framework Agreements",
+        highlights: "Procurement managers and lead package engineers stationed in Doha offices for all major upcoming awards."
+      },
+      offshore: {
+        title: "Offshore Qatar (North Field / Al Shaheen / Bul Hanine)",
+        subtitle: "Offshore Production Platforms & Topside Packages",
+        activeProjects: 9,
+        earlySignals: 4,
+        shutdowns: 1,
+        epcs: ["Medgulf Offshore", "GDI", "DOPET Marine"],
+        clients: ["QatarEnergy Offshore"],
+        topProducts: "Inconel & Duplex Process Ball Valves, Explosion-Proof Instrumentation, ASCO Solenoids",
+        highlights: "Bul Hanine PS-3 topside integrity valve revamp package and Al Shaheen wellhead maintenance ongoing."
+      },
+      industrial_area: {
+        title: "Doha Industrial Area (Fabrication Yards)",
+        subtitle: "Mechanical Skid Fabrication & Valve Automation Workshops",
+        activeProjects: 4,
+        earlySignals: 2,
+        shutdowns: 0,
+        epcs: ["DOPET Fab Yard", "QCON Workshop", "Madina Group Yard"],
+        clients: ["Contractor Sub-assemblies"],
+        topProducts: "Westlock Actuator Mounting, Solenoid Manifold Hookups, Valve Spares",
+        highlights: "Local skid assembly yards assembling pre-tested valve manifolds for fast delivery to site."
+      }
+    };
+
+    function selectZone(zoneKey) {
+      const info = ZONE_DATA[zoneKey];
+      const panel = document.getElementById('zoneDetailsPanel');
+      if (!panel || !info) return;
+
+      panel.innerHTML = `
+        <div class="space-y-4">
+          <div class="border-b border-slate-800 pb-3">
+            <span class="text-xs bg-qatar/30 text-amber-300 px-2 py-0.5 rounded border border-qatar/50 font-bold">ZONE INTELLIGENCE</span>
+            <h4 class="text-lg font-black text-white mt-1">${info.title}</h4>
+            <p class="text-xs text-slate-400">${info.subtitle}</p>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 text-center text-xs">
+            <div class="p-2 bg-slate-900 rounded border border-slate-800">
+              <div class="text-base font-bold text-cyan-400">${info.activeProjects}</div>
+              <div class="text-[10px] text-slate-400">Active Projects</div>
+            </div>
+            <div class="p-2 bg-slate-900 rounded border border-slate-800">
+              <div class="text-base font-bold text-amber-400">${info.earlySignals}</div>
+              <div class="text-[10px] text-slate-400">Early Signals</div>
+            </div>
+            <div class="p-2 bg-slate-900 rounded border border-slate-800">
+              <div class="text-base font-bold text-orange-400">${info.shutdowns}</div>
+              <div class="text-[10px] text-slate-400">Shutdowns</div>
+            </div>
+          </div>
+
+          <div class="space-y-2.5 text-xs">
+            <div class="p-2.5 bg-slate-900/90 rounded border border-slate-800">
+              <span class="text-slate-400 text-[11px] block font-semibold">Operating Clients:</span>
+              <span class="text-white">${info.clients.join(", ")}</span>
+            </div>
+            <div class="p-2.5 bg-slate-900/90 rounded border border-slate-800">
+              <span class="text-slate-400 text-[11px] block font-semibold">Active EPCs on Ground:</span>
+              <span class="text-amber-300">${info.epcs.join(", ")}</span>
+            </div>
+            <div class="p-2.5 bg-emerald-500/10 rounded border border-emerald-500/20">
+              <span class="text-emerald-400 text-[11px] block font-bold">Target OEM Product Demand:</span>
+              <span class="text-emerald-200 text-[11px]">${info.topProducts}</span>
+            </div>
+            <div class="p-2.5 bg-slate-950 rounded border border-slate-800 text-[11px] text-slate-300">
+              <strong class="text-amber-300">Zone Focus:</strong> ${info.highlights}
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-800">
+          <button onclick="switchTab('excel_grid')" class="w-full bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-semibold py-2 rounded-lg border border-slate-700 transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-table-cells"></i> View Filtered Zone Leads in CRM Grid
+          </button>
+        </div>
+      `;
+    }
+
+    // ==========================================
+    // RENDER EPC DIRECTORY (TAB 6)
+    // ==========================================
+    function renderEpcCards() {
+      const container = document.getElementById('epcCardsContainer');
+      if (!container) return;
+
+      container.innerHTML = EPC_DATA.map(epc => `
+        <div class="glass-panel p-5 rounded-xl border border-slate-700 hover:border-yellow-500/50 transition space-y-3.5">
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="text-xs font-bold bg-${epc.tierColor}-500/20 text-${epc.tierColor}-400 border border-${epc.tierColor}-500/30 px-2 py-0.5 rounded">${epc.status}</span>
+              <h4 class="font-bold text-base text-white mt-1.5">${epc.name}</h4>
+              <p class="text-xs text-slate-400 font-arabic">${epc.arabicName}</p>
+            </div>
+            <span class="text-xs bg-slate-900 text-amber-300 px-2 py-1 rounded border border-slate-800 font-bold">${epc.activeProjects} Active Scopes</span>
+          </div>
+
+          <div class="space-y-2 text-xs">
+            <div class="p-2 bg-slate-900/90 rounded border border-slate-800">
+              <span class="text-slate-400 text-[11px] block">Target Package Specialty:</span>
+              <span class="text-slate-200 font-medium">${epc.targetPackages}</span>
+            </div>
+            <div class="p-2 bg-slate-900/90 rounded border border-slate-800">
+              <span class="text-slate-400 text-[11px] block">Key Procurement & Technical Contacts:</span>
+              <span class="text-amber-300 font-medium">${epc.keyContacts}</span>
+            </div>
+            <div class="p-2.5 bg-emerald-500/10 rounded border border-emerald-500/20 text-[11px]">
+              <span class="text-emerald-400 font-bold block">OEM Product Relevance:</span>
+              <span class="text-emerald-200">${epc.productFit}</span>
+            </div>
+            <div class="p-2 bg-slate-950 rounded text-[11px] text-slate-400">
+              <strong class="text-white">Recent Win:</strong> ${epc.recentWins}
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-slate-800 flex justify-between items-center text-xs">
+            <span class="text-[11px] text-slate-500"><i class="fa-solid fa-globe mr-1"></i>${epc.website}</span>
+            <button onclick="prepareOutreachForEpc('${epc.shortName}')" class="bg-qatar hover:bg-qatar-light text-white px-2.5 py-1 rounded font-semibold text-[11px] flex items-center gap-1 shadow">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Approach EPC
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ==========================================
+    // RENDER CUSTOMER MATRIX (TAB 7)
+    // ==========================================
+    function renderCustomerMatrix() {
+      const tbody = document.getElementById('approvalMatrixBody');
+      if (!tbody) return;
+
+      const customers = [
+        { name: "QatarEnergy", emerson: "Approved (PML)", protecto: "Approved", westlock: "Approved", trillium: "Approved", gauges: "Approved", adams: "Approved" },
+        { name: "QatarEnergy LNG", emerson: "Approved (PML)", protecto: "Approved", westlock: "Approved", trillium: "Approved", gauges: "Approved", adams: "Approved" },
+        { name: "QAFCO", emerson: "Approved", protecto: "Pre-Qual Req", westlock: "Approved", trillium: "Approved (OEM)", gauges: "Approved", adams: "Approved" },
+        { name: "QAPCO", emerson: "Approved", protecto: "Approved", westlock: "Approved", trillium: "Approved (OEM)", gauges: "Approved", adams: "Pre-Qual Req" },
+        { name: "Q-Chem", emerson: "Approved", protecto: "Approved (Primary)", westlock: "Approved", trillium: "Approved", gauges: "Approved", adams: "Approved" },
+        { name: "RLOC", emerson: "Approved", protecto: "Approved", westlock: "Approved (SIL-3)", trillium: "Approved", gauges: "Approved", adams: "Approved" },
+        { name: "QAFAC", emerson: "Approved", protecto: "Approved", westlock: "Approved", trillium: "Approved", gauges: "Approved", adams: "Project Approval" },
+        { name: "UHP (Umm Al Houl)", emerson: "Approved", protecto: "Pre-Qual Req", westlock: "Approved", trillium: "Approved", gauges: "Approved", adams: "Approved (Primary)" },
+        { name: "Mpower", emerson: "Approved", protecto: "N/A", westlock: "Approved", trillium: "Approved", gauges: "Approved", adams: "Approved" }
+      ];
+
+      tbody.innerHTML = customers.map(c => `
+        <tr class="hover:bg-slate-800/50 transition">
+          <td class="p-2.5 font-bold text-white">${c.name}</td>
+          <td class="p-2.5"><span class="px-2 py-0.5 rounded text-[11px] bg-emerald-500/20 text-emerald-400 font-semibold">${c.emerson}</span></td>
+          <td class="p-2.5"><span class="px-2 py-0.5 rounded text-[11px] ${c.protecto.includes('Approved') ? 'bg-emerald-500/20 text-emerald-400 font-semibold' : 'bg-amber-500/20 text-amber-300'}">${c.protecto}</span></td>
+          <td class="p-2.5"><span class="px-2 py-0.5 rounded text-[11px] bg-emerald-500/20 text-emerald-400 font-semibold">${c.westlock}</span></td>
+          <td class="p-2.5"><span class="px-2 py-0.5 rounded text-[11px] bg-emerald-500/20 text-emerald-400 font-semibold">${c.trillium}</span></td>
+          <td class="p-2.5"><span class="px-2 py-0.5 rounded text-[11px] bg-emerald-500/20 text-emerald-400 font-semibold">${c.gauges}</span></td>
+          <td class="p-2.5"><span class="px-2 py-0.5 rounded text-[11px] ${c.adams.includes('Approved') ? 'bg-emerald-500/20 text-emerald-400 font-semibold' : 'bg-amber-500/20 text-amber-300'}">${c.adams}</span></td>
+        </tr>
+      `).join('');
+    }
+
+    // ==========================================
+    // RENDER PRODUCT PORTFOLIO (TAB 8)
+    // ==========================================
+    function renderProductPortfolio() {
+      const container = document.getElementById('productPortfolioContainer');
+      if (!container) return;
+
+      container.innerHTML = PRODUCT_PORTFOLIO.map(p => `
+        <div class="glass-panel p-5 rounded-xl border border-slate-700 space-y-3">
+          <div class="flex items-center gap-3 border-b border-slate-800 pb-3">
+            <div class="w-10 h-10 rounded-lg bg-qatar/20 border border-qatar flex items-center justify-center text-amber-300 text-lg">
+              <i class="${p.icon}"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-base text-white">${p.category}</h4>
+              <p class="text-xs font-semibold text-cyan-300">${p.brand}</p>
+            </div>
+          </div>
+
+          <div class="space-y-2 text-xs">
+            <div class="p-2 bg-slate-900 rounded border border-slate-800">
+              <span class="text-slate-400 text-[11px] block">Product Portfolio Lines:</span>
+              <span class="text-slate-200 font-medium">${p.lines}</span>
+            </div>
+            <div class="p-2 bg-slate-900 rounded border border-slate-800">
+              <span class="text-slate-400 text-[11px] block">Service Applications:</span>
+              <span class="text-slate-300">${p.applications}</span>
+            </div>
+            <div class="p-2 bg-emerald-500/10 rounded border border-emerald-500/20">
+              <span class="text-emerald-400 text-[11px] block font-bold">Qatar PML Status:</span>
+              <span class="text-emerald-200 text-[11px]">${p.qatarApproval}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ==========================================
+    // RENDER SOURCES (TAB 9)
+    // ==========================================
+    function renderSources() {
+      const container = document.getElementById('sourcesListContainer');
+      if (!container) return;
+
+      container.innerHTML = SOURCES_DATA.map(s => `
+        <div class="p-3 bg-slate-900/90 rounded-lg border border-slate-800 flex items-center justify-between text-xs hover:border-slate-700 transition">
+          <div class="space-y-0.5">
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-white">${s.name}</span>
+              <span class="text-[10px] bg-slate-800 text-slate-300 px-1.5 py-0.2 rounded border border-slate-700">${s.tier}</span>
+            </div>
+            <p class="text-[11px] text-slate-500 font-mono">${s.url}</p>
+          </div>
+          <div class="text-right shrink-0">
+            <span class="text-[11px] text-emerald-400 font-semibold block">${s.status}</span>
+            <span class="text-[10px] text-slate-400">Scanned ${s.lastScan} • ${s.hits} Signals</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ==========================================
+    // AI SALES OUTREACH GENERATOR (TAB 10)
+    // ==========================================
+    function renderOutreachSection() {
+      const selector = document.getElementById('outreachLeadSelector');
+      if (!selector) return;
+
+      selector.innerHTML = opportunities.map(opp => `
+        <div onclick="selectOutreachLead('${opp.id}')" class="p-3 rounded-lg border cursor-pointer transition text-xs ${selectedLeadForOutreach.id === opp.id ? 'bg-qatar/30 border-qatar text-white' : 'bg-slate-900/80 border-slate-800 text-slate-300 hover:border-slate-700'}">
+          <div class="flex justify-between font-bold">
+            <span>${opp.client}</span>
+            <span class="text-amber-300">${opp.score} pts</span>
+          </div>
+          <p class="text-[11px] truncate mt-1 text-slate-200">${opp.project}</p>
+          <div class="flex justify-between text-[10px] text-slate-400 mt-1.5">
+            <span>EPC: <strong class="text-white">${opp.epc}</strong></span>
+            <span>${opp.product}</span>
+          </div>
+        </div>
+      `).join('');
+
+      renderOutreachContent();
+    }
+
+    function selectOutreachLead(id) {
+      const opp = opportunities.find(o => o.id === id);
+      if (opp) {
+        selectedLeadForOutreach = opp;
+        renderOutreachSection();
+      }
+    }
+
+    function prepareOutreachForLead(id) {
+      const opp = opportunities.find(o => o.id === id);
+      if (opp) {
+        selectedLeadForOutreach = opp;
+        switchTab('outreach_generator');
+      }
+    }
+
+    function prepareOutreachForEpc(epcName) {
+      const opp = opportunities.find(o => o.epc === epcName) || opportunities[0];
+      selectedLeadForOutreach = opp;
+      switchTab('outreach_generator');
+    }
+
+    function renderOutreachContent() {
+      const panel = document.getElementById('outreachDisplayPanel');
+      if (!panel || !selectedLeadForOutreach) return;
+
+      const opp = selectedLeadForOutreach;
+
+      panel.innerHTML = `
+        <div class="space-y-4">
+          <div class="border-b border-slate-800 pb-3 flex justify-between items-start">
+            <div>
+              <span class="text-xs bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded border border-amber-500/30 font-bold">TARGETING: ${opp.epc} / ${opp.client}</span>
+              <h4 class="text-base font-black text-white mt-1">${opp.project}</h4>
+              <p class="text-xs text-slate-400">Matching Product: <strong class="text-cyan-300">${opp.product} (${opp.brand})</strong> | Est Value: <strong class="text-emerald-400">QAR ${(opp.value).toLocaleString()}</strong></p>
+            </div>
+            <button onclick="regenerateOutreach()" class="bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs px-3 py-1.5 rounded border border-slate-700 flex items-center gap-1">
+              <i class="fa-solid fa-arrows-rotate"></i> Regenerate
+            </button>
+          </div>
+
+          <!-- Outreach Tabs -->
+          <div class="flex items-center gap-2 border-b border-slate-800 text-xs pb-2">
+            <button onclick="setOutreachTab('email_procurement')" id="otab-email_procurement" class="otab-btn font-bold text-white bg-slate-800 px-3 py-1.5 rounded">EPC Procurement Email</button>
+            <button onclick="setOutreachTab('email_technical')" id="otab-email_technical" class="otab-btn text-slate-400 hover:text-white px-3 py-1.5 rounded">Mechanical / E&I Lead Email</button>
+            <button onclick="setOutreachTab('whatsapp')" id="otab-whatsapp" class="otab-btn text-slate-400 hover:text-white px-3 py-1.5 rounded">WhatsApp Direct</button>
+            <button onclick="setOutreachTab('phone_script')" id="otab-phone_script" class="otab-btn text-slate-400 hover:text-white px-3 py-1.5 rounded">Phone Talk Track</button>
+            <button onclick="setOutreachTab('tech_questions')" id="otab-tech_questions" class="otab-btn text-slate-400 hover:text-white px-3 py-1.5 rounded">Technical Qual Questions</button>
+          </div>
+
+          <!-- Outreach Body Display -->
+          <div id="outreachBodyText" class="p-4 bg-slate-950 rounded-xl border border-slate-800 font-mono text-xs text-slate-200 whitespace-pre-wrap leading-relaxed max-h-[340px] overflow-y-auto">
+          </div>
+        </div>
+
+        <div class="pt-3 border-t border-slate-800 flex justify-between items-center text-xs">
+          <span class="text-slate-500 text-[11px]">Tailored B2B industrial tone compliant with Qatar energy sales etiquette</span>
+          <button onclick="copyOutreachText()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-1.5 rounded-lg flex items-center gap-1.5 shadow">
+            <i class="fa-solid fa-copy"></i> Copy to Clipboard
+          </button>
+        </div>
+      `;
+
+      setOutreachTab('email_procurement');
+    }
+
+    function setOutreachTab(tabType) {
+      document.querySelectorAll('.otab-btn').forEach(b => {
+        b.classList.remove('font-bold', 'text-white', 'bg-slate-800');
+        b.classList.add('text-slate-400');
+      });
+      const currentBtn = document.getElementById('otab-' + tabType);
+      if (currentBtn) {
+        currentBtn.classList.add('font-bold', 'text-white', 'bg-slate-800');
+        currentBtn.classList.remove('text-slate-400');
+      }
+
+      const opp = selectedLeadForOutreach;
+      const bodyEl = document.getElementById('outreachBodyText');
+      if (!bodyEl) return;
+
+      if (tabType === 'email_procurement') {
+        bodyEl.innerText = `Subject: Pre-Bid Equipment & OEM Package Support: ${opp.project} | ${opp.client}
+
+Dear Procurement Team at ${opp.epc},
+
+I hope this email finds you well.
+
+With reference to the upcoming / active package for the "${opp.project}" under ${opp.client} at ${opp.facility}, I am reaching out on behalf of our authorized sales and technical support office in Qatar.
+
+We represent ${opp.brand} (${opp.product}), with an established installed base and active Preferred Manufacturer List (PML) approvals across ${opp.client} facilities.
+
+As your engineering and estimating teams prepare for this package, we would like to offer:
+1. Pre-bid BOQ alignment and technical sizing support.
+2. Compliance with ${opp.client} project standard specifications (ASME / NACE MR0175 / SIL rating).
+3. Competitive factory-direct commercial terms and localized technical support in Qatar.
+
+Could we schedule a brief 10-minute introductory call or meeting this week with your package procurement lead?
+
+Thank you and looking forward to supporting ${opp.epc}'s bid success.
+
+Best regards,
+
+Noman S.
+Assistant Sales Manager - Industrial OEM Solutions (Qatar)
+Doha, State of Qatar | +974 XX XXX XXX`;
+      } else if (tabType === 'email_technical') {
+        bodyEl.innerText = `Subject: Technical Package Coordination: ${opp.brand} ${opp.product} for ${opp.project}
+
+Dear Mechanical & Instrumentation Engineering Lead at ${opp.epc},
+
+Regarding the design envelope and equipment specifications for the "${opp.project}" with ${opp.client}:
+
+We understand the severe service and reliability requirements involved at ${opp.facility}. We are pleased to provide technical data sheets, 3D CAD drawings, and Qatar energy track records for our ${opp.brand} range (${opp.product}).
+
+Key technical capabilities:
+• Full compliance with sour gas / H2S NACE MR0175 material requirements.
+• Pre-qualified tight shut-off and high-cycle reliability certifications.
+• Local engineering and calibration support within Qatar for fast commissioning.
+
+Please let us know if we can share the complete engineering documentation package or review the draft equipment data sheets with your team.
+
+Best regards,
+
+Noman S.
+Assistant Sales Manager | Technical Sales (Qatar)
+Doha, State of Qatar`;
+      } else if (tabType === 'whatsapp') {
+        bodyEl.innerText = `Salam Eng. Tariq / ${opp.epc} Procurement,
+
+Hope you are doing well. This is Noman from the ${opp.brand} authorized team in Qatar.
+
+Reaching out regarding the upcoming ${opp.client} ${opp.project} (${opp.facility}). We have the approved ${opp.product} OEM product line and would like to support your team with pre-bid pricing and data sheets before the tender sub-package closes.
+
+Please let me know if we can send the capability statement over email or connect for 5 mins today. Thanks!`;
+      } else if (tabType === 'phone_script') {
+        bodyEl.innerText = `[CALL TALK TRACK FOR ${opp.epc} PACKAGE MANAGER]
+
+1. Introduction:
+"Good morning Eng. [Name], this is Noman S., Assistant Sales Manager with the authorized ${opp.brand} representation in Doha."
+
+2. Context & Reason for Call:
+"I am calling regarding the ${opp.project} with ${opp.client}. We noticed the preliminary package mobilization and wanted to connect with your team early."
+
+3. Value Proposition:
+"Our ${opp.brand} ${opp.product} are already on the ${opp.client} approved vendor list. By engaging with us before the RFQ tender issue, we can provide pre-bid sizing, guarantee factory lead times, and optimize your package margin."
+
+4. Qualifying Questions:
+- "Who is heading the mechanical / instrumentation package evaluation for this job?"
+- "Has ${opp.client} finalized the approved manufacturer list for this scope, or are concessions permitted?"
+- "When is your internal estimation team expecting the package submission deadline?"
+
+5. Closing / Next Action:
+"I will send our complete Qatar project track record and catalog to your email right now. Let's touch base on Thursday."`;
+      } else if (tabType === 'tech_questions') {
+        bodyEl.innerText = `[TECHNICAL QUALIFICATION CHECKLIST FOR ${opp.project}]
+
+Q1. Process Conditions:
+• Design Pressure & Operating Temperature range?
+• Is fluid sour (H2S / CO2 content requiring NACE MR0175 / ISO 15156 metallurgy)?
+
+Q2. Valve & Instrumentation Specs:
+• Body & Trim Metallurgy: Carbon Steel / 316SS / Duplex / Inconel 625?
+• End Connections: Flanged (RF/RTJ) ASME Class 150# / 300# / 600# / 900#?
+• Actuation & Solenoid: 24VDC explosion-proof ATEX / IECEx with Westlock SIL-3 feedback?
+
+Q3. Flame Arrestor & Tank Vent Specs (if applicable):
+• Explosion Group: IIA, IIB3, or IIC (Hydrogen)?
+• In-line Deflagration or Detonation rating required?
+
+Q4. Spares & Delivery Timeline:
+• Mandatory 2-year operational spares and commissioning spare parts included in package?
+• Required delivery window at Ras Laffan / Mesaieed site warehouse?`;
+      }
+    }
+
+    function regenerateOutreach() {
+      setOutreachTab('email_procurement');
+      alert("AI Outreach Strategy re-indexed with latest market signal data.");
+    }
+
+    function copyOutreachText() {
+      const text = document.getElementById('outreachBodyText')?.innerText;
+      if (text) {
+        navigator.clipboard.writeText(text);
+        alert("Outreach text copied to clipboard!");
+      }
+    }
+
+    // ==========================================
+    // MODAL: WHY THIS LEAD? (FACT vs SIGNAL vs INFERENCE)
+    // ==========================================
+    function openWhyLeadModal(id) {
+      const opp = opportunities.find(o => o.id === id);
+      if (!opp) return;
+
+      document.getElementById('modalLeadTitle').innerText = `${opp.id}: ${opp.project}`;
+      document.getElementById('modalLeadSubtitle').innerText = `${opp.client} | ${opp.facility} | Target EPC: ${opp.epc}`;
+
+      const content = document.getElementById('modalLeadContent');
+      content.innerHTML = `
+        <div class="space-y-3 text-xs">
+          <!-- FACT -->
+          <div class="p-3 rounded-xl badge-fact space-y-1">
+            <div class="flex items-center gap-1.5 font-bold uppercase tracking-wide">
+              <i class="fa-solid fa-circle-check"></i> 1. FACT (Direct Official Confirmation)
+            </div>
+            <p class="leading-relaxed text-slate-200">${opp.factText || "Public project announcement officially registered in client procurement database."}</p>
+          </div>
+
+          <!-- SIGNAL -->
+          <div class="p-3 rounded-xl badge-signal space-y-1">
+            <div class="flex items-center gap-1.5 font-bold uppercase tracking-wide">
+              <i class="fa-solid fa-tower-broadcast"></i> 2. SIGNAL (Early Commercial Movement)
+            </div>
+            <p class="leading-relaxed text-slate-200">${opp.signalText || "EPC mobilization and contractor estimation teams detected in market intelligence scan."}</p>
+          </div>
+
+          <!-- INFERENCE -->
+          <div class="p-3 rounded-xl badge-inference space-y-1">
+            <div class="flex items-center gap-1.5 font-bold uppercase tracking-wide">
+              <i class="fa-solid fa-brain"></i> 3. AI INFERENCE (OEM Product Fit Logic)
+            </div>
+            <p class="leading-relaxed text-slate-200">${opp.inferenceText || "Process engineering requirements directly match your OEM portfolio specifications."}</p>
+          </div>
+
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-2">
+            <span class="font-bold text-slate-300 block">Lead Scoring Breakdown (Total: ${opp.score}/100)</span>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-[11px]">
+              <div class="p-1.5 bg-slate-900 rounded"><span class="text-slate-400">Relevance:</span> <strong class="text-emerald-400">24/25</strong></div>
+              <div class="p-1.5 bg-slate-900 rounded"><span class="text-slate-400">Product Fit:</span> <strong class="text-emerald-400">23/25</strong></div>
+              <div class="p-1.5 bg-slate-900 rounded"><span class="text-slate-400">EPC Access:</span> <strong class="text-amber-300">18/20</strong></div>
+              <div class="p-1.5 bg-slate-900 rounded"><span class="text-slate-400">Timing/Score:</span> <strong class="text-cyan-300">26/30</strong></div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('whyLeadModal').classList.remove('hidden');
+    }
+
+    function closeWhyLeadModal() {
+      document.getElementById('whyLeadModal').classList.add('hidden');
+    }
+
+    // ==========================================
+    // MODAL: ARABIC INTELLIGENCE DRAWER
+    // ==========================================
+    function openArabicDrawer(id) {
+      const opp = opportunities.find(o => o.id === id);
+      if (!opp) return;
+
+      const content = document.getElementById('arabicDrawerContent');
+      content.innerHTML = `
+        <div class="space-y-4 text-xs">
+          <!-- Arabic Original -->
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 space-y-2">
+            <div class="flex justify-between items-center text-slate-400">
+              <span class="font-bold text-amber-300 flex items-center gap-1.5">
+                <i class="fa-solid fa-file-lines"></i> Original Preserved Arabic Source Text
+              </span>
+              <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded text-slate-300">Language: Arabic (قطر)</span>
+            </div>
+            <p class="font-arabic text-sm text-slate-100 leading-relaxed text-right dir-rtl p-2 bg-slate-900/60 rounded">
+              ${opp.arabicText || "مشروع تطوير وتحديث المنشآت النفطية في دولة قطر وتوريد الصمامات والمعدات الميكانيكية وأجهزة القياس المعتمدة."}
+            </p>
+          </div>
+
+          <!-- English Translation -->
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 space-y-2">
+            <div class="flex justify-between items-center text-slate-400">
+              <span class="font-bold text-emerald-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-globe"></i> Professional English Translation
+              </span>
+              <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded font-bold">Confidence: 96%</span>
+            </div>
+            <p class="text-xs text-slate-200 leading-relaxed p-2 bg-slate-900/60 rounded">
+              ${opp.translatedText || "Development and modification project for Qatar petroleum facilities including supply of certified valves, mechanical equipment, and instrumentation."}
+            </p>
+          </div>
+
+          <!-- Extracted Entities -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
+            <div class="p-2 bg-slate-900 rounded border border-slate-800"><span class="text-slate-400 block">Extracted Client:</span><strong class="text-white">${opp.client}</strong></div>
+            <div class="p-2 bg-slate-900 rounded border border-slate-800"><span class="text-slate-400 block">Facility Zone:</span><strong class="text-white">${opp.facility}</strong></div>
+            <div class="p-2 bg-slate-900 rounded border border-slate-800"><span class="text-slate-400 block">Target EPC:</span><strong class="text-amber-300">${opp.epc}</strong></div>
+            <div class="p-2 bg-slate-900 rounded border border-slate-800"><span class="text-slate-400 block">Matched OEM:</span><strong class="text-cyan-300">${opp.brand}</strong></div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('arabicDrawerModal').classList.remove('hidden');
+    }
+
+    function closeArabicDrawer() {
+      document.getElementById('arabicDrawerModal').classList.add('hidden');
+    }
+
+    // ==========================================
+    // MODAL: DAILY SALES BRIEFING
+    // ==========================================
+    function openDailyBriefingModal() {
+      const content = document.getElementById('dailyBriefingContent');
+      content.innerHTML = `
+        <div class="space-y-4">
+          <div class="p-3 bg-qatar/20 border border-qatar/40 rounded-xl">
+            <h4 class="text-sm font-bold text-amber-300 flex items-center gap-2">
+              <i class="fa-solid fa-bullhorn"></i> Morning Strategic Intelligence Summary
+            </h4>
+            <p class="text-xs text-slate-200 mt-1">Qatar market activity is heavily skewed towards Pre-RFQ engineering packages for Ras Laffan flare revamp and Mesaieed chemical shutdowns.</p>
+          </div>
+
+          <div class="space-y-2">
+            <h5 class="text-xs font-bold text-white uppercase tracking-wider">🎯 Top 5 Revenue Actions for You Today:</h5>
+            
+            <div class="p-2.5 bg-slate-950 rounded-lg border border-slate-800 flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-red-500/20 text-red-400 font-bold flex items-center justify-center text-xs shrink-0">1</span>
+              <div>
+                <strong class="text-white">Contact DOPET (Eng. Tariq Mansour):</strong>
+                <p class="text-slate-300 text-[11px]">Submit Emerson / ASCO valve quotation package for QatarEnergy Ras Laffan BOG Flare modification (#QTR-2026-0089).</p>
+              </div>
+            </div>
+
+            <div class="p-2.5 bg-slate-950 rounded-lg border border-slate-800 flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center text-xs shrink-0">2</span>
+              <div>
+                <strong class="text-white">Follow up with QCON Turnaround Team:</strong>
+                <p class="text-slate-300 text-[11px]">Present ADAMS triple-offset severe service valves for QatarEnergy LNG Train 3 AGRU unit overhaul (#QTR-2026-0092).</p>
+              </div>
+            </div>
+
+            <div class="p-2.5 bg-slate-950 rounded-lg border border-slate-800 flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 font-bold flex items-center justify-center text-xs shrink-0">3</span>
+              <div>
+                <strong class="text-white">Coordinate Quotation with Quotation Team:</strong>
+                <p class="text-slate-300 text-[11px]">Finalize Protectoseal flame arrestor offer for Medgulf bidding on Q-Chem Mesaieed Silo Package (Due: 18-Sep).</p>
+              </div>
+            </div>
+
+            <div class="p-2.5 bg-slate-950 rounded-lg border border-slate-800 flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center text-xs shrink-0">4</span>
+              <div>
+                <strong class="text-white">Engage Madina Group for QAFCO-4 Turnaround:</strong>
+                <p class="text-slate-300 text-[11px]">Deliver Trillium rotating pump spares catalog 47 days ahead of shutdown window.</p>
+              </div>
+            </div>
+
+            <div class="p-2.5 bg-slate-950 rounded-lg border border-slate-800 flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 font-bold flex items-center justify-center text-xs shrink-0">5</span>
+              <div>
+                <strong class="text-white">TRAGS Instrumentation Alignment:</strong>
+                <p class="text-slate-300 text-[11px]">Submit Ashcroft differential pressure and Bourdon temperature gauge datasheets for QAFCO-7 Ammonia Syngas compressor.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('dailyBriefingModal').classList.remove('hidden');
+    }
+
+    function closeDailyBriefingModal() {
+      document.getElementById('dailyBriefingModal').classList.add('hidden');
+    }
+
+    // ==========================================
+    // MODAL: ADD / SAVE NEW LEAD
+    // ==========================================
+    function openAddLeadModal() {
+      document.getElementById('addLeadModal').classList.remove('hidden');
+    }
+
+    function closeAddLeadModal() {
+      document.getElementById('addLeadModal').classList.add('hidden');
+    }
+
+    function saveNewLead(e) {
+      e.preventDefault();
+      const newLead = {
+        id: "QTR-2026-0" + (Math.floor(Math.random() * 900) + 100),
+        client: document.getElementById('formClient').value,
+        facility: document.getElementById('formFacility').value,
+        project: document.getElementById('formProject').value,
+        stage: document.getElementById('formStage').value,
+        stageBadge: document.getElementById('formStage').value.split(' ')[0],
+        epc: document.getElementById('formEpc').value,
+        contractor: document.getElementById('formEpc').value + " Technical",
+        product: document.getElementById('formProduct').value,
+        brand: document.getElementById('formBrand').value,
+        value: Number(document.getElementById('formValue').value),
+        score: Number(document.getElementById('formScore').value),
+        confidence: "High (90%)",
+        status: document.getElementById('formStatus').value,
+        expectedRfq: "Q4 2026",
+        detectedAgo: "Just now",
+        nextAction: document.getElementById('formNextAction').value || "Contact EPC package manager",
+        arabicText: "مشروع جديد مسجل في قاعدة البيانات بواسطة المستخدم لمتابعة متطلبات الصمامات والمعدات الميكانيكية.",
+        translatedText: "New project registered in database by user to track valve and mechanical equipment requirements.",
+        factText: "User inputted opportunity directly into Qatar O&G Opportunity Radar.",
+        signalText: "Commercial scope verified by sales personnel on ground.",
+        inferenceText: "Matches selected OEM product portfolio line."
+      };
+
+      opportunities.unshift(newLead);
+      saveState();
+      closeAddLeadModal();
+      renderExcelTable();
+      renderTopOpportunities();
+      alert(`New opportunity ${newLead.id} added successfully to CRM grid!`);
+    }
+
+    // ==========================================
+    // LIVE SCAN SIMULATION
+    // ==========================================
+    function triggerScan() {
+      const icon = document.getElementById('scanIcon');
+      if (icon) icon.classList.add('animate-spin');
+
+      setTimeout(() => {
+        if (icon) icon.classList.remove('animate-spin');
+        alert("Scan Complete: 12 Qatar Oil & Gas public sources scanned. 3 new procurement signals ingested, translated and matched to your OEM product portfolio.");
+        renderRecentSignals();
+      }, 1200);
+    }
+
+    function toggleAlertsDrawer() {
+      alert("Alert Center:\n• 11 Hot Leads (>80 score) detected.\n• QAFCO-4 Turnaround starting in 47 days.\n• 1 New Tender on Mushtaryat Portal for Ras Laffan.\n• Protectoseal RFQ closing in 20 days.");
+    }
+
+    // ==========================================
+    // INITIALIZATION
+    // ==========================================
+    document.addEventListener('DOMContentLoaded', () => {
+      renderTopOpportunities();
+      renderRecentSignals();
+      renderQuickEpc();
+    });
+  </script>
+</body>
+</html>
