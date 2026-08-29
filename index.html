@@ -95,14 +95,14 @@
     </div>
 
     <!-- Header Actions -->
-    <div class="flex items-center space-x-3">
-      <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light hover:from-qatar-light hover:to-qatar text-white px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-md shadow-qatar/20 transition-all active:scale-95">
+    <div class="flex items-center space-x-2 sm:space-x-3">
+      <button onclick="triggerScan()" class="hidden sm:flex bg-gradient-to-r from-qatar to-qatar-light hover:from-qatar-light hover:to-qatar text-white px-3.5 py-1.5 rounded-lg text-xs font-semibold items-center gap-1.5 shadow-md shadow-qatar/20 transition-all active:scale-95">
         <i class="fa-solid fa-arrows-rotate" id="scanIcon"></i>
-        <span>Scan Monitored Sources</span>
+        <span>Scan Sources</span>
       </button>
-      <button onclick="openDailyBriefingModal()" class="bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/30 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition">
+      <button onclick="openDailyBriefingModal()" class="hidden sm:flex bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/30 px-3 py-1.5 rounded-lg text-xs font-medium items-center gap-1.5 transition">
         <i class="fa-solid fa-newspaper text-amber-400"></i>
-        <span>Daily Briefing</span>
+        <span>Briefing</span>
       </button>
       <div class="relative">
         <button onclick="toggleAlertsDrawer()" class="relative p-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg border border-slate-700 transition">
@@ -111,7 +111,7 @@
         </button>
       </div>
       <div class="flex items-center gap-2 pl-2 border-l border-slate-800">
-        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-petrocon to-qatar border border-amber-400/50 flex items-center justify-center font-bold text-xs text-white">
+        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-petrocon to-qatar border border-amber-400/50 flex items-center justify-center font-bold text-xs text-white shrink-0">
           AS
         </div>
         <div class="hidden sm:block text-left">
@@ -119,16 +119,28 @@
           <p class="text-[10px] text-slate-400 leading-tight">Asst. Sales Mgr (PETROCON)</p>
         </div>
       </div>
+      <!-- Mobile Menu Toggle Button -->
+      <button onclick="toggleMobileNav()" class="md:hidden p-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg border border-slate-700 focus:outline-none">
+        <i class="fa-solid fa-bars text-base" id="mobileMenuIcon"></i>
+      </button>
     </div>
   </header>
 
   <!-- MAIN APP CONTAINER -->
-  <div class="flex-1 flex overflow-hidden">
+  <div class="flex-1 flex overflow-hidden relative">
 
-    <!-- SIDEBAR NAVIGATION -->
-    <aside class="w-64 bg-slate-950/90 border-r border-slate-800 flex flex-col justify-between shrink-0 select-none">
+    <!-- Backdrop for Mobile Sidebar -->
+    <div id="sidebarBackdrop" onclick="toggleMobileNav()" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-30 hidden md:hidden transition-opacity"></div>
+
+    <!-- SIDEBAR NAVIGATION (RESPONSIVE DRAWER) -->
+    <aside id="appSidebar" class="fixed inset-y-0 left-0 z-40 w-64 bg-slate-950/95 border-r border-slate-800 flex flex-col justify-between shrink-0 select-none transform -translate-x-full transition-transform duration-300 ease-in-out md:translate-x-0 md:relative md:flex">
       <div class="p-3 space-y-1 overflow-y-auto">
-        <div class="px-3 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Navigation</div>
+        <div class="flex items-center justify-between px-3 py-1.5 md:block">
+          <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Navigation</span>
+          <button onclick="toggleMobileNav()" class="md:hidden text-slate-400 hover:text-white p-1">
+            <i class="fa-solid fa-xmark text-sm"></i>
+          </button>
+        </div>
         
         <button onclick="switchTab('command_center')" id="nav-command_center" class="nav-item w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-medium transition bg-qatar/20 text-white border border-qatar/40">
           <div class="flex items-center gap-2.5">
@@ -226,7 +238,7 @@
     </aside>
 
     <!-- MAIN VIEW AREA -->
-    <main class="flex-1 overflow-y-auto p-4 md:p-6 space-y-6" id="mainContentArea">
+    <main class="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 space-y-6 pb-24 md:pb-6" id="mainContentArea">
       
       <!-- TAB 1: COMMAND CENTER (DEFAULT) -->
       <section id="tab-command_center" class="tab-content space-y-6">
@@ -1689,6 +1701,16 @@
     }
 
     // ==========================================
+    // MOBILE NAVIGATION CONTROLLER
+    // ==========================================
+    function toggleMobileNav() {
+      const sidebar = document.getElementById('appSidebar');
+      const backdrop = document.getElementById('sidebarBackdrop');
+      if (sidebar) sidebar.classList.toggle('-translate-x-full');
+      if (backdrop) backdrop.classList.toggle('hidden');
+    }
+
+    // ==========================================
     // TAB SWITCHING
     // ==========================================
     function switchTab(tabId) {
@@ -1697,6 +1719,31 @@
         el.classList.remove('bg-qatar/20', 'text-white', 'border', 'border-qatar/40');
         el.classList.add('text-slate-300');
       });
+
+      // Mobile bottom nav active indicator
+      document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
+        btn.classList.remove('text-amber-400', 'font-bold');
+        btn.classList.add('text-slate-400');
+      });
+      const currentMobileBtn = document.getElementById('mobnav-' + tabId);
+      if (currentMobileBtn) {
+        currentMobileBtn.classList.remove('text-slate-400');
+        currentMobileBtn.classList.add('text-amber-400', 'font-bold');
+      }
+
+      // Close mobile sidebar drawer if open
+      if (window.innerWidth < 768) {
+        const sidebar = document.getElementById('appSidebar');
+        const backdrop = document.getElementById('sidebarBackdrop');
+        if (sidebar && !sidebar.classList.contains('-translate-x-full')) {
+          sidebar.classList.add('-translate-x-full');
+        }
+        if (backdrop && !backdrop.classList.contains('hidden')) {
+          backdrop.classList.add('hidden');
+        }
+        const mainContent = document.getElementById('mainContentArea');
+        if (mainContent) mainContent.scrollTop = 0;
+      }
 
       const targetTab = document.getElementById('tab-' + tabId);
       const targetNav = document.getElementById('nav-' + tabId);
@@ -2936,5 +2983,33 @@ Q4. Spares & Delivery Timeline:
       setInterval(checkLiveCloudSync, 600000); // Check every 10 minutes
     });
   </script>
+
+  <!-- MOBILE BOTTOM NAVIGATION (TOUCH-OPTIMIZED BAR) -->
+  <nav class="fixed bottom-0 left-0 right-0 z-30 bg-slate-950/95 border-t border-slate-800 flex md:hidden justify-around items-center py-2 px-1 backdrop-blur-lg shadow-2xl">
+    <button onclick="switchTab('command_center')" id="mobnav-command_center" class="mobile-nav-btn flex flex-col items-center gap-1 text-[10px] text-amber-400 font-bold focus:outline-none p-1">
+      <i class="fa-solid fa-gauge-high text-base"></i>
+      <span>Command</span>
+    </button>
+    <button onclick="switchTab('project_radar')" id="mobnav-project_radar" class="mobile-nav-btn flex flex-col items-center gap-1 text-[10px] text-slate-400 hover:text-white focus:outline-none p-1">
+      <i class="fa-solid fa-crosshairs text-base"></i>
+      <span>Projects</span>
+    </button>
+    <button onclick="switchTab('shutdown_radar')" id="mobnav-shutdown_radar" class="mobile-nav-btn flex flex-col items-center gap-1 text-[10px] text-slate-400 hover:text-white focus:outline-none p-1">
+      <i class="fa-solid fa-clock-rotate-left text-base"></i>
+      <span>Shutdowns</span>
+    </button>
+    <button onclick="switchTab('excel_grid')" id="mobnav-excel_grid" class="mobile-nav-btn flex flex-col items-center gap-1 text-[10px] text-slate-400 hover:text-white focus:outline-none p-1">
+      <i class="fa-solid fa-table-cells text-base"></i>
+      <span>CRM</span>
+    </button>
+    <button onclick="switchTab('epc_directory')" id="mobnav-epc_directory" class="mobile-nav-btn flex flex-col items-center gap-1 text-[10px] text-slate-400 hover:text-white focus:outline-none p-1">
+      <i class="fa-solid fa-building-shield text-base"></i>
+      <span>EPCs</span>
+    </button>
+    <button onclick="toggleMobileNav()" class="mobile-nav-btn flex flex-col items-center gap-1 text-[10px] text-slate-400 hover:text-white focus:outline-none p-1">
+      <i class="fa-solid fa-layer-group text-base text-cyan-400"></i>
+      <span>More</span>
+    </button>
+  </nav>
 </body>
 </html>
