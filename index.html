@@ -215,9 +215,9 @@
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
 <<<<<<< HEAD
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">30-Aug-2026 20:29 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">30-Aug-2026 20:56 AST</strong>
 =======
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">30-Aug-2026 20:29 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">30-Aug-2026 20:56 AST</strong>
 >>>>>>> 3e3d430 (Implement encrypted Security Lock Screen Overlay with customizable password key for data protection)
     </div>
     <div class="flex items-center gap-2 shrink-0">
@@ -1241,12 +1241,23 @@
           <div class="text-[10px] text-slate-500 pt-1">Total Pipeline is always dynamically calculated from your live CRM Grid rows.</div>
         </div>
 
-        <div class="border-t border-slate-800 pt-3">
-          <label class="block text-slate-300 font-semibold mb-1 flex items-center justify-between">
-            <span class="flex items-center gap-1.5"><i class="fa-solid fa-key text-amber-400"></i> Access Security Password Key</span>
-            <span class="text-[10px] text-slate-500 font-normal">Opening Key</span>
-          </label>
-          <input type="text" id="inputSecurityKey" required placeholder="Default: PETROCON2026" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white font-mono font-bold text-sm focus:outline-none focus:border-amber-400" />
+        <div class="border-t border-slate-800 pt-3 space-y-3">
+          <div>
+            <label class="block text-slate-300 font-semibold mb-1 flex items-center justify-between">
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-key text-amber-400"></i> Access Security Password Key</span>
+              <span class="text-[10px] text-slate-500 font-normal">Opening Key</span>
+            </label>
+            <input type="text" id="inputSecurityKey" required placeholder="Default: PETROCON2026" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white font-mono font-bold text-sm focus:outline-none focus:border-amber-400" />
+          </div>
+
+          <div>
+            <label class="block text-slate-300 font-semibold mb-1 flex items-center justify-between">
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-user-shield text-red-400"></i> Master Authorization Secret Code</span>
+              <span class="text-[10px] text-red-400 font-bold">Required for Password Change</span>
+            </label>
+            <input type="password" id="inputMasterSecretPin" placeholder="Enter Secret Code (1989)..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white font-mono font-bold text-sm focus:outline-none focus:border-red-500" />
+            <p class="text-[10px] text-slate-400 mt-1">Master secret PIN <strong class="text-amber-300 font-mono">1989</strong> is required to authorize changing the password key.</p>
+          </div>
         </div>
 
         <div class="flex justify-end gap-2 pt-2 border-t border-slate-800">
@@ -2072,12 +2083,14 @@
       const inTarget = document.getElementById('inputMonthlyTarget');
       const inAch = document.getElementById('inputAchievedSales');
       const inKey = document.getElementById('inputSecurityKey');
+      const inSecret = document.getElementById('inputMasterSecretPin');
       const modalCount = document.getElementById('modalCrmCount');
       const modalSum = document.getElementById('modalCrmSum');
 
       if (inTarget) inTarget.value = userSettings.monthlyTarget;
       if (inAch) inAch.value = userSettings.achievedSales;
       if (inKey) inKey.value = userSettings.securityKey || "PETROCON2026";
+      if (inSecret) inSecret.value = "";
 
       const totalPipeline = opportunities.reduce((acc, o) => acc + (Number(o.value) || 0), 0);
       if (modalCount) modalCount.innerText = `${opportunities.length} Leads`;
@@ -2103,16 +2116,32 @@
       const inTarget = document.getElementById('inputMonthlyTarget');
       const inAch = document.getElementById('inputAchievedSales');
       const inKey = document.getElementById('inputSecurityKey');
+      const inSecret = document.getElementById('inputMasterSecretPin');
+
+      const newKey = inKey ? inKey.value.trim() : '';
+      const secretPin = inSecret ? inSecret.value.trim() : '';
+      const currentKey = userSettings.securityKey || "PETROCON2026";
 
       userSettings.monthlyTarget = Number(inTarget.value) || 2000000;
       userSettings.achievedSales = Number(inAch.value) || 0;
-      if (inKey && inKey.value.trim()) {
-        userSettings.securityKey = inKey.value.trim();
+
+      // Check if user is attempting to change the Access Password Key
+      if (newKey && newKey !== currentKey) {
+        if (secretPin !== "1989") {
+          alert("❌ Master Authorization Failed!\n\nYou must enter the Master Secret Code (1989) to authorize changing the access password key.\n\nPassword key was NOT modified.");
+          if (inKey) inKey.value = currentKey;
+          return;
+        }
+        userSettings.securityKey = newKey;
+        saveSettings();
+        closeTargetConfigModal();
+        alert(`✅ Master Authorization Verified (Secret: 1989)!\n\n• New Access Password Key: ${userSettings.securityKey}\n• Monthly Target: QAR ${userSettings.monthlyTarget.toLocaleString()}\n• Achieved: QAR ${userSettings.achievedSales.toLocaleString()}`);
+        return;
       }
 
       saveSettings();
       closeTargetConfigModal();
-      alert(`Settings & Security Key updated successfully!\nMonthly Target: QAR ${userSettings.monthlyTarget.toLocaleString()}\nAchieved: QAR ${userSettings.achievedSales.toLocaleString()}\nSecurity Password Key: ${userSettings.securityKey}`);
+      alert(`Settings updated successfully!\nMonthly Target: QAR ${userSettings.monthlyTarget.toLocaleString()}\nAchieved: QAR ${userSettings.achievedSales.toLocaleString()}`);
     }
 
     // ==========================================
