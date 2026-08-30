@@ -96,4 +96,4 @@ python server.py
 ---
 
 ## 📄 License
-Internal Sales Intelligence & Strategic Commercial Use — Petrocon Qatar.
+Internal Sales Intelligence & Strategic Commercial Use — Oil & Gas Terminal Qatar.
