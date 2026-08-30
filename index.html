@@ -215,9 +215,9 @@
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
 <<<<<<< HEAD
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">30-Aug-2026 20:56 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">30-Aug-2026 20:59 AST</strong>
 =======
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">30-Aug-2026 20:56 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">30-Aug-2026 20:59 AST</strong>
 >>>>>>> 3e3d430 (Implement encrypted Security Lock Screen Overlay with customizable password key for data protection)
     </div>
     <div class="flex items-center gap-2 shrink-0">
@@ -1255,8 +1255,8 @@
               <span class="flex items-center gap-1.5"><i class="fa-solid fa-user-shield text-red-400"></i> Master Authorization Secret Code</span>
               <span class="text-[10px] text-red-400 font-bold">Required for Password Change</span>
             </label>
-            <input type="password" id="inputMasterSecretPin" placeholder="Enter Secret Code (1989)..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white font-mono font-bold text-sm focus:outline-none focus:border-red-500" />
-            <p class="text-[10px] text-slate-400 mt-1">Master secret PIN <strong class="text-amber-300 font-mono">1989</strong> is required to authorize changing the password key.</p>
+            <input type="password" id="inputMasterSecretPin" placeholder="Enter Master Secret Code..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white font-mono font-bold text-sm focus:outline-none focus:border-red-500" />
+            <p class="text-[10px] text-slate-400 mt-1">Master secret authorization code is required to modify access password settings.</p>
           </div>
         </div>
 
@@ -2128,14 +2128,14 @@
       // Check if user is attempting to change the Access Password Key
       if (newKey && newKey !== currentKey) {
         if (secretPin !== "1989") {
-          alert("❌ Master Authorization Failed!\n\nYou must enter the Master Secret Code (1989) to authorize changing the access password key.\n\nPassword key was NOT modified.");
+          alert("❌ Master Authorization Failed!\n\nYou must enter the valid Master Secret Code to authorize changing the access password key.\n\nPassword key was NOT modified.");
           if (inKey) inKey.value = currentKey;
           return;
         }
         userSettings.securityKey = newKey;
         saveSettings();
         closeTargetConfigModal();
-        alert(`✅ Master Authorization Verified (Secret: 1989)!\n\n• New Access Password Key: ${userSettings.securityKey}\n• Monthly Target: QAR ${userSettings.monthlyTarget.toLocaleString()}\n• Achieved: QAR ${userSettings.achievedSales.toLocaleString()}`);
+        alert(`✅ Master Authorization Verified!\n\n• New Access Password Key: ${userSettings.securityKey}\n• Monthly Target: QAR ${userSettings.monthlyTarget.toLocaleString()}\n• Achieved: QAR ${userSettings.achievedSales.toLocaleString()}`);
         return;
       }
 
