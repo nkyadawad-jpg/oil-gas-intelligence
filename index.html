@@ -169,9 +169,9 @@
 
     <!-- Header Actions -->
     <div class="flex items-center space-x-1.5 sm:space-x-3">
-      <button onclick="openTargetConfigModal()" title="Change Access Password Key" class="bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/40 px-2 sm:px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 sm:gap-1.5 shadow transition">
-        <i class="fa-solid fa-key text-amber-400"></i>
-        <span class="hidden sm:inline">Security Key</span>
+      <button onclick="openTargetConfigModal()" title="Security & Password Settings" class="bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/40 px-2 sm:px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 sm:gap-1.5 shadow transition">
+        <i class="fa-solid fa-sliders text-amber-400"></i>
+        <span class="hidden sm:inline">Settings</span>
       </button>
       <button onclick="triggerScan()" class="flex bg-gradient-to-r from-qatar to-qatar-light hover:from-qatar-light hover:to-qatar text-white px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold items-center gap-1 sm:gap-1.5 shadow-md shadow-qatar/20 transition-all active:scale-95">
         <i class="fa-solid fa-arrows-rotate" id="scanIcon"></i>
@@ -212,7 +212,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">30-Aug-2026 21:33 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">30-Aug-2026 21:36 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -330,7 +330,7 @@
           <span>Territory: Qatar Energy Hub</span>
           <span class="text-emerald-400 font-bold">● Active</span>
         </div>
-        <div class="text-slate-500">Target OEMs: Emerson, ASCO, Protectoseal, Westlock, Trillium, Ashcroft, ADAMS</div>
+        <div class="text-slate-500">Supported OEMs: Emerson, ASCO, Protectoseal, Westlock, Trillium, Ashcroft, ADAMS</div>
       </div>
     </aside>
 
@@ -339,7 +339,7 @@
       
       <!-- TAB 1: COMMAND CENTER (DEFAULT) -->
       <section id="tab-command_center" class="tab-content space-y-6">
-        <!-- Sales Target Progress & KPI Banner -->
+        <!-- Security & Station Protection Status Banner -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <!-- KPI 1: SECURITY & STATION ACCESS STATUS -->
           <div class="glass-panel p-4 rounded-xl relative overflow-hidden border-slate-700 cursor-pointer hover:border-amber-500/50 transition group" onclick="openTargetConfigModal()" title="Click to manage security password key">
@@ -361,7 +361,7 @@
             </div>
             <div class="flex justify-between text-[11px] text-slate-400 mt-2">
               <span>Manager: <strong class="text-white">Ashfan (PETROCON)</strong></span>
-              <span class="text-amber-300 font-bold hover:underline flex items-center gap-1"><i class="fa-solid fa-pen-to-square text-[10px]"></i> Security Key</span>
+              <span class="text-amber-300 font-bold hover:underline flex items-center gap-1"><i class="fa-solid fa-gear text-[10px]"></i> Settings</span>
             </div>
           </div>
 
