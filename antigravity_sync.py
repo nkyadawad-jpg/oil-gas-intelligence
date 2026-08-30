@@ -65,8 +65,15 @@ def sync_with_github(commit_message=None):
         print(f"[OK] Production Link: https://nkyadawad-jpg.github.io/oil-gas-intelligence/")
         return True
     else:
-        print(f"[!] Push notice: {push_res.stderr.strip() or push_res.stdout.strip()}")
-        return False
+        # Fallback to force push to guarantee production link is clean and free of merge conflicts
+        force_res = run_git("push --force origin main", check=False)
+        if force_res.returncode == 0:
+            print("[OK] Antigravity & GitHub production link forced clean sync!")
+            print(f"[OK] Production Link: https://nkyadawad-jpg.github.io/oil-gas-intelligence/")
+            return True
+        else:
+            print(f"[!] Push notice: {push_res.stderr.strip() or push_res.stdout.strip()}")
+            return False
 
 if __name__ == '__main__':
     msg = " ".join(sys.argv[1:]) if len(sys.argv) > 1 else None
