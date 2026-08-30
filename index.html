@@ -152,17 +152,12 @@
     <!-- Quick Stats in Header -->
     <div class="hidden xl:flex items-center space-x-6 text-xs bg-slate-950/60 px-4 py-1.5 rounded-lg border border-slate-800">
       <div>
-        <span class="text-slate-400">Monthly Target:</span>
-        <span id="hdrTargetVal" class="font-bold text-white ml-1">QAR 2.00M</span>
+        <span class="text-slate-400">Open Pipeline:</span>
+        <span id="hdrPipelineVal" class="font-bold text-cyan-300 ml-1">QAR 4.85M</span>
       </div>
       <div class="h-4 w-px bg-slate-800"></div>
       <div>
-        <span class="text-slate-400">Achieved:</span>
-        <span id="hdrAchievedVal" class="font-bold text-emerald-400 ml-1">QAR 1.25M (62.5%)</span>
-      </div>
-      <div class="h-4 w-px bg-slate-800"></div>
-      <div>
-        <span class="text-slate-400">Weighted Pipeline:</span>
+        <span class="text-slate-400">Weighted Expected:</span>
         <span id="hdrWeightedVal" class="font-bold text-amber-300 ml-1">QAR 2.74M</span>
       </div>
       <div class="h-4 w-px bg-slate-800"></div>
@@ -217,7 +212,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">30-Aug-2026 21:29 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">30-Aug-2026 21:33 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -346,25 +341,27 @@
       <section id="tab-command_center" class="tab-content space-y-6">
         <!-- Sales Target Progress & KPI Banner -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <!-- KPI 1: TARGET & ACHIEVED -->
-          <div class="glass-panel p-4 rounded-xl relative overflow-hidden border-slate-700 cursor-pointer hover:border-amber-500/50 transition group" onclick="openTargetConfigModal()" title="Click to customize monthly sales target">
-            <div class="absolute -right-2 -bottom-2 opacity-10 text-6xl text-amber-400 group-hover:scale-110 transition-transform"><i class="fa-solid fa-bullseye"></i></div>
+          <!-- KPI 1: SECURITY & STATION ACCESS STATUS -->
+          <div class="glass-panel p-4 rounded-xl relative overflow-hidden border-slate-700 cursor-pointer hover:border-amber-500/50 transition group" onclick="openTargetConfigModal()" title="Click to manage security password key">
+            <div class="absolute -right-2 -bottom-2 opacity-10 text-6xl text-amber-400 group-hover:scale-110 transition-transform"><i class="fa-solid fa-user-shield"></i></div>
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-xs text-slate-400 font-medium flex items-center gap-1.5">
-                  <span>Monthly Sales Target</span>
-                  <i class="fa-solid fa-pen-to-square text-[10px] text-amber-400 opacity-60 group-hover:opacity-100"></i>
+                  <span>Security Access Protection</span>
+                  <i class="fa-solid fa-key text-[10px] text-amber-400 opacity-60 group-hover:opacity-100"></i>
                 </p>
-                <h3 id="kpiTargetVal" class="text-2xl font-black text-white mt-1">QAR 2.00M</h3>
+                <h3 class="text-xl font-black text-emerald-400 mt-1 flex items-center gap-2">
+                  <i class="fa-solid fa-lock text-base"></i> Station Protected
+                </h3>
               </div>
-              <span id="kpiTargetPercent" class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs px-2 py-0.5 rounded font-bold">62.5%</span>
+              <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs px-2 py-0.5 rounded font-bold">100% Encrypted</span>
             </div>
             <div class="w-full bg-slate-800 h-2 rounded-full mt-3 overflow-hidden">
-              <div id="kpiTargetBar" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full transition-all duration-500" style="width: 62.5%"></div>
+              <div class="bg-gradient-to-r from-emerald-500 via-teal-400 to-amber-400 h-full rounded-full w-full"></div>
             </div>
             <div class="flex justify-between text-[11px] text-slate-400 mt-2">
-              <span>Achieved: <strong id="kpiAchievedVal" class="text-emerald-300">QAR 1.25M</strong></span>
-              <span>Gap: <strong id="kpiGapVal" class="text-amber-300">QAR 750K</strong></span>
+              <span>Manager: <strong class="text-white">Ashfan (PETROCON)</strong></span>
+              <span class="text-amber-300 font-bold hover:underline flex items-center gap-1"><i class="fa-solid fa-pen-to-square text-[10px]"></i> Security Key</span>
             </div>
           </div>
 
@@ -1890,28 +1887,13 @@
       const coverage = target > 0 ? (totalPipeline / target).toFixed(1) : '0.0';
 
       // 1. Header Quick Stats
-      const hdrTarget = document.getElementById('hdrTargetVal');
-      const hdrAchieved = document.getElementById('hdrAchievedVal');
+      const hdrPip = document.getElementById('hdrPipelineVal');
       const hdrWeighted = document.getElementById('hdrWeightedVal');
       const hdrCoverage = document.getElementById('hdrCoverageVal');
 
-      if (hdrTarget) hdrTarget.innerText = formatQarShort(target);
-      if (hdrAchieved) hdrAchieved.innerText = `${formatQarShort(achieved)} (${percentage}%)`;
+      if (hdrPip) hdrPip.innerText = formatQarShort(totalPipeline);
       if (hdrWeighted) hdrWeighted.innerText = formatQarShort(weightedPipeline);
       if (hdrCoverage) hdrCoverage.innerText = `${coverage}X`;
-
-      // 2. Command Center KPI Card 1 (Target & Achieved)
-      const kpiTarget = document.getElementById('kpiTargetVal');
-      const kpiPct = document.getElementById('kpiTargetPercent');
-      const kpiBar = document.getElementById('kpiTargetBar');
-      const kpiAch = document.getElementById('kpiAchievedVal');
-      const kpiGap = document.getElementById('kpiGapVal');
-
-      if (kpiTarget) kpiTarget.innerText = formatQarShort(target);
-      if (kpiPct) kpiPct.innerText = `${percentage}%`;
-      if (kpiBar) kpiBar.style.width = `${percentage}%`;
-      if (kpiAch) kpiAch.innerText = formatQarShort(achieved);
-      if (kpiGap) kpiGap.innerText = formatQarShort(gap);
 
       // 3. Command Center KPI Card 2 (Open Pipeline)
       const kpiTotPip = document.getElementById('kpiTotalPipelineVal');
