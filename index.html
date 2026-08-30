@@ -215,10 +215,14 @@
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
 <<<<<<< HEAD
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">30-Aug-2026 21:00 AST</strong>
+<<<<<<< HEAD
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">30-Aug-2026 21:13 AST</strong>
 =======
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">30-Aug-2026 21:00 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">30-Aug-2026 21:13 AST</strong>
 >>>>>>> 3e3d430 (Implement encrypted Security Lock Screen Overlay with customizable password key for data protection)
+=======
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">30-Aug-2026 21:13 AST</strong>
+>>>>>>> f20bdbd (Remove git merge notice from dashboard and strictly hide current password and secret code 1989 from modal inputs and alerts)
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -1244,10 +1248,10 @@
         <div class="border-t border-slate-800 pt-3 space-y-3">
           <div>
             <label class="block text-slate-300 font-semibold mb-1 flex items-center justify-between">
-              <span class="flex items-center gap-1.5"><i class="fa-solid fa-key text-amber-400"></i> Access Security Password Key</span>
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-key text-amber-400"></i> New Access Security Password Key</span>
               <span class="text-[10px] text-slate-500 font-normal">Opening Key</span>
             </label>
-            <input type="text" id="inputSecurityKey" required placeholder="Default: PETROCON2026" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white font-mono font-bold text-sm focus:outline-none focus:border-amber-400" />
+            <input type="password" id="inputSecurityKey" placeholder="Leave blank to keep current password..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white font-mono font-bold text-sm focus:outline-none focus:border-amber-400" />
           </div>
 
           <div>
@@ -2089,7 +2093,7 @@
 
       if (inTarget) inTarget.value = userSettings.monthlyTarget;
       if (inAch) inAch.value = userSettings.achievedSales;
-      if (inKey) inKey.value = userSettings.securityKey || "PETROCON2026";
+      if (inKey) inKey.value = "";
       if (inSecret) inSecret.value = "";
 
       const totalPipeline = opportunities.reduce((acc, o) => acc + (Number(o.value) || 0), 0);
@@ -2129,13 +2133,13 @@
       if (newKey && newKey !== currentKey) {
         if (secretPin !== "1989") {
           alert("❌ Master Authorization Failed!\n\nYou must enter the valid Master Secret Code to authorize changing the access password key.\n\nPassword key was NOT modified.");
-          if (inKey) inKey.value = currentKey;
+          if (inKey) inKey.value = "";
           return;
         }
         userSettings.securityKey = newKey;
         saveSettings();
         closeTargetConfigModal();
-        alert(`✅ Master Authorization Verified!\n\n• New Access Password Key: ${userSettings.securityKey}\n• Monthly Target: QAR ${userSettings.monthlyTarget.toLocaleString()}\n• Achieved: QAR ${userSettings.achievedSales.toLocaleString()}`);
+        alert(`✅ Master Authorization Verified!\n\n• Access Security Password Key updated successfully!\n• Monthly Target: QAR ${userSettings.monthlyTarget.toLocaleString()}\n• Achieved: QAR ${userSettings.achievedSales.toLocaleString()}`);
         return;
       }
 
