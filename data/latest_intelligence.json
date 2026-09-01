@@ -1,6 +1,6 @@
 {
-  "syncTimestamp": "02-Sep-2026 02:11 AST",
-  "syncTimestampIso": "2026-09-01T23:11:44.972192+00:00",
+  "syncTimestamp": "02-Sep-2026 02:23 AST",
+  "syncTimestampIso": "2026-09-01T23:23:14.066786+00:00",
   "totalProjectsMonitored": 43,
   "verifiedHotLeads": 11,
   "openPipelineValuation": 4850000,
@@ -16,70 +16,70 @@
       "url": "https://www.qatarenergy.qa",
       "tier": "Tier A (State)",
       "status": "Active (200 OK)",
-      "checkedAt": "02-Sep-2026 02:11 AST"
+      "checkedAt": "02-Sep-2026 02:23 AST"
     },
     {
       "name": "QatarEnergy LNG Official Supplier Notices",
       "url": "https://www.qatarenergylng.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "02-Sep-2026 02:11 AST"
+      "checkedAt": "02-Sep-2026 02:23 AST"
     },
     {
       "name": "QAFCO Fertilizer Official Procurement",
       "url": "https://www.qafco.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "02-Sep-2026 02:11 AST"
+      "checkedAt": "02-Sep-2026 02:23 AST"
     },
     {
       "name": "Q-Chem / RLOC Chemical Portal",
       "url": "https://www.qchem.com.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "02-Sep-2026 02:11 AST"
+      "checkedAt": "02-Sep-2026 02:23 AST"
     },
     {
       "name": "WOQOD Commercial Distribution Portal",
       "url": "https://www.woqod.com",
       "tier": "Tier A (Distribution)",
       "status": "Active (200 OK)",
-      "checkedAt": "02-Sep-2026 02:11 AST"
+      "checkedAt": "02-Sep-2026 02:23 AST"
     },
     {
       "name": "DOPET Engineering & Contracting Portal",
       "url": "https://www.dopet.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "02-Sep-2026 02:11 AST"
+      "checkedAt": "02-Sep-2026 02:23 AST"
     },
     {
       "name": "QCON Turnaround & Construction Disclosures",
       "url": "https://www.qcon.com.qa",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "02-Sep-2026 02:11 AST"
+      "checkedAt": "02-Sep-2026 02:23 AST"
     },
     {
       "name": "TRAGS Electrical & Engineering Qatar",
       "url": "https://www.tragsqatar.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "02-Sep-2026 02:11 AST"
+      "checkedAt": "02-Sep-2026 02:23 AST"
     },
     {
       "name": "Medgulf Construction Official Site",
       "url": "https://www.medgulfconstruction.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "02-Sep-2026 02:11 AST"
+      "checkedAt": "02-Sep-2026 02:23 AST"
     },
     {
       "name": "Blackcat Engineering & Construction",
       "url": "https://www.blackcat.qa",
       "tier": "Tier B (EPC)",
       "status": "Active (Verified)",
-      "checkedAt": "02-Sep-2026 02:11 AST"
+      "checkedAt": "02-Sep-2026 02:23 AST"
     }
   ]
 }
