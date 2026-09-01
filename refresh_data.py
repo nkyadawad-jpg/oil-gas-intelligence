@@ -19,16 +19,16 @@ DATA_DIR = os.path.join(PROJECT_DIR, 'data')
 os.makedirs(DATA_DIR, exist_ok=True)
 
 OFFICIAL_SOURCES = [
-    {"name": "QatarEnergy Mushtaryat E-Procurement Portal", "url": "https://portal.qatarenergy.qa", "tier": "Tier A (State)"},
-    {"name": "QatarEnergy LNG Supplier & Tender Notices", "url": "https://www.qatarenergylng.qa", "tier": "Tier A (Operator)"},
-    {"name": "Pearl GTL / Shell Contractor Portal", "url": "https://www.shell.com.qa", "tier": "Tier A (Major JV)"},
-    {"name": "Tawteen In-Country Value (ICV) Program", "url": "https://www.icv.qa", "tier": "Tier A (Localization)"},
-    {"name": "Ministry of Finance Monaqasat Public Tenders", "url": "https://monaqasat.mof.gov.qa", "tier": "Tier A (Government)"},
-    {"name": "QAFCO Procurement (SAP Ariba Sourcing)", "url": "https://www.qafco.qa", "tier": "Tier A (Operator)"},
-    {"name": "Q-Chem / RLOC Supplier Registry", "url": "https://www.qchem.com.qa", "tier": "Tier A (Operator)"},
-    {"name": "DOPET Disclosures & Subcontracts", "url": "https://www.dopet.com", "tier": "Tier B (EPC)"},
-    {"name": "QCON Turnaround Notices", "url": "https://www.qcon.com.qa", "tier": "Tier B (EPC)"},
-    {"name": "Medgulf Construction Procurement", "url": "https://www.medgulfconstruction.com", "tier": "Tier B (EPC)"}
+    {"name": "QatarEnergy Official State Portal", "url": "https://www.qatarenergy.qa", "tier": "Tier A (State)"},
+    {"name": "QatarEnergy LNG Official Supplier Notices", "url": "https://www.qatarenergylng.qa", "tier": "Tier A (Operator)"},
+    {"name": "QAFCO Fertilizer Official Procurement", "url": "https://www.qafco.qa", "tier": "Tier A (Operator)"},
+    {"name": "Q-Chem / RLOC Chemical Portal", "url": "https://www.qchem.com.qa", "tier": "Tier A (Operator)"},
+    {"name": "WOQOD Commercial Distribution Portal", "url": "https://www.woqod.com", "tier": "Tier A (Distribution)"},
+    {"name": "DOPET Engineering & Contracting Portal", "url": "https://www.dopet.com", "tier": "Tier B (EPC)"},
+    {"name": "QCON Turnaround & Construction Disclosures", "url": "https://www.qcon.com.qa", "tier": "Tier B (EPC)"},
+    {"name": "TRAGS Electrical & Engineering Qatar", "url": "https://www.tragsqatar.com", "tier": "Tier B (EPC)"},
+    {"name": "Medgulf Construction Official Site", "url": "https://www.medgulfconstruction.com", "tier": "Tier B (EPC)"},
+    {"name": "Blackcat Engineering & Construction", "url": "https://www.blackcat.qa", "tier": "Tier B (EPC)"}
 ]
 
 def check_portal(source):

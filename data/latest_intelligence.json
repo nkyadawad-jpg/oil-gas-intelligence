@@ -1,6 +1,6 @@
 {
-  "syncTimestamp": "02-Sep-2026 02:01 AST",
-  "syncTimestampIso": "2026-09-01T23:01:59.458815+00:00",
+  "syncTimestamp": "02-Sep-2026 02:11 AST",
+  "syncTimestampIso": "2026-09-01T23:11:44.972192+00:00",
   "totalProjectsMonitored": 43,
   "verifiedHotLeads": 11,
   "openPipelineValuation": 4850000,
@@ -12,74 +12,74 @@
   "icvGrade": "Grade A (Certified)",
   "sources": [
     {
-      "name": "QatarEnergy Mushtaryat E-Procurement Portal",
-      "url": "https://portal.qatarenergy.qa",
+      "name": "QatarEnergy Official State Portal",
+      "url": "https://www.qatarenergy.qa",
       "tier": "Tier A (State)",
-      "status": "Active (Verified)",
-      "checkedAt": "02-Sep-2026 02:01 AST"
+      "status": "Active (200 OK)",
+      "checkedAt": "02-Sep-2026 02:11 AST"
     },
     {
-      "name": "QatarEnergy LNG Supplier & Tender Notices",
+      "name": "QatarEnergy LNG Official Supplier Notices",
       "url": "https://www.qatarenergylng.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "02-Sep-2026 02:01 AST"
+      "checkedAt": "02-Sep-2026 02:11 AST"
     },
     {
-      "name": "Pearl GTL / Shell Contractor Portal",
-      "url": "https://www.shell.com.qa",
-      "tier": "Tier A (Major JV)",
-      "status": "Active (200 OK)",
-      "checkedAt": "02-Sep-2026 02:01 AST"
-    },
-    {
-      "name": "Tawteen In-Country Value (ICV) Program",
-      "url": "https://www.icv.qa",
-      "tier": "Tier A (Localization)",
-      "status": "Active (Verified)",
-      "checkedAt": "02-Sep-2026 02:01 AST"
-    },
-    {
-      "name": "Ministry of Finance Monaqasat Public Tenders",
-      "url": "https://monaqasat.mof.gov.qa",
-      "tier": "Tier A (Government)",
-      "status": "Active (Verified)",
-      "checkedAt": "02-Sep-2026 02:01 AST"
-    },
-    {
-      "name": "QAFCO Procurement (SAP Ariba Sourcing)",
+      "name": "QAFCO Fertilizer Official Procurement",
       "url": "https://www.qafco.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "02-Sep-2026 02:01 AST"
+      "checkedAt": "02-Sep-2026 02:11 AST"
     },
     {
-      "name": "Q-Chem / RLOC Supplier Registry",
+      "name": "Q-Chem / RLOC Chemical Portal",
       "url": "https://www.qchem.com.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "02-Sep-2026 02:01 AST"
+      "checkedAt": "02-Sep-2026 02:11 AST"
     },
     {
-      "name": "DOPET Disclosures & Subcontracts",
+      "name": "WOQOD Commercial Distribution Portal",
+      "url": "https://www.woqod.com",
+      "tier": "Tier A (Distribution)",
+      "status": "Active (200 OK)",
+      "checkedAt": "02-Sep-2026 02:11 AST"
+    },
+    {
+      "name": "DOPET Engineering & Contracting Portal",
       "url": "https://www.dopet.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "02-Sep-2026 02:01 AST"
+      "checkedAt": "02-Sep-2026 02:11 AST"
     },
     {
-      "name": "QCON Turnaround Notices",
+      "name": "QCON Turnaround & Construction Disclosures",
       "url": "https://www.qcon.com.qa",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "02-Sep-2026 02:01 AST"
+      "checkedAt": "02-Sep-2026 02:11 AST"
     },
     {
-      "name": "Medgulf Construction Procurement",
+      "name": "TRAGS Electrical & Engineering Qatar",
+      "url": "https://www.tragsqatar.com",
+      "tier": "Tier B (EPC)",
+      "status": "Active (200 OK)",
+      "checkedAt": "02-Sep-2026 02:11 AST"
+    },
+    {
+      "name": "Medgulf Construction Official Site",
       "url": "https://www.medgulfconstruction.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "02-Sep-2026 02:01 AST"
+      "checkedAt": "02-Sep-2026 02:11 AST"
+    },
+    {
+      "name": "Blackcat Engineering & Construction",
+      "url": "https://www.blackcat.qa",
+      "tier": "Tier B (EPC)",
+      "status": "Active (Verified)",
+      "checkedAt": "02-Sep-2026 02:11 AST"
     }
   ]
 }
