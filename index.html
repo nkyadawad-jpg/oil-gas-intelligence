@@ -3,9 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0" />
   <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
+  <meta http-equiv="Expires" content="Wed, 11 Jan 1984 05:00:00 GMT" />
+  <script>
+    // Universal cache killer & security purge: ensures web app is 100% free open on all devices
+    try {
+      sessionStorage.setItem('qatar_radar_authenticated', 'true');
+      localStorage.setItem('qatar_radar_authenticated_device', 'true');
+    } catch(e) {}
+    function purgeLegacyLock() {
+      const lockEl = document.getElementById('securityLockOverlay');
+      if (lockEl) lockEl.remove();
+      if (document.body) {
+        document.body.classList.remove('overflow-hidden');
+        document.body.style.overflow = 'auto';
+      }
+    }
+    purgeLegacyLock();
+    document.addEventListener('DOMContentLoaded', purgeLegacyLock);
+    window.addEventListener('load', purgeLegacyLock);
+    setInterval(purgeLegacyLock, 250);
+  </script>
   <title>Qatar O&G Opportunity Radar | Sales Intelligence Command Center</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -156,7 +175,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">05-Sep-2026 14:42 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">05-Sep-2026 14:45 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -2342,32 +2361,6 @@
     function closeDataAuditModal() {
       const modal = document.getElementById('dataAuditModal');
       if (modal) modal.classList.add('hidden');
-    }
-
-    function saveTargetConfig(e) {
-      e.preventDefault();
-      const inKey = document.getElementById('inputSecurityKey');
-      const inSecret = document.getElementById('inputMasterSecretPin');
-
-      const newKey = inKey ? inKey.value.trim() : '';
-      const secretPin = inSecret ? inSecret.value.trim() : '';
-
-      if (!newKey) {
-        alert("Please enter a new Access Security Password Key.");
-        return;
-      }
-
-      if (secretPin !== "1989") {
-        alert("❌ Master Authorization Failed!\n\nYou must enter the valid Master Secret Code to authorize changing the access password key.\n\nPassword key was NOT modified.");
-        if (inKey) inKey.value = "";
-        if (inSecret) inSecret.value = "";
-        return;
-      }
-
-      userSettings.securityKey = newKey;
-      saveSettings();
-      closeTargetConfigModal();
-      alert("✅ Master Authorization Verified!\n\nAccess Security Password Key updated successfully!");
     }
 
     // ==========================================
