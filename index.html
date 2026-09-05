@@ -220,7 +220,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">02-Sep-2026 02:23 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">05-Sep-2026 13:20 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -432,12 +432,12 @@
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-xs text-slate-400 font-medium">Imminent Shutdowns</p>
-                <h3 class="text-2xl font-black text-orange-400 mt-1">5 Plants</h3>
+                <h3 class="text-2xl font-black text-orange-400 mt-1" id="kpiImminentShutdownCount">5 Plants</h3>
               </div>
-              <span class="bg-orange-500/20 text-orange-400 border border-orange-500/30 text-xs px-2 py-0.5 rounded font-bold">&lt; 90 Days</span>
+              <span class="bg-orange-500/20 text-orange-400 border border-orange-500/30 text-xs px-2 py-0.5 rounded font-bold" id="kpiShutdownWindowTag">&lt; 125 Days</span>
             </div>
             <p class="text-[11px] text-slate-400 mt-2">Immediate replacement window for valves, flame arrestors, and pump spares.</p>
-            <div class="text-[11px] text-slate-300 font-medium mt-1">Next: QAFCO-4 Ammonia (<span class="text-orange-300 font-bold">47 Days</span>)</div>
+            <div class="text-[11px] text-slate-300 font-medium mt-1" id="kpiNextShutdownContainer">Next: <strong class="text-white" id="kpiNextShutdownPlant">QAFCO-4 Ammonia</strong> (<span id="kpiNextShutdownDays" class="text-orange-300 font-bold">40 Days</span>)</div>
           </div>
         </div>
 
@@ -615,11 +615,17 @@
               <i class="fa-solid fa-clock-rotate-left text-orange-400"></i>
               Qatar Plant Shutdown & Turnaround Radar
             </h3>
-            <p class="text-xs text-slate-400 mt-0.5">High-velocity replacement opportunities for Valves, Trillium Pump Spares, Flame Arrestors & Gauges</p>
+            <p class="text-xs text-slate-400 mt-0.5">Real-time daily countdown engine • Automatically reduces remaining days day-by-day as scheduled dates approach</p>
           </div>
-          <div class="bg-orange-500/10 border border-orange-500/30 px-3.5 py-1.5 rounded-lg text-xs text-orange-300 font-medium flex items-center gap-2">
-            <i class="fa-solid fa-triangle-exclamation text-orange-400"></i>
-            Rule: Approach maintenance contractors 45-90 days BEFORE shutdown start.
+          <div class="flex items-center gap-3 flex-wrap">
+            <div class="bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800 text-xs text-slate-300 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              <span class="font-mono text-emerald-300 font-bold">Real-time Daily Date Math Active</span>
+            </div>
+            <div class="bg-orange-500/10 border border-orange-500/30 px-3.5 py-1.5 rounded-lg text-xs text-orange-300 font-medium flex items-center gap-2">
+              <i class="fa-solid fa-triangle-exclamation text-orange-400"></i>
+              Rule: Approach maintenance contractors 45-90 days BEFORE shutdown start.
+            </div>
           </div>
         </div>
 
@@ -1368,6 +1374,33 @@
   <!-- JAVASCRIPT APPLICATION CORE -->
   <script>
     // ==========================================
+    // REAL-TIME SHUTDOWN & PIPELINE DATE ENGINE
+    // ==========================================
+    function calcDaysToShutdown(dateStr) {
+      if (!dateStr) return 0;
+      const monthMap = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
+      let targetDate;
+      const parts = dateStr.trim().split('-');
+      if (parts.length === 3 && monthMap.hasOwnProperty(parts[1].toLowerCase())) {
+        const day = parseInt(parts[0], 10);
+        const year = parseInt(parts[2], 10);
+        targetDate = new Date(year, monthMap[parts[1].toLowerCase()], day);
+      } else {
+        targetDate = new Date(dateStr);
+      }
+
+      if (isNaN(targetDate.getTime())) return 0;
+
+      const now = new Date();
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const target = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate());
+
+      const diffMs = target - today;
+      const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+      return Math.max(0, diffDays);
+    }
+
+    // ==========================================
     // INITIAL QATAR OIL & GAS DATASET
     // ==========================================
     const DEFAULT_OPPORTUNITIES = [
@@ -1662,7 +1695,7 @@
     ];
 
     // ==========================================
-    // SHUTDOWN RADAR DATASET
+    // SHUTDOWN RADAR DATASET (REAL-TIME DYNAMIC COUNTDOWN)
     // ==========================================
     const SHUTDOWN_DATA = [
       {
@@ -1673,7 +1706,7 @@
         type: "Major Turnaround",
         expectedStart: "15-Oct-2026",
         expectedEnd: "05-Nov-2026",
-        daysToShutdown: 47,
+        daysToShutdown: calcDaysToShutdown("15-Oct-2026"),
         contractor: "DOPET & QCON",
         equipment: "Syngas Loop, Waste Heat Boilers, Synthesis Converter",
         productFit: "High: Emerson Gate Valves, Trillium Pump Spares, Ashcroft Gauges",
@@ -1687,7 +1720,7 @@
         type: "Scheduled Overhaul",
         expectedStart: "01-Nov-2026",
         expectedEnd: "25-Nov-2026",
-        daysToShutdown: 64,
+        daysToShutdown: calcDaysToShutdown("01-Nov-2026"),
         contractor: "QCON Turnaround Team",
         equipment: "Cryogenic MCHE, AGRU Columns, Refrigerant Compressors",
         productFit: "High: ADAMS Severe Service Valves, Protectoseal Vents, ASCO Solenoids",
@@ -1701,7 +1734,7 @@
         type: "Catalyst & Reactor Maintenance",
         expectedStart: "10-Dec-2026",
         expectedEnd: "22-Dec-2026",
-        daysToShutdown: 103,
+        daysToShutdown: calcDaysToShutdown("10-Dec-2026"),
         contractor: "Medgulf & Madina Group",
         equipment: "Loop Reactor, Polymerization Feed, Fluff Silos",
         productFit: "High: Protectoseal Flame Arrestors, Westlock Positioners",
@@ -1715,7 +1748,7 @@
         type: "Cracker Quench Overhaul",
         expectedStart: "18-Nov-2026",
         expectedEnd: "02-Dec-2026",
-        daysToShutdown: 81,
+        daysToShutdown: calcDaysToShutdown("18-Nov-2026"),
         contractor: "Madina Group",
         equipment: "Quench Towers, Pyrolysis Gasoline Pumps, Transfer Line Valves",
         productFit: "High: Trillium Pump Spares, Emerson Ball Valves",
@@ -1729,7 +1762,7 @@
         type: "Gas Separation Revamp",
         expectedStart: "05-Jan-2027",
         expectedEnd: "20-Jan-2027",
-        daysToShutdown: 129,
+        daysToShutdown: calcDaysToShutdown("05-Jan-2027"),
         contractor: "Blackcat & TRAGS",
         equipment: "3-Phase Separators, Gas Lift Manifold, Relief Flare",
         productFit: "High: Emerson Gate/Ball Valves, Ashcroft Pressure Gauges",
@@ -2043,6 +2076,23 @@
       if (kpiTotCount) kpiTotCount.innerText = `${totalLeads} active scopes`;
       if (kpiHighPot) kpiHighPot.innerText = hotCount;
       if (kpiWatch) kpiWatch.innerText = Math.max(0, totalLeads - hotCount);
+
+      // 4.5 Command Center KPI Card 4 (Real-Time Shutdown Countdown)
+      if (typeof SHUTDOWN_DATA !== 'undefined' && SHUTDOWN_DATA.length > 0) {
+        SHUTDOWN_DATA.forEach(s => {
+          s.daysToShutdown = calcDaysToShutdown(s.expectedStart);
+        });
+        SHUTDOWN_DATA.sort((a, b) => a.daysToShutdown - b.daysToShutdown);
+        const nearest = SHUTDOWN_DATA[0];
+        const nextPlantEl = document.getElementById('kpiNextShutdownPlant');
+        const nextDaysEl = document.getElementById('kpiNextShutdownDays');
+        const countEl = document.getElementById('kpiImminentShutdownCount');
+        if (nearest) {
+          if (nextPlantEl) nextPlantEl.innerText = `${nearest.client} ${nearest.unit}`;
+          if (nextDaysEl) nextDaysEl.innerText = `${nearest.daysToShutdown} Days`;
+        }
+        if (countEl) countEl.innerText = `${SHUTDOWN_DATA.length} Plants`;
+      }
 
       // 5. Product Revenue Breakdown Calculations
       let sumValves = 0, sumInst = 0, sumSolenoids = 0, sumFlame = 0, sumPumps = 0, sumMonitoring = 0;
@@ -2618,23 +2668,52 @@
     }
 
     // ==========================================
-    // RENDER SHUTDOWN RADAR (TAB 3)
+    // RENDER SHUTDOWN RADAR (TAB 3 - DYNAMIC REAL-TIME DAILY COUNTDOWN)
     // ==========================================
     function renderShutdownCards() {
       const container = document.getElementById('shutdownCardsContainer');
       if (!container) return;
 
-      container.innerHTML = SHUTDOWN_DATA.map(s => `
-        <div class="glass-panel p-5 rounded-xl border border-slate-700 hover:border-orange-500/60 transition space-y-4 relative">
+      // Recalculate daysToShutdown live as current date approaches expected start date
+      SHUTDOWN_DATA.forEach(s => {
+        s.daysToShutdown = calcDaysToShutdown(s.expectedStart);
+      });
+      SHUTDOWN_DATA.sort((a, b) => a.daysToShutdown - b.daysToShutdown);
+
+      container.innerHTML = SHUTDOWN_DATA.map(s => {
+        const days = s.daysToShutdown;
+        let badgeStyle = 'bg-amber-500/20 text-amber-300 border-amber-500/40';
+        let boxBorder = 'border-orange-500/40';
+        let tagText = '🟠 UPCOMING TURNAROUND';
+
+        if (days <= 45) {
+          badgeStyle = 'bg-red-500/20 text-red-300 border-red-500/50 animate-pulse';
+          boxBorder = 'border-red-500/60 shadow-lg shadow-red-950/40';
+          tagText = '🔥 IMMINENT REPLACEMENT WINDOW';
+        } else if (days <= 75) {
+          badgeStyle = 'bg-amber-500/20 text-amber-300 border-amber-500/40';
+          boxBorder = 'border-amber-500/50';
+          tagText = '⚡ ACTIVE PRE-SHUTDOWN SPECS';
+        } else {
+          badgeStyle = 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30';
+          boxBorder = 'border-cyan-500/40';
+          tagText = '📅 SCHEDULED OVERHAUL';
+        }
+
+        return `
+        <div class="glass-panel p-5 rounded-xl border border-slate-700 hover:border-orange-500/60 transition space-y-4 relative group">
           <div class="flex justify-between items-start">
             <div>
-              <span class="text-xs bg-orange-500/20 text-orange-400 border border-orange-500/30 px-2 py-0.5 rounded font-bold">${s.id}</span>
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-xs bg-orange-500/20 text-orange-400 border border-orange-500/30 px-2 py-0.5 rounded font-bold">${s.id}</span>
+                <span class="text-[10px] ${badgeStyle} px-2 py-0.5 rounded font-bold border">${tagText}</span>
+              </div>
               <h4 class="font-bold text-base text-white mt-1.5">${s.client} - ${s.unit}</h4>
               <p class="text-xs text-slate-400"><i class="fa-solid fa-location-dot text-red-400 mr-1"></i>${s.facility} Industrial City</p>
             </div>
-            <div class="text-center bg-slate-950 p-2.5 rounded-lg border border-orange-500/40">
-              <div class="text-xl font-black text-orange-400">${s.daysToShutdown}</div>
-              <div class="text-[10px] text-slate-400 uppercase font-semibold">Days Left</div>
+            <div class="text-center bg-slate-950 p-2.5 rounded-lg border ${boxBorder} min-w-[80px] shrink-0">
+              <div class="text-2xl font-black ${days <= 45 ? 'text-red-400' : 'text-orange-400'}">${days}</div>
+              <div class="text-[9px] text-slate-400 uppercase font-bold tracking-wider">Days Left</div>
             </div>
           </div>
 
@@ -2657,11 +2736,15 @@
             </div>
           </div>
 
-          <div class="p-2.5 bg-qatar/20 border border-qatar/40 rounded text-[11px] text-amber-200">
-            <strong>Strategic Next Step:</strong> ${s.recommendedAction}
+          <div class="p-2.5 bg-qatar/20 border border-qatar/40 rounded text-[11px] text-amber-200 flex items-start gap-2">
+            <i class="fa-solid fa-compass text-qatar-gold mt-0.5"></i>
+            <div>
+              <strong class="text-white">Strategic Next Step:</strong> ${s.recommendedAction}
+            </div>
           </div>
         </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
     // ==========================================
