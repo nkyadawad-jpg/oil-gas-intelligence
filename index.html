@@ -65,6 +65,7 @@
       40%, 80% { transform: translateX(8px); }
     }
     .animate-shake { animation: shake 0.4s ease-in-out; }
+    .hidden { display: none !important; }
   </style>
 </head>
 <body class="bg-radar-bg text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-qatar selection:text-white w-full max-w-full overflow-x-hidden">
@@ -220,7 +221,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">05-Sep-2026 14:27 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">05-Sep-2026 14:32 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -2331,10 +2332,16 @@
       const localAuth = localStorage.getItem('qatar_radar_authenticated_device');
 
       if (sessionAuth === 'true' || localAuth === 'true') {
-        if (overlay) overlay.classList.add('hidden');
+        if (overlay) {
+          overlay.classList.add('hidden');
+          overlay.style.display = 'none';
+        }
         document.body.classList.remove('overflow-hidden');
       } else {
-        if (overlay) overlay.classList.remove('hidden');
+        if (overlay) {
+          overlay.classList.remove('hidden');
+          overlay.style.display = 'flex';
+        }
         document.body.classList.add('overflow-hidden');
         setTimeout(() => {
           document.getElementById('securityPassInput')?.focus();
@@ -2361,8 +2368,6 @@
         "1989",
         "QATAR2026",
         "QATAR",
-        "PETROCON2026",
-        "PETROCON",
         "OILGAS2026",
         "ADMIN",
         "ADMIN2026",
@@ -2380,9 +2385,11 @@
         const overlay = document.getElementById('securityLockOverlay');
         if (overlay) {
           overlay.classList.add('hidden');
+          overlay.style.display = 'none';
         }
         document.body.classList.remove('overflow-hidden');
         if (err) err.classList.add('hidden');
+        if (input) input.value = '';
       } else {
         if (err) err.classList.remove('hidden');
         const container = input?.closest('.glass-panel');
@@ -2434,6 +2441,28 @@
     function closeTargetConfigModal() {
       const modal = document.getElementById('targetConfigModal');
       if (modal) modal.classList.add('hidden');
+    }
+
+    function saveTargetConfig(e) {
+      if (e) e.preventDefault();
+      const inKey = document.getElementById('inputSecurityKey');
+      const inSecret = document.getElementById('inputMasterSecretPin');
+
+      const newKey = inKey ? inKey.value.trim() : '';
+      const masterPin = inSecret ? inSecret.value.trim() : '';
+
+      if (masterPin === "1989" || masterPin.toUpperCase() === "ASHFAN2026" || masterPin.toUpperCase() === "TERMINAL2026") {
+        if (newKey !== "") {
+          userSettings.securityKey = newKey;
+          saveSettings();
+          alert("Access Security Password Key updated successfully!");
+          closeTargetConfigModal();
+        } else {
+          alert("Please enter a valid password key.");
+        }
+      } else {
+        alert("Invalid Master Authorization Secret Code. Permission denied.");
+      }
     }
 
     function openOemPlaybookModal() {
