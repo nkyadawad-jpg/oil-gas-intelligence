@@ -102,14 +102,8 @@
               <i class="fa-solid fa-eye text-xs" id="passEyeIcon"></i>
             </button>
           </div>
-          <div class="mt-2 text-[11px] text-slate-400 flex items-center justify-between bg-slate-900/80 p-2 rounded-lg border border-slate-800">
-            <span>Default Key: <code class="text-amber-300 font-mono font-bold">TERMINAL2026</code> <span class="text-slate-500">(Master: 1989)</span></span>
-            <button type="button" onclick="autoFillDefaultPass()" class="text-cyan-400 hover:text-cyan-300 font-bold underline text-[11px] flex items-center gap-1">
-              <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i> Auto-Fill Key
-            </button>
-          </div>
           <p id="lockErrorMessage" class="text-xs text-red-400 mt-1.5 hidden font-medium flex items-center gap-1">
-            <i class="fa-solid fa-triangle-exclamation"></i> Incorrect security password key. Please enter TERMINAL2026 or Master Code 1989.
+            <i class="fa-solid fa-triangle-exclamation"></i> Incorrect security password key. Please try again.
           </p>
         </div>
 
@@ -226,7 +220,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">05-Sep-2026 14:23 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">05-Sep-2026 14:27 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -2201,7 +2195,7 @@
     let userSettings = JSON.parse(localStorage.getItem('qatar_user_settings')) || {
       monthlyTarget: 2000000,
       achievedSales: 1250000,
-      securityKey: "TERMINAL2026"
+      securityKey: "ASHFAN2026"
     };
     let selectedLeadForOutreach = opportunities[0];
     let currentSort = { column: 'score', asc: false };
@@ -2348,20 +2342,6 @@
       }
     }
 
-    function autoFillDefaultPass() {
-      const input = document.getElementById('securityPassInput');
-      if (input) {
-        input.value = "TERMINAL2026";
-        input.type = "text";
-        const icon = document.getElementById('passEyeIcon');
-        if (icon) {
-          icon.classList.remove('fa-eye');
-          icon.classList.add('fa-eye-slash');
-        }
-      }
-      unlockSecurityGate();
-    }
-
     function unlockSecurityGate(e) {
       if (e) e.preventDefault();
       const input = document.getElementById('securityPassInput');
@@ -2370,15 +2350,15 @@
       const pass = input ? input.value.trim() : '';
       const passClean = pass.toUpperCase();
 
-      const configuredKey = (userSettings.securityKey || "TERMINAL2026").trim().toUpperCase();
+      const configuredKey = (userSettings.securityKey || "ASHFAN2026").trim().toUpperCase();
 
       const validKeys = [
         configuredKey,
+        "ASHFAN2026",
+        "ASHFAN",
         "TERMINAL2026",
         "TERMINAL",
         "1989",
-        "ASHFAN2026",
-        "ASHFAN",
         "QATAR2026",
         "QATAR",
         "PETROCON2026",
@@ -2394,13 +2374,12 @@
         if (remember) {
           localStorage.setItem('qatar_radar_authenticated_device', 'true');
         }
+        userSettings.securityKey = "ASHFAN2026";
+        saveSettings();
+
         const overlay = document.getElementById('securityLockOverlay');
         if (overlay) {
-          overlay.classList.add('opacity-0');
-          setTimeout(() => {
-            overlay.classList.add('hidden');
-            overlay.classList.remove('opacity-0');
-          }, 400);
+          overlay.classList.add('hidden');
         }
         document.body.classList.remove('overflow-hidden');
         if (err) err.classList.add('hidden');
