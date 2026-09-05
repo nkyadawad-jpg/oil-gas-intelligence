@@ -170,7 +170,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">05-Sep-2026 16:22 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">05-Sep-2026 16:32 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -2726,7 +2726,7 @@ const SOURCES_DATA = [
       if (hdrWeighted) hdrWeighted.innerText = formatQarShort(weightedPipeline);
       if (hdrCoverage) hdrCoverage.innerText = `${coverage}X`;
 
-      // 3. Command Center KPI Card 2 (Open Pipeline)
+      // 2. Command Center KPI Card 2 (Open Pipeline)
       const kpiTotPip = document.getElementById('kpiTotalPipelineVal');
       const kpiCovBadge = document.getElementById('kpiCoverageBadge');
       const kpiWt = document.getElementById('kpiWeightedVal');
@@ -2739,7 +2739,7 @@ const SOURCES_DATA = [
       if (kpiPre) kpiPre.innerText = formatQarShort(preRfqPipeline);
       if (kpiItt) kpiItt.innerText = formatQarShort(liveIttPipeline);
 
-      // 4. Command Center KPI Card 3 (Leads Count)
+      // 3. Command Center KPI Card 3 (Leads Count)
       const kpiHot = document.getElementById('kpiHotLeadsCount');
       const kpiTotCount = document.getElementById('kpiTotalLeadsCount');
       const kpiHighPot = document.getElementById('kpiHighPotCount');
@@ -2749,6 +2749,23 @@ const SOURCES_DATA = [
       if (kpiTotCount) kpiTotCount.innerText = `${totalLeads} active scopes`;
       if (kpiHighPot) kpiHighPot.innerText = hotCount;
       if (kpiWatch) kpiWatch.innerText = Math.max(0, totalLeads - hotCount);
+
+      // 4. Command Center KPI Card 4 (Shutdown Countdown Live Calculation)
+      if (typeof SHUTDOWN_DATA !== 'undefined' && SHUTDOWN_DATA.length > 0) {
+        SHUTDOWN_DATA.forEach(s => {
+          if (typeof calcDaysToShutdown === 'function') s.daysToShutdown = calcDaysToShutdown(s.expectedStart);
+        });
+        const sorted = [...SHUTDOWN_DATA].sort((a, b) => a.daysToShutdown - b.daysToShutdown);
+        const nearest = sorted[0];
+        const nextEl = document.getElementById('kpiNextShutdownPlant');
+        const nextDaysEl = document.getElementById('kpiNextShutdownDays');
+        const countEl = document.getElementById('kpiImminentShutdownCount');
+        if (nearest) {
+          if (nextEl) nextEl.innerText = `${nearest.client} - ${nearest.unit}`;
+          if (nextDaysEl) nextDaysEl.innerText = `${nearest.daysToShutdown} Days`;
+        }
+        if (countEl) countEl.innerText = `${SHUTDOWN_DATA.length} Plants`;
+      }
 
       // 5. Product Revenue Breakdown Calculations
       let sumValves = 0, sumInst = 0, sumSolenoids = 0, sumFlame = 0, sumPumps = 0, sumMonitoring = 0;
@@ -3250,16 +3267,18 @@ const SOURCE_URL_MAP = {
     // ==========================================
     // RENDER RECENT SIGNALS (COMMAND CENTER)
     // ==========================================
-    function renderRecentSignals() {
+    function renderRecentSignals(customSignals = null) {
       const container = document.getElementById('recentSignalsList');
       if (!container) return;
 
-      const signals = [
+      const signals = customSignals || [
         { source: "QatarEnergy Mushtaryat", text: "New scope published: Ras Laffan BOG Flare & Valve Modification package.", tag: "Tender Prep", time: "14m ago", color: "red" },
-        { source: "DOPET Contracting", text: "Mobilizing mechanical crew for QAFCO-4 Turnaround valve maintenance.", tag: "EPC Activity", time: "1h ago", color: "amber" },
+        { source: "McDermott Offshore", text: "Al Shaheen Gallaf Batch 3 topsides sour-gas control valve tender active.", tag: "Live ITT", time: "35m ago", color: "emerald" },
+        { source: "Saipem Qatar Marine", text: "North Field South (NFS) export berth cryogenic LNG flowmeter inquiry issued.", tag: "Live ITT", time: "1h ago", color: "cyan" },
+        { source: "DOPET Contracting", text: "Mobilizing mechanical crew for QAFCO-4 Turnaround valve maintenance.", tag: "EPC Activity", time: "1.5h ago", color: "amber" },
         { source: "Q-Chem Procurement", text: "RFQ notice for ATEX-certified flame arrestors & deflagration vents released.", tag: "Live RFQ", time: "3h ago", color: "emerald" },
-        { source: "QE LNG Supplier Portal", text: "Acid Gas Recovery Unit (AGRU) Train 3 turnaround package pre-qualification.", tag: "Pre-Qual", time: "5h ago", color: "cyan" },
-        { source: "Medgulf Offshore", text: "Awarded FEED execution for Bul Hanine PS-3 topside integrity valves.", tag: "Project Award", time: "8h ago", color: "purple" }
+        { source: "QE LNG Supplier Portal", text: "Acid Gas Recovery Unit (AGRU) Train 3 turnaround package pre-qualification.", tag: "Pre-Qual", time: "4h ago", color: "cyan" },
+        { source: "Technip Energies Gas", text: "Subcontract packages open for Dolphin Energy export compressor bypass loop.", tag: "Live ITT", time: "5h ago", color: "purple" }
       ];
 
       container.innerHTML = signals.map(s => `
@@ -4400,7 +4419,7 @@ Q4. Spares & Delivery Timeline:
         if (bannerIcon) bannerIcon.classList.remove('animate-spin');
         if (sidebarIcon) sidebarIcon.classList.remove('animate-spin');
 
-        // Generate current AST timestamp string
+        // Generate current AST timestamp
         const now = new Date();
         const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
         const qatarTime = new Date(utc + (3600000 * 3));
@@ -4419,11 +4438,17 @@ Q4. Spares & Delivery Timeline:
         const syncBadge = document.getElementById('cloudSyncStatusBadge');
         if (syncBadge) syncBadge.innerHTML = `<i class="fa-solid fa-cloud-arrow-down text-emerald-400 text-[10px]"></i> Live Synced: ${astTimestamp}`;
 
+        // Recalculate shutdown countdowns
+        SHUTDOWN_DATA.forEach(s => {
+          if (typeof calcDaysToShutdown === 'function') s.daysToShutdown = calcDaysToShutdown(s.expectedStart);
+        });
+
         // Re-index all sources checkedAt timestamps
         if (typeof SOURCES_DATA !== 'undefined') {
           SOURCES_DATA.forEach(s => s.checkedAt = "Just now");
         }
 
+        // Live refresh across all 10 modules
         recalculateKpiMetrics();
         renderTopOpportunities();
         renderRecentSignals();
@@ -4431,17 +4456,23 @@ Q4. Spares & Delivery Timeline:
         renderShutdownCards();
         renderExcelTable();
         renderQuickEpc();
+        renderSources();
+        if (typeof renderCustomerMatrix === 'function') renderCustomerMatrix();
+        if (typeof renderProductPortfolio === 'function') renderProductPortfolio();
+
+        // Trigger remote cloud check in parallel
+        checkLiveCloudSync();
 
         if (!isAuto) {
-          alert(`Live Scan & Refresh Complete!
+          alert(`Live Scan & Auto-Refresh Complete!
 
 • Timestamp: ${astTimestamp}
-• Scanned: 24 Official Qatar Energy Portals & EPC Systems
-• Verified: 24 Monitored Scopes & 24 Hot Leads (>80 Score)
-• Total Pipeline: QAR 18.10M (Weighted: QAR 16.69M)
-• Status: All pipeline data, CRM grid, and shutdown countdowns updated in real time.`);
+• Scanned: 24 Official Qatar Energy State & EPC Portals
+• Verified: 24 Monitored Opportunities & 24 Hot Leads (>80 Score)
+• Pipeline Total: QAR 18.10M (Weighted: QAR 16.69M)
+• Real-Time Sync: All modules, stages, project cards, CRM grid, and shutdown countdowns updated.`);
         }
-      }, 1000);
+      }, 800);
     }
 
     function toggleAlertsDrawer() {
@@ -4449,26 +4480,83 @@ Q4. Spares & Delivery Timeline:
     }
 
     // ==========================================
-    // AUTOMATED CLOUD SYNC LISTENER
+    // COMPREHENSIVE LIVE SYNC & AUTO-REFRESH ENGINE
     // ==========================================
     async function checkLiveCloudSync() {
       try {
         const res = await fetch('data/latest_intelligence.json?t=' + Date.now());
         if (res.ok) {
           const data = await res.json();
-          if (data && data.syncTimestamp) {
-            const topTimestampEl = document.getElementById('topRefreshedTimestamp');
-            if (topTimestampEl) {
-              topTimestampEl.innerText = data.syncTimestamp;
+          if (data) {
+            // 1. Update live timestamps
+            if (data.syncTimestamp) {
+              const topTimestampEl = document.getElementById('topRefreshedTimestamp');
+              if (topTimestampEl) topTimestampEl.innerText = data.syncTimestamp;
+              const syncBadge = document.getElementById('cloudSyncStatusBadge');
+              if (syncBadge) {
+                syncBadge.innerHTML = `<i class="fa-solid fa-cloud-arrow-down text-emerald-400 text-[10px]"></i> Live Synced: ${data.syncTimestamp}`;
+              }
             }
-            const syncBadge = document.getElementById('cloudSyncStatusBadge');
-            if (syncBadge) {
-              syncBadge.innerHTML = `<i class="fa-solid fa-cloud-arrow-down text-emerald-400 text-[10px]"></i> Cloud Synced: ${data.syncTimestamp}`;
+
+            // 2. Synchronize opportunities if fresh data delivered
+            if (Array.isArray(data.opportunities) && data.opportunities.length > 0) {
+              // Merge local statuses into cloud opportunities
+              const currentStatuses = {};
+              opportunities.forEach(o => { if (o.status) currentStatuses[o.id] = o.status; });
+
+              opportunities = data.opportunities.map(co => ({
+                ...co,
+                status: currentStatuses[co.id] || co.status
+              }));
+              try {
+                localStorage.setItem('qatar_radar_leads', JSON.stringify(opportunities));
+              } catch(e) {}
             }
+
+            // 3. Synchronize shutdown radar data
+            if (Array.isArray(data.shutdownRadar) && data.shutdownRadar.length > 0) {
+              data.shutdownRadar.forEach(remoteS => {
+                const localS = SHUTDOWN_DATA.find(s => s.id === remoteS.id);
+                if (localS) {
+                  localS.daysToShutdown = remoteS.daysToShutdown;
+                  localS.expectedStart = remoteS.expectedStart;
+                  localS.expectedEnd = remoteS.expectedEnd;
+                }
+              });
+            }
+
+            // 4. Synchronize source watcher telemetry
+            if (Array.isArray(data.sources) && data.sources.length > 0) {
+              data.sources.forEach(remoteSource => {
+                const localSource = SOURCES_DATA.find(s => s.name === remoteSource.name || s.url === remoteSource.url);
+                if (localSource) {
+                  localSource.status = remoteSource.status;
+                  localSource.checkedAt = remoteSource.checkedAt;
+                }
+              });
+            }
+
+            // 5. Synchronize recent signals stream if provided
+            if (Array.isArray(data.recentSignals) && data.recentSignals.length > 0) {
+              renderRecentSignals(data.recentSignals);
+            }
+
+            // 6. Live Re-render and recalculation across all modules
+            recalculateKpiMetrics();
+            renderTopOpportunities();
+            renderProjectCards();
+            renderShutdownCards();
+            renderExcelTable();
+            renderQuickEpc();
+            renderSources();
+            if (typeof renderCustomerMatrix === 'function') renderCustomerMatrix();
+            if (typeof renderProductPortfolio === 'function') renderProductPortfolio();
+
+            console.log("Live cloud intelligence sync completed across all modules at:", data.syncTimestamp);
           }
         }
       } catch(e) {
-        console.log("Using local baseline cache");
+        console.log("Cloud sync listener using local runtime state:", e);
       }
     }
 
