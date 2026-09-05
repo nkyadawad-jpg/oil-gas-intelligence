@@ -170,7 +170,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">05-Sep-2026 16:12 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">05-Sep-2026 16:22 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -401,7 +401,7 @@
               </h4>
               <p class="text-xs text-slate-400">Real-time allocation calculated dynamically from your CRM opportunities</p>
             </div>
-            <span id="pbTotalPoolVal" class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700 font-mono">Total Opportunity Pool: QAR 4.85M</span>
+            <span id="pbTotalPoolVal" class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700 font-mono">Total Opportunity Pool: QAR 18.10M</span>
           </div>
 
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -505,7 +505,7 @@
                 <i class="fa-solid fa-helmet-safety text-amber-400"></i>
                 Active EPC Projects in Qatar
               </h4>
-              <span class="text-[11px] text-slate-400">10 Monitored EPCs</span>
+              <span class="text-[11px] text-slate-400">20 Monitored EPCs</span>
             </div>
             <div class="space-y-2 max-h-[360px] overflow-y-auto pr-1" id="quickEpcList">
               <!-- EPC items rendered by JS -->
@@ -538,14 +538,21 @@
               <option value="Level 5">Level 5 - Awarded / Spares & Subs</option>
             </select>
             <select id="clientFilter" onchange="filterProjects()" class="bg-slate-900 border border-slate-700 px-3 py-1.5 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500">
-              <option value="all">All Clients</option>
+              <option value="all">All Clients (14 Operators)</option>
               <option value="QatarEnergy">QatarEnergy</option>
               <option value="QatarEnergy LNG">QatarEnergy LNG</option>
               <option value="QAFCO">QAFCO</option>
               <option value="QAPCO">QAPCO</option>
               <option value="Q-Chem">Q-Chem</option>
               <option value="RLOC">RLOC</option>
+              <option value="North Oil Company">North Oil Company (NOC)</option>
+              <option value="Qatar Shell Pearl GTL">Qatar Shell Pearl GTL</option>
+              <option value="Dolphin Energy">Dolphin Energy</option>
+              <option value="Oryx GTL">Oryx GTL</option>
+              <option value="WOQOD">WOQOD</option>
               <option value="QAFAC">QAFAC</option>
+              <option value="UHP">Umm Al Houl Power (UHP)</option>
+              <option value="Mpower">Mpower</option>
             </select>
           </div>
         </div>
@@ -2640,28 +2647,31 @@ const SOURCES_DATA = [
     // ==========================================
     // STATE & CUSTOM SETTINGS MANAGEMENT
     // ==========================================
+    let opportunities = [];
     function loadAndSyncOpportunities() {
-      const stored = localStorage.getItem('qatar_radar_leads');
-      if (!stored) {
-        opportunities = DEFAULT_OPPORTUNITIES.map(item => ({ ...item }));
-        localStorage.setItem('qatar_radar_leads', JSON.stringify(opportunities));
-      } else {
-        try {
+      let leads = DEFAULT_OPPORTUNITIES.map(item => ({ ...item }));
+      try {
+        const stored = localStorage.getItem('qatar_radar_leads');
+        if (stored) {
           const parsed = JSON.parse(stored);
-          if (!Array.isArray(parsed) || parsed.length < DEFAULT_OPPORTUNITIES.length) {
-            opportunities = DEFAULT_OPPORTUNITIES.map(item => ({ ...item }));
-            localStorage.setItem('qatar_radar_leads', JSON.stringify(opportunities));
-          } else {
-            opportunities = parsed;
+          if (Array.isArray(parsed) && parsed.length >= DEFAULT_OPPORTUNITIES.length) {
+            // Keep user local changes if any (like updated status)
+            parsed.forEach(p => {
+              const match = leads.find(l => l.id === p.id);
+              if (match && p.status) match.status = p.status;
+            });
           }
-        } catch (e) {
-          opportunities = DEFAULT_OPPORTUNITIES.map(item => ({ ...item }));
-          localStorage.setItem('qatar_radar_leads', JSON.stringify(opportunities));
         }
+      } catch (e) {
+        console.warn("Storage sync fallback:", e);
       }
+      try {
+        localStorage.setItem('qatar_radar_leads', JSON.stringify(leads));
+      } catch (e) {}
+      opportunities = leads;
       return opportunities;
     }
-    let opportunities = loadAndSyncOpportunities();
+    opportunities = loadAndSyncOpportunities();
     let userSettings = JSON.parse(localStorage.getItem('qatar_user_settings')) || {
       monthlyTarget: 2000000,
       achievedSales: 1250000
@@ -3144,7 +3154,7 @@ const SOURCE_URL_MAP = {
       if (!container) return;
 
       let filtered = [...opportunities];
-      if (filter === 'hot') filtered = filtered.filter(o => o.score >= 90);
+      if (filter === 'hot') filtered = filtered.filter(o => o.score >= 80);
       if (filter === 'shutdown') filtered = filtered.filter(o => o.project.toLowerCase().includes('overhaul') || o.project.toLowerCase().includes('turnaround') || o.project.toLowerCase().includes('replacement') || (o.stageBadge && o.stageBadge.includes('Execution')));
 
       container.innerHTML = filtered.map((opp, idx) => {
@@ -3675,68 +3685,68 @@ const SOURCE_URL_MAP = {
       ras_laffan: {
         title: "Ras Laffan Industrial City (RLIC)",
         subtitle: "Global LNG Capital • North Field East & South Hub",
-        activeProjects: 18,
-        earlySignals: 7,
+        activeProjects: 11,
+        earlySignals: 8,
         shutdowns: 2,
-        epcs: ["DOPET", "QCON", "Medgulf", "Roots Energy"],
-        clients: ["QatarEnergy", "QatarEnergy LNG", "RLOC", "Mpower"],
-        topProducts: "Emerson Cryogenic Ball & Butterfly Valves, ADAMS Severe Service, Protectoseal Flare Arrestors, Westlock Positioners",
-        highlights: "North Field East (NFE) Mega-Trains 1-4 & Boil-Off Gas (BOG) flare revamp packages in active pre-procurement."
+        epcs: ["DOPET", "QCON", "Chiyoda Almana", "Technip Energies", "Saipem", "CCC", "Roots Energy", "Descon"],
+        clients: ["QatarEnergy", "QatarEnergy LNG", "RLOC", "Qatar Shell Pearl GTL", "Dolphin Energy", "Oryx GTL"],
+        topProducts: "Emerson Cryogenic Ball & Butterfly Valves, ADAMS Severe Service, Daniel Ultrasonic Flowmeters, Protectoseal Flare Arrestors, Westlock Positioners",
+        highlights: "North Field East (NFE) Mega-Trains 1-4, NFS Cryogenic Berths, Pearl GTL Paraffin level radar, and BOG flare revamp packages in active procurement."
       },
       mesaieed: {
         title: "Mesaieed Industrial City (MIC)",
-        subtitle: "Downstream Petrochemicals & Refining Hub",
-        activeProjects: 11,
+        subtitle: "Downstream Petrochemicals, Fertilizers & Refining Hub",
+        activeProjects: 8,
         earlySignals: 5,
         shutdowns: 2,
-        epcs: ["DOPET", "TRAGS", "Madina Group", "Al Balagh"],
+        epcs: ["DOPET", "TRAGS", "QCON", "Medgulf", "Madina Group", "Petrofac", "Kent", "HEISCO", "Al Balagh"],
         clients: ["QAFCO", "QAPCO", "Q-Chem", "QAFAC", "QatarEnergy Refinery"],
-        topProducts: "Ashcroft Pressure/Temp Gauges, Protectoseal Silo Flame Arrestors, Trillium Pump Rotating Spares, Emerson Valves",
-        highlights: "QAFCO-7 Ammonia expansion and Q-Chem polyethylene pellet silo deflagration safety schemes currently bidding."
+        topProducts: "Emerson Control Valves, Protectoseal Flame Arrestors, Trillium Pump Spares, Ashcroft Gauges, Continental Disc Rupture Discs, Det-Tronics Flame Detectors",
+        highlights: "QAFCO-7 Ammonia Syngas package, Q-Chem Polyethylene tank vents, QAPCO quench overhauls, and Mesaieed Refinery CCR valve upgrades."
       },
       dukhan: {
-        title: "Dukhan Onshore Oil & Gas Fields",
-        subtitle: "Primary Onshore Upstream Gathering & Processing Hub",
-        activeProjects: 6,
-        earlySignals: 3,
+        title: "Dukhan Onshore Oil Field",
+        subtitle: "Primary Onshore Crude Production & Gas Gathering",
+        activeProjects: 2,
+        earlySignals: 2,
         shutdowns: 1,
-        epcs: ["Blackcat", "TRAGS", "DOPET"],
-        clients: ["QatarEnergy (Upstream Onshore)"],
-        topProducts: "ASCO Explosion-Proof Solenoid Valves, High-Pressure Gate & Check Valves, Ashcroft Solid-Front Duragauges",
-        highlights: "Fahahil and Khatiyah gas lift manifold modernization packages under EPC detailed engineering."
-      },
-      doha: {
-        title: "Doha Energy City & EPC Headquarters",
-        subtitle: "Commercial Decision & Engineering Approval Hub",
-        activeProjects: 5,
-        earlySignals: 8,
-        shutdowns: 0,
-        epcs: ["DOPET HQ", "TRAGS HQ", "Medgulf HQ", "Blackcat HQ", "QCON HQ"],
-        clients: ["QatarEnergy Corporate", "QatarEnergy LNG HQ"],
-        topProducts: "Commercial vendor pre-qualification, Preferred Manufacturer List (PML) approvals, Framework Agreements",
-        highlights: "Procurement managers and lead package engineers stationed in Doha offices for all major upcoming awards."
+        epcs: ["Blackcat", "GDI", "TRAGS"],
+        clients: ["QatarEnergy"],
+        topProducts: "ASCO Explosion-Proof Solenoids, Ashcroft Solid-Front Pressure Gauges, High-Pressure Gate & Choke Valves",
+        highlights: "Dukhan Fahahil Gas Lift manifold modernization & Khatiyah gas gathering multiphase instrumentation."
       },
       offshore: {
-        title: "Offshore Qatar (North Field / Al Shaheen / Bul Hanine)",
-        subtitle: "Offshore Production Platforms & Topside Packages",
-        activeProjects: 9,
-        earlySignals: 4,
-        shutdowns: 1,
-        epcs: ["Medgulf Offshore", "GDI", "DOPET Marine"],
-        clients: ["QatarEnergy Offshore"],
-        topProducts: "Inconel & Duplex Process Ball Valves, Explosion-Proof Instrumentation, ASCO Solenoids",
-        highlights: "Bul Hanine PS-3 topside integrity valve revamp package and Al Shaheen wellhead maintenance ongoing."
-      },
-      industrial_area: {
-        title: "Doha Industrial Area (Fabrication Yards)",
-        subtitle: "Mechanical Skid Fabrication & Valve Automation Workshops",
-        activeProjects: 4,
-        earlySignals: 2,
+        title: "Qatar Offshore (Al Shaheen, Bul Hanine, Maydan Mahzam)",
+        subtitle: "Offshore Crude Production & Topsides Refurbishment",
+        activeProjects: 2,
+        earlySignals: 3,
         shutdowns: 0,
-        epcs: ["DOPET Fab Yard", "QCON Workshop", "Madina Group Yard"],
-        clients: ["Contractor Sub-assemblies"],
-        topProducts: "Westlock Actuator Mounting, Solenoid Manifold Hookups, Valve Spares",
-        highlights: "Local skid assembly yards assembling pre-tested valve manifolds for fast delivery to site."
+        epcs: ["McDermott", "Medgulf", "Saipem", "GDI"],
+        clients: ["North Oil Company (NOC)", "QatarEnergy"],
+        topProducts: "Fisher Sour Gas Control Valves, Emerson 2500# Offshore Ball Valves, High-Pressure Double-Block-and-Bleed Manifolds",
+        highlights: "Al Shaheen Gallaf Batch 3 topsides control valves & Bul Hanine PS-3 topside integrity valve packages."
+      },
+      halul: {
+        title: "Halul Island Offshore Crude Terminal",
+        subtitle: "Strategic Offshore Crude Storage, Blending & Tanker Offloading",
+        activeProjects: 1,
+        earlySignals: 1,
+        shutdowns: 0,
+        epcs: ["Galfar Al Misnad", "Medgulf"],
+        clients: ["QatarEnergy"],
+        topProducts: "Protectoseal Marine-Grade Detonation Arrestors, Breather Vents, Emerson Full-Bore Ball Valves",
+        highlights: "Floating roof crude oil storage tanks environmental vent & P/V relief valve upgrade."
+      },
+      umm_al_houl: {
+        title: "Umm Al Houl & Ras Abu Fontas Utility Hub",
+        subtitle: "Independent Water & Power Plants (IWPP)",
+        activeProjects: 2,
+        earlySignals: 1,
+        shutdowns: 0,
+        epcs: ["Al Muftah", "Roots Energy"],
+        clients: ["Umm Al Houl Power (UHP)", "Mpower"],
+        topProducts: "ADAMS Rubber-Lined Seawater Butterfly Valves, Westlock Digital Valve Actuators, Bourdon Pressure Transmitters",
+        highlights: "Umm Al Houl RO seawater intake expansion & Ras Abu Fontas gas turbine fuel skid valve automation."
       }
     };
 
@@ -4272,55 +4282,54 @@ Q4. Spares & Delivery Timeline:
             <h4 class="text-sm font-bold text-amber-300 flex items-center gap-2">
               <i class="fa-solid fa-bullhorn"></i> Morning Strategic Intelligence Summary
             </h4>
-            <p class="text-xs text-slate-200 mt-1">Qatar market activity is heavily skewed towards Pre-RFQ engineering packages for Ras Laffan flare revamp and Mesaieed chemical shutdowns.</p>
+            <p class="text-xs text-slate-200 mt-1">Qatar market activity is at an all-time peak with <strong>QAR 18.10M</strong> in monitored pipeline opportunities across 24 verified scopes, led by North Field East/South expansions and Mesaieed turnaround packages.</p>
           </div>
 
           <div class="space-y-2">
-            <h5 class="text-xs font-bold text-white uppercase tracking-wider">🎯 Top 5 Revenue Actions for You Today:</h5>
+            <h5 class="text-xs font-bold text-white uppercase tracking-wider">🎯 Top 5 Immediate Revenue Actions:</h5>
             
             <div class="p-2.5 bg-slate-950 rounded-lg border border-slate-800 flex items-start gap-2.5">
               <span class="w-5 h-5 rounded-full bg-red-500/20 text-red-400 font-bold flex items-center justify-center text-xs shrink-0">1</span>
               <div>
-                <strong class="text-white">Contact DOPET (Eng. Tariq Mansour):</strong>
-                <p class="text-slate-300 text-[11px]">Submit Emerson / ASCO valve quotation package for QatarEnergy Ras Laffan BOG Flare modification (#QTR-2026-0089).</p>
+                <strong class="text-white">Engage McDermott Qatar (Al Shaheen Gallaf Batch 3):</strong>
+                <p class="text-slate-300 text-[11px]">Submit Fisher severe service sour-gas control valve package for North Oil Company offshore topsides (#QTR-2026-0125 • QAR 1.48M • Live ITT).</p>
               </div>
             </div>
 
             <div class="p-2.5 bg-slate-950 rounded-lg border border-slate-800 flex items-start gap-2.5">
               <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center text-xs shrink-0">2</span>
               <div>
-                <strong class="text-white">Follow up with QCON Turnaround Team:</strong>
-                <p class="text-slate-300 text-[11px]">Present ADAMS triple-offset severe service valves for QatarEnergy LNG Train 3 AGRU unit overhaul (#QTR-2026-0092).</p>
+                <strong class="text-white">Coordinate with Saipem Qatar Marine Div:</strong>
+                <p class="text-slate-300 text-[11px]">Present Daniel ultrasonic LNG flowmeter & Micro Motion Coriolis packages for North Field South (NFS) export berths (#QTR-2026-0140 • QAR 1.65M • Live ITT).</p>
               </div>
             </div>
 
             <div class="p-2.5 bg-slate-950 rounded-lg border border-slate-800 flex items-start gap-2.5">
               <span class="w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 font-bold flex items-center justify-center text-xs shrink-0">3</span>
               <div>
-                <strong class="text-white">Coordinate Quotation with Quotation Team:</strong>
-                <p class="text-slate-300 text-[11px]">Finalize Protectoseal flame arrestor offer for Medgulf bidding on Q-Chem Mesaieed Silo Package (Due: 18-Sep).</p>
+                <strong class="text-white">Contact DOPET (Eng. Tariq Mansour):</strong>
+                <p class="text-slate-300 text-[11px]">Follow up Emerson / ASCO valve quotation package for QatarEnergy Ras Laffan BOG Flare modification (#QTR-2026-0089 • QAR 1.25M).</p>
               </div>
             </div>
 
             <div class="p-2.5 bg-slate-950 rounded-lg border border-slate-800 flex items-start gap-2.5">
               <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center text-xs shrink-0">4</span>
               <div>
-                <strong class="text-white">Engage Madina Group for QAFCO-4 Turnaround:</strong>
-                <p class="text-slate-300 text-[11px]">Deliver Trillium rotating pump spares catalog 47 days ahead of shutdown window.</p>
+                <strong class="text-white">Meet Technip Energies Gas Div:</strong>
+                <p class="text-slate-300 text-[11px]">Submit ADAMS triple-eccentric rotary valve tender for Dolphin Energy export compressor bypass loop (#QTR-2026-0131 • QAR 1.12M • Live ITT).</p>
               </div>
             </div>
 
             <div class="p-2.5 bg-slate-950 rounded-lg border border-slate-800 flex items-start gap-2.5">
               <span class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 font-bold flex items-center justify-center text-xs shrink-0">5</span>
               <div>
-                <strong class="text-white">TRAGS Instrumentation Alignment:</strong>
-                <p class="text-slate-300 text-[11px]">Submit Ashcroft differential pressure and Bourdon temperature gauge datasheets for QAFCO-7 Ammonia Syngas compressor.</p>
+                <strong class="text-white">Follow up with QCON Turnaround Team:</strong>
+                <p class="text-slate-300 text-[11px]">Finalize ADAMS AGRU valve replacements for QatarEnergy LNG Train 3 scheduled overhaul (#QTR-2026-0092 • QAR 880K • Live ITT).</p>
               </div>
             </div>
           </div>
         </div>
       `;
-
       document.getElementById('dailyBriefingModal').classList.remove('hidden');
     }
 
