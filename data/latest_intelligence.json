@@ -1,6 +1,6 @@
 {
-  "syncTimestamp": "05-Sep-2026 15:22 AST",
-  "syncTimestampIso": "2026-09-05T12:22:01.805204+00:00",
+  "syncTimestamp": "05-Sep-2026 16:12 AST",
+  "syncTimestampIso": "2026-09-05T13:12:13.069129+00:00",
   "totalProjectsMonitored": 54,
   "verifiedHotLeads": 24,
   "openPipelineValuation": 18100000,
@@ -16,168 +16,168 @@
       "url": "https://www.qatarenergy.qa",
       "tier": "Tier A (State)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "QatarEnergy LNG Official Supplier Notices",
       "url": "https://www.qatarenergylng.qa",
       "tier": "Tier A (Operator)",
-      "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "status": "Active (Verified)",
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "QAFCO Fertilizer Official Procurement",
       "url": "https://www.qafco.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "Q-Chem / RLOC Chemical Portal",
       "url": "https://www.qchem.com.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "QAPCO Petrochemical Procurement Portal",
       "url": "https://www.qapco.com",
       "tier": "Tier A (Operator)",
       "status": "Protected (307)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "North Oil Company (NOC) Official Portal",
       "url": "https://www.noc.qa",
       "tier": "Tier A (Offshore Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "Qatar Shell Pearl GTL Official Site",
       "url": "https://www.shell.com.qa",
       "tier": "Tier A (GTL Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "Dolphin Energy Official Qatar Portal",
       "url": "https://www.dolphinenergy.com",
       "tier": "Tier A (Gas Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "Oryx GTL Official Corporate Site",
       "url": "https://www.oryxgtl.com.qa",
       "tier": "Tier A (GTL Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "WOQOD Commercial Distribution Portal",
       "url": "https://www.woqod.com",
       "tier": "Tier A (Distribution)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "QAFAC Methanol Procurement Portal",
       "url": "https://www.qafac.com.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "Umm Al Houl Power (UHP) Portal",
       "url": "https://www.uhp.com.qa",
       "tier": "Tier A (Utility)",
       "status": "Active (Verified)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "Mpower Power Generation Portal",
       "url": "https://www.mpower.com.qa",
       "tier": "Tier A (Utility)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "DOPET Engineering & Contracting Portal",
       "url": "https://www.dopet.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "QCON Turnaround & Construction Disclosures",
       "url": "https://www.qcon.com.qa",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "TRAGS Electrical & Engineering Qatar",
       "url": "https://www.tragsqatar.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "Medgulf Construction Official Site",
       "url": "https://www.medgulfconstruction.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "Blackcat Engineering & Construction",
       "url": "https://www.blackcat.qa",
       "tier": "Tier B (EPC)",
       "status": "Active (Verified)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "Chiyoda Almana Engineering Portal",
       "url": "https://www.chiyodaalmana.com.qa",
       "tier": "Tier B (EPC/FEED)",
       "status": "Active (Verified)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "McDermott Offshore Qatar Site",
       "url": "https://www.mcdermott.com",
       "tier": "Tier B (Offshore EPC)",
       "status": "Protected (403)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "Saipem Qatar Contracting Portal",
       "url": "https://www.saipem.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "Technip Energies Qatar Portal",
       "url": "https://www.technipenergies.com",
       "tier": "Tier B (Mega EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "Consolidated Contractors Company (CCC)",
       "url": "https://www.ccc.net",
       "tier": "Tier B (Mega EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     },
     {
       "name": "Galfar Al Misnad Engineering Qatar",
       "url": "https://www.galfarqatar.com.qa",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 15:22 AST"
+      "checkedAt": "05-Sep-2026 16:12 AST"
     }
   ],
   "shutdownRadar": [
