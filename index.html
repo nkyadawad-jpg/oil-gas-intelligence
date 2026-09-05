@@ -115,17 +115,17 @@
     <div class="hidden xl:flex items-center space-x-6 text-xs bg-slate-950/60 px-4 py-1.5 rounded-lg border border-slate-800">
       <div>
         <span class="text-slate-400">Open Pipeline:</span>
-        <span id="hdrPipelineVal" class="font-bold text-cyan-300 ml-1">QAR 4.85M</span>
+        <span id="hdrPipelineVal" class="font-bold text-cyan-300 ml-1">QAR 15.11M</span>
       </div>
       <div class="h-4 w-px bg-slate-800"></div>
       <div>
         <span class="text-slate-400">Weighted Expected:</span>
-        <span id="hdrWeightedVal" class="font-bold text-amber-300 ml-1">QAR 2.74M</span>
+        <span id="hdrWeightedVal" class="font-bold text-amber-300 ml-1">QAR 13.78M</span>
       </div>
       <div class="h-4 w-px bg-slate-800"></div>
       <div>
         <span class="text-slate-400">Pipeline Coverage:</span>
-        <span id="hdrCoverageVal" class="font-bold text-cyan-400 ml-1">2.4X</span>
+        <span id="hdrCoverageVal" class="font-bold text-cyan-400 ml-1">7.6X</span>
       </div>
     </div>
 
@@ -175,7 +175,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">05-Sep-2026 14:45 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">05-Sep-2026 14:54 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -350,14 +350,14 @@
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-xs text-slate-400 font-medium">Open Pipeline (Sum of Leads)</p>
-                <h3 id="kpiTotalPipelineVal" class="text-2xl font-black text-cyan-300 mt-1">QAR 4.85M</h3>
+                <h3 id="kpiTotalPipelineVal" class="text-2xl font-black text-cyan-300 mt-1">QAR 15.11M</h3>
               </div>
-              <span id="kpiCoverageBadge" class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs px-2 py-0.5 rounded font-bold">2.4X Cov</span>
+              <span id="kpiCoverageBadge" class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs px-2 py-0.5 rounded font-bold">7.6X Cov</span>
             </div>
-            <p class="text-[11px] text-slate-400 mt-2">Weighted Expected Value: <strong id="kpiWeightedVal" class="text-white">QAR 2.74M</strong></p>
+            <p class="text-[11px] text-slate-400 mt-2">Weighted Expected Value: <strong id="kpiWeightedVal" class="text-white">QAR 13.78M</strong></p>
             <div class="text-[11px] text-slate-400 mt-1 flex justify-between">
-              <span>Pre-RFQ Stage: <strong id="kpiPreRfqVal" class="text-amber-300">QAR 3.10M</strong></span>
-              <span>Live ITT: <strong id="kpiLiveIttVal" class="text-emerald-300">QAR 1.75M</strong></span>
+              <span>Pre-RFQ Stage: <strong id="kpiPreRfqVal" class="text-amber-300">QAR 10.86M</strong></span>
+              <span>Live ITT: <strong id="kpiLiveIttVal" class="text-emerald-300">QAR 4.25M</strong></span>
             </div>
           </div>
 
@@ -367,17 +367,17 @@
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-xs text-slate-400 font-medium">Hot Pre-RFQ Opportunities</p>
-                <h3 id="kpiHotLeadsCount" class="text-2xl font-black text-red-400 mt-1">11 Leads</h3>
+                <h3 id="kpiHotLeadsCount" class="text-2xl font-black text-red-400 mt-1">18 Leads</h3>
               </div>
               <span class="bg-red-500/20 text-red-400 border border-red-500/30 text-xs px-2 py-0.5 rounded font-bold animate-pulse">🔥 High Conv</span>
             </div>
             <div class="flex items-center gap-2 mt-3 text-[11px] text-slate-300">
               <span class="text-slate-400">Total Monitored Leads:</span>
-              <span id="kpiTotalLeadsCount" class="font-bold text-white">12 active scopes</span>
+              <span id="kpiTotalLeadsCount" class="font-bold text-white">18 active scopes</span>
             </div>
             <div class="flex justify-between text-[11px] text-slate-400 mt-1">
-              <span>High Potential (&gt;80): <strong id="kpiHighPotCount" class="text-amber-400">11</strong></span>
-              <span>Watchlist: <strong id="kpiWatchlistCount" class="text-slate-300">1</strong></span>
+              <span>High Potential (&gt;80): <strong id="kpiHighPotCount" class="text-amber-400">18</strong></span>
+              <span>Watchlist: <strong id="kpiWatchlistCount" class="text-slate-300">0</strong></span>
             </div>
           </div>
 
@@ -406,7 +406,7 @@
               </h4>
               <p class="text-xs text-slate-400">Real-time allocation calculated dynamically from your CRM opportunities</p>
             </div>
-            <span id="pbTotalPoolVal" class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700 font-mono">Total Opportunity Pool: QAR 4.85M</span>
+            <span id="pbTotalPoolVal" class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700 font-mono">Total Opportunity Pool: QAR 15.11M</span>
           </div>
 
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -2069,37 +2069,8 @@
     // STATE & CUSTOM SETTINGS MANAGEMENT
     // ==========================================
     function loadAndSyncOpportunities() {
-      let localData = null;
-      try {
-        localData = JSON.parse(localStorage.getItem('qatar_radar_leads'));
-      } catch(e) {
-        localData = null;
-      }
-
-      if (!localData || !Array.isArray(localData) || localData.length === 0) {
-        opportunities = [...DEFAULT_OPPORTUNITIES];
-      } else {
-        const existingMap = new Map();
-        localData.forEach(item => {
-          if (item && item.id) existingMap.set(item.id, item);
-        });
-
-        // Always merge all 18 DEFAULT_OPPORTUNITIES items so newly established leads are immediately loaded
-        DEFAULT_OPPORTUNITIES.forEach(defItem => {
-          if (!existingMap.has(defItem.id)) {
-            existingMap.set(defItem.id, defItem);
-          } else {
-            const existing = existingMap.get(defItem.id);
-            existing.value = defItem.value;
-            existing.score = defItem.score;
-            existing.stage = defItem.stage;
-            existing.expectedRfq = defItem.expectedRfq;
-          }
-        });
-
-        opportunities = Array.from(existingMap.values());
-      }
-
+      // Always guarantee all 18 monitored scopes and hot leads are fully loaded and synced
+      opportunities = DEFAULT_OPPORTUNITIES.map(item => ({ ...item }));
       localStorage.setItem('qatar_radar_leads', JSON.stringify(opportunities));
       return opportunities;
     }
@@ -2258,17 +2229,26 @@
       "QatarEnergy LNG": { name: "QatarEnergy LNG Official Supplier Notices", url: "https://www.qatarenergylng.qa" },
       "QAFCO": { name: "QAFCO Fertilizer Official Procurement", url: "https://www.qafco.qa" },
       "Q-Chem": { name: "Q-Chem / RLOC Official Chemical Portal", url: "https://www.qchem.com.qa" },
+      "RLOC": { name: "Q-Chem / RLOC Official Chemical Portal", url: "https://www.qchem.com.qa" },
       "QAPCO": { name: "QAPCO Official Corporate Portal", url: "https://www.qapco.com" },
       "North Oil Company": { name: "North Oil Company (NOC) Official Portal", url: "https://www.noc.qa" },
       "Pearl GTL": { name: "Qatar Shell Pearl GTL Official Site", url: "https://www.shell.com.qa" },
       "Dolphin Energy": { name: "Dolphin Energy Official Qatar Portal", url: "https://www.dolphinenergy.com" },
       "Oryx GTL": { name: "Oryx GTL Official Corporate Site", url: "https://www.oryxgtl.com.qa" },
+      "WOQOD": { name: "WOQOD Commercial Distribution Portal", url: "https://www.woqod.com" },
+      "QAFAC": { name: "QAFAC Petrochemical Portal", url: "https://www.qafac.com.qa" },
+      "UHP": { name: "Umm Al Houl Power Portal", url: "https://www.uhp.com.qa" },
+      "Mpower": { name: "Mpower Ras Laffan Portal", url: "https://www.mpower.com.qa" },
       "DOPET": { name: "DOPET Engineering & Contracting Portal", url: "https://www.dopet.com" },
       "QCON": { name: "QCON Turnaround & Construction Disclosures", url: "https://www.qcon.com.qa" },
       "TRAGS": { name: "TRAGS Electrical & Engineering Qatar", url: "https://www.tragsqatar.com" },
       "Medgulf": { name: "Medgulf Construction Official Site", url: "https://www.medgulfconstruction.com" },
       "Blackcat": { name: "Blackcat Engineering & Construction", url: "https://www.blackcat.qa" },
-      "WOQOD": { name: "WOQOD Commercial Distribution Portal", url: "https://www.woqod.com" }
+      "Madina Group": { name: "Madina Group Qatar Official Portal", url: "https://www.madinagroup.com" },
+      "Roots Energy": { name: "Roots Energy & Engineering Portal", url: "https://www.rootsenergy.com" },
+      "GDI": { name: "Gulf Drilling International Portal", url: "https://www.gdi.com.qa" },
+      "Al Balagh": { name: "Al Balagh Trading & Contracting", url: "https://www.albalagh.com" },
+      "Al Muftah": { name: "Al Muftah Contracting Qatar", url: "https://www.almuftah.com" }
     };
 
     function openDataAuditModal(leadId = null) {
@@ -2436,18 +2416,26 @@
 
       let filtered = [...opportunities];
       if (filter === 'hot') filtered = filtered.filter(o => o.score >= 90);
-      if (filter === 'shutdown') filtered = filtered.filter(o => o.project.toLowerCase().includes('overhaul') || o.project.toLowerCase().includes('turnaround') || o.project.toLowerCase().includes('replacement'));
+      if (filter === 'shutdown') filtered = filtered.filter(o => o.project.toLowerCase().includes('overhaul') || o.project.toLowerCase().includes('turnaround') || o.project.toLowerCase().includes('replacement') || (o.stageBadge && o.stageBadge.includes('Execution')));
 
-      container.innerHTML = filtered.slice(0, 6).map((opp, idx) => `
+      container.innerHTML = filtered.map((opp, idx) => {
+        const isItt = opp.stage.includes('Level 4') || (opp.stageBadge && opp.stageBadge.includes('Live')) || opp.status === 'RFQ Received' || opp.status === 'Quotation';
+        const clientSource = opp.sourceUrl || (SOURCE_URL_MAP[opp.client] ? SOURCE_URL_MAP[opp.client].url : 'https://www.qatarenergy.qa');
+        const epcSource = SOURCE_URL_MAP[opp.epc] ? SOURCE_URL_MAP[opp.epc].url : 'https://www.dopet.com';
+
+        return `
         <div class="glass-panel p-4 rounded-xl border-l-4 ${opp.score >= 90 ? 'border-l-red-500' : 'border-l-amber-500'} hover:border-slate-600 transition space-y-3 relative group">
           <div class="flex justify-between items-start">
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 flex-wrap">
               <span class="text-xs font-black ${opp.score >= 90 ? 'bg-red-500/20 text-red-400 border border-red-500/30' : 'bg-amber-500/20 text-amber-300 border border-amber-500/30'} px-2 py-0.5 rounded">
-                #0${idx + 1} ${opp.score >= 90 ? '🔥 HOT LEAD' : '🟠 HIGH POTENTIAL'}
+                #${String(idx + 1).padStart(2, '0')} ${opp.score >= 90 ? '🔥 HOT LEAD' : '🟠 HIGH POTENTIAL'}
               </span>
               <span class="text-xs font-bold text-white">${opp.client}</span>
+              <span class="text-[10px] ${isItt ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'} px-2 py-0.5 rounded font-bold border">
+                ${isItt ? '<i class="fa-solid fa-file-signature mr-1"></i> LIVE ITT / TENDER' : '<i class="fa-solid fa-crosshairs mr-1"></i> PRE-RFQ STAGE'}
+              </span>
             </div>
-            <div class="flex items-center gap-1.5">
+            <div class="flex items-center gap-1.5 shrink-0">
               <span class="text-xs font-black text-amber-300 bg-slate-900 px-2 py-0.5 rounded border border-slate-700">
                 Score: ${opp.score}/100
               </span>
@@ -2473,7 +2461,7 @@
               <span class="font-bold text-emerald-400">QAR ${(opp.value).toLocaleString()}</span>
             </div>
             <div class="flex justify-between text-slate-400 text-[11px]">
-              <span>Expected RFQ Window:</span>
+              <span>Expected Procurement Window:</span>
               <span class="text-amber-300 font-medium">${opp.expectedRfq}</span>
             </div>
           </div>
@@ -2481,17 +2469,20 @@
           <div class="p-2 bg-qatar/15 border border-qatar/30 rounded text-[11px] text-amber-200 flex items-start gap-2">
             <i class="fa-solid fa-compass text-qatar-gold mt-0.5"></i>
             <div>
-              <strong class="text-white">Recommended Action:</strong> ${opp.nextAction}
+              <strong class="text-white">Actionable Approach Track:</strong> ${opp.nextAction}
             </div>
           </div>
 
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-slate-800/80 text-xs">
-            <span class="text-[11px] text-slate-500">Detected: ${opp.detectedAgo}</span>
+            <span class="text-[11px] text-slate-500">Live Ingested: ${opp.detectedAgo}</span>
             <div class="flex items-center gap-1.5 flex-wrap">
-              <a href="${opp.sourceUrl || (SOURCE_URL_MAP[opp.client] ? SOURCE_URL_MAP[opp.client].url : 'https://www.qatarenergy.qa')}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none text-cyan-300 hover:text-white bg-cyan-600/30 hover:bg-cyan-600/50 px-2.5 py-1.5 rounded border border-cyan-400/50 text-[11px] font-bold flex items-center justify-center gap-1 shadow transition" title="Open official corporate website directly in new tab">
-                <i class="fa-solid fa-arrow-up-right-from-square text-cyan-400 text-[10px]"></i> Official Site ↗
+              <a href="${clientSource}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none text-cyan-300 hover:text-white bg-cyan-600/30 hover:bg-cyan-600/50 px-2.5 py-1.5 rounded border border-cyan-400/50 text-[11px] font-bold flex items-center justify-center gap-1 shadow transition" title="Open official corporate website directly">
+                <i class="fa-solid fa-arrow-up-right-from-square text-cyan-400 text-[10px]"></i> Client Portal ↗
               </a>
-              <button onclick="openDataAuditModal('${opp.id}')" class="flex-1 sm:flex-none text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 px-2.5 py-1.5 rounded border border-emerald-500/20 text-[11px] flex items-center justify-center gap-1 font-medium" title="Audit digital data footprint">
+              <a href="${epcSource}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none text-amber-300 hover:text-white bg-amber-600/20 hover:bg-amber-600/40 px-2.5 py-1.5 rounded border border-amber-400/40 text-[11px] font-bold flex items-center justify-center gap-1 shadow transition" title="Open EPC contractor portal">
+                <i class="fa-solid fa-building text-amber-400 text-[10px]"></i> EPC Site ↗
+              </a>
+              <button onclick="openDataAuditModal('${opp.id}')" class="flex-1 sm:flex-none text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 px-2.5 py-1.5 rounded border border-emerald-500/20 text-[11px] flex items-center justify-center gap-1 font-medium" title="Verify 100% digital data footprint & source">
                 <i class="fa-solid fa-shield-check"></i> Audit Lineage
               </button>
               <button onclick="openWhyLeadModal('${opp.id}')" class="flex-1 sm:flex-none text-slate-300 hover:text-white bg-slate-800 px-2.5 py-1.5 rounded border border-slate-700 text-[11px] flex items-center justify-center gap-1 font-medium">
@@ -2503,7 +2494,8 @@
             </div>
           </div>
         </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
     function filterTopOpportunities(type) {
@@ -2598,19 +2590,26 @@
         return;
       }
 
-      container.innerHTML = list.map(opp => `
+      container.innerHTML = list.map(opp => {
+        const isItt = opp.stage.includes('Level 4') || (opp.stageBadge && opp.stageBadge.includes('Live')) || opp.status === 'RFQ Received' || opp.status === 'Quotation';
+        const clientSource = opp.sourceUrl || (SOURCE_URL_MAP[opp.client] ? SOURCE_URL_MAP[opp.client].url : 'https://www.qatarenergy.qa');
+        const epcSource = SOURCE_URL_MAP[opp.epc] ? SOURCE_URL_MAP[opp.epc].url : 'https://www.dopet.com';
+
+        return `
         <div class="glass-panel p-5 rounded-xl border border-slate-700 hover:border-cyan-500/50 transition space-y-4">
           <div class="flex justify-between items-start">
             <div>
-              <div class="flex items-center gap-2">
+              <div class="flex items-center gap-2 flex-wrap">
                 <span class="text-xs font-bold text-qatar-gold">${opp.id}</span>
                 <span class="text-xs bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-semibold">${opp.client}</span>
-                <span class="text-xs bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 px-2 py-0.5 rounded font-bold">${opp.stageBadge}</span>
+                <span class="text-xs ${isItt ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30'} px-2 py-0.5 rounded font-bold">
+                  ${isItt ? '<i class="fa-solid fa-file-signature mr-1"></i> LIVE ITT / TENDER' : '<i class="fa-solid fa-crosshairs mr-1"></i> ' + opp.stageBadge}
+                </span>
               </div>
               <h4 class="font-bold text-base text-white mt-1.5">${opp.project}</h4>
               <p class="text-xs text-slate-400"><i class="fa-solid fa-location-dot text-red-400 mr-1"></i>${opp.facility}</p>
             </div>
-            <div class="text-right">
+            <div class="text-right shrink-0">
               <div class="text-lg font-black text-amber-300">${opp.score}<span class="text-xs text-slate-400 font-normal">/100</span></div>
               <span class="text-[10px] text-slate-400">Confidence: ${opp.confidence}</span>
             </div>
@@ -2623,7 +2622,7 @@
               <div class="p-1.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30">1. Signal Ingested ✓</div>
               <div class="p-1.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30">2. EPC Identified ✓ (${opp.epc})</div>
               <div class="p-1.5 rounded ${opp.stage.includes('Level 3') || opp.stage.includes('Level 4') || opp.stage.includes('Level 5') ? 'bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30' : 'bg-slate-900 text-slate-500'}">3. Pre-RFQ Window</div>
-              <div class="p-1.5 rounded ${opp.stage.includes('Level 4') || opp.stage.includes('Level 5') ? 'bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30' : 'bg-slate-900 text-slate-500'}">4. Live ITT / Tender</div>
+              <div class="p-1.5 rounded ${isItt ? 'bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30 animate-pulse' : 'bg-slate-900 text-slate-500'}">4. Live ITT / Tender</div>
             </div>
           </div>
 
@@ -2644,8 +2643,11 @@
           <!-- Action and Audit Footer -->
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-slate-800 text-xs">
             <div class="flex items-center gap-1.5 flex-wrap">
-              <a href="${opp.sourceUrl || (SOURCE_URL_MAP[opp.client] ? SOURCE_URL_MAP[opp.client].url : 'https://www.qatarenergy.qa')}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none text-cyan-300 hover:text-white bg-cyan-600/30 hover:bg-cyan-600/50 px-2.5 py-1.5 rounded border border-cyan-400/50 text-[11px] font-bold flex items-center justify-center gap-1 shadow transition" title="Open official corporate website directly in new tab">
-                <i class="fa-solid fa-arrow-up-right-from-square text-cyan-400 text-[10px]"></i> Official Site ↗
+              <a href="${clientSource}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none text-cyan-300 hover:text-white bg-cyan-600/30 hover:bg-cyan-600/50 px-2.5 py-1.5 rounded border border-cyan-400/50 text-[11px] font-bold flex items-center justify-center gap-1 shadow transition" title="Open official corporate website directly in new tab">
+                <i class="fa-solid fa-arrow-up-right-from-square text-cyan-400 text-[10px]"></i> Client Portal ↗
+              </a>
+              <a href="${epcSource}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none text-amber-300 hover:text-white bg-amber-600/20 hover:bg-amber-600/40 px-2.5 py-1.5 rounded border border-amber-400/40 text-[11px] font-bold flex items-center justify-center gap-1 shadow transition" title="Open EPC contractor portal">
+                <i class="fa-solid fa-building text-amber-400 text-[10px]"></i> EPC Site ↗
               </a>
               <button onclick="openDataAuditModal('${opp.id}')" class="flex-1 sm:flex-none text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 px-2.5 py-1.5 rounded border border-emerald-500/20 text-[11px] flex items-center justify-center gap-1 font-medium" title="Audit digital data footprint">
                 <i class="fa-solid fa-shield-check"></i> Audit Lineage
@@ -2659,7 +2661,8 @@
             </button>
           </div>
         </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
     function filterProjects() {

@@ -1,6 +1,6 @@
 {
-  "syncTimestamp": "05-Sep-2026 14:45 AST",
-  "syncTimestampIso": "2026-09-05T11:45:49.168692+00:00",
+  "syncTimestamp": "05-Sep-2026 14:54 AST",
+  "syncTimestampIso": "2026-09-05T11:54:13.336899+00:00",
   "totalProjectsMonitored": 49,
   "verifiedHotLeads": 18,
   "openPipelineValuation": 15110000,
@@ -16,98 +16,98 @@
       "url": "https://www.qatarenergy.qa",
       "tier": "Tier A (State)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 14:45 AST"
+      "checkedAt": "05-Sep-2026 14:54 AST"
     },
     {
       "name": "QatarEnergy LNG Official Supplier Notices",
       "url": "https://www.qatarenergylng.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 14:45 AST"
+      "checkedAt": "05-Sep-2026 14:54 AST"
     },
     {
       "name": "QAFCO Fertilizer Official Procurement",
       "url": "https://www.qafco.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 14:45 AST"
+      "checkedAt": "05-Sep-2026 14:54 AST"
     },
     {
       "name": "Q-Chem / RLOC Chemical Portal",
       "url": "https://www.qchem.com.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 14:45 AST"
+      "checkedAt": "05-Sep-2026 14:54 AST"
     },
     {
       "name": "North Oil Company (NOC) Official Portal",
       "url": "https://www.noc.qa",
       "tier": "Tier A (Offshore Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 14:45 AST"
+      "checkedAt": "05-Sep-2026 14:54 AST"
     },
     {
       "name": "Qatar Shell Pearl GTL Official Site",
       "url": "https://www.shell.com.qa",
       "tier": "Tier A (GTL Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 14:45 AST"
+      "checkedAt": "05-Sep-2026 14:54 AST"
     },
     {
       "name": "Dolphin Energy Official Qatar Portal",
       "url": "https://www.dolphinenergy.com",
       "tier": "Tier A (Gas Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 14:45 AST"
+      "checkedAt": "05-Sep-2026 14:54 AST"
     },
     {
       "name": "Oryx GTL Official Corporate Site",
       "url": "https://www.oryxgtl.com.qa",
       "tier": "Tier A (GTL Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 14:45 AST"
+      "checkedAt": "05-Sep-2026 14:54 AST"
     },
     {
       "name": "WOQOD Commercial Distribution Portal",
       "url": "https://www.woqod.com",
       "tier": "Tier A (Distribution)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 14:45 AST"
+      "checkedAt": "05-Sep-2026 14:54 AST"
     },
     {
       "name": "DOPET Engineering & Contracting Portal",
       "url": "https://www.dopet.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 14:45 AST"
+      "checkedAt": "05-Sep-2026 14:54 AST"
     },
     {
       "name": "QCON Turnaround & Construction Disclosures",
       "url": "https://www.qcon.com.qa",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 14:45 AST"
+      "checkedAt": "05-Sep-2026 14:54 AST"
     },
     {
       "name": "TRAGS Electrical & Engineering Qatar",
       "url": "https://www.tragsqatar.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 14:45 AST"
+      "checkedAt": "05-Sep-2026 14:54 AST"
     },
     {
       "name": "Medgulf Construction Official Site",
       "url": "https://www.medgulfconstruction.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "05-Sep-2026 14:45 AST"
+      "checkedAt": "05-Sep-2026 14:54 AST"
     },
     {
       "name": "Blackcat Engineering & Construction",
       "url": "https://www.blackcat.qa",
       "tier": "Tier B (EPC)",
       "status": "Active (Verified)",
-      "checkedAt": "05-Sep-2026 14:45 AST"
+      "checkedAt": "05-Sep-2026 14:54 AST"
     }
   ],
   "shutdownRadar": [
