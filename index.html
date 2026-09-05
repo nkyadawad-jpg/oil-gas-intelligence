@@ -70,64 +70,6 @@
 </head>
 <body class="bg-radar-bg text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-qatar selection:text-white w-full max-w-full overflow-x-hidden">
 
-  <!-- SECURITY AUTHENTICATION LOCK SCREEN OVERLAY -->
-  <div id="securityLockOverlay" class="fixed inset-0 z-50 bg-slate-950/98 backdrop-blur-2xl flex items-center justify-center p-4 transition-all duration-500">
-    <div class="glass-panel p-6 sm:p-8 rounded-3xl max-w-md w-full border border-slate-700 shadow-2xl space-y-6 text-center relative overflow-hidden">
-      
-      <!-- Top Decorative Accents -->
-      <div class="absolute -top-12 -left-12 w-36 h-36 bg-qatar/30 rounded-full blur-2xl pointer-events-none"></div>
-      <div class="absolute -bottom-12 -right-12 w-36 h-36 bg-cyan-500/20 rounded-full blur-2xl pointer-events-none"></div>
-
-      <!-- Oil & Gas Terminal & Security Badge -->
-      <div class="flex flex-col items-center space-y-3">
-        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-qatar via-qatar-dark to-slate-900 flex items-center justify-center shadow-xl border border-amber-400/50">
-          <i class="fa-solid fa-lock-keyhole text-amber-300 text-2xl animate-pulse"></i>
-        </div>
-        <div>
-          <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full border border-amber-500/40 font-bold uppercase tracking-wider">RESTRICTED COMMERCIAL ACCESS</span>
-          <h2 class="text-xl sm:text-2xl font-black text-white mt-1.5 tracking-wide">QATAR O&G RADAR</h2>
-          <p class="text-xs text-slate-400 mt-0.5">Oil & Gas Terminal Qatar • Opportunity Intelligence Platform</p>
-        </div>
-      </div>
-
-      <!-- Password Unlock Form -->
-      <form id="lockScreenForm" action="javascript:void(0);" onsubmit="unlockSecurityGate(event); return false;" class="space-y-4 text-left">
-        <div>
-          <label class="block text-xs text-slate-300 font-semibold mb-1.5 flex items-center justify-between">
-            <span>Enter Access Security Key</span>
-            <span class="text-[10px] text-slate-500 font-normal">Encrypted Entry</span>
-          </label>
-          <div class="relative">
-            <input type="password" id="securityPassInput" required placeholder="Enter Security Password Key..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white text-sm font-mono focus:outline-none focus:border-qatar focus:ring-1 focus:ring-qatar pr-10 shadow-inner" />
-            <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white p-1">
-              <i class="fa-solid fa-eye text-xs" id="passEyeIcon"></i>
-            </button>
-          </div>
-          <p id="lockErrorMessage" class="text-xs text-red-400 mt-1.5 hidden font-medium flex items-center gap-1">
-            <i class="fa-solid fa-triangle-exclamation"></i> Incorrect security password key. Please try again.
-          </p>
-        </div>
-
-        <div class="flex items-center justify-between text-xs text-slate-400">
-          <label class="flex items-center gap-2 cursor-pointer select-none">
-            <input type="checkbox" id="rememberDeviceCheck" class="rounded bg-slate-900 border-slate-700 text-qatar focus:ring-0 w-3.5 h-3.5" checked />
-            <span>Remember on this device</span>
-          </label>
-        </div>
-
-        <button type="submit" class="w-full py-3 bg-gradient-to-r from-qatar to-qatar-light hover:from-qatar-light hover:to-qatar text-white font-bold text-sm rounded-xl shadow-lg shadow-qatar/30 flex items-center justify-center gap-2 transition active:scale-95">
-          <i class="fa-solid fa-key text-amber-300"></i>
-          <span>Unlock & Access Dashboard</span>
-        </button>
-      </form>
-
-      <!-- Security Notice Footer -->
-      <div class="pt-2 border-t border-slate-800/80 text-[10px] text-slate-500 flex items-center justify-between">
-        <span>Authorized Manager: <strong class="text-slate-300">Ashfan</strong></span>
-        <span><i class="fa-solid fa-shield-halved text-emerald-400"></i> Protected</span>
-      </div>
-    </div>
-  </div>
 
   <!-- TOP HEADER / NAV BAR -->
   <header class="bg-slate-900/95 border-b border-slate-800 sticky top-0 z-40 backdrop-blur-md px-3 sm:px-4 py-2 sm:py-2.5 flex items-center justify-between shadow-xl w-full max-w-full">
@@ -170,10 +112,6 @@
 
     <!-- Header Actions -->
     <div class="flex items-center space-x-1.5 sm:space-x-3">
-      <button onclick="openTargetConfigModal()" title="Security & Password Settings" class="bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/40 px-2 sm:px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 sm:gap-1.5 shadow transition">
-        <i class="fa-solid fa-sliders text-amber-400"></i>
-        <span class="hidden sm:inline">Settings</span>
-      </button>
       <button onclick="triggerScan()" class="flex bg-gradient-to-r from-qatar to-qatar-light hover:from-qatar-light hover:to-qatar text-white px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold items-center gap-1 sm:gap-1.5 shadow-md shadow-qatar/20 transition-all active:scale-95">
         <i class="fa-solid fa-arrows-rotate" id="scanIcon"></i>
         <span class="hidden xs:inline">Scan Sources</span>
@@ -205,9 +143,6 @@
           <p class="text-xs font-semibold text-white leading-tight">Ashfan</p>
           <p class="text-[10px] text-slate-400 leading-tight">Asst. Sales Mgr (Oil & Gas Terminal)</p>
         </div>
-        <button onclick="lockSecurityGate()" title="Lock Dashboard Station" class="p-1.5 bg-slate-800 hover:bg-red-500/20 text-slate-400 hover:text-red-400 rounded-lg border border-slate-700 hover:border-red-500/40 text-xs transition active:scale-95">
-          <i class="fa-solid fa-lock"></i>
-        </button>
       </div>
       <!-- Mobile Menu Toggle Button -->
       <button onclick="toggleMobileNav()" class="md:hidden p-1.5 sm:p-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg border border-slate-700 focus:outline-none">
@@ -221,7 +156,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">05-Sep-2026 14:36 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">05-Sep-2026 14:42 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -366,27 +301,27 @@
       <section id="tab-command_center" class="tab-content space-y-6">
         <!-- Security & Station Protection Status Banner -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <!-- KPI 1: SECURITY & STATION ACCESS STATUS -->
-          <div class="glass-panel p-4 rounded-xl relative overflow-hidden border-slate-700 cursor-pointer hover:border-amber-500/50 transition group" onclick="openTargetConfigModal()" title="Click to manage security password key">
-            <div class="absolute -right-2 -bottom-2 opacity-10 text-6xl text-amber-400 group-hover:scale-110 transition-transform"><i class="fa-solid fa-user-shield"></i></div>
+          <!-- KPI 1: PLATFORM ACCESS & COMMERCIAL STATUS -->
+          <div class="glass-panel p-4 rounded-xl relative overflow-hidden border-slate-700">
+            <div class="absolute -right-2 -bottom-2 opacity-10 text-6xl text-emerald-400"><i class="fa-solid fa-lock-open"></i></div>
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-xs text-slate-400 font-medium flex items-center gap-1.5">
-                  <span>Security Access Protection</span>
-                  <i class="fa-solid fa-key text-[10px] text-amber-400 opacity-60 group-hover:opacity-100"></i>
+                  <span>Platform Commercial Access</span>
+                  <i class="fa-solid fa-globe text-[10px] text-emerald-400"></i>
                 </p>
                 <h3 class="text-xl font-black text-emerald-400 mt-1 flex items-center gap-2">
-                  <i class="fa-solid fa-lock text-base"></i> Station Protected
+                  <i class="fa-solid fa-lock-open text-base"></i> Free Open Access
                 </h3>
               </div>
-              <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs px-2 py-0.5 rounded font-bold">100% Encrypted</span>
+              <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs px-2 py-0.5 rounded font-bold">100% Unlocked</span>
             </div>
             <div class="w-full bg-slate-800 h-2 rounded-full mt-3 overflow-hidden">
-              <div class="bg-gradient-to-r from-emerald-500 via-teal-400 to-amber-400 h-full rounded-full w-full"></div>
+              <div class="bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 h-full rounded-full w-full"></div>
             </div>
             <div class="flex justify-between text-[11px] text-slate-400 mt-2">
               <span>Manager: <strong class="text-white">Ashfan (Oil & Gas Terminal)</strong></span>
-              <span class="text-amber-300 font-bold hover:underline flex items-center gap-1"><i class="fa-solid fa-gear text-[10px]"></i> Settings</span>
+              <span class="text-emerald-300 font-bold flex items-center gap-1"><i class="fa-solid fa-circle-check text-[10px]"></i> Live Station</span>
             </div>
           </div>
 
@@ -1236,49 +1171,7 @@
   </div>
 
 
-  <!-- MODAL: SECURITY & PASSWORD PROTECTION SETTINGS -->
-  <div id="targetConfigModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
-      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 flex items-center justify-center border border-amber-500/40">
-            <i class="fa-solid fa-user-shield"></i>
-          </div>
-          <div>
-            <h3 class="text-base font-bold text-white">Security Password Settings</h3>
-            <p class="text-[11px] text-slate-400">Modify access security password key for dashboard protection</p>
-          </div>
-        </div>
-        <button onclick="closeTargetConfigModal()" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
-      </div>
 
-      <form id="targetConfigForm" onsubmit="saveTargetConfig(event)" class="space-y-4 text-xs">
-        <div class="space-y-3">
-          <div>
-            <label class="block text-slate-300 font-semibold mb-1 flex items-center justify-between">
-              <span class="flex items-center gap-1.5"><i class="fa-solid fa-key text-amber-400"></i> New Access Security Password Key</span>
-              <span class="text-[10px] text-slate-500 font-normal">Opening Key</span>
-            </label>
-            <input type="password" id="inputSecurityKey" required placeholder="Enter new access password key..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white font-mono font-bold text-sm focus:outline-none focus:border-amber-400" />
-          </div>
-
-          <div>
-            <label class="block text-slate-300 font-semibold mb-1 flex items-center justify-between">
-              <span class="flex items-center gap-1.5"><i class="fa-solid fa-user-shield text-red-400"></i> Master Authorization Secret Code</span>
-              <span class="text-[10px] text-red-400 font-bold">Required for Password Change</span>
-            </label>
-            <input type="password" id="inputMasterSecretPin" required placeholder="Enter Master Secret Code..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white font-mono font-bold text-sm focus:outline-none focus:border-red-500" />
-            <p class="text-[10px] text-slate-400 mt-1">Master secret authorization code is required to modify access password settings.</p>
-          </div>
-        </div>
-
-        <div class="flex justify-end gap-2 pt-2 border-t border-slate-800">
-          <button type="button" onclick="closeTargetConfigModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-lg text-xs">Cancel</button>
-          <button type="submit" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black px-5 py-2 rounded-lg text-xs shadow">Update Password</button>
-        </div>
-      </form>
-    </div>
-  </div>
 
   <!-- MODAL: OEM COMPETITOR BATTLE CARD & SPEC-IN PLAYBOOK -->
   <div id="oemPlaybookModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
@@ -2195,9 +2088,12 @@
     let opportunities = loadAndSyncOpportunities();
     let userSettings = JSON.parse(localStorage.getItem('qatar_user_settings')) || {
       monthlyTarget: 2000000,
-      achievedSales: 1250000,
-      securityKey: "ASHFAN2026"
+      achievedSales: 1250000
     };
+    try {
+      sessionStorage.removeItem('qatar_radar_authenticated');
+      localStorage.removeItem('qatar_radar_authenticated_device');
+    } catch(e) {}
     let selectedLeadForOutreach = opportunities[0];
     let currentSort = { column: 'score', asc: false };
 
@@ -2323,177 +2219,7 @@
       updatePb('pbMonitoringVal', 'pbMonitoringPct', sumMonitoring);
     }
 
-    // ==========================================
-    // SECURITY LOCK GATE CONTROLLER
-    // ==========================================
-    function checkSecurityStatus() {
-      const overlay = document.getElementById('securityLockOverlay');
-      
-      try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const queryPass = urlParams.get('securityPassInput');
-        if (queryPass !== null) {
-          window.history.replaceState({}, document.title, window.location.pathname);
-          const passClean = queryPass.trim().toUpperCase();
-          if (passClean !== "") {
-            sessionStorage.setItem('qatar_radar_authenticated', 'true');
-            localStorage.setItem('qatar_radar_authenticated_device', 'true');
-          }
-        }
-      } catch(e) {}
 
-      const sessionAuth = sessionStorage.getItem('qatar_radar_authenticated');
-      const localAuth = localStorage.getItem('qatar_radar_authenticated_device');
-
-      if (sessionAuth === 'true' || localAuth === 'true') {
-        if (overlay) {
-          overlay.classList.add('hidden');
-          overlay.style.display = 'none';
-        }
-        document.body.classList.remove('overflow-hidden');
-      } else {
-        if (overlay) {
-          overlay.classList.remove('hidden');
-          overlay.style.display = 'flex';
-        }
-        document.body.classList.add('overflow-hidden');
-        setTimeout(() => {
-          document.getElementById('securityPassInput')?.focus();
-        }, 300);
-      }
-    }
-
-    function unlockSecurityGate(e) {
-      if (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-      const input = document.getElementById('securityPassInput');
-      const err = document.getElementById('lockErrorMessage');
-      const remember = document.getElementById('rememberDeviceCheck')?.checked;
-      const pass = input ? input.value.trim() : '';
-      const passClean = pass.toUpperCase();
-
-      const configuredKey = (userSettings.securityKey || "ASHFAN2026").trim().toUpperCase();
-
-      const validKeys = [
-        configuredKey,
-        "ASHFAN2026",
-        "ASHFAN",
-        "TERMINAL2026",
-        "TERMINAL",
-        "1989",
-        "QATAR2026",
-        "QATAR",
-        "OILGAS2026",
-        "OILGAS",
-        "ADMIN",
-        "ADMIN2026",
-        "2026",
-        "UNLOCK",
-        "OPEN",
-        "PASSWORD"
-      ];
-
-      const isPassValid = passClean !== "" && (
-        validKeys.includes(passClean) || 
-        passClean.includes("ASHFAN") || 
-        passClean.includes("1989") || 
-        passClean.includes("TERMINAL") || 
-        pass === userSettings.securityKey
-      );
-
-      if (isPassValid) {
-        sessionStorage.setItem('qatar_radar_authenticated', 'true');
-        localStorage.setItem('qatar_radar_authenticated_device', 'true');
-
-        userSettings.securityKey = "ASHFAN2026";
-        saveSettings();
-
-        const overlay = document.getElementById('securityLockOverlay');
-        if (overlay) {
-          overlay.classList.add('hidden');
-          overlay.style.display = 'none';
-        }
-        document.body.classList.remove('overflow-hidden');
-        if (err) err.classList.add('hidden');
-        if (input) input.value = '';
-        return false;
-      } else {
-        if (err) err.classList.remove('hidden');
-        const container = input?.closest('.glass-panel');
-        if (container) {
-          container.classList.add('animate-shake');
-          setTimeout(() => container.classList.remove('animate-shake'), 500);
-        }
-        return false;
-      }
-    }
-
-    function lockSecurityGate() {
-      sessionStorage.removeItem('qatar_radar_authenticated');
-      localStorage.removeItem('qatar_radar_authenticated_device');
-      const input = document.getElementById('securityPassInput');
-      if (input) input.value = '';
-      checkSecurityStatus();
-    }
-
-    function togglePasswordVisibility() {
-      const input = document.getElementById('securityPassInput');
-      const icon = document.getElementById('passEyeIcon');
-      if (input && icon) {
-        if (input.type === 'password') {
-          input.type = 'text';
-          icon.classList.remove('fa-eye');
-          icon.classList.add('fa-eye-slash');
-        } else {
-          input.type = 'password';
-          icon.classList.remove('fa-eye-slash');
-          icon.classList.add('fa-eye');
-        }
-      }
-    }
-
-    // ==========================================
-    // SECURITY PASSWORD CONTROLLER
-    // ==========================================
-    function openTargetConfigModal() {
-      const modal = document.getElementById('targetConfigModal');
-      const inKey = document.getElementById('inputSecurityKey');
-      const inSecret = document.getElementById('inputMasterSecretPin');
-
-      if (inKey) inKey.value = "";
-      if (inSecret) inSecret.value = "";
-
-      if (modal) modal.classList.remove('hidden');
-    }
-
-    function closeTargetConfigModal() {
-      const modal = document.getElementById('targetConfigModal');
-      if (modal) modal.classList.add('hidden');
-    }
-
-    function saveTargetConfig(e) {
-      if (e) e.preventDefault();
-      const inKey = document.getElementById('inputSecurityKey');
-      const inSecret = document.getElementById('inputMasterSecretPin');
-
-      const newKey = inKey ? inKey.value.trim() : '';
-      const masterPin = inSecret ? inSecret.value.trim() : '';
-
-      if (masterPin === "1989" || masterPin.toUpperCase() === "ASHFAN2026" || masterPin.toUpperCase() === "TERMINAL2026") {
-        if (newKey !== "") {
-          userSettings.securityKey = newKey;
-          saveSettings();
-          alert("Access Security Password Key updated successfully!");
-          closeTargetConfigModal();
-        } else {
-          alert("Please enter a valid password key.");
-        }
-      } else {
-        alert("Invalid Master Authorization Secret Code. Permission denied.");
-      }
-    }
 
     function openOemPlaybookModal() {
       const modal = document.getElementById('oemPlaybookModal');
@@ -4010,7 +3736,6 @@ Q4. Spares & Delivery Timeline:
     // INITIALIZATION & HOURLY AUTOMATIC SCHEDULER
     // ==========================================
     document.addEventListener('DOMContentLoaded', () => {
-      checkSecurityStatus();
       recalculateKpiMetrics();
       renderTopOpportunities();
       renderRecentSignals();
