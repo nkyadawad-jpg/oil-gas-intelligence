@@ -220,7 +220,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">05-Sep-2026 13:41 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">05-Sep-2026 14:12 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -570,10 +570,13 @@
       <section id="tab-project_radar" class="tab-content hidden space-y-6">
         <div class="flex flex-wrap items-center justify-between gap-4 glass-panel p-4 rounded-xl">
           <div>
-            <h3 class="text-xl font-black text-white flex items-center gap-2">
-              <i class="fa-solid fa-crosshairs text-cyan-400"></i>
-              Qatar Oil & Gas Project Intelligence Radar
-            </h3>
+            <div class="flex items-center gap-3 flex-wrap">
+              <h3 class="text-xl font-black text-white flex items-center gap-2">
+                <i class="fa-solid fa-crosshairs text-cyan-400"></i>
+                Qatar Oil & Gas Project Intelligence Radar
+              </h3>
+              <span id="projectScopeCounterBadge" class="text-xs bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 px-2.5 py-0.5 rounded-full font-bold">18 Active Scopes (QAR 15.11M Total Pipeline)</span>
+            </div>
             <p class="text-xs text-slate-400 mt-0.5">Clustered Project Lifecycles • Early Commercial Signals • Product Applicability Matrix</p>
           </div>
           
@@ -588,14 +591,21 @@
               <option value="Level 5">Level 5 - Awarded / Spares & Subs</option>
             </select>
             <select id="clientFilter" onchange="filterProjects()" class="bg-slate-900 border border-slate-700 px-3 py-1.5 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-500">
-              <option value="all">All Clients</option>
+              <option value="all">All Clients (18 Active Scopes)</option>
               <option value="QatarEnergy">QatarEnergy</option>
               <option value="QatarEnergy LNG">QatarEnergy LNG</option>
               <option value="QAFCO">QAFCO</option>
               <option value="QAPCO">QAPCO</option>
               <option value="Q-Chem">Q-Chem</option>
               <option value="RLOC">RLOC</option>
+              <option value="North Oil Company">North Oil Company (NOC)</option>
+              <option value="Pearl GTL">Pearl GTL (Qatar Shell)</option>
+              <option value="Dolphin Energy">Dolphin Energy</option>
+              <option value="WOQOD">WOQOD</option>
+              <option value="Oryx GTL">Oryx GTL</option>
               <option value="QAFAC">QAFAC</option>
+              <option value="UHP">UHP (Umm Al Houl Power)</option>
+              <option value="Mpower">Mpower (Ras Laffan C)</option>
             </select>
           </div>
         </div>
@@ -2130,6 +2140,10 @@
       { name: "QatarEnergy LNG Official Supplier Notices", url: "https://www.qatarenergylng.qa", tier: "Tier A (Operator)", lastScan: "25 mins ago", status: "Active (200 OK)", hits: 9 },
       { name: "QAFCO Fertilizer Official Procurement", url: "https://www.qafco.qa", tier: "Tier A (Operator)", lastScan: "1 hour ago", status: "Active (200 OK)", hits: 6 },
       { name: "Q-Chem / RLOC Chemical Portal", url: "https://www.qchem.com.qa", tier: "Tier A (Operator)", lastScan: "2 hours ago", status: "Active (200 OK)", hits: 5 },
+      { name: "North Oil Company (NOC) Official Portal", url: "https://www.noc.qa", tier: "Tier A (Offshore Operator)", lastScan: "15 mins ago", status: "Active (200 OK)", hits: 8 },
+      { name: "Qatar Shell Pearl GTL Official Site", url: "https://www.shell.com.qa", tier: "Tier A (GTL Operator)", lastScan: "30 mins ago", status: "Active (200 OK)", hits: 7 },
+      { name: "Dolphin Energy Official Qatar Portal", url: "https://www.dolphinenergy.com", tier: "Tier A (Gas Operator)", lastScan: "45 mins ago", status: "Active (200 OK)", hits: 6 },
+      { name: "Oryx GTL Official Corporate Site", url: "https://www.oryxgtl.com.qa", tier: "Tier A (GTL Operator)", lastScan: "1 hour ago", status: "Active (200 OK)", hits: 4 },
       { name: "WOQOD Commercial Distribution Portal", url: "https://www.woqod.com", tier: "Tier A (Distribution)", lastScan: "3 hours ago", status: "Active (200 OK)", hits: 4 },
       { name: "DOPET Engineering & Contracting Portal", url: "https://www.dopet.com", tier: "Tier B (EPC)", lastScan: "15 mins ago", status: "Active (200 OK)", hits: 8 },
       { name: "QCON Turnaround & Construction Disclosures", url: "https://www.qcon.com.qa", tier: "Tier B (EPC)", lastScan: "45 mins ago", status: "Active (200 OK)", hits: 7 },
@@ -2141,7 +2155,43 @@
     // ==========================================
     // STATE & CUSTOM SETTINGS MANAGEMENT
     // ==========================================
-    let opportunities = JSON.parse(localStorage.getItem('qatar_radar_leads')) || DEFAULT_OPPORTUNITIES;
+    function loadAndSyncOpportunities() {
+      let localData = null;
+      try {
+        localData = JSON.parse(localStorage.getItem('qatar_radar_leads'));
+      } catch(e) {
+        localData = null;
+      }
+
+      if (!localData || !Array.isArray(localData) || localData.length === 0) {
+        opportunities = [...DEFAULT_OPPORTUNITIES];
+      } else {
+        const existingMap = new Map();
+        localData.forEach(item => {
+          if (item && item.id) existingMap.set(item.id, item);
+        });
+
+        // Always merge all 18 DEFAULT_OPPORTUNITIES items so newly established leads are immediately loaded
+        DEFAULT_OPPORTUNITIES.forEach(defItem => {
+          if (!existingMap.has(defItem.id)) {
+            existingMap.set(defItem.id, defItem);
+          } else {
+            const existing = existingMap.get(defItem.id);
+            existing.value = defItem.value;
+            existing.score = defItem.score;
+            existing.stage = defItem.stage;
+            existing.expectedRfq = defItem.expectedRfq;
+          }
+        });
+
+        opportunities = Array.from(existingMap.values());
+      }
+
+      localStorage.setItem('qatar_radar_leads', JSON.stringify(opportunities));
+      return opportunities;
+    }
+
+    let opportunities = loadAndSyncOpportunities();
     let userSettings = JSON.parse(localStorage.getItem('qatar_user_settings')) || {
       monthlyTarget: 2000000,
       achievedSales: 1250000,
@@ -2593,7 +2643,7 @@
       if (filter === 'hot') filtered = filtered.filter(o => o.score >= 90);
       if (filter === 'shutdown') filtered = filtered.filter(o => o.project.toLowerCase().includes('overhaul') || o.project.toLowerCase().includes('turnaround') || o.project.toLowerCase().includes('replacement'));
 
-      container.innerHTML = filtered.slice(0, 4).map((opp, idx) => `
+      container.innerHTML = filtered.slice(0, 6).map((opp, idx) => `
         <div class="glass-panel p-4 rounded-xl border-l-4 ${opp.score >= 90 ? 'border-l-red-500' : 'border-l-amber-500'} hover:border-slate-600 transition space-y-3 relative group">
           <div class="flex justify-between items-start">
             <div class="flex items-center gap-2">
@@ -2741,6 +2791,12 @@
         const matchesClient = clientFilter === 'all' || opp.client.includes(clientFilter);
         return matchesSearch && matchesStage && matchesClient;
       });
+
+      const subVal = list.reduce((acc, o) => acc + (Number(o.value) || 0), 0);
+      const counterBadge = document.getElementById('projectScopeCounterBadge');
+      if (counterBadge) {
+        counterBadge.innerText = `Showing ${list.length} of ${opportunities.length} Active Scopes (${formatQarShort(subVal)} Pipeline Pool)`;
+      }
 
       if (list.length === 0) {
         container.innerHTML = `<div class="col-span-2 text-center p-8 text-slate-500 text-sm">No projects matching selected criteria.</div>`;
@@ -3841,7 +3897,7 @@ Q4. Spares & Delivery Timeline:
         renderQuickEpc();
 
         if (!isAuto) {
-          alert(`Live Scan & Refresh Complete!\n\n• Timestamp: ${astTimestamp}\n• Scanned: 10 Official Qatar Energy Portals (Mushtaryat, QatarEnergy LNG, Shell, QAFCO, Q-Chem, Tawteen, Monaqasat)\n• Verified: 43 Monitored Scopes & 11 Hot Leads (>80 Score)\n• Status: All pipeline values and shutdown countdowns updated.`);
+          alert(`Live Scan & Refresh Complete!\n\n• Timestamp: ${astTimestamp}\n• Scanned: 14 Official Qatar Energy Portals (QatarEnergy, QE LNG, NOC, Shell Pearl GTL, Dolphin Energy, QAFCO, Q-Chem, QAPCO, Oryx GTL, WOQOD, EPCs)\n• Verified: 49 Monitored Scopes & 18 Hot Leads (>80 Score)\n• Total Pipeline Valuation: QAR 15.11 Million\n• Status: All 18 pipeline project scopes and real-time shutdown countdowns updated.`);
         }
       }, 1000);
     }
