@@ -170,7 +170,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">08-Sep-2026 19:47 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">08-Sep-2026 19:54 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -350,9 +350,9 @@
               <span id="kpiCoverageBadge" class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs px-2 py-0.5 rounded font-bold">9.1X Cov</span>
             </div>
             <p class="text-[11px] text-slate-400 mt-2">Weighted Expected Value: <strong id="kpiWeightedVal" class="text-white">QAR 16.69M</strong></p>
-            <div class="text-[11px] text-slate-400 mt-1 flex justify-between">
-              <span>Pre-RFQ Stage: <strong id="kpiPreRfqVal" class="text-amber-300">QAR 8.50M</strong></span>
-              <span>Live ITT: <strong id="kpiLiveIttVal" class="text-emerald-300">QAR 9.60M</strong></span>
+            <div class="text-[11px] text-slate-400 mt-1 flex justify-between gap-2 flex-wrap">
+              <span class="bg-slate-950 px-2 py-0.5 rounded border border-slate-800">Pre-RFQ Stage: <strong id="kpiPreRfqVal" class="text-amber-300">14 Leads (QAR 8.50M)</strong></span>
+              <span class="bg-slate-950 px-2 py-0.5 rounded border border-slate-800">Live ITT: <strong id="kpiLiveIttVal" class="text-emerald-300">10 Tenders (QAR 9.60M)</strong></span>
             </div>
           </div>
 
@@ -469,8 +469,10 @@
               <h3 class="font-black text-lg text-white tracking-wide">🚨 TODAY'S TOP PRE-RFQ OPPORTUNITIES</h3>
               <span class="text-xs text-slate-400">(Prioritized by Lead Score & Procurement Imminence)</span>
             </div>
-            <div class="flex items-center gap-2 text-xs">
-              <button onclick="filterTopOpportunities('all')" class="top-filter-btn px-2.5 py-1 rounded bg-slate-800 text-white font-medium">All</button>
+            <div class="flex items-center gap-2 text-xs flex-wrap">
+              <button onclick="filterTopOpportunities('all')" class="top-filter-btn px-2.5 py-1 rounded bg-slate-800 text-white font-medium">All (24)</button>
+              <button onclick="filterTopOpportunities('pre_rfq')" class="top-filter-btn px-2.5 py-1 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-500/40 hover:bg-cyan-900 font-bold">⚡ Pre-RFQ Only (14)</button>
+              <button onclick="filterTopOpportunities('live_itt')" class="top-filter-btn px-2.5 py-1 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-900 font-bold">📝 Live ITT / Tenders (10)</button>
               <button onclick="filterTopOpportunities('hot')" class="top-filter-btn px-2.5 py-1 rounded bg-slate-900 text-slate-400 hover:text-white">Hot Leads (&gt;80)</button>
               <button onclick="filterTopOpportunities('shutdown')" class="top-filter-btn px-2.5 py-1 rounded bg-slate-900 text-slate-400 hover:text-white">Shutdowns</button>
             </div>
@@ -518,6 +520,30 @@
 
       <!-- TAB 2: PROJECT & SIGNAL RADAR -->
       <section id="tab-project_radar" class="tab-content hidden space-y-6">
+        <!-- STAGE METRICS SUMMARY BAR -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="glass-panel p-3 rounded-xl border border-cyan-500/40 bg-cyan-950/20">
+            <div class="text-[11px] text-cyan-300 font-bold uppercase tracking-wider">⚡ Pre-RFQ Stage</div>
+            <div id="radarPreRfqVal" class="text-lg font-black text-white mt-0.5">14 Leads • QAR 8.50M</div>
+            <div class="text-[10px] text-slate-400">Early Engineering & Procurement Prep</div>
+          </div>
+          <div class="glass-panel p-3 rounded-xl border border-emerald-500/40 bg-emerald-950/20">
+            <div class="text-[11px] text-emerald-300 font-bold uppercase tracking-wider">📝 Live ITT / Tenders</div>
+            <div id="radarLiveIttVal" class="text-lg font-black text-white mt-0.5">10 Tenders • QAR 9.60M</div>
+            <div class="text-[10px] text-slate-400">Active Bidding & RFQ Quotation Window</div>
+          </div>
+          <div class="glass-panel p-3 rounded-xl border border-amber-500/40 bg-amber-950/20">
+            <div class="text-[11px] text-amber-300 font-bold uppercase tracking-wider">🏗️ FEED & Pre-RFQ Breakdown</div>
+            <div id="radarFeedVal" class="text-lg font-black text-white mt-0.5">4 FEED • 10 Pre-RFQ</div>
+            <div class="text-[10px] text-slate-400">Level 2 FEED & Level 3 Procurement</div>
+          </div>
+          <div class="glass-panel p-3 rounded-xl border border-slate-700 bg-slate-900/60">
+            <div class="text-[11px] text-slate-300 font-bold uppercase tracking-wider">🎯 Total Opportunity Pool</div>
+            <div id="radarTotalVal" class="text-lg font-black text-amber-300 mt-0.5">24 Scopes • QAR 18.10M</div>
+            <div class="text-[10px] text-slate-400">100% Verified Qatar Energy Scopes</div>
+          </div>
+        </div>
+
         <div class="flex flex-wrap items-center justify-between gap-4 glass-panel p-4 rounded-xl">
           <div>
             <h3 class="text-xl font-black text-white flex items-center gap-2">
@@ -2654,11 +2680,15 @@ const SOURCES_DATA = [
         const stored = localStorage.getItem('qatar_radar_leads');
         if (stored) {
           const parsed = JSON.parse(stored);
-          if (Array.isArray(parsed) && parsed.length >= DEFAULT_OPPORTUNITIES.length) {
-            // Keep user local changes if any (like updated status)
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            // Merge custom user statuses and user-created rows
             parsed.forEach(p => {
               const match = leads.find(l => l.id === p.id);
-              if (match && p.status) match.status = p.status;
+              if (match) {
+                if (p.status) match.status = p.status;
+              } else if (p.id && p.project) {
+                leads.push(p); // Keep custom added rows
+              }
             });
           }
         }
@@ -2751,8 +2781,10 @@ const SOURCES_DATA = [
       if (kpiTotPip) kpiTotPip.innerText = formatQarShort(totalPipeline);
       if (kpiCovBadge) kpiCovBadge.innerText = `${coverage}X Cov`;
       if (kpiWt) kpiWt.innerText = formatQarShort(weightedPipeline);
-      if (kpiPre) kpiPre.innerText = formatQarShort(preRfqPipeline);
-      if (kpiItt) kpiItt.innerText = formatQarShort(liveIttPipeline);
+      const preRfqCount = opportunities.filter(o => !o.stage.includes('Level 4') && !o.stage.includes('Level 5') && o.status !== 'RFQ Received' && o.status !== 'Quotation' && o.status !== 'Won').length;
+      const liveIttCount = totalLeads - preRfqCount;
+      if (kpiPre) kpiPre.innerText = `${preRfqCount} Leads (${formatQarShort(preRfqPipeline)})`;
+      if (kpiItt) kpiItt.innerText = `${liveIttCount} Tenders (${formatQarShort(liveIttPipeline)})`;
 
       // 3. Command Center KPI Card 3 (Leads Count)
       const kpiHot = document.getElementById('kpiHotLeadsCount');
@@ -3186,8 +3218,15 @@ const SOURCE_URL_MAP = {
       if (!container) return;
 
       let filtered = [...opportunities];
-      if (filter === 'hot') filtered = filtered.filter(o => o.score >= 80);
-      if (filter === 'shutdown') filtered = filtered.filter(o => o.project.toLowerCase().includes('overhaul') || o.project.toLowerCase().includes('turnaround') || o.project.toLowerCase().includes('replacement') || (o.stageBadge && o.stageBadge.includes('Execution')));
+      if (filter === 'pre_rfq') {
+        filtered = filtered.filter(o => !o.stage.includes('Level 4') && !o.stage.includes('Level 5') && o.status !== 'RFQ Received' && o.status !== 'Quotation' && o.status !== 'Won');
+      } else if (filter === 'live_itt') {
+        filtered = filtered.filter(o => o.stage.includes('Level 4') || o.stage.includes('Level 5') || o.status === 'RFQ Received' || o.status === 'Quotation');
+      } else if (filter === 'hot') {
+        filtered = filtered.filter(o => o.score >= 80);
+      } else if (filter === 'shutdown') {
+        filtered = filtered.filter(o => o.project.toLowerCase().includes('overhaul') || o.project.toLowerCase().includes('turnaround') || o.project.toLowerCase().includes('replacement') || (o.stageBadge && o.stageBadge.includes('Execution')));
+      }
 
       container.innerHTML = filtered.map((opp, idx) => {
         const isItt = opp.stage.includes('Level 4') || (opp.stageBadge && opp.stageBadge.includes('Live')) || opp.status === 'RFQ Received' || opp.status === 'Quotation';
