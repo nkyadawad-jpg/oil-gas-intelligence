@@ -86,6 +86,18 @@ def update_index_html_timestamp(time_str):
                 f.write(new_content)
             print(f"[OK] Updated timestamp in index.html to: {time_str}")
 
+
+def calc_days_to_rfq(date_str):
+    month_map = {"jan":1, "feb":2, "mar":3, "apr":4, "may":5, "jun":6, "jul":7, "aug":8, "sep":9, "oct":10, "nov":11, "dec":12}
+    try:
+        parts = date_str.strip().split('-')
+        if len(parts) == 3 and parts[1].lower() in month_map:
+            target_date = datetime.date(int(parts[2]), month_map[parts[1].lower()], int(parts[0]))
+            return max(0, (target_date - datetime.date.today()).days)
+    except Exception:
+        pass
+    return 0
+
 def calc_days_to_shutdown(date_str):
     month_map = {"jan":1, "feb":2, "mar":3, "apr":4, "may":5, "jun":6, "jul":7, "aug":8, "sep":9, "oct":10, "nov":11, "dec":12}
     try:

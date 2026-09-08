@@ -170,7 +170,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">05-Sep-2026 16:32 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">08-Sep-2026 19:29 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -3298,7 +3298,13 @@ const SOURCE_URL_MAP = {
     function renderQuickEpc() {
       const container = document.getElementById('quickEpcList');
       if (!container) return;
-      container.innerHTML = EPC_DATA.slice(0, 5).map(epc => `
+      container.innerHTML = EPC_DATA.slice(0, 5).map(epc => {
+        const epcLeads = opportunities.filter(o => {
+          const e = (o.epc || '').toLowerCase();
+          return e.includes((epc.shortName||'').toLowerCase()) || e.includes((epc.name||'').toLowerCase());
+        });
+        const liveCount = epcLeads.length > 0 ? epcLeads.length : epc.activeProjects;
+        return `
         <div class="p-2.5 bg-slate-900/90 rounded-lg border border-slate-800 text-xs flex items-center justify-between hover:border-slate-700 transition">
           <div>
             <div class="font-bold text-white flex items-center gap-1.5">
@@ -3312,7 +3318,8 @@ const SOURCE_URL_MAP = {
             <button onclick="switchTab('epc_directory')" class="block text-[10px] text-cyan-400 hover:underline">View Scope →</button>
           </div>
         </div>
-      `).join('');
+      `;
+      }).join('');
     }
 
     // ==========================================
@@ -3774,6 +3781,22 @@ const SOURCE_URL_MAP = {
       const panel = document.getElementById('zoneDetailsPanel');
       if (!panel || !info) return;
 
+      // Compute live zone metrics dynamically from opportunities
+      const zoneLeads = opportunities.filter(o => {
+        const fac = (o.facility || '').toLowerCase();
+        if (zoneKey === 'ras_laffan') return fac.includes('ras laffan') || fac.includes('rlic');
+        if (zoneKey === 'mesaieed') return fac.includes('mesaieed') || fac.includes('mic');
+        if (zoneKey === 'dukhan') return fac.includes('dukhan');
+        if (zoneKey === 'offshore') return fac.includes('offshore') || fac.includes('bul hanine') || fac.includes('al shaheen');
+        if (zoneKey === 'halul') return fac.includes('halul');
+        if (zoneKey === 'umm_al_houl') return fac.includes('umm al houl') || fac.includes('ras abu fontas');
+        return false;
+      });
+
+      const liveZoneProjects = zoneLeads.length > 0 ? zoneLeads.length : info.activeProjects;
+      const liveZoneValue = zoneLeads.reduce((sum, o) => sum + (Number(o.value) || 0), 0);
+      const liveZoneValueStr = liveZoneValue > 0 ? ` (QAR ${(liveZoneValue/1000000).toFixed(2)}M)` : '';
+
       panel.innerHTML = `
         <div class="space-y-4">
           <div class="border-b border-slate-800 pb-3">
@@ -3784,7 +3807,7 @@ const SOURCE_URL_MAP = {
 
           <div class="grid grid-cols-3 gap-2 text-center text-xs">
             <div class="p-2 bg-slate-900 rounded border border-slate-800">
-              <div class="text-base font-bold text-cyan-400">${info.activeProjects}</div>
+              <div class="text-base font-bold text-cyan-400">${liveZoneProjects}${liveZoneValueStr ? '<span class="text-[10px] text-emerald-300 block font-normal font-sans">' + liveZoneValueStr + '</span>' : ''}</div>
               <div class="text-[10px] text-slate-400">Active Projects</div>
             </div>
             <div class="p-2 bg-slate-900 rounded border border-slate-800">
@@ -3831,7 +3854,18 @@ const SOURCE_URL_MAP = {
       const container = document.getElementById('epcCardsContainer');
       if (!container) return;
 
-      container.innerHTML = EPC_DATA.map(epc => `
+      container.innerHTML = EPC_DATA.map(epc => {
+        const epcLeads = opportunities.filter(o => {
+          const e = (o.epc || '').toLowerCase();
+          const name = (epc.name || '').toLowerCase();
+          const shortName = (epc.shortName || '').toLowerCase();
+          return e.includes(shortName) || e.includes(name) || name.includes(e);
+        });
+        const liveCount = epcLeads.length > 0 ? epcLeads.length : epc.activeProjects;
+        const liveVal = epcLeads.reduce((sum, o) => sum + (Number(o.value) || 0), 0);
+        const liveValStr = liveVal > 0 ? ` • QAR ${(liveVal / 1000000).toFixed(2)}M` : '';
+
+        return `
         <div class="glass-panel p-5 rounded-xl border border-slate-700 hover:border-yellow-500/50 transition space-y-3.5">
           <div class="flex justify-between items-start">
             <div>
@@ -3839,7 +3873,7 @@ const SOURCE_URL_MAP = {
               <h4 class="font-bold text-base text-white mt-1.5">${epc.name}</h4>
               <p class="text-xs text-slate-400 font-arabic">${epc.arabicName}</p>
             </div>
-            <span class="text-xs bg-slate-900 text-amber-300 px-2 py-1 rounded border border-slate-800 font-bold">${epc.activeProjects} Active Scopes</span>
+            <span class="text-xs bg-slate-900 text-amber-300 px-2 py-1 rounded border border-slate-800 font-bold">${liveCount} Active Scopes${liveValStr}</span>
           </div>
 
           <div class="space-y-2 text-xs">
@@ -3867,7 +3901,8 @@ const SOURCE_URL_MAP = {
             </button>
           </div>
         </div>
-      `).join('');
+      `;
+      }).join('');
     }
 
     // ==========================================
@@ -3914,7 +3949,19 @@ const SOURCE_URL_MAP = {
       const container = document.getElementById('productPortfolioContainer');
       if (!container) return;
 
-      container.innerHTML = PRODUCT_PORTFOLIO.map(p => `
+      container.innerHTML = PRODUCT_PORTFOLIO.map(p => {
+        const brandKey = p.brand.split('/')[0].trim().toLowerCase();
+        const brandLeads = opportunities.filter(o => {
+          const b = (o.brand || '').toLowerCase();
+          const prod = (o.product || '').toLowerCase();
+          const cat = (p.category || '').toLowerCase();
+          return b.includes(brandKey) || prod.includes(cat) || cat.includes(prod);
+        });
+        const liveCount = brandLeads.length;
+        const liveVal = brandLeads.reduce((sum, o) => sum + (Number(o.value) || 0), 0);
+        const liveValText = liveVal > 0 ? `QAR ${(liveVal / 1000000).toFixed(2)}M Active Pipeline (${liveCount} Scopes)` : 'Active Scopes in Pipeline';
+
+        return `
         <div class="glass-panel p-5 rounded-xl border border-slate-700 space-y-3">
           <div class="flex items-center gap-3 border-b border-slate-800 pb-3">
             <div class="w-10 h-10 rounded-lg bg-qatar/20 border border-qatar flex items-center justify-center text-amber-300 text-lg">
@@ -3936,12 +3983,13 @@ const SOURCE_URL_MAP = {
               <span class="text-slate-300">${p.applications}</span>
             </div>
             <div class="p-2 bg-emerald-500/10 rounded border border-emerald-500/20">
-              <span class="text-emerald-400 text-[11px] block font-bold">Qatar PML Status:</span>
+              <div class="mb-1 text-cyan-300 text-[11px] font-bold"><i class="fa-solid fa-chart-line mr-1"></i>${liveValText}</div><span class="text-emerald-400 text-[11px] block font-bold">Qatar PML Status:</span>
               <span class="text-emerald-200 text-[11px]">${p.qatarApproval}</span>
             </div>
           </div>
         </div>
-      `).join('');
+      `;
+      }).join('');
     }
 
     // ==========================================
@@ -3965,7 +4013,8 @@ const SOURCE_URL_MAP = {
             <span class="text-[10px] text-slate-400">Scanned ${s.lastScan} • ${s.hits} Signals</span>
           </div>
         </div>
-      `).join('');
+      `;
+      }).join('');
     }
 
     // ==========================================
@@ -4541,16 +4590,18 @@ Q4. Spares & Delivery Timeline:
               renderRecentSignals(data.recentSignals);
             }
 
-            // 6. Live Re-render and recalculation across all modules
+            // 6. Live Re-render and recalculation across all 10 modules
             recalculateKpiMetrics();
             renderTopOpportunities();
             renderProjectCards();
             renderShutdownCards();
             renderExcelTable();
             renderQuickEpc();
+            if (typeof renderEpcCards === 'function') renderEpcCards();
             renderSources();
             if (typeof renderCustomerMatrix === 'function') renderCustomerMatrix();
             if (typeof renderProductPortfolio === 'function') renderProductPortfolio();
+            if (typeof selectZone === 'function') selectZone('ras_laffan');
 
             console.log("Live cloud intelligence sync completed across all modules at:", data.syncTimestamp);
           }
