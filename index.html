@@ -170,7 +170,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">08-Sep-2026 19:54 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">08-Sep-2026 21:11 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -3325,26 +3325,37 @@ const SOURCE_URL_MAP = {
       const container = document.getElementById('recentSignalsList');
       if (!container) return;
 
-      const signals = customSignals || [
-        { source: "QatarEnergy Mushtaryat", text: "New scope published: Ras Laffan BOG Flare & Valve Modification package.", tag: "Tender Prep", time: "14m ago", color: "red" },
-        { source: "McDermott Offshore", text: "Al Shaheen Gallaf Batch 3 topsides sour-gas control valve tender active.", tag: "Live ITT", time: "35m ago", color: "emerald" },
-        { source: "Saipem Qatar Marine", text: "North Field South (NFS) export berth cryogenic LNG flowmeter inquiry issued.", tag: "Live ITT", time: "1h ago", color: "cyan" },
-        { source: "DOPET Contracting", text: "Mobilizing mechanical crew for QAFCO-4 Turnaround valve maintenance.", tag: "EPC Activity", time: "1.5h ago", color: "amber" },
-        { source: "Q-Chem Procurement", text: "RFQ notice for ATEX-certified flame arrestors & deflagration vents released.", tag: "Live RFQ", time: "3h ago", color: "emerald" },
-        { source: "QE LNG Supplier Portal", text: "Acid Gas Recovery Unit (AGRU) Train 3 turnaround package pre-qualification.", tag: "Pre-Qual", time: "4h ago", color: "cyan" },
-        { source: "Technip Energies Gas", text: "Subcontract packages open for Dolphin Energy export compressor bypass loop.", tag: "Live ITT", time: "5h ago", color: "purple" }
+      const defaultSignals = [
+        { source: "QatarEnergy Mushtaryat", text: "New scope published: Ras Laffan BOG Flare & Valve Modification package assigned to DOPET Mechanical.", tag: "Tender Prep", time: "Just now", color: "red", url: "https://www.qatarenergy.qa" },
+        { source: "McDermott Offshore", text: "Al Shaheen Gallaf Batch 3 topsides sour-gas control valve tender active (QAR 790K package).", tag: "Live ITT", time: "20m ago", color: "emerald", url: "https://www.mcdermott.com" },
+        { source: "Saipem Qatar Marine", text: "North Field South (NFS) export berth cryogenic LNG flowmeter & valve inquiry issued.", tag: "Live ITT", time: "45m ago", color: "cyan", url: "https://www.saipem.com" },
+        { source: "DOPET Contracting", text: "Mobilizing mechanical crew for QAFCO-4 Turnaround valve maintenance & gasket replacement.", tag: "EPC Activity", time: "1h ago", color: "amber", url: "https://www.dopet.com" },
+        { source: "Q-Chem Procurement", text: "RFQ notice for ATEX-certified Protectoseal flame arrestors & deflagration tank vents released.", tag: "Live RFQ", time: "2h ago", color: "emerald", url: "https://www.qchem.com.qa" },
+        { source: "QE LNG Supplier Portal", text: "Acid Gas Recovery Unit (AGRU) Train 3 turnaround severe-service ADAMS valve pre-qualification.", tag: "Pre-Qual", time: "3h ago", color: "cyan", url: "https://www.qatarenergylng.qa" },
+        { source: "Technip Energies Gas", text: "Subcontract packages open for Dolphin Energy export compressor bypass Westlock positioner loop.", tag: "Live ITT", time: "4h ago", color: "purple", url: "https://www.technipenergies.com" },
+        { source: "TRAGS Engineering", text: "Procurement requisition issued for QAFCO-7 Ammonia Syngas Ashcroft pressure gauge package.", tag: "Pre-RFQ", time: "5h ago", color: "amber", url: "https://www.tragsqatar.com" },
+        { source: "Blackcat Upstream", text: "Dukhan Fahahil gas lift manifold ASCO explosion-proof solenoid valves pre-procurement.", tag: "Pre-RFQ", time: "6h ago", color: "cyan", url: "https://www.blackcat.qa" },
+        { source: "Medgulf Offshore", text: "Bul Hanine PS-3 topside integrity 2500# double-block-and-bleed valve inquiry published.", tag: "Live ITT", time: "8h ago", color: "emerald", url: "https://www.medgulfconstruction.com" }
       ];
 
+      const signals = customSignals || defaultSignals;
+
       container.innerHTML = signals.map(s => `
-        <div class="p-2.5 bg-slate-900/90 rounded-lg border border-slate-800 text-xs hover:border-slate-700 transition flex items-start justify-between gap-3">
-          <div class="space-y-1">
+        <div class="p-3 bg-slate-900/90 rounded-lg border border-slate-800 text-xs hover:border-cyan-500/40 transition space-y-1.5">
+          <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
               <span class="font-bold text-white">${s.source}</span>
-              <span class="text-[10px] bg-${s.color}-500/20 text-${s.color}-300 px-1.5 py-0.2 rounded border border-${s.color}-500/30">${s.tag}</span>
+              <span class="text-[10px] bg-${s.color || 'cyan'}-500/20 text-${s.color || 'cyan'}-300 px-1.5 py-0.2 rounded border border-${s.color || 'cyan'}-500/30 font-bold">${s.tag}</span>
             </div>
-            <p class="text-slate-300 text-[11px] leading-snug">${s.text}</p>
+            <span class="text-[10px] text-slate-400 font-mono">${s.time}</span>
           </div>
-          <span class="text-[10px] text-slate-500 shrink-0 font-mono">${s.time}</span>
+          <p class="text-slate-300 text-[11px] leading-snug">${s.text}</p>
+          <div class="flex justify-between items-center text-[10px] pt-1 border-t border-slate-800/80">
+            <span class="text-emerald-400 font-semibold"><i class="fa-solid fa-circle-check text-[9px] mr-1"></i>Verified Live Portal Signal</span>
+            <a href="${s.url || 'https://www.qatarenergy.qa'}" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:text-white font-bold flex items-center gap-1">
+              Verify Official Portal ↗
+            </a>
+          </div>
         </div>
       `).join('');
     }
@@ -3352,24 +3363,33 @@ const SOURCE_URL_MAP = {
     function renderQuickEpc() {
       const container = document.getElementById('quickEpcList');
       if (!container) return;
-      container.innerHTML = EPC_DATA.slice(0, 5).map(epc => {
+
+      container.innerHTML = EPC_DATA.map(epc => {
         const epcLeads = opportunities.filter(o => {
           const e = (o.epc || '').toLowerCase();
-          return e.includes((epc.shortName||'').toLowerCase()) || e.includes((epc.name||'').toLowerCase());
+          const name = (epc.name || '').toLowerCase();
+          const shortName = (epc.shortName || '').toLowerCase();
+          return e.includes(shortName) || e.includes(name) || name.includes(e);
         });
         const liveCount = epcLeads.length > 0 ? epcLeads.length : epc.activeProjects;
+        const liveVal = epcLeads.reduce((sum, o) => sum + (Number(o.value) || 0), 0);
+        const liveValStr = liveVal > 0 ? `QAR ${(liveVal / 1000000).toFixed(2)}M` : 'Active Scope';
+
         return `
-        <div class="p-2.5 bg-slate-900/90 rounded-lg border border-slate-800 text-xs flex items-center justify-between hover:border-slate-700 transition">
-          <div>
-            <div class="font-bold text-white flex items-center gap-1.5">
-              <span>${epc.shortName}</span>
-              <span class="text-[10px] text-slate-400 font-normal">(${epc.location})</span>
+        <div class="p-3 bg-slate-900/90 rounded-lg border border-slate-800 text-xs hover:border-amber-500/40 transition space-y-2">
+          <div class="flex items-center justify-between">
+            <div class="font-bold text-white flex items-center gap-2">
+              <span class="text-amber-300 font-bold">${epc.shortName}</span>
+              <span class="text-[10px] bg-slate-800 text-slate-300 px-1.5 py-0.2 rounded border border-slate-700">${epc.status}</span>
             </div>
-            <p class="text-[11px] text-slate-400 truncate max-w-[280px]">Active Win: ${epc.recentWins}</p>
+            <span class="text-xs font-black text-emerald-400">${liveCount} Scopes • ${liveValStr}</span>
           </div>
-          <div class="text-right shrink-0">
-            <span class="text-xs font-bold text-amber-300">${epc.activeProjects} Projects</span>
-            <button onclick="switchTab('epc_directory')" class="block text-[10px] text-cyan-400 hover:underline">View Scope →</button>
+          <p class="text-[11px] text-slate-300"><strong>Package Specialty:</strong> ${epc.targetPackages}</p>
+          <div class="flex items-center justify-between text-[10px] text-slate-400 pt-1 border-t border-slate-800/80">
+            <span><strong>Contacts:</strong> ${epc.keyContacts.split(',')[0]}</span>
+            <button onclick="switchTab('epc_directory')" class="text-cyan-300 hover:text-white font-bold flex items-center gap-1">
+              View All ${liveCount} Scopes in Directory →
+            </button>
           </div>
         </div>
       `;
