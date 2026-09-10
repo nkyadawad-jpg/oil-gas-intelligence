@@ -170,7 +170,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">10-Sep-2026 18:40 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">10-Sep-2026 18:47 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -2681,13 +2681,14 @@ const SOURCES_DATA = [
         if (stored) {
           const parsed = JSON.parse(stored);
           if (Array.isArray(parsed) && parsed.length > 0) {
-            // Merge custom user statuses and user-created rows
             parsed.forEach(p => {
               const match = leads.find(l => l.id === p.id);
               if (match) {
                 if (p.status) match.status = p.status;
+                if (p.stage) match.stage = p.stage;
+                if (p.value) match.value = p.value;
               } else if (p.id && p.project) {
-                leads.push(p); // Keep custom added rows
+                leads.push(p);
               }
             });
           }
@@ -2695,11 +2696,35 @@ const SOURCES_DATA = [
       } catch (e) {
         console.warn("Storage sync fallback:", e);
       }
+      // Ensure all 24 default opportunities exist
+      if (leads.length < DEFAULT_OPPORTUNITIES.length) {
+        leads = DEFAULT_OPPORTUNITIES.map(item => ({ ...item }));
+      }
       try {
         localStorage.setItem('qatar_radar_leads', JSON.stringify(leads));
       } catch (e) {}
       opportunities = leads;
       return opportunities;
+    }
+
+    function restoreAllVerifiedData() {
+      opportunities = DEFAULT_OPPORTUNITIES.map(item => ({ ...item }));
+      try {
+        localStorage.setItem('qatar_radar_leads', JSON.stringify(opportunities));
+      } catch (e) {}
+      recalculateKpiMetrics();
+      renderTopOpportunities();
+      renderRecentSignals();
+      renderProjectCards();
+      renderShutdownCards();
+      renderExcelTable();
+      renderQuickEpc();
+      if (typeof renderEpcCards === 'function') renderEpcCards();
+      renderSources();
+      if (typeof renderCustomerMatrix === 'function') renderCustomerMatrix();
+      if (typeof renderProductPortfolio === 'function') renderProductPortfolio();
+      if (typeof selectZone === 'function') selectZone('ras_laffan');
+      alert("All 24 Verified Qatar Energy Opportunities & Module Datasets Restored & Synced Smoothly!");
     }
     opportunities = loadAndSyncOpportunities();
     let userSettings = JSON.parse(localStorage.getItem('qatar_user_settings')) || {
