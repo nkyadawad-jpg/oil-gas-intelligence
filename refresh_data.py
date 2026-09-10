@@ -86,18 +86,6 @@ def update_index_html_timestamp(time_str):
                 f.write(new_content)
             print(f"[OK] Updated timestamp in index.html to: {time_str}")
 
-
-def calc_days_to_rfq(date_str):
-    month_map = {"jan":1, "feb":2, "mar":3, "apr":4, "may":5, "jun":6, "jul":7, "aug":8, "sep":9, "oct":10, "nov":11, "dec":12}
-    try:
-        parts = date_str.strip().split('-')
-        if len(parts) == 3 and parts[1].lower() in month_map:
-            target_date = datetime.date(int(parts[2]), month_map[parts[1].lower()], int(parts[0]))
-            return max(0, (target_date - datetime.date.today()).days)
-    except Exception:
-        pass
-    return 0
-
 def calc_days_to_shutdown(date_str):
     month_map = {"jan":1, "feb":2, "mar":3, "apr":4, "may":5, "jun":6, "jul":7, "aug":8, "sep":9, "oct":10, "nov":11, "dec":12}
     try:
@@ -844,18 +832,13 @@ def generate_hourly_data():
         "shutdownRadar": shutdown_radar_data,
         "opportunities": OPPORTUNITIES_PAYLOAD,
         "recentSignals": [
-            { "source": "QatarEnergy Mushtaryat", "text": "New scope published: Ras Laffan BOG Flare & Valve Modification package assigned to DOPET Mechanical.", "tag": "Tender Prep", "time": "Just now", "color": "red", "url": "https://www.qatarenergy.qa" },
-            { "source": "McDermott Offshore", "text": "Al Shaheen Gallaf Batch 3 topsides sour-gas control valve tender active (QAR 790K package).", "tag": "Live ITT", "time": "20m ago", "color": "emerald", "url": "https://www.mcdermott.com" },
-            { "source": "Saipem Qatar Marine", "text": "North Field South (NFS) export berth cryogenic LNG flowmeter & valve inquiry issued.", "tag": "Live ITT", "time": "45m ago", "color": "cyan", "url": "https://www.saipem.com" },
-            { "source": "DOPET Contracting", "text": "Mobilizing mechanical crew for QAFCO-4 Turnaround valve maintenance & gasket replacement.", "tag": "EPC Activity", "time": "1h ago", "color": "amber", "url": "https://www.dopet.com" },
-            { "source": "Q-Chem Procurement", "text": "RFQ notice for ATEX-certified Protectoseal flame arrestors & deflagration tank vents released.", "tag": "Live RFQ", "time": "2h ago", "color": "emerald", "url": "https://www.qchem.com.qa" },
-            { "source": "QE LNG Supplier Portal", "text": "Acid Gas Recovery Unit (AGRU) Train 3 turnaround severe-service ADAMS valve pre-qualification.", "tag": "Pre-Qual", "time": "3h ago", "color": "cyan", "url": "https://www.qatarenergylng.qa" },
-            { "source": "Technip Energies Gas", "text": "Subcontract packages open for Dolphin Energy export compressor bypass Westlock positioner loop.", "tag": "Live ITT", "time": "4h ago", "color": "purple", "url": "https://www.technipenergies.com" },
-            { "source": "TRAGS Engineering", "text": "Procurement requisition issued for QAFCO-7 Ammonia Syngas Ashcroft pressure gauge package.", "tag": "Pre-RFQ", "time": "5h ago", "color": "amber", "url": "https://www.tragsqatar.com" },
-            { "source": "Blackcat Upstream", "text": "Dukhan Fahahil gas lift manifold ASCO explosion-proof solenoid valves pre-procurement.", "tag": "Pre-RFQ", "time": "6h ago", "color": "cyan", "url": "https://www.blackcat.qa" },
-            { "source": "Medgulf Offshore", "text": "Bul Hanine PS-3 topside integrity 2500# double-block-and-bleed valve inquiry published.", "tag": "Live ITT", "time": "8h ago", "color": "emerald", "url": "https://www.medgulfconstruction.com" },
-            { "source": "Chiyoda Almana", "text": "FEED engineering verification complete for RLIC paraffin treatment plant valve expansion.", "tag": "FEED Stage", "time": "10h ago", "color": "cyan", "url": "https://www.chiyodaalmana.com.qa" },
-            { "source": "QCON Turnaround", "text": "QAPCO Ethylene Plant 2 quench water pump Trillium impeller overhaul scope finalized.", "tag": "Turnaround", "time": "12h ago", "color": "amber", "url": "https://www.qcon.com.qa" }
+            { "source": "QatarEnergy Mushtaryat", "text": "New scope published: Ras Laffan BOG Flare & Valve Modification package.", "tag": "Tender Prep", "time": "Just now", "color": "red" },
+            { "source": "McDermott Offshore", "text": "Al Shaheen Gallaf Batch 3 topsides sour-gas control valve tender active.", "tag": "Live ITT", "time": "20m ago", "color": "emerald" },
+            { "source": "Saipem Qatar Marine", "text": "North Field South (NFS) export berth cryogenic LNG flowmeter inquiry issued.", "tag": "Live ITT", "time": "45m ago", "color": "cyan" },
+            { "source": "DOPET Contracting", "text": "Mobilizing mechanical crew for QAFCO-4 Turnaround valve maintenance.", "tag": "EPC Activity", "time": "1h ago", "color": "amber" },
+            { "source": "Q-Chem Procurement", "text": "RFQ notice for ATEX-certified flame arrestors & deflagration vents released.", "tag": "Live RFQ", "time": "2h ago", "color": "emerald" },
+            { "source": "QE LNG Supplier Portal", "text": "Acid Gas Recovery Unit (AGRU) Train 3 turnaround package pre-qualification.", "tag": "Pre-Qual", "time": "3h ago", "color": "cyan" },
+            { "source": "Technip Energies Gas", "text": "Subcontract packages open for Dolphin Energy export compressor bypass loop.", "tag": "Live ITT", "time": "4h ago", "color": "purple" }
         ]
     }
 

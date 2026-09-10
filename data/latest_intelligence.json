@@ -1,6 +1,6 @@
 {
-  "syncTimestamp": "10-Sep-2026 18:59 AST",
-  "syncTimestampIso": "2026-09-10T15:59:08.152093+00:00",
+  "syncTimestamp": "10-Sep-2026 19:01 AST",
+  "syncTimestampIso": "2026-09-10T16:01:58.703431+00:00",
   "totalProjectsMonitored": 54,
   "verifiedHotLeads": 24,
   "openPipelineValuation": 18100000,
@@ -16,168 +16,168 @@
       "url": "https://www.qatarenergy.qa",
       "tier": "Tier A (State)",
       "status": "Active (200 OK)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "QatarEnergy LNG Official Supplier Notices",
       "url": "https://www.qatarenergylng.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "QAFCO Fertilizer Official Procurement",
       "url": "https://www.qafco.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "Q-Chem / RLOC Chemical Portal",
       "url": "https://www.qchem.com.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "QAPCO Petrochemical Procurement Portal",
       "url": "https://www.qapco.com",
       "tier": "Tier A (Operator)",
       "status": "Protected (307)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "North Oil Company (NOC) Official Portal",
       "url": "https://www.noc.qa",
       "tier": "Tier A (Offshore Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "Qatar Shell Pearl GTL Official Site",
       "url": "https://www.shell.com.qa",
       "tier": "Tier A (GTL Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "Dolphin Energy Official Qatar Portal",
       "url": "https://www.dolphinenergy.com",
       "tier": "Tier A (Gas Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "Oryx GTL Official Corporate Site",
       "url": "https://www.oryxgtl.com.qa",
       "tier": "Tier A (GTL Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "WOQOD Commercial Distribution Portal",
       "url": "https://www.woqod.com",
       "tier": "Tier A (Distribution)",
       "status": "Active (200 OK)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "QAFAC Methanol Procurement Portal",
       "url": "https://www.qafac.com.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "Umm Al Houl Power (UHP) Portal",
       "url": "https://www.uhp.com.qa",
       "tier": "Tier A (Utility)",
       "status": "Active (Verified)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "Mpower Power Generation Portal",
       "url": "https://www.mpower.com.qa",
       "tier": "Tier A (Utility)",
       "status": "Active (200 OK)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "DOPET Engineering & Contracting Portal",
       "url": "https://www.dopet.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "QCON Turnaround & Construction Disclosures",
       "url": "https://www.qcon.com.qa",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "TRAGS Electrical & Engineering Qatar",
       "url": "https://www.tragsqatar.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "Medgulf Construction Official Site",
       "url": "https://www.medgulfconstruction.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "Blackcat Engineering & Construction",
       "url": "https://www.blackcat.qa",
       "tier": "Tier B (EPC)",
       "status": "Active (Verified)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "Chiyoda Almana Engineering Portal",
       "url": "https://www.chiyodaalmana.com.qa",
       "tier": "Tier B (EPC/FEED)",
       "status": "Active (Verified)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "McDermott Offshore Qatar Site",
       "url": "https://www.mcdermott.com",
       "tier": "Tier B (Offshore EPC)",
       "status": "Protected (403)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "Saipem Qatar Contracting Portal",
       "url": "https://www.saipem.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "Technip Energies Qatar Portal",
       "url": "https://www.technipenergies.com",
       "tier": "Tier B (Mega EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "Consolidated Contractors Company (CCC)",
       "url": "https://www.ccc.net",
       "tier": "Tier B (Mega EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     },
     {
       "name": "Galfar Al Misnad Engineering Qatar",
       "url": "https://www.galfarqatar.com.qa",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "10-Sep-2026 18:59 AST"
+      "checkedAt": "10-Sep-2026 19:01 AST"
     }
   ],
   "shutdownRadar": [
@@ -881,99 +881,52 @@
   "recentSignals": [
     {
       "source": "QatarEnergy Mushtaryat",
-      "text": "New scope published: Ras Laffan BOG Flare & Valve Modification package assigned to DOPET Mechanical.",
+      "text": "New scope published: Ras Laffan BOG Flare & Valve Modification package.",
       "tag": "Tender Prep",
       "time": "Just now",
-      "color": "red",
-      "url": "https://www.qatarenergy.qa"
+      "color": "red"
     },
     {
       "source": "McDermott Offshore",
-      "text": "Al Shaheen Gallaf Batch 3 topsides sour-gas control valve tender active (QAR 790K package).",
+      "text": "Al Shaheen Gallaf Batch 3 topsides sour-gas control valve tender active.",
       "tag": "Live ITT",
       "time": "20m ago",
-      "color": "emerald",
-      "url": "https://www.mcdermott.com"
+      "color": "emerald"
     },
     {
       "source": "Saipem Qatar Marine",
-      "text": "North Field South (NFS) export berth cryogenic LNG flowmeter & valve inquiry issued.",
+      "text": "North Field South (NFS) export berth cryogenic LNG flowmeter inquiry issued.",
       "tag": "Live ITT",
       "time": "45m ago",
-      "color": "cyan",
-      "url": "https://www.saipem.com"
+      "color": "cyan"
     },
     {
       "source": "DOPET Contracting",
-      "text": "Mobilizing mechanical crew for QAFCO-4 Turnaround valve maintenance & gasket replacement.",
+      "text": "Mobilizing mechanical crew for QAFCO-4 Turnaround valve maintenance.",
       "tag": "EPC Activity",
       "time": "1h ago",
-      "color": "amber",
-      "url": "https://www.dopet.com"
+      "color": "amber"
     },
     {
       "source": "Q-Chem Procurement",
-      "text": "RFQ notice for ATEX-certified Protectoseal flame arrestors & deflagration tank vents released.",
+      "text": "RFQ notice for ATEX-certified flame arrestors & deflagration vents released.",
       "tag": "Live RFQ",
       "time": "2h ago",
-      "color": "emerald",
-      "url": "https://www.qchem.com.qa"
+      "color": "emerald"
     },
     {
       "source": "QE LNG Supplier Portal",
-      "text": "Acid Gas Recovery Unit (AGRU) Train 3 turnaround severe-service ADAMS valve pre-qualification.",
+      "text": "Acid Gas Recovery Unit (AGRU) Train 3 turnaround package pre-qualification.",
       "tag": "Pre-Qual",
       "time": "3h ago",
-      "color": "cyan",
-      "url": "https://www.qatarenergylng.qa"
+      "color": "cyan"
     },
     {
       "source": "Technip Energies Gas",
-      "text": "Subcontract packages open for Dolphin Energy export compressor bypass Westlock positioner loop.",
+      "text": "Subcontract packages open for Dolphin Energy export compressor bypass loop.",
       "tag": "Live ITT",
       "time": "4h ago",
-      "color": "purple",
-      "url": "https://www.technipenergies.com"
-    },
-    {
-      "source": "TRAGS Engineering",
-      "text": "Procurement requisition issued for QAFCO-7 Ammonia Syngas Ashcroft pressure gauge package.",
-      "tag": "Pre-RFQ",
-      "time": "5h ago",
-      "color": "amber",
-      "url": "https://www.tragsqatar.com"
-    },
-    {
-      "source": "Blackcat Upstream",
-      "text": "Dukhan Fahahil gas lift manifold ASCO explosion-proof solenoid valves pre-procurement.",
-      "tag": "Pre-RFQ",
-      "time": "6h ago",
-      "color": "cyan",
-      "url": "https://www.blackcat.qa"
-    },
-    {
-      "source": "Medgulf Offshore",
-      "text": "Bul Hanine PS-3 topside integrity 2500# double-block-and-bleed valve inquiry published.",
-      "tag": "Live ITT",
-      "time": "8h ago",
-      "color": "emerald",
-      "url": "https://www.medgulfconstruction.com"
-    },
-    {
-      "source": "Chiyoda Almana",
-      "text": "FEED engineering verification complete for RLIC paraffin treatment plant valve expansion.",
-      "tag": "FEED Stage",
-      "time": "10h ago",
-      "color": "cyan",
-      "url": "https://www.chiyodaalmana.com.qa"
-    },
-    {
-      "source": "QCON Turnaround",
-      "text": "QAPCO Ethylene Plant 2 quench water pump Trillium impeller overhaul scope finalized.",
-      "tag": "Turnaround",
-      "time": "12h ago",
-      "color": "amber",
-      "url": "https://www.qcon.com.qa"
+      "color": "purple"
     }
   ]
 }
