@@ -65,6 +65,40 @@
       40%, 80% { transform: translateX(8px); }
     }
     .animate-shake { animation: shake 0.4s ease-in-out; }
+  
+    /* CRITICAL LAYOUT & DISPLAY FALLBACK STYLES */
+    body {
+      background-color: #020617 !important;
+      color: #f8fafc !important;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.85) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+      border: 1px solid rgba(51, 65, 85, 0.8) !important;
+    }
+    .tab-content.hidden {
+      display: none !important;
+    }
+    .tab-content:not(.hidden) {
+      display: block !important;
+    }
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.hidden {
+      display: none !important;
+    }
+
   </style>
 </head>
 <body class="bg-radar-bg text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-qatar selection:text-white w-full max-w-full overflow-x-hidden">
@@ -170,7 +204,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">10-Sep-2026 18:47 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">10-Sep-2026 18:53 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -2682,13 +2716,15 @@ const SOURCES_DATA = [
           const parsed = JSON.parse(stored);
           if (Array.isArray(parsed) && parsed.length > 0) {
             parsed.forEach(p => {
-              const match = leads.find(l => l.id === p.id);
-              if (match) {
-                if (p.status) match.status = p.status;
-                if (p.stage) match.stage = p.stage;
-                if (p.value) match.value = p.value;
-              } else if (p.id && p.project) {
-                leads.push(p);
+              if (p && p.id) {
+                const match = leads.find(l => l.id === p.id);
+                if (match) {
+                  if (p.status) match.status = p.status;
+                  if (p.stage) match.stage = p.stage;
+                  if (p.value) match.value = p.value;
+                } else if (p.project) {
+                  leads.push(p);
+                }
               }
             });
           }
@@ -2696,8 +2732,7 @@ const SOURCES_DATA = [
       } catch (e) {
         console.warn("Storage sync fallback:", e);
       }
-      // Ensure all 24 default opportunities exist
-      if (leads.length < DEFAULT_OPPORTUNITIES.length) {
+      if (!Array.isArray(leads) || leads.length < DEFAULT_OPPORTUNITIES.length) {
         leads = DEFAULT_OPPORTUNITIES.map(item => ({ ...item }));
       }
       try {
