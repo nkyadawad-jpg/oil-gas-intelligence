@@ -204,7 +204,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">10-Sep-2026 18:53 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">10-Sep-2026 18:59 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -2707,36 +2707,20 @@ const SOURCES_DATA = [
     // ==========================================
     // STATE & CUSTOM SETTINGS MANAGEMENT
     // ==========================================
-    let opportunities = [];
+    let opportunities = DEFAULT_OPPORTUNITIES.map(item => ({ ...item }));
     function loadAndSyncOpportunities() {
       let leads = DEFAULT_OPPORTUNITIES.map(item => ({ ...item }));
       try {
         const stored = localStorage.getItem('qatar_radar_leads');
         if (stored) {
           const parsed = JSON.parse(stored);
-          if (Array.isArray(parsed) && parsed.length > 0) {
+          if (Array.isArray(parsed) && parsed.length >= DEFAULT_OPPORTUNITIES.length) {
             parsed.forEach(p => {
-              if (p && p.id) {
-                const match = leads.find(l => l.id === p.id);
-                if (match) {
-                  if (p.status) match.status = p.status;
-                  if (p.stage) match.stage = p.stage;
-                  if (p.value) match.value = p.value;
-                } else if (p.project) {
-                  leads.push(p);
-                }
-              }
+              const match = leads.find(l => l.id === p.id);
+              if (match && p.status) match.status = p.status;
             });
           }
         }
-      } catch (e) {
-        console.warn("Storage sync fallback:", e);
-      }
-      if (!Array.isArray(leads) || leads.length < DEFAULT_OPPORTUNITIES.length) {
-        leads = DEFAULT_OPPORTUNITIES.map(item => ({ ...item }));
-      }
-      try {
-        localStorage.setItem('qatar_radar_leads', JSON.stringify(leads));
       } catch (e) {}
       opportunities = leads;
       return opportunities;
@@ -3238,18 +3222,12 @@ const SOURCE_URL_MAP = {
       }
 
       // Close mobile sidebar drawer if open
-      if (window.innerWidth < 768) {
-        const sidebar = document.getElementById('appSidebar');
-        const backdrop = document.getElementById('sidebarBackdrop');
-        if (sidebar && !sidebar.classList.contains('-translate-x-full')) {
-          sidebar.classList.add('-translate-x-full');
-        }
-        if (backdrop && !backdrop.classList.contains('hidden')) {
-          backdrop.classList.add('hidden');
-        }
-        const mainContent = document.getElementById('mainContentArea');
-        if (mainContent) mainContent.scrollTop = 0;
-      }
+      const sidebar = document.getElementById('appSidebar');
+      const backdrop = document.getElementById('sidebarBackdrop');
+      if (sidebar) sidebar.classList.add('-translate-x-full');
+      if (backdrop) backdrop.classList.add('hidden');
+      const mainContent = document.getElementById('mainContentArea');
+      if (mainContent) mainContent.scrollTop = 0;
 
       const targetTab = document.getElementById('tab-' + tabId);
       const targetNav = document.getElementById('nav-' + tabId);
@@ -3259,15 +3237,29 @@ const SOURCE_URL_MAP = {
         targetNav.classList.remove('text-slate-300');
       }
 
-      if (tabId === 'excel_grid') renderExcelTable();
-      if (tabId === 'project_radar') renderProjectCards();
-      if (tabId === 'shutdown_radar') renderShutdownCards();
-      if (tabId === 'qatar_map') selectZone('ras_laffan');
-      if (tabId === 'epc_directory') renderEpcCards();
-      if (tabId === 'customer_matrix') renderCustomerMatrix();
-      if (tabId === 'product_portfolio') renderProductPortfolio();
-      if (tabId === 'source_monitor') renderSources();
-      if (tabId === 'outreach_generator') renderOutreachSection();
+      // Re-render target module view cleanly
+      if (tabId === 'command_center') {
+        recalculateKpiMetrics();
+        renderTopOpportunities();
+        renderRecentSignals();
+        renderQuickEpc();
+      } else if (tabId === 'project_radar') {
+        renderProjectCards();
+      } else if (tabId === 'shutdown_radar') {
+        renderShutdownCards();
+      } else if (tabId === 'excel_grid') {
+        renderExcelTable();
+      } else if (tabId === 'epc_directory') {
+        if (typeof renderEpcCards === 'function') renderEpcCards();
+      } else if (tabId === 'customer_matrix') {
+        if (typeof renderCustomerMatrix === 'function') renderCustomerMatrix();
+      } else if (tabId === 'product_portfolio') {
+        if (typeof renderProductPortfolio === 'function') renderProductPortfolio();
+      } else if (tabId === 'source_monitor') {
+        renderSources();
+      } else if (tabId === 'qatar_map') {
+        if (typeof selectZone === 'function') selectZone('ras_laffan');
+      }
     }
 
     // ==========================================
