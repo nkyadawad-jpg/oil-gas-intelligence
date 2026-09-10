@@ -170,7 +170,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">08-Sep-2026 21:11 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">10-Sep-2026 18:40 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -495,7 +495,7 @@
               </h4>
               <span class="text-[11px] text-slate-400">Auto-Refreshes</span>
             </div>
-            <div class="space-y-2.5 max-h-[360px] overflow-y-auto pr-1" id="recentSignalsList">
+            <div class="space-y-2.5 max-h-[520px] overflow-y-auto pr-1" id="recentSignalsList">
               <!-- Signal items rendered by JS -->
             </div>
           </div>
@@ -509,7 +509,7 @@
               </h4>
               <span class="text-[11px] text-slate-400">20 Monitored EPCs</span>
             </div>
-            <div class="space-y-2 max-h-[360px] overflow-y-auto pr-1" id="quickEpcList">
+            <div class="space-y-2 max-h-[520px] overflow-y-auto pr-1" id="quickEpcList">
               <!-- EPC items rendered by JS -->
             </div>
           </div>
@@ -3364,7 +3364,7 @@ const SOURCE_URL_MAP = {
       const container = document.getElementById('quickEpcList');
       if (!container) return;
 
-      container.innerHTML = EPC_DATA.map(epc => {
+      container.innerHTML = EPC_DATA.map((epc, idx) => {
         const epcLeads = opportunities.filter(o => {
           const e = (o.epc || '').toLowerCase();
           const name = (epc.name || '').toLowerCase();
@@ -3374,22 +3374,34 @@ const SOURCE_URL_MAP = {
         const liveCount = epcLeads.length > 0 ? epcLeads.length : epc.activeProjects;
         const liveVal = epcLeads.reduce((sum, o) => sum + (Number(o.value) || 0), 0);
         const liveValStr = liveVal > 0 ? `QAR ${(liveVal / 1000000).toFixed(2)}M` : 'Active Scope';
+        const websiteUrl = epc.website.startsWith('http') ? epc.website : `https://${epc.website}`;
 
         return `
-        <div class="p-3 bg-slate-900/90 rounded-lg border border-slate-800 text-xs hover:border-amber-500/40 transition space-y-2">
+        <div class="p-3 bg-slate-900/90 rounded-lg border border-slate-800 text-xs hover:border-amber-500/50 transition space-y-2">
           <div class="flex items-center justify-between">
-            <div class="font-bold text-white flex items-center gap-2">
-              <span class="text-amber-300 font-bold">${epc.shortName}</span>
-              <span class="text-[10px] bg-slate-800 text-slate-300 px-1.5 py-0.2 rounded border border-slate-700">${epc.status}</span>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold bg-slate-800 text-amber-300 px-2 py-0.5 rounded border border-slate-700">#${String(idx + 1).padStart(2, '0')}</span>
+              <span class="text-sm font-bold text-white">${epc.name} (${epc.shortName})</span>
             </div>
-            <span class="text-xs font-black text-emerald-400">${liveCount} Scopes • ${liveValStr}</span>
+            <span class="text-xs font-black text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">${liveCount} Scopes • ${liveValStr}</span>
           </div>
-          <p class="text-[11px] text-slate-300"><strong>Package Specialty:</strong> ${epc.targetPackages}</p>
-          <div class="flex items-center justify-between text-[10px] text-slate-400 pt-1 border-t border-slate-800/80">
-            <span><strong>Contacts:</strong> ${epc.keyContacts.split(',')[0]}</span>
-            <button onclick="switchTab('epc_directory')" class="text-cyan-300 hover:text-white font-bold flex items-center gap-1">
-              View All ${liveCount} Scopes in Directory →
-            </button>
+          <p class="text-[11px] text-slate-300 leading-snug"><strong>Package Specialty:</strong> ${epc.targetPackages}</p>
+          <div class="p-2 bg-slate-950 rounded text-[11px] text-slate-400 flex justify-between items-center">
+            <span><strong>Key Contacts:</strong> <span class="text-amber-300">${epc.keyContacts}</span></span>
+            <span class="text-slate-500 font-mono text-[10px]">${epc.status}</span>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-slate-800/80 text-[11px]">
+            <a href="${websiteUrl}" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:text-white font-bold flex items-center gap-1">
+              <i class="fa-solid fa-globe text-[10px]"></i> ${epc.website} ↗
+            </a>
+            <div class="flex items-center gap-1.5">
+              <button onclick="prepareOutreachForEpc('${epc.shortName}')" class="bg-qatar hover:bg-qatar-light text-white px-2 py-0.5 rounded font-bold text-[10px] flex items-center gap-1 shadow">
+                <i class="fa-solid fa-wand-magic-sparkles text-[9px]"></i> Approach EPC
+              </button>
+              <button onclick="switchTab('epc_directory')" class="text-amber-400 hover:text-white font-bold text-[10px]">
+                Full Scopes →
+              </button>
+            </div>
           </div>
         </div>
       `;
