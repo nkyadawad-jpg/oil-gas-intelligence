@@ -170,7 +170,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">13-Sep-2026 09:27 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">13-Sep-2026 19:21 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -345,11 +345,11 @@
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-xs text-slate-400 font-medium">Open Pipeline (Sum of Leads)</p>
-                <h3 id="kpiTotalPipelineVal" class="text-2xl font-black text-cyan-300 mt-1">QAR 18.10M</h3>
+                <h3 id="kpiTotalPipelineVal" class="text-2xl font-black text-cyan-300 mt-1">QAR 22.50M</h3>
               </div>
-              <span id="kpiCoverageBadge" class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs px-2 py-0.5 rounded font-bold">9.1X Cov</span>
+              <span id="kpiCoverageBadge" class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs px-2 py-0.5 rounded font-bold">11.3X Cov</span>
             </div>
-            <p class="text-[11px] text-slate-400 mt-2">Weighted Expected Value: <strong id="kpiWeightedVal" class="text-white">QAR 16.69M</strong></p>
+            <p class="text-[11px] text-slate-400 mt-2">Weighted Expected Value: <strong id="kpiWeightedVal" class="text-white">QAR 20.75M</strong></p>
             <div class="text-[11px] text-slate-400 mt-1 flex justify-between">
               <span>Pre-RFQ Stage: <strong id="kpiPreRfqVal" class="text-amber-300">QAR 8.50M</strong></span>
               <span>Live ITT: <strong id="kpiLiveIttVal" class="text-emerald-300">QAR 9.60M</strong></span>
@@ -362,13 +362,13 @@
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-xs text-slate-400 font-medium">Hot Pre-RFQ Opportunities</p>
-                <h3 id="kpiHotLeadsCount" class="text-2xl font-black text-red-400 mt-1">24 Leads</h3>
+                <h3 id="kpiHotLeadsCount" class="text-2xl font-black text-red-400 mt-1">28 Leads</h3>
               </div>
               <span class="bg-red-500/20 text-red-400 border border-red-500/30 text-xs px-2 py-0.5 rounded font-bold animate-pulse">🔥 High Conv</span>
             </div>
             <div class="flex items-center gap-2 mt-3 text-[11px] text-slate-300">
               <span class="text-slate-400">Total Monitored Leads:</span>
-              <span id="kpiTotalLeadsCount" class="text-slate-400 text-xs">24 active scopes</span>
+              <span id="kpiTotalLeadsCount" class="text-slate-400 text-xs">28 active scopes</span>
             </div>
             <div class="flex justify-between text-[11px] text-slate-400 mt-1">
               <span>High Potential (&gt;80): <strong id="kpiHighPotCount" class="text-amber-300">24</strong></span>
@@ -401,7 +401,7 @@
               </h4>
               <p class="text-xs text-slate-400">Real-time allocation calculated dynamically from your CRM opportunities</p>
             </div>
-            <span id="pbTotalPoolVal" class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700 font-mono">Total Opportunity Pool: QAR 18.10M</span>
+            <span id="pbTotalPoolVal" class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700 font-mono">Total Opportunity Pool: QAR 22.50M</span>
           </div>
 
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -1338,7 +1338,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "15-Oct-2026",
             "detectedAgo": "14 hours ago",
             "nextAction": "Engage DOPET Procurement Head & Instrumentation Lead",
-            "arabicText": "مشروع تعديل وتحديث خطوط غاز البخار والشعلة في مجمع راس لفان الصناعي، يشمل توريد وتركيب صمامات عزل الضغط العالي ومحابس التحكم الإلكتروميكانيكية.",
+            "arabicText": "\u0645\u0634\u0631\u0648\u0639 \u062a\u0639\u062f\u064a\u0644 \u0648\u062a\u062d\u062f\u064a\u062b \u062e\u0637\u0648\u0637 \u063a\u0627\u0632 \u0627\u0644\u0628\u062e\u0627\u0631 \u0648\u0627\u0644\u0634\u0639\u0644\u0629 \u0641\u064a \u0645\u062c\u0645\u0639 \u0631\u0627\u0633 \u0644\u0641\u0627\u0646 \u0627\u0644\u0635\u0646\u0627\u0639\u064a\u060c \u064a\u0634\u0645\u0644 \u062a\u0648\u0631\u064a\u062f \u0648\u062a\u0631\u0643\u064a\u0628 \u0635\u0645\u0627\u0645\u0627\u062a \u0639\u0632\u0644 \u0627\u0644\u0636\u063a\u0637 \u0627\u0644\u0639\u0627\u0644\u064a \u0648\u0645\u062d\u0627\u0628\u0633 \u0627\u0644\u062a\u062d\u0643\u0645 \u0627\u0644\u0625\u0644\u0643\u062a\u0631\u0648\u0645\u064a\u0643\u0627\u0646\u064a\u0643\u064a\u0629.",
             "translatedText": "Project for modification and revamp of boil-off gas and flare lines at Ras Laffan Industrial Complex, including supply and installation of high-pressure isolation valves and electromechanical control valves.",
             "factText": "QatarEnergy officially issued notice of preliminary engineering package allocation to DOPET for Ras Laffan BOG flare system.",
             "signalText": "Multiple EPC mechanical requisitions show upcoming procurement of 600# and 900# cryogenic isolation valves.",
@@ -1364,7 +1364,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "30-Sep-2026",
             "detectedAgo": "1 day ago",
             "nextAction": "Present ADAMS triple-eccentric metal-seated valve catalog to QCON package manager",
-            "arabicText": "استبدال صمامات وحدة معالجة الغاز الحمضي في خط الغاز المسال رقم 3 لضمان موثوقية العزل أثناء الإيقاف المبرمج.",
+            "arabicText": "\u0627\u0633\u062a\u0628\u062f\u0627\u0644 \u0635\u0645\u0627\u0645\u0627\u062a \u0648\u062d\u062f\u0629 \u0645\u0639\u0627\u0644\u062c\u0629 \u0627\u0644\u063a\u0627\u0632 \u0627\u0644\u062d\u0645\u0636\u064a \u0641\u064a \u062e\u0637 \u0627\u0644\u063a\u0627\u0632 \u0627\u0644\u0645\u0633\u0627\u0644 \u0631\u0642\u0645 3 \u0644\u0636\u0645\u0627\u0646 \u0645\u0648\u062b\u0648\u0642\u064a\u0629 \u0627\u0644\u0639\u0632\u0644 \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u0625\u064a\u0642\u0627\u0641 \u0627\u0644\u0645\u0628\u0631\u0645\u062c.",
             "translatedText": "Replacement of Acid Gas Recovery Unit (AGRU) valves in LNG Train 3 to ensure positive isolation reliability during scheduled turnaround.",
             "factText": "QatarEnergy LNG scheduled Train 3 maintenance turnaround for Q4 2026.",
             "signalText": "QCON confirmed as primary mechanical turnaround contractor with live tender package.",
@@ -1390,7 +1390,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "20-Nov-2026",
             "detectedAgo": "2 days ago",
             "nextAction": "Coordinate with TRAGS engineering team on instrument data sheet specifications",
-            "arabicText": "توريد أجهزة قياس الضغط ودرجات الحرارة وضواغط الغاز الاصطناعي لمصنع قافكو 7 للأمونيا في مسيعيد.",
+            "arabicText": "\u062a\u0648\u0631\u064a\u062f \u0623\u062c\u0647\u0632\u0629 \u0642\u064a\u0627\u0633 \u0627\u0644\u0636\u063a\u0637 \u0648\u062f\u0631\u062c\u0627\u062a \u0627\u0644\u062d\u0631\u0627\u0631\u0629 \u0648\u0636\u0648\u0627\u063a\u0637 \u0627\u0644\u063a\u0627\u0632 \u0627\u0644\u0627\u0635\u0637\u0646\u0627\u0639\u064a \u0644\u0645\u0635\u0646\u0639 \u0642\u0627\u0641\u0643\u0648 7 \u0644\u0644\u0623\u0645\u0648\u0646\u064a\u0627 \u0641\u064a \u0645\u0633\u064a\u0639\u064a\u062f.",
             "translatedText": "Supply of pressure and temperature instruments and syngas compressor parts for QAFCO-7 Ammonia plant in Mesaieed.",
             "factText": "Consortium executing QAFCO-7 expanding utility connections for syngas loop.",
             "signalText": "TRAGS procurement team drafting vendor list for vibration-resistant solid front process gauges.",
@@ -1416,7 +1416,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "18-Sep-2026",
             "detectedAgo": "3 days ago",
             "nextAction": "Submit commercial quotation with Protectoseal explosion-proof ATEX certificates",
-            "arabicText": "تحديث شبكة مانعات اللهب وصمامات تنفيس خزانات المواد الهيدروكربونية بمصنع كيوكيم للبولي إيثيلين في مسيعيد.",
+            "arabicText": "\u062a\u062d\u062f\u064a\u062b \u0634\u0628\u0643\u0629 \u0645\u0627\u0646\u0639\u0627\u062a \u0627\u0644\u0644\u0647\u0628 \u0648\u0635\u0645\u0627\u0645\u0627\u062a \u062a\u0646\u0641\u064a\u0633 \u062e\u0632\u0627\u0646\u0627\u062a \u0627\u0644\u0645\u0648\u0627\u062f \u0627\u0644\u0647\u064a\u062f\u0631\u0648\u0643\u0631\u0628\u0648\u0646\u064a\u0629 \u0628\u0645\u0635\u0646\u0639 \u0643\u064a\u0648\u0643\u064a\u0645 \u0644\u0644\u0628\u0648\u0644\u064a \u0625\u064a\u062b\u064a\u0644\u064a\u0646 \u0641\u064a \u0645\u0633\u064a\u0639\u064a\u062f.",
             "translatedText": "Upgrade of in-line deflagration flame arrestors and tank pressure relief vents at Q-Chem Polyethylene plant in Mesaieed.",
             "factText": "Q-Chem issued safety upgrade mandate for volatile monomer storage tanks.",
             "signalText": "Medgulf estimating engineers received tender inquiry for ATEX certified end-of-line arrestors.",
@@ -1442,7 +1442,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "05-Nov-2026",
             "detectedAgo": "4 days ago",
             "nextAction": "Deliver Trillium rotating pump spares catalog to Madina Group Mesaieed workshop manager",
-            "arabicText": "تأمين قطع غيار ومضخات تدوير مياه التبريد السريع لوحدة الإيثيلين رقم 2 في مجمع قابكو بمسيعيد.",
+            "arabicText": "\u062a\u0623\u0645\u064a\u0646 \u0642\u0637\u0639 \u063a\u064a\u0627\u0631 \u0648\u0645\u0636\u062e\u0627\u062a \u062a\u062f\u0648\u064a\u0631 \u0645\u064a\u0627\u0647 \u0627\u0644\u062a\u0628\u0631\u064a\u062f \u0627\u0644\u0633\u0631\u064a\u0639 \u0644\u0648\u062d\u062f\u0629 \u0627\u0644\u0625\u064a\u062b\u064a\u0644\u064a\u0646 \u0631\u0642\u0645 2 \u0641\u064a \u0645\u062c\u0645\u0639 \u0642\u0627\u0628\u0643\u0648 \u0628\u0645\u0633\u064a\u0639\u064a\u062f.",
             "translatedText": "Procurement of replacement impellers, shafts, and mechanical seals for quench water circulation pumps at QAPCO Ethylene Plant 2.",
             "factText": "QAPCO scheduled turnaround requires replacement of OEM slurry and quench pump wear components.",
             "signalText": "Madina Group mobilizing workshop space for rotating machinery rebuild.",
@@ -1468,7 +1468,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "28-Oct-2026",
             "detectedAgo": "5 days ago",
             "nextAction": "Schedule technical lunch-and-learn on Westlock AccuTrak digital position monitors with Roots Energy",
-            "arabicText": "تحديث أجهزة المراقبة الذكية ومحددات المواقع لصمامات الإغلاق الاضطراري في مجمع راس لفان للأوليفينات.",
+            "arabicText": "\u062a\u062d\u062f\u064a\u062b \u0623\u062c\u0647\u0632\u0629 \u0627\u0644\u0645\u0631\u0627\u0642\u0628\u0629 \u0627\u0644\u0630\u0643\u064a\u0629 \u0648\u0645\u062d\u062f\u062f\u0627\u062a \u0627\u0644\u0645\u0648\u0627\u0642\u0639 \u0644\u0635\u0645\u0627\u0645\u0627\u062a \u0627\u0644\u0625\u063a\u0644\u0627\u0642 \u0627\u0644\u0627\u0636\u0637\u0631\u0627\u0631\u064a \u0641\u064a \u0645\u062c\u0645\u0639 \u0631\u0627\u0633 \u0644\u0641\u0627\u0646 \u0644\u0644\u0623\u0648\u0644\u064a\u0641\u064a\u0646\u0627\u062a.",
             "translatedText": "Modernization of digital valve position monitors and switches for Emergency Shutdown (ESD) valves at RLOC ethane cracker.",
             "factText": "RLOC safety committee approved SIL-3 verification upgrade across automated valves.",
             "signalText": "Roots Energy instrumentation engineers requested specifications for flameproof position transmitters.",
@@ -1494,7 +1494,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "12-Dec-2026",
             "detectedAgo": "6 days ago",
             "nextAction": "Provide Blackcat procurement lead with ASCO RedHat explosion-proof solenoid pricing matrix",
-            "arabicText": "تجديد منظومة الصمامات الكهرومغناطيسية وأجهزة نقل الضغط لمجمع صمامات الرفع بالغاز في منطقة دخان الفحيحيل.",
+            "arabicText": "\u062a\u062c\u062f\u064a\u062f \u0645\u0646\u0638\u0648\u0645\u0629 \u0627\u0644\u0635\u0645\u0627\u0645\u0627\u062a \u0627\u0644\u0643\u0647\u0631\u0648\u0645\u063a\u0646\u0627\u0637\u064a\u0633\u064a\u0629 \u0648\u0623\u062c\u0647\u0632\u0629 \u0646\u0642\u0644 \u0627\u0644\u0636\u063a\u0637 \u0644\u0645\u062c\u0645\u0639 \u0635\u0645\u0627\u0645\u0627\u062a \u0627\u0644\u0631\u0641\u0639 \u0628\u0627\u0644\u063a\u0627\u0632 \u0641\u064a \u0645\u0646\u0637\u0642\u0629 \u062f\u062e\u0627\u0646 \u0627\u0644\u0641\u062d\u064a\u062d\u064a\u0644.",
             "translatedText": "Revamp of explosion-proof solenoid pilot valves and pressure transmitters at Dukhan Fahahil gas lift manifold.",
             "factText": "QatarEnergy awarded Dukhan gas lift optimization FEED package.",
             "signalText": "Blackcat engineering team preparing procurement package for high-pressure sour gas wellhead control.",
@@ -1520,7 +1520,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "10-Oct-2026",
             "detectedAgo": "1 week ago",
             "nextAction": "Prepare formal technical proposal for 2500# offshore rated ball and double-block-and-bleed valves",
-            "arabicText": "مشروع استبدال صمامات العزل الرئيسية لمنصات رؤوس الآبار البحرية في حقل بوالحنين المنصة الثالثة.",
+            "arabicText": "\u0645\u0634\u0631\u0648\u0639 \u0627\u0633\u062a\u0628\u062f\u0627\u0644 \u0635\u0645\u0627\u0645\u0627\u062a \u0627\u0644\u0639\u0632\u0644 \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629 \u0644\u0645\u0646\u0635\u0627\u062a \u0631\u0624\u0648\u0633 \u0627\u0644\u0622\u0628\u0627\u0631 \u0627\u0644\u0628\u062d\u0631\u064a\u0629 \u0641\u064a \u062d\u0642\u0644 \u0628\u0648\u0627\u0644\u062d\u0646\u064a\u0646 \u0627\u0644\u0645\u0646\u0635\u0629 \u0627\u0644\u062b\u0627\u0644\u062b\u0629.",
             "translatedText": "Replacement of high-pressure topside double-block-and-bleed and isolation valves for Bul Hanine PS-3 offshore platform.",
             "factText": "QatarEnergy published offshore topside integrity refurbishment scope.",
             "signalText": "Medgulf offshore estimating division received tender package for super duplex and Inconel cladded valves.",
@@ -1546,7 +1546,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "15-Nov-2026",
             "detectedAgo": "1 week ago",
             "nextAction": "Send Baumer multi-point temperature sensor data sheets to Al Balagh engineering manager",
-            "arabicText": "مشروع تحديث أجهزة قياس درجات الحرارة ومستويات السوائل لمفاعل تصنيع الميثانول في قافاك مسيعيد.",
+            "arabicText": "\u0645\u0634\u0631\u0648\u0639 \u062a\u062d\u062f\u064a\u062b \u0623\u062c\u0647\u0632\u0629 \u0642\u064a\u0627\u0633 \u062f\u0631\u062c\u0627\u062a \u0627\u0644\u062d\u0631\u0627\u0631\u0629 \u0648\u0645\u0633\u062a\u0648\u064a\u0627\u062a \u0627\u0644\u0633\u0648\u0627\u0626\u0644 \u0644\u0645\u0641\u0627\u0639\u0644 \u062a\u0635\u0646\u064a\u0639 \u0627\u0644\u0645\u064a\u062b\u0627\u0646\u0648\u0644 \u0641\u064a \u0642\u0627\u0641\u0627\u0643 \u0645\u0633\u064a\u0639\u064a\u062f.",
             "translatedText": "Upgrade of multi-point reactor thermowells and level gauges at QAFAC Methanol synthesis plant.",
             "factText": "QAFAC scheduled catalyst replenishment and reactor inspection for early 2027.",
             "signalText": "Al Balagh engineering team requesting supplier credentials for high-temperature reactor instruments.",
@@ -1572,7 +1572,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "30-Nov-2026",
             "detectedAgo": "1 week ago",
             "nextAction": "Present ADAMS rubber-lined and high-alloy butterfly valves to Al Muftah procurement director",
-            "arabicText": "توريد صمامات فراشة مقاومة لمياه البحر المالحة لمنشأة تحلية المياه وتوليد الكهرباء في أم الحول.",
+            "arabicText": "\u062a\u0648\u0631\u064a\u062f \u0635\u0645\u0627\u0645\u0627\u062a \u0641\u0631\u0627\u0634\u0629 \u0645\u0642\u0627\u0648\u0645\u0629 \u0644\u0645\u064a\u0627\u0647 \u0627\u0644\u0628\u062d\u0631 \u0627\u0644\u0645\u0627\u0644\u062d\u0629 \u0644\u0645\u0646\u0634\u0623\u0629 \u062a\u062d\u0644\u064a\u0629 \u0627\u0644\u0645\u064a\u0627\u0647 \u0648\u062a\u0648\u0644\u064a\u062f \u0627\u0644\u0643\u0647\u0631\u0628\u0627\u0621 \u0641\u064a \u0623\u0645 \u0627\u0644\u062d\u0648\u0644.",
             "translatedText": "Supply of large-diameter high-nickel aluminum bronze butterfly valves for seawater intake expansion at Umm Al Houl Power.",
             "factText": "Umm Al Houl Power expanding RO desalination intake capacity by 30%.",
             "signalText": "Al Muftah Contracting shortlisting European valve manufacturers for seawater intake lines.",
@@ -1598,7 +1598,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "15-Dec-2026",
             "detectedAgo": "1 week ago",
             "nextAction": "Provide Westlock digital valve controller technical documentation for turbine fuel skids",
-            "arabicText": "تجديد مشغلات الصمامات وأجهزة المراقبة لخطوط الوقود الغازي لتوربينات توليد الطاقة في راس أبو فنطاس.",
+            "arabicText": "\u062a\u062c\u062f\u064a\u062f \u0645\u0634\u063a\u0644\u0627\u062a \u0627\u0644\u0635\u0645\u0627\u0645\u0627\u062a \u0648\u0623\u062c\u0647\u0632\u0629 \u0627\u0644\u0645\u0631\u0627\u0642\u0628\u0629 \u0644\u062e\u0637\u0648\u0637 \u0627\u0644\u0648\u0642\u0648\u062f \u0627\u0644\u063a\u0627\u0632\u064a \u0644\u062a\u0648\u0631\u0628\u064a\u0646\u0627\u062a \u062a\u0648\u0644\u064a\u062f \u0627\u0644\u0637\u0627\u0642\u0629 \u0641\u064a \u0631\u0627\u0633 \u0623\u0628\u0648 \u0641\u0646\u0637\u0627\u0633.",
             "translatedText": "Replacement of valve actuators and limit switch boxes on gas turbine fuel skids at Ras Abu Fontas power station.",
             "factText": "Mpower initiating annual turbine gas skid modernization.",
             "signalText": "Roots Energy engineering assessing automated valve feedback loop upgrades.",
@@ -1624,7 +1624,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "25-Sep-2026",
             "detectedAgo": "1 week ago",
             "nextAction": "Submit commercial bid for fire-safe full bore ball valves with DOPET estimating manager",
-            "arabicText": "توريد صمامات القطع الاضطراري المقاومة للحريق ومحابس الوقود لمحطة وقود الطائرات المركزية في الدوحة.",
+            "arabicText": "\u062a\u0648\u0631\u064a\u062f \u0635\u0645\u0627\u0645\u0627\u062a \u0627\u0644\u0642\u0637\u0639 \u0627\u0644\u0627\u0636\u0637\u0631\u0627\u0631\u064a \u0627\u0644\u0645\u0642\u0627\u0648\u0645\u0629 \u0644\u0644\u062d\u0631\u064a\u0642 \u0648\u0645\u062d\u0627\u0628\u0633 \u0627\u0644\u0648\u0642\u0648\u062f \u0644\u0645\u062d\u0637\u0629 \u0648\u0642\u0648\u062f \u0627\u0644\u0637\u0627\u0626\u0631\u0627\u062a \u0627\u0644\u0645\u0631\u0643\u0632\u064a\u0629 \u0641\u064a \u0627\u0644\u062f\u0648\u062d\u0629.",
             "translatedText": "Supply of fire-safe emergency shutdown valves and pipeline ball valves for WOQOD Hamad Airport jet fuel distribution hub.",
             "factText": "WOQOD issued safety tender for bulk aviation fuel terminal automation.",
             "signalText": "DOPET bidding as lead mechanical and pipeline EPC contractor.",
@@ -1650,7 +1650,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "08-Oct-2026",
             "detectedAgo": "3 hours ago",
             "nextAction": "Engage McDermott Qatar package procurement manager with Fisher sour-gas control valve datasheets",
-            "arabicText": "مشروع تزويد صمامات التحكم عالية الضغط وصمامات العزل السريع لمنصات مشروع جلاف البحرية في حقل الشاهين.",
+            "arabicText": "\u0645\u0634\u0631\u0648\u0639 \u062a\u0632\u0648\u064a\u062f \u0635\u0645\u0627\u0645\u0627\u062a \u0627\u0644\u062a\u062d\u0643\u0645 \u0639\u0627\u0644\u064a\u0629 \u0627\u0644\u0636\u063a\u0637 \u0648\u0635\u0645\u0627\u0645\u0627\u062a \u0627\u0644\u0639\u0632\u0644 \u0627\u0644\u0633\u0631\u064a\u0639 \u0644\u0645\u0646\u0635\u0627\u062a \u0645\u0634\u0631\u0648\u0639 \u062c\u0644\u0627\u0641 \u0627\u0644\u0628\u062d\u0631\u064a\u0629 \u0641\u064a \u062d\u0642\u0644 \u0627\u0644\u0634\u0627\u0647\u064a\u0646.",
             "translatedText": "High-pressure topside control valves and emergency shutdown packages for North Oil Company Gallaf Batch 3 offshore platforms.",
             "factText": "North Oil Company confirmed McDermott executing offshore topsides fabrication.",
             "signalText": "McDermott issuing technical inquiries for severe service sour gas control valves with noise attenuation trim.",
@@ -1676,7 +1676,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "24-Oct-2026",
             "detectedAgo": "5 hours ago",
             "nextAction": "Present Magnetrol Eclipse 706 Guided Wave Radar to Chiyoda Almana instrumentation lead",
-            "arabicText": "تحديث أجهزة قياس مستوى السوائل عالية الدقة لوحدة تحويل البارافين الثقيل في مجمع اللؤلؤة لتحويل الغاز لسوائل.",
+            "arabicText": "\u062a\u062d\u062f\u064a\u062b \u0623\u062c\u0647\u0632\u0629 \u0642\u064a\u0627\u0633 \u0645\u0633\u062a\u0648\u0649 \u0627\u0644\u0633\u0648\u0627\u0626\u0644 \u0639\u0627\u0644\u064a\u0629 \u0627\u0644\u062f\u0642\u0629 \u0644\u0648\u062d\u062f\u0629 \u062a\u062d\u0648\u064a\u0644 \u0627\u0644\u0628\u0627\u0631\u0627\u0641\u064a\u0646 \u0627\u0644\u062b\u0642\u064a\u0644 \u0641\u064a \u0645\u062c\u0645\u0639 \u0627\u0644\u0644\u0624\u0644\u0624\u0629 \u0644\u062a\u062d\u0648\u064a\u0644 \u0627\u0644\u063a\u0627\u0632 \u0644\u0633\u0648\u0627\u0626\u0644.",
             "translatedText": "Revamp of guided wave radar level transmitters for high-temperature heavy paraffin reactors at Shell Pearl GTL.",
             "factText": "Qatar Shell Pearl GTL initiated Phase-1 debottlenecking for synthesis liquid conversion.",
             "signalText": "Chiyoda Almana completing detailed FEED package for liquid level measurement across catalytic reactors.",
@@ -1702,7 +1702,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "14-Oct-2026",
             "detectedAgo": "8 hours ago",
             "nextAction": "Submit ADAMS triple-eccentric metal-seated bid to Technip Energies procurement team",
-            "arabicText": "توريد صمامات التحكم الالتفافية لضواغط تصدير الغاز الرئيسية في محطة معالجة غاز دولفين براس لفان.",
+            "arabicText": "\u062a\u0648\u0631\u064a\u062f \u0635\u0645\u0627\u0645\u0627\u062a \u0627\u0644\u062a\u062d\u0643\u0645 \u0627\u0644\u0627\u0644\u062a\u0641\u0627\u0641\u064a\u0629 \u0644\u0636\u0648\u0627\u063a\u0637 \u062a\u0635\u062f\u064a\u0631 \u0627\u0644\u063a\u0627\u0632 \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629 \u0641\u064a \u0645\u062d\u0637\u0629 \u0645\u0639\u0627\u0644\u062c\u0629 \u063a\u0627\u0632 \u062f\u0648\u0644\u0641\u064a\u0646 \u0628\u0631\u0627\u0633 \u0644\u0641\u0627\u0646.",
             "translatedText": "Procurement of anti-surge bypass and high-differential pressure isolation valves for export gas compressors at Dolphin Energy.",
             "factText": "Dolphin Energy scheduled major compressor revamp for cross-border export stream.",
             "signalText": "Technip Energies actively negotiating subcontract equipment packages for export compression train.",
@@ -1728,7 +1728,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "02-Nov-2026",
             "detectedAgo": "10 hours ago",
             "nextAction": "Coordinate with Descon turnaround planners for high-pressure hydrogen service valve datasheets",
-            "arabicText": "مشروع استبدال صمامات عزل الهيدروجين عالي الضغط لوحدة التكسير الهيدروجيني للديزل في مجمع أوريكس جي تي إل.",
+            "arabicText": "\u0645\u0634\u0631\u0648\u0639 \u0627\u0633\u062a\u0628\u062f\u0627\u0644 \u0635\u0645\u0627\u0645\u0627\u062a \u0639\u0632\u0644 \u0627\u0644\u0647\u064a\u062f\u0631\u0648\u062c\u064a\u0646 \u0639\u0627\u0644\u064a \u0627\u0644\u0636\u063a\u0637 \u0644\u0648\u062d\u062f\u0629 \u0627\u0644\u062a\u0643\u0633\u064a\u0631 \u0627\u0644\u0647\u064a\u062f\u0631\u0648\u062c\u064a\u0646\u064a \u0644\u0644\u062f\u064a\u0632\u0644 \u0641\u064a \u0645\u062c\u0645\u0639 \u0623\u0648\u0631\u064a\u0643\u0633 \u062c\u064a \u062a\u064a \u0625\u0644.",
             "translatedText": "Replacement of hydrogen service isolation valves and high-temperature manifolds at Oryx GTL hydrocracker.",
             "factText": "Oryx GTL finalized planned turnaround scope for diesel hydroprocessing section.",
             "signalText": "Descon Engineering mobilizing specialized valve technicians for high-pressure hydrogen loop overhaul.",
@@ -1754,7 +1754,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "18-Nov-2026",
             "detectedAgo": "12 hours ago",
             "nextAction": "Deliver Protectoseal marine-grade aluminum pressure/vacuum relief valve specs to Galfar engineering",
-            "arabicText": "مشروع تحديث صمامات تنفيس خزانات النفط الخام ومانعات اللهب في جزيرة حالول البترولية التابعة لقطر للطاقة.",
+            "arabicText": "\u0645\u0634\u0631\u0648\u0639 \u062a\u062d\u062f\u064a\u062b \u0635\u0645\u0627\u0645\u0627\u062a \u062a\u0646\u0641\u064a\u0633 \u062e\u0632\u0627\u0646\u0627\u062a \u0627\u0644\u0646\u0641\u0637 \u0627\u0644\u062e\u0627\u0645 \u0648\u0645\u0627\u0646\u0639\u0627\u062a \u0627\u0644\u0644\u0647\u0628 \u0641\u064a \u062c\u0632\u064a\u0631\u0629 \u062d\u0627\u0644\u0648\u0644 \u0627\u0644\u0628\u062a\u0631\u0648\u0644\u064a\u0629 \u0627\u0644\u062a\u0627\u0628\u0639\u0629 \u0644\u0642\u0637\u0631 \u0644\u0644\u0637\u0627\u0642\u0629.",
             "translatedText": "Upgrade of breathing valves and marine-coated detonation flame arrestors for floating roof crude oil storage tanks on Halul Island.",
             "factText": "QatarEnergy issued storage tank integrity and environmental emission compliance tender.",
             "signalText": "Galfar Al Misnad performing site survey for tank farm piping and vent lines on Halul Island.",
@@ -1780,7 +1780,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "28-Sep-2026",
             "detectedAgo": "16 hours ago",
             "nextAction": "Submit Daniel custody transfer ultrasonic LNG flowmeter technical package to Saipem marine team",
-            "arabicText": "تطوير أذرع تحميل الغاز الطبيعي المسال وأنظمة القياس الرسمية لأرصفة التصدير الجديدة التابعة لحقل الشمال الجنوبي.",
+            "arabicText": "\u062a\u0637\u0648\u064a\u0631 \u0623\u0630\u0631\u0639 \u062a\u062d\u0645\u064a\u0644 \u0627\u0644\u063a\u0627\u0632 \u0627\u0644\u0637\u0628\u064a\u0639\u064a \u0627\u0644\u0645\u0633\u0627\u0644 \u0648\u0623\u0646\u0638\u0645\u0629 \u0627\u0644\u0642\u064a\u0627\u0633 \u0627\u0644\u0631\u0633\u0645\u064a\u0629 \u0644\u0623\u0631\u0635\u0641\u0629 \u0627\u0644\u062a\u0635\u062f\u064a\u0631 \u0627\u0644\u062c\u062f\u064a\u062f\u0629 \u0627\u0644\u062a\u0627\u0628\u0639\u0629 \u0644\u062d\u0642\u0644 \u0627\u0644\u0634\u0645\u0627\u0644 \u0627\u0644\u062c\u0646\u0648\u0628\u064a.",
             "translatedText": "Revamp of cryogenic LNG loading arms and ultrasonic custody transfer flow metering systems for North Field South export berths.",
             "factText": "QatarEnergy LNG expanding berth export capacity for upcoming NFS LNG output.",
             "signalText": "Saipem marine procurement team issued formal ITT package for cryogenic custody transfer metering skids.",
@@ -1806,7 +1806,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "10-Nov-2026",
             "detectedAgo": "18 hours ago",
             "nextAction": "Meet CCC Qatar technical procurement team to finalize Flexitallic Kammprofile gasket package for CO2 trains",
-            "arabicText": "توريد حشيات إحكام الضغط العالي وصمامات العزل لمشروع احتجاز وتخزين الكربون في حقل الشمال الشرقي.",
+            "arabicText": "\u062a\u0648\u0631\u064a\u062f \u062d\u0634\u064a\u0627\u062a \u0625\u062d\u0643\u0627\u0645 \u0627\u0644\u0636\u063a\u0637 \u0627\u0644\u0639\u0627\u0644\u064a \u0648\u0635\u0645\u0627\u0645\u0627\u062a \u0627\u0644\u0639\u0632\u0644 \u0644\u0645\u0634\u0631\u0648\u0639 \u0627\u062d\u062a\u062c\u0627\u0632 \u0648\u062a\u062e\u0632\u064a\u0646 \u0627\u0644\u0643\u0631\u0628\u0648\u0646 \u0641\u064a \u062d\u0642\u0644 \u0627\u0644\u0634\u0645\u0627\u0644 \u0627\u0644\u0634\u0631\u0642\u064a.",
             "translatedText": "Supply of high-pressure Kammprofile gaskets and dense-phase CO2 isolation valves for NFE Carbon Capture & Sequestration facility.",
             "factText": "QatarEnergy advancing 4.3 MTPA carbon capture facility adjacent to NFE mega trains.",
             "signalText": "CCC mobilizing mechanical fabrication crews for supercritical CO2 injection piping.",
@@ -1832,7 +1832,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "22-Nov-2026",
             "detectedAgo": "20 hours ago",
             "nextAction": "Provide Continental Disc sanitary and corrosive-service rupture disc datasheets to Petrofac team",
-            "arabicText": "تجديد أجهزة قياس وضبط السوائل وأقراص التمزق لغاسلات الغبار بمصنع يوريا 5 في شركة قافكو مسيعيد.",
+            "arabicText": "\u062a\u062c\u062f\u064a\u062f \u0623\u062c\u0647\u0632\u0629 \u0642\u064a\u0627\u0633 \u0648\u0636\u0628\u0637 \u0627\u0644\u0633\u0648\u0627\u0626\u0644 \u0648\u0623\u0642\u0631\u0627\u0635 \u0627\u0644\u062a\u0645\u0632\u0642 \u0644\u063a\u0627\u0633\u0644\u0627\u062a \u0627\u0644\u063a\u0628\u0627\u0631 \u0628\u0645\u0635\u0646\u0639 \u064a\u0648\u0631\u064a\u0627 5 \u0641\u064a \u0634\u0631\u0643\u0629 \u0642\u0627\u0641\u0643\u0648 \u0645\u0633\u064a\u0639\u064a\u062f.",
             "translatedText": "Replacement of safety relief valves and rupture discs on urea dust scrubber towers at QAFCO-5.",
             "factText": "QAFCO environmental emission control upgrade tender allocated to plant service contractors.",
             "signalText": "Petrofac engineering team reviewing overpressure protection specifications for corrosive carbamate fluid lines.",
@@ -1858,7 +1858,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "04-Oct-2026",
             "detectedAgo": "1 day ago",
             "nextAction": "Submit Pall gas coalescer and catalyst recovery filter element bid to Kent Energies procurement",
-            "arabicText": "تجهيز فلاتر فصل الغازات عالية الكفاءة وحشيات الضغط لمصنع الهكسين-1 التابع لشركة كيوكيم في مسيعيد.",
+            "arabicText": "\u062a\u062c\u0647\u064a\u0632 \u0641\u0644\u0627\u062a\u0631 \u0641\u0635\u0644 \u0627\u0644\u063a\u0627\u0632\u0627\u062a \u0639\u0627\u0644\u064a\u0629 \u0627\u0644\u0643\u0641\u0627\u0621\u0629 \u0648\u062d\u0634\u064a\u0627\u062a \u0627\u0644\u0636\u063a\u0637 \u0644\u0645\u0635\u0646\u0639 \u0627\u0644\u0647\u0643\u0633\u064a\u0646-1 \u0627\u0644\u062a\u0627\u0628\u0639 \u0644\u0634\u0631\u0643\u0629 \u0643\u064a\u0648\u0643\u064a\u0645 \u0641\u064a \u0645\u0633\u064a\u0639\u064a\u062f.",
             "translatedText": "Supply of liquid/gas coalescing filter elements and severe-service polymerization valves for Q-Chem 1-Hexene plant.",
             "factText": "Q-Chem launched specialty chemicals debottlenecking package.",
             "signalText": "Kent Energies preparing commercial subcontracts for catalyst separator revamp.",
@@ -1884,11 +1884,11 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "12-Oct-2026",
             "detectedAgo": "1 day ago",
             "nextAction": "Deliver ADAMS high-temperature metal-seated catalyst isolation valve proposal to HEISCO team",
-            "arabicText": "مشروع استبدال صمامات مصفاة مسيعيد لوحدة التكسير الحفزي المستمر والمبادلات الحرارية عالية الحرارة.",
+            "arabicText": "\u0645\u0634\u0631\u0648\u0639 \u0627\u0633\u062a\u0628\u062f\u0627\u0644 \u0635\u0645\u0627\u0645\u0627\u062a \u0645\u0635\u0641\u0627\u0629 \u0645\u0633\u064a\u0639\u064a\u062f \u0644\u0648\u062d\u062f\u0629 \u0627\u0644\u062a\u0643\u0633\u064a\u0631 \u0627\u0644\u062d\u0641\u0632\u064a \u0627\u0644\u0645\u0633\u062a\u0645\u0631 \u0648\u0627\u0644\u0645\u0628\u0627\u062f\u0644\u0627\u062a \u0627\u0644\u062d\u0631\u0627\u0631\u064a\u0629 \u0639\u0627\u0644\u064a\u0629 \u0627\u0644\u062d\u0631\u0627\u0631\u0629.",
             "translatedText": "High-temperature metal-seated rotary valves and catalyst transfer isolation package for Mesaieed Refinery CCR unit.",
             "factText": "QatarEnergy Refinery scheduled major furnace and catalytic reformer shutdown for early 2027.",
             "signalText": "HEISCO Qatar secured pre-shutdown fabrication and valve servicing subcontract.",
-            "inferenceText": "ADAMS triple-eccentric valves handle 550°C catalyst-laden flue gases without jamming or leakage.",
+            "inferenceText": "ADAMS triple-eccentric valves handle 550\u00b0C catalyst-laden flue gases without jamming or leakage.",
             "sourceUrl": "https://www.qatarenergy.qa",
             "epcUrl": "https://www.heisco.com"
       },
@@ -1910,7 +1910,7 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "15-Nov-2026",
             "detectedAgo": "2 days ago",
             "nextAction": "Provide Ashcroft solid-front pressure transmitters and thermowells to GDI technical team",
-            "arabicText": "تطوير أجهزة القياس متعددة الأطوار وصمامات الأمان لمحطة تجميع الغاز في خطية بحقل دخان.",
+            "arabicText": "\u062a\u0637\u0648\u064a\u0631 \u0623\u062c\u0647\u0632\u0629 \u0627\u0644\u0642\u064a\u0627\u0633 \u0645\u062a\u0639\u062f\u062f\u0629 \u0627\u0644\u0623\u0637\u0648\u0627\u0631 \u0648\u0635\u0645\u0627\u0645\u0627\u062a \u0627\u0644\u0623\u0645\u0627\u0646 \u0644\u0645\u062d\u0637\u0629 \u062a\u062c\u0645\u064a\u0639 \u0627\u0644\u063a\u0627\u0632 \u0641\u064a \u062e\u0637\u064a\u0629 \u0628\u062d\u0642\u0644 \u062f\u062e\u0627\u0646.",
             "translatedText": "Instrumentation and safety valve upgrade for Khatiyah onshore crude/gas separation manifold in Dukhan.",
             "factText": "QatarEnergy onshore production division expanding remote monitoring across Dukhan gathering stations.",
             "signalText": "GDI technical team drafting field instrumentation requisitions for high-vibration wellhead flow lines.",
@@ -1928,7 +1928,7 @@ const DEFAULT_OPPORTUNITIES = [
             "epc": "QCON",
             "contractor": "QCON Petrochem Div",
             "product": "Fire & Gas Detection Systems",
-            "brand": "Dräger / Det-Tronics",
+            "brand": "Dr\u00e4ger / Det-Tronics",
             "value": 720000,
             "score": 93,
             "confidence": "High (95%)",
@@ -1936,13 +1936,117 @@ const DEFAULT_OPPORTUNITIES = [
             "expectedRfq": "06-Oct-2026",
             "detectedAgo": "2 days ago",
             "nextAction": "Submit Det-Tronics optical flame detector and combustible gas sensing system bid to QCON",
-            "arabicText": "مشروع تزويد كواشف اللهب والحريق البصرية وصمامات الحماية لمفاعل البولي إيثيلين منخفض الكثافة بقابكو.",
+            "arabicText": "\u0645\u0634\u0631\u0648\u0639 \u062a\u0632\u0648\u064a\u062f \u0643\u0648\u0627\u0634\u0641 \u0627\u0644\u0644\u0647\u0628 \u0648\u0627\u0644\u062d\u0631\u064a\u0642 \u0627\u0644\u0628\u0635\u0631\u064a\u0629 \u0648\u0635\u0645\u0627\u0645\u0627\u062a \u0627\u0644\u062d\u0645\u0627\u064a\u0629 \u0644\u0645\u0641\u0627\u0639\u0644 \u0627\u0644\u0628\u0648\u0644\u064a \u0625\u064a\u062b\u064a\u0644\u064a\u0646 \u0645\u0646\u062e\u0641\u0636 \u0627\u0644\u0643\u062b\u0627\u0641\u0629 \u0628\u0642\u0627\u0628\u0643\u0648.",
             "translatedText": "Optical flame detection sensors and high-pressure reactor safety interlocks for QAPCO LDPE Autoclave units.",
             "factText": "QAPCO safety engineering team released emergency shutdown detection system tender.",
             "signalText": "QCON invited specialized safety instrument vendors to submit ATEX Zone 1 certified flame detectors.",
             "inferenceText": "Det-Tronics X3301 multispectrum IR flame detectors deliver false-alarm immunity in ethylene polymerization environments.",
             "sourceUrl": "https://www.qapco.com",
             "epcUrl": "https://www.qcon.com.qa"
+      },
+      {
+            "id": "QTR-2026-0160",
+            "client": "QatarEnergy",
+            "facility": "Ras Laffan Industrial City",
+            "project": "NFS Mega-Train Cryogenic Storage & Offloading BOG Compressor Skid",
+            "stage": "Level 3 (Procurement Approaching)",
+            "stageBadge": "Procurement Approaching",
+            "epc": "Technip Energies",
+            "contractor": "Technip Energies LNG Div",
+            "product": "Cryogenic Ball & Butterfly Valves",
+            "brand": "Emerson / ADAMS",
+            "value": 1450000,
+            "score": 95,
+            "confidence": "High (97%)",
+            "status": "Pre-RFQ",
+            "expectedRfq": "10-Nov-2026",
+            "detectedAgo": "2 hours ago",
+            "nextAction": "Engage Technip Energies cryogenic package manager for ADAMS triple-eccentric valve qualification",
+            "arabicText": "\u0645\u0634\u0631\u0648\u0639 \u062e\u0632\u0627\u0646 \u0648\u063a\u0627\u0632\u0627\u062a \u0627\u0644\u062a\u0628\u0631\u064a\u062f \u0627\u0644\u0639\u0645\u064a\u0642 \u0641\u064a \u0645\u062c\u0645\u0639 \u063a\u0627\u0632 \u0627\u0644\u0634\u0645\u0627\u0644 \u0627\u0644\u062c\u0646\u0648\u0628\u064a \u0628\u0631\u0627\u0633 \u0644\u0641\u0627\u0646.",
+            "translatedText": "North Field South (NFS) cryogenic boil-off gas compressor skid and offloading line revamp.",
+            "factText": "QatarEnergy officially sanctioned NFS offloading loop expansion.",
+            "signalText": "Technip Energies issued vendor qualification notice for 900# cryogenic isolation valves.",
+            "inferenceText": "Emerson Cryogenic Ball Valves and ADAMS Metal-Seated Valves directly fit low-temperature LNG service.",
+            "sourceUrl": "https://www.qatarenergy.qa",
+            "epcUrl": "https://www.technipenergies.com"
+      },
+      {
+            "id": "QTR-2026-0163",
+            "client": "QAFCO",
+            "facility": "Mesaieed Industrial City",
+            "project": "QAFCO-6 Urea Plant Granulation Tower Scrubbing Fan Spares & Vents",
+            "stage": "Level 4 (Live ITT / Tender)",
+            "stageBadge": "Live ITT",
+            "epc": "DOPET",
+            "contractor": "DOPET Turnaround Dept",
+            "product": "Flame Arrestors & Tank Vents",
+            "brand": "Protectoseal",
+            "value": 980000,
+            "score": 92,
+            "confidence": "High (94%)",
+            "status": "RFQ Received",
+            "expectedRfq": "25-Oct-2026",
+            "detectedAgo": "4 hours ago",
+            "nextAction": "Submit Protectoseal explosion-proof ATEX breather vent package to DOPET estimating team",
+            "arabicText": "\u062a\u0648\u0631\u064a\u062f \u0635\u0645\u0627\u0645\u0627\u062a \u062a\u0646\u0641\u064a\u0633 \u0648\u0645\u0627\u0646\u0639\u0627\u062a \u0644\u0647\u0628 \u0644\u0628\u0631\u062c \u062a\u062d\u0628\u064a\u0628 \u0627\u0644\u064a\u0648\u0631\u064a\u0627 \u0628\u0645\u0635\u0646\u0639 \u0642\u0627\u0641\u0643\u0648 6 \u0641\u064a \u0645\u0633\u064a\u0639\u064a\u062f.",
+            "translatedText": "Supply of explosion-proof tank vents and deflagration flame arrestors for QAFCO-6 Urea granulation tower.",
+            "factText": "QAFCO safety integrity report mandated replacement of atmospheric relief vents.",
+            "signalText": "DOPET mechanical turnaround division requested ATEX certified pressure/vacuum relief valve quotation.",
+            "inferenceText": "Protectoseal Series 830 vents match existing flanged vessel nozzles.",
+            "sourceUrl": "https://www.qafco.qa",
+            "epcUrl": "https://www.dopet.com"
+      },
+      {
+            "id": "QTR-2026-0166",
+            "client": "North Oil Company",
+            "facility": "Al Shaheen Offshore Field",
+            "project": "Al Shaheen Offshore Platform Gallaf Phase 3 Sour Gas Manifold Valves",
+            "stage": "Level 4 (Live ITT / Tender)",
+            "stageBadge": "Live ITT",
+            "epc": "Saipem",
+            "contractor": "Saipem Offshore Contracting",
+            "product": "Solenoid Valves & Actuation",
+            "brand": "Emerson ASCO",
+            "value": 1120000,
+            "score": 96,
+            "confidence": "High (98%)",
+            "status": "RFQ Received",
+            "expectedRfq": "15-Oct-2026",
+            "detectedAgo": "5 hours ago",
+            "nextAction": "Deliver ASCO 316L explosion-proof pilot solenoid proposal to Saipem offshore instrumentation team",
+            "arabicText": "\u062a\u0648\u0631\u064a\u062f \u0645\u062d\u0627\u0628\u0633 \u0643\u0647\u0631\u0648\u0645\u063a\u0646\u0627\u0637\u064a\u0633\u064a\u0629 \u0648\u0645\u062c\u0645\u0639\u0627\u062a \u063a\u0627\u0632 \u062d\u0645\u0636\u064a \u0644\u0645\u0646\u0635\u0629 \u062d\u0642\u0644 \u0627\u0644\u0634\u0627\u0647\u064a\u0646 \u0627\u0644\u0628\u062d\u0631\u064a.",
+            "translatedText": "Supply of sour-gas rated pilot solenoid valves and double-block-and-bleed manifolds for Al Shaheen topsides.",
+            "factText": "NOC issued offshore platform expansion notice for Gallaf Phase 3.",
+            "signalText": "Saipem offshore procurement team requested Inconel trim SIL-3 solenoid pilot valves.",
+            "inferenceText": "ASCO 3-way stainless steel solenoids meet NOC severe offshore H2S specification.",
+            "sourceUrl": "https://www.noc.qa",
+            "epcUrl": "https://www.saipem.com"
+      },
+      {
+            "id": "QTR-2026-0169",
+            "client": "Q-Chem",
+            "facility": "Mesaieed Industrial City",
+            "project": "Q-Chem II Hexene-1 Plant Polyolefin Reactor Gauges & Positioners",
+            "stage": "Level 3 (Procurement Approaching)",
+            "stageBadge": "Procurement Approaching",
+            "epc": "Medgulf",
+            "contractor": "Medgulf E&I Division",
+            "product": "Pressure & Temp Gauges",
+            "brand": "Ashcroft / Westlock",
+            "value": 850000,
+            "score": 91,
+            "confidence": "High (93%)",
+            "status": "Pre-RFQ",
+            "expectedRfq": "05-Dec-2026",
+            "detectedAgo": "7 hours ago",
+            "nextAction": "Present Ashcroft Duragauge solid-front process gauges and Westlock digital monitors to Medgulf",
+            "arabicText": "\u062a\u062d\u062f\u064a\u062b \u0623\u062c\u0647\u0632\u0629 \u0642\u064a\u0627\u0633 \u0627\u0644\u0636\u063a\u0637 \u0648\u0645\u062d\u062f\u062f\u0627\u062a \u0645\u0648\u0642\u0639 \u0627\u0644\u0635\u0645\u0627\u0645\u0627\u062a \u0644\u0645\u0635\u0646\u0639 \u0627\u0644\u0647\u064a\u0643\u0633\u064a\u0646 1 \u0641\u064a \u0643\u064a\u0648\u0643\u064a\u0645 \u0645\u0633\u064a\u0639\u064a\u062f.",
+            "translatedText": "Upgrade of solid-front pressure gauges and digital valve position monitors at Q-Chem II Hexene-1 plant.",
+            "factText": "Q-Chem II scheduled reactor instrumentation revamp package.",
+            "signalText": "Medgulf instrumentation engineers preparing vendor list for SIL-2 position monitors and liquid-filled gauges.",
+            "inferenceText": "Ashcroft 1279 Duragauges and Westlock AccuTrak positioners provide direct drop-in replacement.",
+            "sourceUrl": "https://www.qchem.com.qa",
+            "epcUrl": "https://www.medgulfconstruction.com"
       }
 ];
 
@@ -4316,7 +4420,7 @@ Q4. Spares & Delivery Timeline:
             <h4 class="text-sm font-bold text-amber-300 flex items-center gap-2">
               <i class="fa-solid fa-bullhorn"></i> Morning Strategic Intelligence Summary
             </h4>
-            <p class="text-xs text-slate-200 mt-1">Qatar market activity is at an all-time peak with <strong>QAR 18.10M</strong> in monitored pipeline opportunities across 24 verified scopes, led by North Field East/South expansions and Mesaieed turnaround packages.</p>
+            <p class="text-xs text-slate-200 mt-1">Qatar market activity is at an all-time peak with <strong>QAR 22.50M</strong> in monitored pipeline opportunities across 24 verified scopes, led by North Field East/South expansions and Mesaieed turnaround packages.</p>
           </div>
 
           <div class="space-y-2">
@@ -4484,7 +4588,7 @@ Q4. Spares & Delivery Timeline:
 • Timestamp: ${astTimestamp}
 • Scanned: 24 Official Qatar Energy State & EPC Portals
 • Verified: 24 Monitored Opportunities & 24 Hot Leads (>80 Score)
-• Pipeline Total: QAR 18.10M (Weighted: QAR 16.69M)
+• Pipeline Total: QAR 22.50M (Weighted: QAR 20.75M)
 • Real-Time Sync: All modules, stages, project cards, CRM grid, and shutdown countdowns updated.`);
         }
       }, 800);
