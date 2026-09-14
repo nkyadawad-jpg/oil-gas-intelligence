@@ -70,13 +70,28 @@ def check_portal(source):
         "status": status
     }
 
+
+def update_index_html_opportunities(opps):
+    index_path = os.path.join(PROJECT_DIR, 'index.html')
+    if os.path.exists(index_path):
+        with open(index_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        m = re.search(r'const DEFAULT_OPPORTUNITIES = (\[[\s\S]*?\]);', content)
+        if m:
+            opps_json = json.dumps(opps, indent=6)
+            new_content = content.replace(m.group(0), f"const DEFAULT_OPPORTUNITIES = {opps_json};")
+            if new_content != content:
+                with open(index_path, 'w', encoding='utf-8') as f:
+                    f.write(new_content)
+                print(f"[OK] Synchronized {len(opps)} opportunities into index.html DEFAULT_OPPORTUNITIES!")
+
 def update_index_html_timestamp(time_str):
     index_path = os.path.join(PROJECT_DIR, 'index.html')
     if os.path.exists(index_path):
         with open(index_path, 'r', encoding='utf-8') as f:
             content = f.read()
 
-        # Update topRefreshedTimestamp content
         pattern = r'(<strong id="topRefreshedTimestamp"[^>]*>)[^<]*(<\/strong>)'
         replacement = r'\g<1>' + time_str + r'\g<2>'
         new_content = re.sub(pattern, replacement, content)
@@ -848,6 +863,7 @@ def generate_hourly_data():
 
     print(f"[OK] Generated {out_file} successfully at {time_str}")
     update_index_html_timestamp(time_str)
+    update_index_html_opportunities(OPPORTUNITIES_PAYLOAD)
 
 if __name__ == '__main__':
     generate_hourly_data()
