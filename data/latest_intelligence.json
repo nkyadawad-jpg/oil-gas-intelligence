@@ -1,11 +1,11 @@
 {
-  "syncTimestamp": "14-Sep-2026 10:26 AST",
-  "syncTimestampIso": "2026-09-14T07:26:33.290129+00:00",
-  "totalProjectsMonitored": 58,
-  "verifiedHotLeads": 28,
-  "openPipelineValuation": 22500000,
-  "weightedPipeline": 20750000,
-  "pipelineCoverage": "11.3X",
+  "syncTimestamp": "16-Sep-2026 10:29 AST",
+  "syncTimestampIso": "2026-09-16T07:29:04.602168+00:00",
+  "totalProjectsMonitored": 62,
+  "verifiedHotLeads": 32,
+  "openPipelineValuation": 27500000,
+  "weightedPipeline": 25250000,
+  "pipelineCoverage": "13.8X",
   "monthlyTarget": 2000000,
   "monthlyAchieved": 1250000,
   "targetPercentage": 62.5,
@@ -16,168 +16,168 @@
       "url": "https://www.qatarenergy.qa",
       "tier": "Tier A (State)",
       "status": "Active (200 OK)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "QatarEnergy LNG Official Supplier Notices",
       "url": "https://www.qatarenergylng.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "QAFCO Fertilizer Official Procurement",
       "url": "https://www.qafco.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "Q-Chem / RLOC Chemical Portal",
       "url": "https://www.qchem.com.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "QAPCO Petrochemical Procurement Portal",
       "url": "https://www.qapco.com",
       "tier": "Tier A (Operator)",
       "status": "Protected (307)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "North Oil Company (NOC) Official Portal",
       "url": "https://www.noc.qa",
       "tier": "Tier A (Offshore Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "Qatar Shell Pearl GTL Official Site",
       "url": "https://www.shell.com.qa",
       "tier": "Tier A (GTL Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "Dolphin Energy Official Qatar Portal",
       "url": "https://www.dolphinenergy.com",
       "tier": "Tier A (Gas Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "Oryx GTL Official Corporate Site",
       "url": "https://www.oryxgtl.com.qa",
       "tier": "Tier A (GTL Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "WOQOD Commercial Distribution Portal",
       "url": "https://www.woqod.com",
       "tier": "Tier A (Distribution)",
       "status": "Active (200 OK)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "QAFAC Methanol Procurement Portal",
       "url": "https://www.qafac.com.qa",
       "tier": "Tier A (Operator)",
       "status": "Active (200 OK)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "Umm Al Houl Power (UHP) Portal",
       "url": "https://www.uhp.com.qa",
       "tier": "Tier A (Utility)",
       "status": "Active (Verified)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "Mpower Power Generation Portal",
       "url": "https://www.mpower.com.qa",
       "tier": "Tier A (Utility)",
       "status": "Active (200 OK)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "DOPET Engineering & Contracting Portal",
       "url": "https://www.dopet.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "QCON Turnaround & Construction Disclosures",
       "url": "https://www.qcon.com.qa",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "TRAGS Electrical & Engineering Qatar",
       "url": "https://www.tragsqatar.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "Medgulf Construction Official Site",
       "url": "https://www.medgulfconstruction.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "Blackcat Engineering & Construction",
       "url": "https://www.blackcat.qa",
       "tier": "Tier B (EPC)",
       "status": "Active (Verified)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "Chiyoda Almana Engineering Portal",
       "url": "https://www.chiyodaalmana.com.qa",
       "tier": "Tier B (EPC/FEED)",
       "status": "Active (Verified)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "McDermott Offshore Qatar Site",
       "url": "https://www.mcdermott.com",
       "tier": "Tier B (Offshore EPC)",
       "status": "Protected (403)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "Saipem Qatar Contracting Portal",
       "url": "https://www.saipem.com",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "Technip Energies Qatar Portal",
       "url": "https://www.technipenergies.com",
       "tier": "Tier B (Mega EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "Consolidated Contractors Company (CCC)",
       "url": "https://www.ccc.net",
       "tier": "Tier B (Mega EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     },
     {
       "name": "Galfar Al Misnad Engineering Qatar",
       "url": "https://www.galfarqatar.com.qa",
       "tier": "Tier B (EPC)",
       "status": "Active (200 OK)",
-      "checkedAt": "14-Sep-2026 10:26 AST"
+      "checkedAt": "16-Sep-2026 10:29 AST"
     }
   ],
   "shutdownRadar": [
@@ -189,7 +189,7 @@
       "type": "Major Turnaround",
       "expectedStart": "15-Oct-2026",
       "expectedEnd": "05-Nov-2026",
-      "daysToShutdown": 31,
+      "daysToShutdown": 29,
       "contractor": "DOPET & QCON",
       "equipment": "Syngas Loop, Waste Heat Boilers, Synthesis Converter",
       "productFit": "High: Emerson Gate Valves, Trillium Pump Spares, Ashcroft Gauges",
@@ -203,7 +203,7 @@
       "type": "Scheduled Overhaul",
       "expectedStart": "01-Nov-2026",
       "expectedEnd": "25-Nov-2026",
-      "daysToShutdown": 48,
+      "daysToShutdown": 46,
       "contractor": "QCON Turnaround Team",
       "equipment": "Cryogenic MCHE, AGRU Columns, Refrigerant Compressors",
       "productFit": "High: ADAMS Severe Service Valves, Protectoseal Vents, ASCO Solenoids",
@@ -217,7 +217,7 @@
       "type": "Catalyst & Reactor Maintenance",
       "expectedStart": "10-Dec-2026",
       "expectedEnd": "22-Dec-2026",
-      "daysToShutdown": 87,
+      "daysToShutdown": 85,
       "contractor": "Medgulf & Madina Group",
       "equipment": "Loop Reactor, Polymerization Feed, Fluff Silos",
       "productFit": "High: Protectoseal Flame Arrestors, Westlock Positioners",
@@ -231,7 +231,7 @@
       "type": "Cracker Quench Overhaul",
       "expectedStart": "18-Nov-2026",
       "expectedEnd": "02-Dec-2026",
-      "daysToShutdown": 65,
+      "daysToShutdown": 63,
       "contractor": "Madina Group",
       "equipment": "Quench Towers, Pyrolysis Gasoline Pumps, Transfer Line Valves",
       "productFit": "High: Trillium Pump Spares, Emerson Ball Valves",
@@ -245,7 +245,7 @@
       "type": "Gas Separation Revamp",
       "expectedStart": "05-Jan-2027",
       "expectedEnd": "20-Jan-2027",
-      "daysToShutdown": 113,
+      "daysToShutdown": 111,
       "contractor": "Blackcat & TRAGS",
       "equipment": "3-Phase Separators, Gas Lift Manifold, Relief Flare",
       "productFit": "High: Emerson Gate/Ball Valves, Ashcroft Pressure Gauges",
@@ -980,6 +980,110 @@
       "inferenceText": "Ashcroft 1279 Duragauges and Westlock AccuTrak positioners provide direct drop-in replacement.",
       "sourceUrl": "https://www.qchem.com.qa",
       "epcUrl": "https://www.medgulfconstruction.com"
+    },
+    {
+      "id": "QTR-2026-0172",
+      "client": "QatarEnergy LNG",
+      "facility": "Ras Laffan Industrial City",
+      "project": "Train 7 Main Cryogenic Heat Exchanger (MCHE) Relief & Control Valve Package",
+      "stage": "Level 4 (Live ITT / Tender)",
+      "stageBadge": "Live ITT",
+      "epc": "Technip Energies",
+      "contractor": "Technip Energies LNG Div",
+      "product": "Cryogenic Control & Severe Service Valves",
+      "brand": "ADAMS / Fisher",
+      "value": 1650000,
+      "score": 96,
+      "confidence": "High (98%)",
+      "status": "RFQ Received",
+      "expectedRfq": "05-Oct-2026",
+      "detectedAgo": "1 hour ago",
+      "nextAction": "Submit ADAMS triple-eccentric cryogenic butterfly and Fisher severe-service control valve technical offer to Technip Energies",
+      "arabicText": "\u0645\u0634\u0631\u0648\u0639 \u062a\u062d\u062f\u064a\u062b \u0635\u0645\u0627\u0645\u0627\u062a \u0627\u0644\u062a\u062d\u0643\u0645 \u0648\u0627\u0644\u0636\u063a\u0637 \u0627\u0644\u0639\u0627\u0644\u064a \u0644\u0648\u062d\u062f\u0629 \u0627\u0644\u0645\u0628\u0627\u062f\u0644 \u0627\u0644\u062d\u0631\u0627\u0631\u064a \u0627\u0644\u0631\u0626\u064a\u0633\u064a \u0644\u0642\u0637\u0627\u0631 \u0627\u0644\u063a\u0627\u0632 \u0627\u0644\u0645\u0633\u0627\u0644 \u0631\u0642\u0645 7 \u0628\u0631\u0627\u0633 \u0644\u0641\u0627\u0646.",
+      "translatedText": "Revamp of high-pressure control valves and cryogenic isolation packages for LNG Train 7 MCHE debottlenecking.",
+      "factText": "QatarEnergy LNG issued debottlenecking approval for Train 7 export throughput boost.",
+      "signalText": "Technip Energies issued tender inquiry for 1200# cryogenic metal-seated valves.",
+      "inferenceText": "ADAMS triple-offset metal-seated valves and Fisher control valves fit low-temp (-162\u00b0C) LNG service.",
+      "sourceUrl": "https://www.qatarenergylng.qa",
+      "epcUrl": "https://www.technipenergies.com"
+    },
+    {
+      "id": "QTR-2026-0175",
+      "client": "QAFCO",
+      "facility": "Mesaieed Industrial City",
+      "project": "QAFCO-5 Ammonia Synthesis Converter Hot Gas Bypass & Safety Relief Valves",
+      "stage": "Level 3 (Procurement Approaching)",
+      "stageBadge": "Procurement Approaching",
+      "epc": "DOPET",
+      "contractor": "DOPET Turnaround & Maintenance Div",
+      "product": "Severe Service Safety Valves & Rupture Discs",
+      "brand": "Crosby / Continental Disc",
+      "value": 1120000,
+      "score": 93,
+      "confidence": "High (95%)",
+      "status": "Pre-RFQ",
+      "expectedRfq": "18-Nov-2026",
+      "detectedAgo": "3 hours ago",
+      "nextAction": "Provide Crosby high-pressure safety relief valve specifications to DOPET QAFCO turnaround team",
+      "arabicText": "\u062a\u0648\u0631\u064a\u062f \u0635\u0645\u0627\u0645\u0627\u062a \u0623\u0645\u0627\u0646 \u0639\u0627\u0644\u064a\u0629 \u0627\u0644\u0636\u063a\u0637 \u0648\u0623\u0642\u0631\u0627\u0635 \u062a\u0645\u0632\u0642 \u0644\u0645\u062d\u0648\u0644 \u0627\u0644\u0623\u0645\u0648\u0646\u064a\u0627 \u0628\u0645\u0635\u0646\u0639 \u0642\u0627\u0641\u0643\u0648 5 \u0641\u064a \u0645\u0633\u064a\u0639\u064a\u062f.",
+      "translatedText": "Procurement of high-pressure safety relief valves and rupture disc assemblies for QAFCO-5 ammonia converter loop.",
+      "factText": "QAFCO scheduled QAFCO-5 synthesis loop turnaround for early 2027.",
+      "signalText": "DOPET turnaround team drafting vendor qualification list for 1500# syngas safety relief valves.",
+      "inferenceText": "Crosby JOS-E pressure relief valves with Inconel bellows withstand high-temperature syngas service.",
+      "sourceUrl": "https://www.qafco.qa",
+      "epcUrl": "https://www.dopet.com"
+    },
+    {
+      "id": "QTR-2026-0178",
+      "client": "Qatar Shell Pearl GTL",
+      "facility": "Ras Laffan Industrial City",
+      "project": "Pearl GTL Train 2 Synthesis Gas Slurry Bubble Column Reactor Gauges & Positioners",
+      "stage": "Level 4 (Live ITT / Tender)",
+      "stageBadge": "Live ITT",
+      "epc": "Chiyoda Almana",
+      "contractor": "Chiyoda Almana E&I Team",
+      "product": "Valve Monitoring & Digital Positioners",
+      "brand": "Westlock Controls / Ashcroft",
+      "value": 890000,
+      "score": 94,
+      "confidence": "High (96%)",
+      "status": "RFQ Received",
+      "expectedRfq": "12-Oct-2026",
+      "detectedAgo": "4 hours ago",
+      "nextAction": "Present Westlock SIL-3 AccuTrak digital position transmitters and Ashcroft liquid-filled process gauges to Chiyoda Almana",
+      "arabicText": "\u062a\u062d\u062f\u064a\u062b \u0623\u062c\u0647\u0632\u0629 \u0645\u0631\u0627\u0642\u0628\u0629 \u0648\u0645\u062d\u062f\u062f\u0627\u062a \u0645\u0648\u0627\u0636\u0639 \u0627\u0644\u0635\u0645\u0627\u0645\u0627\u062a \u0644\u0645\u0641\u0627\u0639\u0644\u0627\u062a \u062a\u062d\u0648\u064a\u0644 \u0627\u0644\u063a\u0627\u0632 \u0644\u0633\u0648\u0627\u0626\u0644 \u0641\u064a \u0645\u062c\u0645\u0639 \u0627\u0644\u0644\u0624\u0644\u0624\u0629 \u0628\u0631\u0627\u0633 \u0644\u0641\u0627\u0646.",
+      "translatedText": "Instrumentation revamp for slurry bubble column synthesis reactors at Shell Pearl GTL Train 2.",
+      "factText": "Shell Pearl GTL authorized reactor instrumentation safety enhancement program.",
+      "signalText": "Chiyoda Almana E&I engineers requested SIL-3 rated explosion-proof limit switch boxes and solid-front pressure gauges.",
+      "inferenceText": "Westlock 2600 AccuTrak positioners and Ashcroft Duragauges meet severe GTL synthesis operating conditions.",
+      "sourceUrl": "https://www.shell.com.qa",
+      "epcUrl": "https://www.chiyodaalmana.com.qa"
+    },
+    {
+      "id": "QTR-2026-0181",
+      "client": "North Oil Company",
+      "facility": "Al Shaheen Offshore Field",
+      "project": "Al Shaheen Ruya (Gallaf Phase 3) Platform Subsea ESD & Hydraulic Control Skids",
+      "stage": "Level 3 (Procurement Approaching)",
+      "stageBadge": "Procurement Approaching",
+      "epc": "McDermott",
+      "contractor": "McDermott Subsea Div",
+      "product": "Solenoid Valves & Hydraulic Actuation",
+      "brand": "Emerson ASCO",
+      "value": 1340000,
+      "score": 95,
+      "confidence": "High (97%)",
+      "status": "Pre-RFQ",
+      "expectedRfq": "01-Dec-2026",
+      "detectedAgo": "5 hours ago",
+      "nextAction": "Deliver ASCO 316L stainless steel explosion-proof solenoid valve proposal to McDermott offshore project management",
+      "arabicText": "\u062a\u0648\u0631\u064a\u062f \u0635\u0645\u0627\u0645\u0627\u062a \u0627\u0644\u062a\u062d\u0643\u0645 \u0627\u0644\u0647\u064a\u062f\u0631\u0648\u0643\u0647\u0631\u0648\u0645\u063a\u0646\u0627\u0637\u064a\u0633\u064a\u0629 \u0644\u0645\u0646\u0635\u0627\u062a \u062d\u0642\u0644 \u0627\u0644\u0634\u0627\u0647\u064a\u0646 \u0627\u0644\u0628\u062d\u0631\u064a \u0636\u0645\u0646 \u0645\u0634\u0631\u0648\u0639 \u0631\u0648\u064a\u0627.",
+      "translatedText": "Supply of offshore-grade pilot solenoid valves and hydraulic ESD skids for NOC Ruya Project platforms.",
+      "factText": "North Oil Company sanctioned Ruya Project mega offshore expansion package.",
+      "signalText": "McDermott offshore engineering team issued vendor list request for 316L SIL-3 solenoid control manifolds.",
+      "inferenceText": "ASCO 3-way stainless steel solenoids comply with NOC offshore marine H2S specifications.",
+      "sourceUrl": "https://www.noc.qa",
+      "epcUrl": "https://www.mcdermott.com"
     }
   ],
   "recentSignals": [

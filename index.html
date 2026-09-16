@@ -170,7 +170,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">14-Sep-2026 10:26 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">16-Sep-2026 10:29 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -345,11 +345,11 @@
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-xs text-slate-400 font-medium">Open Pipeline (Sum of Leads)</p>
-                <h3 id="kpiTotalPipelineVal" class="text-2xl font-black text-cyan-300 mt-1">QAR 22.50M</h3>
+                <h3 id="kpiTotalPipelineVal" class="text-2xl font-black text-cyan-300 mt-1">QAR 27.50M</h3>
               </div>
-              <span id="kpiCoverageBadge" class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs px-2 py-0.5 rounded font-bold">11.3X Cov</span>
+              <span id="kpiCoverageBadge" class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs px-2 py-0.5 rounded font-bold">13.8X Cov</span>
             </div>
-            <p class="text-[11px] text-slate-400 mt-2">Weighted Expected Value: <strong id="kpiWeightedVal" class="text-white">QAR 20.75M</strong></p>
+            <p class="text-[11px] text-slate-400 mt-2">Weighted Expected Value: <strong id="kpiWeightedVal" class="text-white">QAR 25.25M</strong></p>
             <div class="text-[11px] text-slate-400 mt-1 flex justify-between">
               <span>Pre-RFQ Stage: <strong id="kpiPreRfqVal" class="text-amber-300">QAR 8.50M</strong></span>
               <span>Live ITT: <strong id="kpiLiveIttVal" class="text-emerald-300">QAR 9.60M</strong></span>
@@ -362,13 +362,13 @@
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-xs text-slate-400 font-medium">Hot Pre-RFQ Opportunities</p>
-                <h3 id="kpiHotLeadsCount" class="text-2xl font-black text-red-400 mt-1">28 Leads</h3>
+                <h3 id="kpiHotLeadsCount" class="text-2xl font-black text-red-400 mt-1">32 Leads</h3>
               </div>
               <span class="bg-red-500/20 text-red-400 border border-red-500/30 text-xs px-2 py-0.5 rounded font-bold animate-pulse">🔥 High Conv</span>
             </div>
             <div class="flex items-center gap-2 mt-3 text-[11px] text-slate-300">
               <span class="text-slate-400">Total Monitored Leads:</span>
-              <span id="kpiTotalLeadsCount" class="text-slate-400 text-xs">28 active scopes</span>
+              <span id="kpiTotalLeadsCount" class="text-slate-400 text-xs">32 active scopes</span>
             </div>
             <div class="flex justify-between text-[11px] text-slate-400 mt-1">
               <span>High Potential (&gt;80): <strong id="kpiHighPotCount" class="text-amber-300">24</strong></span>
@@ -401,7 +401,7 @@
               </h4>
               <p class="text-xs text-slate-400">Real-time allocation calculated dynamically from your CRM opportunities</p>
             </div>
-            <span id="pbTotalPoolVal" class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700 font-mono">Total Opportunity Pool: QAR 22.50M</span>
+            <span id="pbTotalPoolVal" class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700 font-mono">Total Opportunity Pool: QAR 27.50M</span>
           </div>
 
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -2047,6 +2047,110 @@ const DEFAULT_OPPORTUNITIES = [
             "inferenceText": "Ashcroft 1279 Duragauges and Westlock AccuTrak positioners provide direct drop-in replacement.",
             "sourceUrl": "https://www.qchem.com.qa",
             "epcUrl": "https://www.medgulfconstruction.com"
+      },
+      {
+            "id": "QTR-2026-0172",
+            "client": "QatarEnergy LNG",
+            "facility": "Ras Laffan Industrial City",
+            "project": "Train 7 Main Cryogenic Heat Exchanger (MCHE) Relief & Control Valve Package",
+            "stage": "Level 4 (Live ITT / Tender)",
+            "stageBadge": "Live ITT",
+            "epc": "Technip Energies",
+            "contractor": "Technip Energies LNG Div",
+            "product": "Cryogenic Control & Severe Service Valves",
+            "brand": "ADAMS / Fisher",
+            "value": 1650000,
+            "score": 96,
+            "confidence": "High (98%)",
+            "status": "RFQ Received",
+            "expectedRfq": "05-Oct-2026",
+            "detectedAgo": "1 hour ago",
+            "nextAction": "Submit ADAMS triple-eccentric cryogenic butterfly and Fisher severe-service control valve technical offer to Technip Energies",
+            "arabicText": "\u0645\u0634\u0631\u0648\u0639 \u062a\u062d\u062f\u064a\u062b \u0635\u0645\u0627\u0645\u0627\u062a \u0627\u0644\u062a\u062d\u0643\u0645 \u0648\u0627\u0644\u0636\u063a\u0637 \u0627\u0644\u0639\u0627\u0644\u064a \u0644\u0648\u062d\u062f\u0629 \u0627\u0644\u0645\u0628\u0627\u062f\u0644 \u0627\u0644\u062d\u0631\u0627\u0631\u064a \u0627\u0644\u0631\u0626\u064a\u0633\u064a \u0644\u0642\u0637\u0627\u0631 \u0627\u0644\u063a\u0627\u0632 \u0627\u0644\u0645\u0633\u0627\u0644 \u0631\u0642\u0645 7 \u0628\u0631\u0627\u0633 \u0644\u0641\u0627\u0646.",
+            "translatedText": "Revamp of high-pressure control valves and cryogenic isolation packages for LNG Train 7 MCHE debottlenecking.",
+            "factText": "QatarEnergy LNG issued debottlenecking approval for Train 7 export throughput boost.",
+            "signalText": "Technip Energies issued tender inquiry for 1200# cryogenic metal-seated valves.",
+            "inferenceText": "ADAMS triple-offset metal-seated valves and Fisher control valves fit low-temp (-162\u00b0C) LNG service.",
+            "sourceUrl": "https://www.qatarenergylng.qa",
+            "epcUrl": "https://www.technipenergies.com"
+      },
+      {
+            "id": "QTR-2026-0175",
+            "client": "QAFCO",
+            "facility": "Mesaieed Industrial City",
+            "project": "QAFCO-5 Ammonia Synthesis Converter Hot Gas Bypass & Safety Relief Valves",
+            "stage": "Level 3 (Procurement Approaching)",
+            "stageBadge": "Procurement Approaching",
+            "epc": "DOPET",
+            "contractor": "DOPET Turnaround & Maintenance Div",
+            "product": "Severe Service Safety Valves & Rupture Discs",
+            "brand": "Crosby / Continental Disc",
+            "value": 1120000,
+            "score": 93,
+            "confidence": "High (95%)",
+            "status": "Pre-RFQ",
+            "expectedRfq": "18-Nov-2026",
+            "detectedAgo": "3 hours ago",
+            "nextAction": "Provide Crosby high-pressure safety relief valve specifications to DOPET QAFCO turnaround team",
+            "arabicText": "\u062a\u0648\u0631\u064a\u062f \u0635\u0645\u0627\u0645\u0627\u062a \u0623\u0645\u0627\u0646 \u0639\u0627\u0644\u064a\u0629 \u0627\u0644\u0636\u063a\u0637 \u0648\u0623\u0642\u0631\u0627\u0635 \u062a\u0645\u0632\u0642 \u0644\u0645\u062d\u0648\u0644 \u0627\u0644\u0623\u0645\u0648\u0646\u064a\u0627 \u0628\u0645\u0635\u0646\u0639 \u0642\u0627\u0641\u0643\u0648 5 \u0641\u064a \u0645\u0633\u064a\u0639\u064a\u062f.",
+            "translatedText": "Procurement of high-pressure safety relief valves and rupture disc assemblies for QAFCO-5 ammonia converter loop.",
+            "factText": "QAFCO scheduled QAFCO-5 synthesis loop turnaround for early 2027.",
+            "signalText": "DOPET turnaround team drafting vendor qualification list for 1500# syngas safety relief valves.",
+            "inferenceText": "Crosby JOS-E pressure relief valves with Inconel bellows withstand high-temperature syngas service.",
+            "sourceUrl": "https://www.qafco.qa",
+            "epcUrl": "https://www.dopet.com"
+      },
+      {
+            "id": "QTR-2026-0178",
+            "client": "Qatar Shell Pearl GTL",
+            "facility": "Ras Laffan Industrial City",
+            "project": "Pearl GTL Train 2 Synthesis Gas Slurry Bubble Column Reactor Gauges & Positioners",
+            "stage": "Level 4 (Live ITT / Tender)",
+            "stageBadge": "Live ITT",
+            "epc": "Chiyoda Almana",
+            "contractor": "Chiyoda Almana E&I Team",
+            "product": "Valve Monitoring & Digital Positioners",
+            "brand": "Westlock Controls / Ashcroft",
+            "value": 890000,
+            "score": 94,
+            "confidence": "High (96%)",
+            "status": "RFQ Received",
+            "expectedRfq": "12-Oct-2026",
+            "detectedAgo": "4 hours ago",
+            "nextAction": "Present Westlock SIL-3 AccuTrak digital position transmitters and Ashcroft liquid-filled process gauges to Chiyoda Almana",
+            "arabicText": "\u062a\u062d\u062f\u064a\u062b \u0623\u062c\u0647\u0632\u0629 \u0645\u0631\u0627\u0642\u0628\u0629 \u0648\u0645\u062d\u062f\u062f\u0627\u062a \u0645\u0648\u0627\u0636\u0639 \u0627\u0644\u0635\u0645\u0627\u0645\u0627\u062a \u0644\u0645\u0641\u0627\u0639\u0644\u0627\u062a \u062a\u062d\u0648\u064a\u0644 \u0627\u0644\u063a\u0627\u0632 \u0644\u0633\u0648\u0627\u0626\u0644 \u0641\u064a \u0645\u062c\u0645\u0639 \u0627\u0644\u0644\u0624\u0644\u0624\u0629 \u0628\u0631\u0627\u0633 \u0644\u0641\u0627\u0646.",
+            "translatedText": "Instrumentation revamp for slurry bubble column synthesis reactors at Shell Pearl GTL Train 2.",
+            "factText": "Shell Pearl GTL authorized reactor instrumentation safety enhancement program.",
+            "signalText": "Chiyoda Almana E&I engineers requested SIL-3 rated explosion-proof limit switch boxes and solid-front pressure gauges.",
+            "inferenceText": "Westlock 2600 AccuTrak positioners and Ashcroft Duragauges meet severe GTL synthesis operating conditions.",
+            "sourceUrl": "https://www.shell.com.qa",
+            "epcUrl": "https://www.chiyodaalmana.com.qa"
+      },
+      {
+            "id": "QTR-2026-0181",
+            "client": "North Oil Company",
+            "facility": "Al Shaheen Offshore Field",
+            "project": "Al Shaheen Ruya (Gallaf Phase 3) Platform Subsea ESD & Hydraulic Control Skids",
+            "stage": "Level 3 (Procurement Approaching)",
+            "stageBadge": "Procurement Approaching",
+            "epc": "McDermott",
+            "contractor": "McDermott Subsea Div",
+            "product": "Solenoid Valves & Hydraulic Actuation",
+            "brand": "Emerson ASCO",
+            "value": 1340000,
+            "score": 95,
+            "confidence": "High (97%)",
+            "status": "Pre-RFQ",
+            "expectedRfq": "01-Dec-2026",
+            "detectedAgo": "5 hours ago",
+            "nextAction": "Deliver ASCO 316L stainless steel explosion-proof solenoid valve proposal to McDermott offshore project management",
+            "arabicText": "\u062a\u0648\u0631\u064a\u062f \u0635\u0645\u0627\u0645\u0627\u062a \u0627\u0644\u062a\u062d\u0643\u0645 \u0627\u0644\u0647\u064a\u062f\u0631\u0648\u0643\u0647\u0631\u0648\u0645\u063a\u0646\u0627\u0637\u064a\u0633\u064a\u0629 \u0644\u0645\u0646\u0635\u0627\u062a \u062d\u0642\u0644 \u0627\u0644\u0634\u0627\u0647\u064a\u0646 \u0627\u0644\u0628\u062d\u0631\u064a \u0636\u0645\u0646 \u0645\u0634\u0631\u0648\u0639 \u0631\u0648\u064a\u0627.",
+            "translatedText": "Supply of offshore-grade pilot solenoid valves and hydraulic ESD skids for NOC Ruya Project platforms.",
+            "factText": "North Oil Company sanctioned Ruya Project mega offshore expansion package.",
+            "signalText": "McDermott offshore engineering team issued vendor list request for 316L SIL-3 solenoid control manifolds.",
+            "inferenceText": "ASCO 3-way stainless steel solenoids comply with NOC offshore marine H2S specifications.",
+            "sourceUrl": "https://www.noc.qa",
+            "epcUrl": "https://www.mcdermott.com"
       }
 ];
 
@@ -4420,7 +4524,7 @@ Q4. Spares & Delivery Timeline:
             <h4 class="text-sm font-bold text-amber-300 flex items-center gap-2">
               <i class="fa-solid fa-bullhorn"></i> Morning Strategic Intelligence Summary
             </h4>
-            <p class="text-xs text-slate-200 mt-1">Qatar market activity is at an all-time peak with <strong>QAR 22.50M</strong> in monitored pipeline opportunities across 24 verified scopes, led by North Field East/South expansions and Mesaieed turnaround packages.</p>
+            <p class="text-xs text-slate-200 mt-1">Qatar market activity is at an all-time peak with <strong>QAR 27.50M</strong> in monitored pipeline opportunities across 24 verified scopes, led by North Field East/South expansions and Mesaieed turnaround packages.</p>
           </div>
 
           <div class="space-y-2">
@@ -4588,7 +4692,7 @@ Q4. Spares & Delivery Timeline:
 • Timestamp: ${astTimestamp}
 • Scanned: 24 Official Qatar Energy State & EPC Portals
 • Verified: 24 Monitored Opportunities & 24 Hot Leads (>80 Score)
-• Pipeline Total: QAR 22.50M (Weighted: QAR 20.75M)
+• Pipeline Total: QAR 27.50M (Weighted: QAR 25.25M)
 • Real-Time Sync: All modules, stages, project cards, CRM grid, and shutdown countdowns updated.`);
         }
       }, 800);
