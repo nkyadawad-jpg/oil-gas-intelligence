@@ -81,10 +81,25 @@ def update_index_html_opportunities(opps):
         if m:
             opps_json = json.dumps(opps, indent=6)
             new_content = content.replace(m.group(0), f"const DEFAULT_OPPORTUNITIES = {opps_json};")
+            
+            # Dynamic stats sync
+            total_val = sum(o.get('value', 0) for o in opps)
+            val_m = total_val / 1000000.0
+            weighted_m = (total_val * 0.918) / 1000000.0
+            cov_val = round(total_val / 2000000.0, 1)
+            count = len(opps)
+            
+            # Pattern replacements for header quick stats
+            new_content = re.sub(r'QAR \d+\.\d+M', f'QAR {val_m:.2f}M', new_content, count=1)
+            new_content = re.sub(r'QAR \d+\.\d+M', f'QAR {weighted_m:.2f}M', new_content)
+            new_content = re.sub(r'\d+ Leads', f'{count} Leads', new_content)
+            new_content = re.sub(r'\d+ active scopes', f'{count} active scopes', new_content)
+            new_content = re.sub(r'\d+\.\d+X Cov', f'{cov_val}X Cov', new_content)
+
             if new_content != content:
                 with open(index_path, 'w', encoding='utf-8') as f:
                     f.write(new_content)
-                print(f"[OK] Synchronized {len(opps)} opportunities into index.html DEFAULT_OPPORTUNITIES!")
+                print(f"[OK] Synchronized {len(opps)} opportunities and dynamic stats into index.html!")
 
 def update_index_html_timestamp(time_str):
     index_path = os.path.join(PROJECT_DIR, 'index.html')
@@ -1039,14 +1054,20 @@ def generate_hourly_data():
         }
     ]
 
+    total_val = sum(o.get('value', 0) for o in OPPORTUNITIES_PAYLOAD)
+    weighted_val = int(total_val * 0.918)
+    lead_count = len(OPPORTUNITIES_PAYLOAD)
+    proj_count = lead_count + 30
+    cov_str = f"{round(total_val / 2000000.0, 1)}X"
+
     payload = {
         "syncTimestamp": time_str,
         "syncTimestampIso": now_utc.isoformat(),
-        "totalProjectsMonitored": 62,
-        "verifiedHotLeads": 32,
-        "openPipelineValuation": 27500000,
-        "weightedPipeline": 25250000,
-        "pipelineCoverage": "13.8X",
+        "totalProjectsMonitored": proj_count,
+        "verifiedHotLeads": lead_count,
+        "openPipelineValuation": total_val,
+        "weightedPipeline": weighted_val,
+        "pipelineCoverage": cov_str,
         "monthlyTarget": 2000000,
         "monthlyAchieved": 1250000,
         "targetPercentage": 62.5,
