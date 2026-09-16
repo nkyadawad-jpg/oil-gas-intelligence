@@ -82,19 +82,16 @@ def update_index_html_opportunities(opps):
             opps_json = json.dumps(opps, indent=6)
             new_content = content.replace(m.group(0), f"const DEFAULT_OPPORTUNITIES = {opps_json};")
             
-            # Dynamic stats sync
+            # Dynamic stats sync targeting specific element IDs
             total_val = sum(o.get('value', 0) for o in opps)
             val_m = total_val / 1000000.0
             weighted_m = (total_val * 0.918) / 1000000.0
             cov_val = round(total_val / 2000000.0, 1)
             count = len(opps)
             
-            # Pattern replacements for header quick stats
-            new_content = re.sub(r'QAR \d+\.\d+M', f'QAR {val_m:.2f}M', new_content, count=1)
-            new_content = re.sub(r'QAR \d+\.\d+M', f'QAR {weighted_m:.2f}M', new_content)
-            new_content = re.sub(r'\d+ Leads', f'{count} Leads', new_content)
-            new_content = re.sub(r'\d+ active scopes', f'{count} active scopes', new_content)
-            new_content = re.sub(r'\d+\.\d+X Cov', f'{cov_val}X Cov', new_content)
+            new_content = re.sub(r'(<span id="hdrPipelineVal"[^>]*>)[^<]*(<\/span>)', f'\\g<1>QAR {val_m:.2f}M\\g<2>', new_content)
+            new_content = re.sub(r'(<span id="hdrWeightedVal"[^>]*>)[^<]*(<\/span>)', f'\\g<1>QAR {weighted_m:.2f}M\\g<2>', new_content)
+            new_content = re.sub(r'(<span id="hdrCoverageVal"[^>]*>)[^<]*(<\/span>)', f'\\g<1>{cov_val}X\\g<2>', new_content)
 
             if new_content != content:
                 with open(index_path, 'w', encoding='utf-8') as f:
