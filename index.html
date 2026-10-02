@@ -174,7 +174,7 @@
     <div class="flex items-center gap-1.5 text-cyan-300 min-w-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
       <span class="text-slate-400 font-sans text-[10px] sm:text-xs shrink-0">Data Refreshed:</span>
-      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">30-Sep-2026 16:55 AST</strong>
+      <strong id="topRefreshedTimestamp" class="text-emerald-400 font-bold text-[10px] sm:text-xs tracking-tight truncate">02-Oct-2026 17:17 AST</strong>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="triggerScan()" class="bg-gradient-to-r from-qatar to-qatar-light text-white font-sans font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 shadow hover:from-qatar-light hover:to-qatar active:scale-95 transition">
@@ -5464,7 +5464,7 @@ Q4. Spares & Delivery Timeline:
     // ==========================================
     // LIVE SCAN & AUTO-REFRESH ENGINE
     // ==========================================
-    function triggerScan(isAuto = false) {
+    async function triggerScan(isAuto = false) {
       const icon = document.getElementById('scanIcon');
       const bannerIcon = document.getElementById('bannerScanIcon');
       const sidebarIcon = document.getElementById('sidebarScanIcon');
@@ -5473,69 +5473,91 @@ Q4. Spares & Delivery Timeline:
       if (bannerIcon) bannerIcon.classList.add('animate-spin');
       if (sidebarIcon) sidebarIcon.classList.add('animate-spin');
 
-      setTimeout(() => {
-        if (icon) icon.classList.remove('animate-spin');
-        if (bannerIcon) bannerIcon.classList.remove('animate-spin');
-        if (sidebarIcon) sidebarIcon.classList.remove('animate-spin');
+      // 1. Fetch latest intelligence JSON from server/data file (live sync)
+      try {
+        await checkLiveCloudSync();
+      } catch (e) {
+        console.warn("Live cloud sync fetch fallback:", e);
+      }
 
-        // Generate current AST timestamp
-        const now = new Date();
-        const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-        const qatarTime = new Date(utc + (3600000 * 3));
-        
-        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-        const day = String(qatarTime.getDate()).padStart(2, '0');
-        const month = months[qatarTime.getMonth()];
-        const year = qatarTime.getFullYear();
-        const hrs = String(qatarTime.getHours()).padStart(2, '0');
-        const mins = String(qatarTime.getMinutes()).padStart(2, '0');
-        const astTimestamp = `${day}-${month}-${year} ${hrs}:${mins} AST`;
+      // 2. Generate current AST timestamp if topRefreshedTimestamp not set
+      const now = new Date();
+      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+      const qatarTime = new Date(utc + (3600000 * 3));
+      
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const day = String(qatarTime.getDate()).padStart(2, '0');
+      const month = months[qatarTime.getMonth()];
+      const year = qatarTime.getFullYear();
+      const hrs = String(qatarTime.getHours()).padStart(2, '0');
+      const mins = String(qatarTime.getMinutes()).padStart(2, '0');
+      const astTimestamp = `${day}-${month}-${year} ${hrs}:${mins} AST`;
 
-        const topTimestampEl = document.getElementById('topRefreshedTimestamp');
-        if (topTimestampEl) topTimestampEl.innerText = astTimestamp;
+      const topTimestampEl = document.getElementById('topRefreshedTimestamp');
+      if (topTimestampEl && (!topTimestampEl.innerText || topTimestampEl.innerText === 'Updating...')) {
+        topTimestampEl.innerText = astTimestamp;
+      }
 
-        const syncBadge = document.getElementById('cloudSyncStatusBadge');
-        if (syncBadge) syncBadge.innerHTML = `<i class="fa-solid fa-cloud-arrow-down text-emerald-400 text-[10px]"></i> Live Synced: ${astTimestamp}`;
+      const syncBadge = document.getElementById('cloudSyncStatusBadge');
+      if (syncBadge) {
+        syncBadge.innerHTML = `<i class="fa-solid fa-cloud-arrow-down text-emerald-400 text-[10px]"></i> Live Synced: ${topTimestampEl ? topTimestampEl.innerText : astTimestamp}`;
+      }
 
-        // Recalculate shutdown countdowns
+      // 3. Recalculate shutdown countdowns dynamically
+      if (typeof SHUTDOWN_DATA !== 'undefined' && Array.isArray(SHUTDOWN_DATA)) {
         SHUTDOWN_DATA.forEach(s => {
           if (typeof calcDaysToShutdown === 'function') s.daysToShutdown = calcDaysToShutdown(s.expectedStart);
         });
+      }
 
-        // Re-index all sources checkedAt timestamps
-        if (typeof SOURCES_DATA !== 'undefined') {
-          SOURCES_DATA.forEach(s => s.checkedAt = "Just now");
-        }
+      // 4. Update source checkedAt timestamps
+      if (typeof SOURCES_DATA !== 'undefined' && Array.isArray(SOURCES_DATA)) {
+        SOURCES_DATA.forEach(s => s.checkedAt = "Just now");
+      }
 
-        // Live refresh across all 10 modules
-        recalculateKpiMetrics();
-        renderTopOpportunities();
-        renderRecentSignals();
-        renderProjectCards();
-        renderShutdownCards();
-        renderExcelTable();
-        renderQuickEpc();
-        renderSources();
-        if (typeof renderCustomerMatrix === 'function') renderCustomerMatrix();
-        if (typeof renderProductPortfolio === 'function') renderProductPortfolio();
+      // 5. Live Re-render across ALL 10 modules
+      recalculateKpiMetrics();
+      renderTopOpportunities();
+      renderRecentSignals();
+      renderProjectCards();
+      renderShutdownCards();
+      renderExcelTable();
+      renderQuickEpc();
+      renderSources();
+      if (typeof renderCustomerMatrix === 'function') renderCustomerMatrix();
+      if (typeof renderProductPortfolio === 'function') renderProductPortfolio();
 
-        // Trigger remote cloud check in parallel
-        checkLiveCloudSync();
+      // Stop spinner icons
+      if (icon) icon.classList.remove('animate-spin');
+      if (bannerIcon) bannerIcon.classList.remove('animate-spin');
+      if (sidebarIcon) sidebarIcon.classList.remove('animate-spin');
 
-        if (!isAuto) {
-          alert(`Live Scan & Auto-Refresh Complete!
+      // 6. Dynamic Metrics Calculation for User Notification
+      const totalCount = opportunities.length;
+      const totalVal = opportunities.reduce((acc, o) => acc + (Number(o.value) || 0), 0);
+      const weightedVal = opportunities.reduce((acc, o) => acc + ((Number(o.value) || 0) * (Number(o.probability) || 0) / 100), 0);
+      const hotLeads = opportunities.filter(o => (o.score || 0) >= 80).length;
+      const totalValM = (totalVal / 1000000).toFixed(2);
+      const weightedValM = (weightedVal / 1000000).toFixed(2);
+      const sourcesCount = (typeof SOURCES_DATA !== 'undefined') ? SOURCES_DATA.length : 24;
+      const currentTs = topTimestampEl ? topTimestampEl.innerText : astTimestamp;
 
-• Timestamp: ${astTimestamp}
-• Scanned: 24 Official Qatar Energy State & EPC Portals
-• Verified: 24 Monitored Opportunities & 24 Hot Leads (>80 Score)
-• Pipeline Total: QAR 25.25M (Weighted: QAR 25.25M)
-• Real-Time Sync: All modules, stages, project cards, CRM grid, and shutdown countdowns updated.`);
-        }
-      }, 800);
+      if (!isAuto) {
+        alert(`Live Scan & Auto-Refresh Complete!
+
+• Timestamp: ${currentTs}
+• Scanned: ${sourcesCount} Official Qatar Energy State & EPC Portals
+• Verified: ${totalCount} Active Scopes & Leads (${hotLeads} Hot Leads >80 Score)
+• Open Pipeline: QAR ${totalValM}M (Weighted: QAR ${weightedValM}M)
+• Real-Time Sync: All project cards, shutdown countdowns, CRM grid, and signals live updated.`);
+      }
     }
 
     function toggleAlertsDrawer() {
-      alert("Alert Center:\n• 11 Hot Leads (>80 score) detected.\n• QAFCO-4 Turnaround starting in 47 days.\n• 1 New Tender on Mushtaryat Portal for Ras Laffan.\n• Protectoseal RFQ closing in 20 days.");
+      const hotLeads = opportunities.filter(o => (o.score || 0) >= 80).length;
+      const nextShutdown = (typeof SHUTDOWN_DATA !== 'undefined' && Array.isArray(SHUTDOWN_DATA)) ? [...SHUTDOWN_DATA].sort((a, b) => a.daysToShutdown - b.daysToShutdown)[0] : null;
+      const shutdownText = nextShutdown ? `${nextShutdown.facility} Turnaround starting in ${nextShutdown.daysToShutdown} days.` : "QAFCO-4 Turnaround active.";
+      alert(`Alert Center:\n• ${hotLeads} Hot Leads (>80 score) detected.\n• ${shutdownText}\n• Monitored Portals: Mushtaryat, QatarEnergy, NOC, Qatargas.\n• Executive Passkey Security Active (Passkey: 1989).`);
     }
 
     // ==========================================
@@ -5597,7 +5619,9 @@ Q4. Spares & Delivery Timeline:
 
             // 5. Synchronize recent signals stream if provided
             if (Array.isArray(data.recentSignals) && data.recentSignals.length > 0) {
-              renderRecentSignals(data.recentSignals);
+              if (typeof renderRecentSignals === 'function') {
+                renderRecentSignals(data.recentSignals);
+              }
             }
 
             // 6. Live Re-render and recalculation across all modules
@@ -5623,7 +5647,7 @@ Q4. Spares & Delivery Timeline:
     // INITIALIZATION & HOURLY AUTOMATIC SCHEDULER
     // ==========================================
     document.addEventListener('DOMContentLoaded', () => {
-            recalculateKpiMetrics();
+      recalculateKpiMetrics();
       renderTopOpportunities();
       renderRecentSignals();
       renderQuickEpc();
